@@ -8,7 +8,9 @@ function Layout() {
       <Header />
       <Flex minH="92vh">
         <Sidebar />
-        <Outlet />
+        <main>
+          <Outlet />
+        </main>
       </Flex>
     </Flex>
   );
