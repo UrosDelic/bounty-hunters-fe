@@ -1,4 +1,4 @@
-const layoutData = [
+const sidebarData = [
   {
     role: 'employee',
     text: 'feed',
@@ -31,4 +31,4 @@ const layoutData = [
   },
 ];
 
-export default layoutData;
+export default sidebarData;

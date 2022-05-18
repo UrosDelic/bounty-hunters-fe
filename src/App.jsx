@@ -4,7 +4,7 @@ import { Routes, Route } from 'react-router-dom';
 import { ColorModeSwitcher } from './ColorModeSwitcher';
 import { BrowserRouter } from 'react-router-dom';
 import { ColorModeScript } from '@chakra-ui/react';
-import Layout from './components/Layout.jsx';
+import { Layout } from './components';
 
 function App() {
   return (
