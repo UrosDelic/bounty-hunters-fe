@@ -13,15 +13,6 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route element={<Layout />}>
-            <Route
-              path="/"
-              element={
-                <div>
-                  test
-                  <ColorModeSwitcher></ColorModeSwitcher>
-                </div>
-              }
-            />
             <Route path="/feed" element={<div>feed</div>} />
             <Route path="/new-tasks" element={<div>new tasks</div>} />
             <Route path="/my-tasks" element={<div>my tasks</div>} />

@@ -1,5 +1,7 @@
-import { Flex, Heading } from '@chakra-ui/react';
+import { ColorModeProvider, Flex, Heading } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
+import { ColorModeSwitcher } from '../ColorModeSwitcher';
+import { Box } from '@chakra-ui/react';
 
 function Header() {
   return (
@@ -12,7 +14,10 @@ function Header() {
       justifyContent="space-between"
     >
       <Heading as="h3">Quantox</Heading>
-      <HamburgerIcon cursor="pointer" w={8} h={8} />
+      <Box>
+        <ColorModeSwitcher />
+        <HamburgerIcon cursor="pointer" w={8} h={8} />
+      </Box>
     </Flex>
   );
 }
