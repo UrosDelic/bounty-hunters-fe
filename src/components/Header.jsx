@@ -15,7 +15,7 @@ function Header() {
     >
       <Heading as="h3">Quantox</Heading>
       <Box>
-        <ColorModeSwitcher />
+        <ColorModeSwitcher marginRight={2} />
         <HamburgerIcon cursor="pointer" w={8} h={8} />
       </Box>
     </Flex>
