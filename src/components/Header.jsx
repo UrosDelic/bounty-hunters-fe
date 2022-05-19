@@ -1,5 +1,5 @@
-import { ColorModeProvider, Flex, Heading } from '@chakra-ui/react';
-import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
+import { Flex, Heading } from '@chakra-ui/react';
+import { HamburgerIcon } from '@chakra-ui/icons';
 import { ColorModeSwitcher } from '../ColorModeSwitcher';
 import { Box } from '@chakra-ui/react';
 
