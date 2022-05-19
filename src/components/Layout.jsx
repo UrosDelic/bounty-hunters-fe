@@ -1,4 +1,4 @@
-import { Flex } from '@chakra-ui/react';
+import { Flex, Box } from '@chakra-ui/react';
 import { Header, Sidebar } from './index';
 import { Outlet } from 'react-router-dom';
 
@@ -6,11 +6,11 @@ function Layout() {
   return (
     <Flex minH="100vh" flexDirection="column">
       <Header />
-      <Flex minH="92vh">
+      <Flex flex={1} flexDirection={['column', 'row']}>
         <Sidebar />
-        <main>
+        <Box flex={1}>
           <Outlet />
-        </main>
+        </Box>
       </Flex>
     </Flex>
   );
