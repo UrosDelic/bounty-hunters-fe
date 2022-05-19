@@ -11,7 +11,7 @@ function App() {
       <ColorModeScript />
       <BrowserRouter>
         <Routes>
-          <Route element={<Layout />}>
+          <Route path="/" element={<Layout />}>
             <Route path="/feed" element={<div>feed</div>} />
             <Route path="/new-tasks" element={<div>new tasks</div>} />
             <Route path="/my-tasks" element={<div>my tasks</div>} />
