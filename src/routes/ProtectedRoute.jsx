@@ -6,6 +6,10 @@ function ProtectedRoute({ allowedRoles }) {
 
   if (allowedRoles.includes(user)) {
     return <Outlet />;
+  }
+
+  if (user) {
+    return <Navigate to="/feed" />;
   } else {
     return <Navigate to="/login" />;
   }
