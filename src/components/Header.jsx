@@ -17,7 +17,8 @@ function Header({ onOpen }) {
       <HamburgerIcon cursor="pointer" w={8} h={8} onClick={onOpen} />
 
       <Box>
-        <ColorModeSwitcher />
+        <ColorModeSwitcher marginRight={2} />
+        <HamburgerIcon cursor="pointer" w={8} h={8} />
       </Box>
     </Flex>
   );
