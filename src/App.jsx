@@ -4,6 +4,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { ColorModeScript } from '@chakra-ui/react';
 import { Layout } from './components';
+import { DefaultPage, NotFound } from './pages';
 import ProtectedRoute from './routes/ProtectedRoute';
 import userTypes from './context/userTypes';
 
@@ -16,6 +17,20 @@ function App() {
           <Route path="/login" element={<div>Login</div>} />
 
           <Route element={<Layout />}>
+            <Route
+              element={
+                <ProtectedRoute
+                  allowedRoles={[
+                    userTypes.EMPLOYEE,
+                    userTypes.ADMIN,
+                    userTypes.SUPER_ADMIN,
+                  ]}
+                />
+              }
+            >
+              <Route path="/" element={<DefaultPage />} />
+            </Route>
+
             <Route
               element={<ProtectedRoute allowedRoles={[userTypes.EMPLOYEE]} />}
             >
@@ -45,7 +60,7 @@ function App() {
             </Route>
           </Route>
 
-          <Route path="*" element={<Navigate to="/feed" />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </ChakraProvider>
