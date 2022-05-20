@@ -2,50 +2,41 @@ import {
   Table,
   Thead,
   Tbody,
-  Tfoot,
   Tr,
   Th,
   Td,
-  TableCaption,
   TableContainer,
+  Text,
 } from '@chakra-ui/react';
 
-function WalletTable() {
+function WalletTable({ data, headers, title }) {
   return (
     <TableContainer>
-      <Table variant="striped" colorScheme="teal">
-        <TableCaption>Imperial to metric conversion factors</TableCaption>
+      <Text fontSize="xl" m={2}>
+        {title}
+      </Text>
+      <Table variant="striped">
         <Thead>
           <Tr>
-            <Th>To convert</Th>
-            <Th>into</Th>
-            <Th isNumeric>multiply by</Th>
+            <Th>{headers[0]}</Th>
+            <Th>{headers[1]}</Th>
+            <Th isNumeric>{headers[2]}</Th>
           </Tr>
         </Thead>
-        <Tbody>
-          <Tr>
-            <Td>inches</Td>
-            <Td>millimetres (mm)</Td>
-            <Td isNumeric>25.4</Td>
-          </Tr>
-          <Tr>
-            <Td>feet</Td>
-            <Td>centimetres (cm)</Td>
-            <Td isNumeric>30.48</Td>
-          </Tr>
-          <Tr>
-            <Td>yards</Td>
-            <Td>metres (m)</Td>
-            <Td isNumeric>0.91444</Td>
-          </Tr>
+        <Tbody wordBreak="break-word">
+          {data.map(item => {
+            const { id, name, points, date } = item;
+            return (
+              <Tr key={id}>
+                <Td maxWidth="150px">{name}</Td>
+                <Td maxWidth="150px">{points}</Td>
+                <Td maxWidth="150px" isNumeric>
+                  {date}
+                </Td>
+              </Tr>
+            );
+          })}
         </Tbody>
-        <Tfoot>
-          <Tr>
-            <Th>To convert</Th>
-            <Th>into</Th>
-            <Th isNumeric>multiply by</Th>
-          </Tr>
-        </Tfoot>
       </Table>
     </TableContainer>
   );
