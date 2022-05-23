@@ -5,7 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { Layout } from './components';
 import Feed from './components/user/Feed';
 import theme from './theme';
-import { DefaultPage, NotFound, Wallet } from './pages';
+import { DefaultPage, NotFound, Wallet, Store } from './pages';
 import ProtectedRoute from './routes/ProtectedRoute';
 import userTypes from './context/userTypes';
 
@@ -38,7 +38,7 @@ function App() {
               <Route path="/new-tasks" element={<div>new tasks</div>} />
               <Route path="/my-tasks" element={<div>my tasks</div>} />
               <Route path="/wallet" element={<Wallet />} />
-              <Route path="/store" element={<div>store</div>} />
+              <Route path="/store" element={<Store />} />
               <Route path="/my-orders" element={<div>my orders</div>} />
             </Route>
 
