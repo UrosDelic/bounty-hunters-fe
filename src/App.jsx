@@ -4,7 +4,7 @@ import { Routes, Route } from 'react-router-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { Layout } from './components';
 import Feed from './components/user/Feed';
-import theme from './theme';
+import theme from './theme/index';
 import { DefaultPage, NotFound, Wallet } from './pages';
 import ProtectedRoute from './routes/ProtectedRoute';
 import userTypes from './context/userTypes';
