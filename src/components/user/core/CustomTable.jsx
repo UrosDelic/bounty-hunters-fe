@@ -14,7 +14,7 @@ import {
 function CustomTable({ data, title, color }) {
   if (data)
     return (
-      <TableContainer rounded={'xl'} bg="white">
+      <TableContainer rounded={'xl'} bg="white" boxShadow="dark-lg">
         <Text fontSize="xl" m={2}>
           {title}
         </Text>
