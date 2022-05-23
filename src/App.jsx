@@ -9,6 +9,7 @@ import { DefaultPage, NotFound, Wallet, Store } from './pages';
 import theme from './theme/index';
 import ProtectedRoute from './routes/ProtectedRoute';
 import userTypes from './context/userTypes';
+import MyTasksPage from './pages/MyTasks';
 
 function App() {
   return (
@@ -37,7 +38,7 @@ function App() {
             >
               <Route path="/feed" element={<Feed />} />
               <Route path="/new-tasks" element={<div>new tasks</div>} />
-              <Route path="/my-tasks" element={<div>my tasks</div>} />
+              <Route path="/my-tasks" element={<MyTasksPage />} />
               <Route path="/wallet" element={<Wallet />} />
               <Route path="/store" element={<Store />} />
               <Route path="/my-orders" element={<div>my orders</div>} />

@@ -7,6 +7,10 @@ const theme = extendTheme({
       green: '#32CC4C',
       red: '#E14A39',
     },
+    task: {
+      lightGray: '#E2E8F0',
+      status: '#5FB0B7',
+    },
   },
   fonts: {
     heading: 'Montserrat',
