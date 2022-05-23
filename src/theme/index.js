@@ -5,6 +5,10 @@ const theme = extendTheme({
     main: {
       purple: '#A14EBF',
     },
+    task: {
+      background: '#6C91BF',
+      status: '#5FB0B7',
+    },
   },
   fonts: {
     heading: 'Montserrat',
