@@ -6,7 +6,7 @@ const theme = extendTheme({
       purple: '#A14EBF',
     },
     task: {
-      background: '#6C91BF',
+      lightGray: '#E2E8F0',
       status: '#5FB0B7',
     },
   },
