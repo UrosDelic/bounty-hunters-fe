@@ -1,6 +1,6 @@
 import { Box, Badge } from '@chakra-ui/react';
 
-const MyTask = ({ headline, text }) => {
+const MyTask = ({ headline, text, status }) => {
   return (
     <Box
       bg="task.lightGray"
@@ -13,7 +13,7 @@ const MyTask = ({ headline, text }) => {
       <Box textAlign="center">{headline}</Box>
       <Box ml={1}>
         <Badge borderRadius="full" px="5" bg="task.status">
-          To Do
+          {status}
         </Badge>
       </Box>
       <Box textAlign="center">{text}</Box>
