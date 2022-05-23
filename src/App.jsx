@@ -1,18 +1,18 @@
 import React from 'react';
 import { ChakraProvider } from '@chakra-ui/react';
+import { CSSReset } from '@chakra-ui/css-reset';
 import { Routes, Route } from 'react-router-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { Layout } from './components';
 import Feed from './components/user/Feed';
 import { DefaultPage, NotFound, Wallet, Store } from './pages';
 import theme from './theme/index';
-import { DefaultPage, NotFound, Wallet } from './pages';
 import ProtectedRoute from './routes/ProtectedRoute';
 import userTypes from './context/userTypes';
 
 function App() {
   return (
-    <ChakraProvider theme={theme}>
+    <ChakraProvider CSSReset theme={theme}>
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<div>Login</div>} />

@@ -44,7 +44,7 @@ const taskComplete = [
     date: '10/19/2022',
   },
   {
-    id: 4,
+    id: 5,
     name: 'Milan Stevic',
     desc: 'Stefan Stevic just successfully completed the task “Task X” and got 1000 points!',
     date: '10/19/2022',
@@ -76,7 +76,7 @@ const latestOrders = [
     data: { img: shirt },
   },
   {
-    id: 4,
+    id: 5,
     name: 'Milan Stevic',
     desc: 'just ordered a Quantox Shirt!',
     data: { img: shirt },
@@ -109,7 +109,7 @@ const taskCreated = [
     data: '10/19/2022',
   },
   {
-    id: 4,
+    id: 5,
     name: 'Admin',
     desc: 'New Task "Writte Article"',
     data: '10/19/2022',
@@ -137,7 +137,7 @@ const Feed = () => {
                   </Text>
                   <Carousel gap={32}>
                     {latestOrders.slice(0, 4).map((data, index) => (
-                      <StyledCard>
+                      <StyledCard key={index}>
                         <Flex alignItems="center" p={3}>
                           <Avatar size="md" name={data.name} />
                           <Text fontWeight="bold" mx={4}>

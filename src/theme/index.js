@@ -4,6 +4,8 @@ const theme = extendTheme({
   colors: {
     main: {
       purple: '#A14EBF',
+      green: '#32CC4C',
+      red: '#E14A39',
     },
   },
   fonts: {

@@ -1,3 +1,7 @@
+import shirt from '../img/shirt.jpg';
+import sticker from '../img/sticker.jpg';
+import mug from '../img/mug.jpg';
+
 const gainedPoints = [
   {
     id: 1,
@@ -47,16 +51,76 @@ const spentPoints = [
 ];
 
 const productsList = [
-  { id: 1, name: 'Shirt', points: 40, description: 'this is a product' },
-  { id: 2, name: 'Shirt', points: 40, description: 'this is a product' },
-  { id: 3, name: 'Shirt', points: 40, description: 'this is a product' },
-  { id: 4, name: 'Shirt', points: 40, description: 'this is a product' },
-  { id: 5, name: 'Shirt', points: 40, description: 'this is a product' },
-  { id: 6, name: 'Shirt', points: 40, description: 'this is a product' },
-  { id: 7, name: 'Shirt', points: 40, description: 'this is a product' },
-  { id: 8, name: 'Shirt', points: 40, description: 'this is a product' },
-  { id: 9, name: 'Shirt', points: 40, description: 'this is a product' },
-  { id: 10, name: 'Shirt', points: 40, description: 'this is a product' },
+  {
+    id: 1,
+    name: 'Shirt',
+    points: 40,
+    image: shirt,
+    description: 'this is a product',
+  },
+  {
+    id: 2,
+    name: 'Quantox Mug',
+    points: 20,
+    image: mug,
+    description: 'this is a product',
+  },
+  {
+    id: 3,
+    name: 'Quantox Mug',
+    points: 20,
+    image: mug,
+    description: 'this is a product',
+  },
+  {
+    id: 4,
+    name: 'Shirt',
+    points: 40,
+    image: shirt,
+    description: 'this is a product',
+  },
+  {
+    id: 5,
+    name: 'Sticker',
+    points: 10,
+    image: sticker,
+    description: 'this is a sticker',
+  },
+  {
+    id: 6,
+    name: 'Shirt',
+    points: 40,
+    image: shirt,
+    description: 'this is a product',
+  },
+  {
+    id: 7,
+    name: 'Shirt',
+    points: 40,
+    image: shirt,
+    description: 'this is a product',
+  },
+  {
+    id: 8,
+    name: 'Shirt',
+    points: 40,
+    image: shirt,
+    description: 'this is a product',
+  },
+  {
+    id: 9,
+    name: 'Shirt',
+    points: 40,
+    image: shirt,
+    description: 'this is a product',
+  },
+  {
+    id: 10,
+    name: 'Sticker',
+    points: 10,
+    image: sticker,
+    description: 'this is a product',
+  },
 ];
 
 export { gainedPoints, spentPoints, productsList };
