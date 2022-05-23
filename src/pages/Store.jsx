@@ -33,7 +33,7 @@ function Store() {
             <GridItem
               key={id}
               border="2px solid"
-              borderColor="purple.300"
+              borderColor="main.violet"
               borderRadius="8px"
             >
               <Flex direction="column" alignItems="center">
@@ -51,7 +51,7 @@ function Store() {
                   width="100%"
                   textAlign="left"
                   padding="10px"
-                  backgroundColor="purple.300"
+                  backgroundColor="main.violet"
                 >
                   <Text fontSize="20px">{name}</Text>
                   <Text fontSize="17px">Points needed: {points}</Text>
