@@ -6,12 +6,14 @@ import {
   GridItem,
   Image,
   Text,
+  Link,
 } from '@chakra-ui/react';
+import { Link as RouterLink } from 'react-router-dom';
 import { productsList } from '../testData/TestData';
 
 function Store() {
   return (
-    <Box maxW="80%" margin="auto" boxSizing="border-box">
+    <Box maxW="90%" margin="auto" marginBottom="50px" boxSizing="border-box">
       <Heading as="h1" textAlign="center" marginTop="50px">
         Available products
       </Heading>
@@ -33,20 +35,26 @@ function Store() {
               border="2px solid"
               borderColor="purple.300"
               borderRadius="8px"
-              padding="10px"
             >
               <Flex direction="column" alignItems="center">
-                <Image
-                  src={image}
-                  alt={name}
-                  margin="auto"
-                  width={['90%']}
-                  height="300px"
-                  cursor="pointer"
-                />
-                <Box width="100%" textAlign="left" paddingTop="15px">
+                <Link as={RouterLink} to={`/store/${id}`}>
+                  <Image
+                    src={image}
+                    alt={name}
+                    margin="auto"
+                    width="200px"
+                    height="300px"
+                    cursor="pointer"
+                  />
+                </Link>
+                <Box
+                  width="100%"
+                  textAlign="left"
+                  padding="10px"
+                  backgroundColor="purple.300"
+                >
                   <Text fontSize="20px">{name}</Text>
-                  <Text fontSize="17px">{points}</Text>
+                  <Text fontSize="17px">Points needed: {points}</Text>
                 </Box>
               </Flex>
             </GridItem>

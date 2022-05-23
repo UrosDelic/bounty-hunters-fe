@@ -41,6 +41,7 @@ function App() {
               <Route path="/my-tasks" element={<MyTasksPage />} />
               <Route path="/wallet" element={<Wallet />} />
               <Route path="/store" element={<Store />} />
+              <Route path="/store/:id" element={<div>Some Product</div>} />
               <Route path="/my-orders" element={<div>my orders</div>} />
             </Route>
 
