@@ -1,19 +1,18 @@
 import React from 'react';
-import { ChakraProvider, extendTheme } from '@chakra-ui/react';
+import { ChakraProvider } from '@chakra-ui/react';
 import { Routes, Route } from 'react-router-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { Layout } from './components';
 import Feed from './components/user/Feed';
-import theme from './theme';
-import { DefaultPage, NotFound } from './pages';
+import theme from './theme/index';
+import { DefaultPage, NotFound, Wallet } from './pages';
 import ProtectedRoute from './routes/ProtectedRoute';
 import userTypes from './context/userTypes';
 import MyTasksPage from './pages/MyTasks';
 
 function App() {
   return (
-    <ChakraProvider theme={extendTheme(theme)}>
-      {/* <ColorModeScript /> */}
+    <ChakraProvider theme={theme}>
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<div>Login</div>} />
@@ -39,7 +38,7 @@ function App() {
               <Route path="/feed" element={<Feed />} />
               <Route path="/new-tasks" element={<div>new tasks</div>} />
               <Route path="/my-tasks" element={<MyTasksPage />} />
-              <Route path="/wallet" element={<div>wallet</div>} />
+              <Route path="/wallet" element={<Wallet />} />
               <Route path="/store" element={<div>store</div>} />
               <Route path="/my-orders" element={<div>my orders</div>} />
             </Route>

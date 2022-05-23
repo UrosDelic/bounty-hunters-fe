@@ -119,22 +119,22 @@ const taskCreated = [
 const Feed = () => {
   return (
     <>
-      <Box p={{ base: 0, md: 5 }}>
+      <Box m="auto" p={{ base: 0, md: 5 }}>
         <SimpleGrid gap={8} p={6}>
           <Flex alignItems={'center'}>
             <Avatar src="https://bit.ly/ryan-florence" mx={2} size="lg" />
-            <Heading as={'h3'} mt={2} color="white" fontWeight={'bold'}>
+            <Heading as={'h3'} mt={2} ml={2} fontWeight={'bold'}>
               Welcome Back, User!
             </Heading>
           </Flex>
 
-          <Text fontSize={'20'} my={2} mx={4} color="white">
-            Check out the Latest Orders from Q-Store!
-          </Text>
           <GridItem>
-            <Grid templateColumns={{ base: '90vw', xl: '50% 50%' }} gap={8}>
+            <Grid templateColumns={{ base: '90vw', xl: '60% 40%' }} gap={8}>
               <GridItem>
                 <Container minW={{ md: '100%' }} py={8} px={6}>
+                  <Text fontWeight={'bold'} fontSize={'20'} mb={5}>
+                    Check out the Latest Orders from Q-Store!
+                  </Text>
                   <Carousel gap={32}>
                     {latestOrders.slice(0, 4).map((data, index) => (
                       <StyledCard>

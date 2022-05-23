@@ -8,9 +8,8 @@ function Header({ onOpen }) {
     <Flex
       minH="8vh"
       alignItems="center"
-      backgroundColor="black"
+      bg="main.purple"
       color="white"
-      bg="purple.300"
       padding="10px 15px"
       justifyContent="space-between"
     >
@@ -18,7 +17,6 @@ function Header({ onOpen }) {
 
       <Box>
         <ColorModeSwitcher marginRight={2} />
-        <HamburgerIcon cursor="pointer" w={8} h={8} />
       </Box>
     </Flex>
   );
