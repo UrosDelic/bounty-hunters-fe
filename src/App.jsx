@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChakraProvider, extendTheme } from '@chakra-ui/react';
+import { ChakraProvider } from '@chakra-ui/react';
 import { Routes, Route } from 'react-router-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { Layout } from './components';
@@ -11,8 +11,7 @@ import userTypes from './context/userTypes';
 
 function App() {
   return (
-    <ChakraProvider theme={extendTheme(theme)}>
-      {/* <ColorModeScript /> */}
+    <ChakraProvider theme={theme}>
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<div>Login</div>} />
