@@ -4,5 +4,14 @@ import Sidebar from './Sidebar';
 import WalletTable from './WalletTable';
 import SumOfPoints from './SumOfPoints';
 import StoreItem from './StoreItem';
+import SingleOrder from './SingleOrder';
 
-export { Layout, Header, Sidebar, SumOfPoints, WalletTable, StoreItem };
+export {
+  Layout,
+  Header,
+  Sidebar,
+  SumOfPoints,
+  WalletTable,
+  StoreItem,
+  SingleOrder,
+};

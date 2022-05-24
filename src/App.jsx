@@ -4,7 +4,14 @@ import { Routes, Route } from 'react-router-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { Layout } from './components';
 import Feed from './components/user/Feed';
-import { DefaultPage, NotFound, Wallet, Store, Product } from './pages';
+import {
+  DefaultPage,
+  NotFound,
+  Wallet,
+  Store,
+  Product,
+  MyOrders,
+} from './pages';
 import theme from './theme/index';
 import ProtectedRoute from './routes/ProtectedRoute';
 import userTypes from './context/userTypes';
@@ -41,7 +48,7 @@ function App() {
               <Route path="/wallet" element={<Wallet />} />
               <Route path="/store" element={<Store />} />
               <Route path="/store/:id" element={<Product />} />
-              <Route path="/my-orders" element={<div>orders</div>} />
+              <Route path="/my-orders" element={<MyOrders />} />
             </Route>
 
             <Route

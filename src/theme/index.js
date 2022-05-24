@@ -12,6 +12,12 @@ const theme = extendTheme({
       lightGray: '#E2E8F0',
       status: '#5FB0B7',
     },
+    myOrders: {
+      lightGray: '#B3C5CD',
+      green: '#32CC4C',
+      yellow: '#FAFA05',
+      violet: '#B794F4',
+    },
   },
   fonts: {
     heading: 'Montserrat',
