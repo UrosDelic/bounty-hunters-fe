@@ -4,7 +4,7 @@ import userTypes from './userTypes';
 const AppContext = createContext();
 
 function AppProvider({ children }) {
-  const [user, setUser] = useState(userTypes.EMPLOYEE);
+  const [user] = useState(userTypes.EMPLOYEE);
 
   return <AppContext.Provider value={{ user }}>{children}</AppContext.Provider>;
 }
