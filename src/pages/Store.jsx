@@ -1,14 +1,5 @@
-import {
-  Heading,
-  Box,
-  Flex,
-  Grid,
-  GridItem,
-  Image,
-  Text,
-  Link,
-} from '@chakra-ui/react';
-import { Link as RouterLink } from 'react-router-dom';
+import { Heading, Box, Grid, GridItem } from '@chakra-ui/react';
+import { StoreItem } from '../components/index';
 import { productsList } from '../testData/TestData';
 
 function Store() {
@@ -28,7 +19,7 @@ function Store() {
         marginTop="50px"
       >
         {productsList.map(product => {
-          const { id, name, points, image } = product;
+          const { id } = product;
           return (
             <GridItem
               key={id}
@@ -36,27 +27,7 @@ function Store() {
               borderColor="main.violet"
               borderRadius="8px"
             >
-              <Flex direction="column" alignItems="center">
-                <Link as={RouterLink} to={`/store/${id}`}>
-                  <Image
-                    src={image}
-                    alt={name}
-                    margin="auto"
-                    width="200px"
-                    height="300px"
-                    cursor="pointer"
-                  />
-                </Link>
-                <Box
-                  width="100%"
-                  textAlign="left"
-                  padding="10px"
-                  backgroundColor="main.violet"
-                >
-                  <Text fontSize="20px">{name}</Text>
-                  <Text fontSize="17px">Points needed: {points}</Text>
-                </Box>
-              </Flex>
+              <StoreItem {...product} />
             </GridItem>
           );
         })}

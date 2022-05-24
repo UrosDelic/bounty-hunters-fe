@@ -1,11 +1,10 @@
 import React from 'react';
 import { ChakraProvider } from '@chakra-ui/react';
-import { CSSReset } from '@chakra-ui/css-reset';
 import { Routes, Route } from 'react-router-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { Layout } from './components';
 import Feed from './components/user/Feed';
-import { DefaultPage, NotFound, Wallet, Store } from './pages';
+import { DefaultPage, NotFound, Wallet, Store, Product } from './pages';
 import theme from './theme/index';
 import ProtectedRoute from './routes/ProtectedRoute';
 import userTypes from './context/userTypes';
@@ -13,7 +12,7 @@ import MyTasksPage from './pages/MyTasks';
 
 function App() {
   return (
-    <ChakraProvider CSSReset theme={theme}>
+    <ChakraProvider theme={theme}>
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<div>Login</div>} />
@@ -41,8 +40,8 @@ function App() {
               <Route path="/my-tasks" element={<MyTasksPage />} />
               <Route path="/wallet" element={<Wallet />} />
               <Route path="/store" element={<Store />} />
-              <Route path="/store/:id" element={<div>Some Product</div>} />
-              <Route path="/my-orders" element={<div>my orders</div>} />
+              <Route path="/store/:id" element={<Product />} />
+              <Route path="/my-orders" element={<div>orders</div>} />
             </Route>
 
             <Route
