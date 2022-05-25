@@ -17,6 +17,9 @@ const theme = extendTheme({
     store: {
       violet: '#B794F4',
     },
+    productDetails: {
+      violet: '#B794F4',
+    },
     myOrders: {
       lightGray: '#B3C5CD',
       green: '#32CC4C',
