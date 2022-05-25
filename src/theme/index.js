@@ -5,12 +5,17 @@ const theme = extendTheme({
     main: {
       purple: '#A14EBF',
       violet: '#B794F4',
-      green: '#32CC4C',
-      red: '#E14A39',
     },
     task: {
       lightGray: '#E2E8F0',
       status: '#5FB0B7',
+    },
+    wallet: {
+      green: '#32CC4C',
+      red: '#E14A39',
+    },
+    store: {
+      violet: '#B794F4',
     },
     myOrders: {
       lightGray: '#B3C5CD',

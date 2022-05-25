@@ -1,4 +1,4 @@
-import { Flex, Box, Text, Image } from '@chakra-ui/react';
+import { Flex, Box, Text, Image, Avatar } from '@chakra-ui/react';
 
 function SingleOrder({
   id,
@@ -16,11 +16,14 @@ function SingleOrder({
   };
 
   return (
-    <Flex margin="auto" direction="column" height="100%">
-      <Box>
-        <Text fontSize="20px">Order #{id}</Text>
-        <Text color="myOrders.lightGray">{date}</Text>
-      </Box>
+    <Flex margin="auto" width="fit-content" direction="column" height="100%">
+      <Flex justifyContent="space-between" alignItems="center">
+        <Box>
+          <Text fontSize="20px">Order #{id}</Text>
+          <Text color="myOrders.lightGray">{date}</Text>
+        </Box>
+        <Avatar name="Vuk" backgroundColor="myOrders.lightGray" />
+      </Flex>
       <Flex marginBottom="8px" marginTop="8px">
         <Image
           src={image}
@@ -35,21 +38,19 @@ function SingleOrder({
           <Text>Points: {points}</Text>
         </Box>
       </Flex>
-      <Flex alignItems="center" marginTop="auto">
-        {/* <Text>{points}</Text> */}
-        <Box
-          color={statusColor[status]}
-          borderColor={statusColor[status]}
-          border="1px solid"
-          borderRadius="5px"
-          padding="8px"
-          textTransform="uppercase"
-          width="100%"
-          textAlign="center"
-        >
-          {status}
-        </Box>
-      </Flex>
+      <Box
+        color={statusColor[status]}
+        borderColor={statusColor[status]}
+        border="1px solid"
+        borderRadius="5px"
+        padding="8px"
+        textTransform="uppercase"
+        width="100%"
+        textAlign="center"
+        marginTop="auto"
+      >
+        {status}
+      </Box>
     </Flex>
   );
 }

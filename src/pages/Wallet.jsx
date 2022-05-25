@@ -28,12 +28,12 @@ function Wallet() {
         <Box>
           <SumOfPoints
             text="Points gained"
-            color="main.green"
+            color="wallet.green"
             sum={sumOfGainedPoints}
           />
           <SumOfPoints
             text="Points spent"
-            color="main.red"
+            color="wallet.red"
             sum={sumOfSpentPoints}
           />
         </Box>

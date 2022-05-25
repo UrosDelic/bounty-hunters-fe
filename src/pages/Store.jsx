@@ -4,7 +4,7 @@ import { productsList } from '../testData/TestData';
 
 function Store() {
   return (
-    <Box maxW="90%" margin="auto" marginBottom="50px" boxSizing="border-box">
+    <Box maxW="75%" margin="auto" marginBottom="50px" boxSizing="border-box">
       <Heading as="h1" textAlign="center" marginTop="50px">
         Available products
       </Heading>

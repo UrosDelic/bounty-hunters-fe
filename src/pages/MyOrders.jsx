@@ -4,7 +4,7 @@ import { SingleOrder } from '../components/index';
 
 function MyOrders() {
   return (
-    <Box margin="auto" width="70%" marginTop="50px" marginBottom="30px">
+    <Box margin="auto" maxW="75%" marginTop="50px" marginBottom="30px">
       <Grid
         templateColumns={[
           'repeat(1, 1fr)',
@@ -13,6 +13,8 @@ function MyOrders() {
           'repeat(4, 1fr)',
         ]}
         gap={4}
+        columnGap={4}
+        rowGap={6}
       >
         {ordersList.map(order => {
           const { id } = order;
