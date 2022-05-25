@@ -7,6 +7,17 @@ class HttpCommunicator {
   constructor() {
     this.http = axios.create({ baseURL: config.baseURL });
   }
+
+  get(url) {
+    return this.http
+      .get(url)
+      .then(data => {
+        return { data };
+      })
+      .catch(error => {
+        return { error };
+      });
+  }
 }
 
 let instance = null;

@@ -1,6 +1,6 @@
 function generateConfig() {
   const config = {};
-  config.baseURL = '';
+  config.baseURL = 'https://reqres.in';
   return config;
 }
 
