@@ -123,4 +123,52 @@ const productsList = [
   },
 ];
 
-export { gainedPoints, spentPoints, productsList };
+const ordersList = [
+  {
+    id: 1,
+    name: 'Quantox Shirt',
+    image: shirt,
+    points: 40,
+    status: 'pending',
+    date: '28/12/1992',
+    shippingAdress: 'Cvijiceva br. 4',
+  },
+  {
+    id: 2,
+    name: 'Quantox Mug',
+    image: mug,
+    points: 20,
+    status: 'in progress',
+    date: '27/12/1992',
+    shippingAdress: 'Milentijeva br. 5',
+  },
+  {
+    id: 3,
+    name: 'Quantox Mug',
+    image: mug,
+    points: 20,
+    status: 'pending',
+    date: '28/12/1992',
+    shippingAdress: 'Cvijiceva br. 4',
+  },
+  {
+    id: 4,
+    name: 'Quantox Shirt',
+    image: shirt,
+    points: 40,
+    status: 'fulfilled',
+    date: '20/12/1997',
+    shippingAdress: 'Cvijiceva br. 4',
+  },
+  {
+    id: 5,
+    name: 'Quantox Sticker',
+    image: sticker,
+    points: 10,
+    status: 'fulfilled',
+    date: '20/11/2002',
+    shippingAdress: 'Cvijiceva br. 4',
+  },
+];
+
+export { gainedPoints, spentPoints, productsList, ordersList };

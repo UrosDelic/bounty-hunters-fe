@@ -9,8 +9,8 @@ function StoreItem({ id, name, image, points }) {
           src={image}
           alt={name}
           margin="auto"
-          width="200px"
-          height="300px"
+          width="170px"
+          height="240px"
           cursor="pointer"
         />
       </Link>
