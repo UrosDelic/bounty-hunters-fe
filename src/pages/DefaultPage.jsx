@@ -3,18 +3,18 @@ import { useAppContext } from '../context/appContext';
 import userTypes from '../context/userTypes';
 
 function DefaultPage() {
-  const { user } = useAppContext();
+  const { userRole } = useAppContext();
   const location = useLocation();
 
-  if (user === userTypes.EMPLOYEE) {
+  if (userRole === userTypes.EMPLOYEE) {
     return <Navigate to="/feed" state={{ from: location }} replace />;
   }
 
-  if (user === userTypes.ADMIN) {
+  if (userRole === userTypes.ADMIN) {
     return <Navigate to="/tasks" state={{ from: location }} replace />;
   }
 
-  if (user === userTypes.EMPLOYEE) {
+  if (userRole === userTypes.SUPERADMIN) {
     return <Navigate to="/users" state={{ from: location }} replace />;
   }
 }

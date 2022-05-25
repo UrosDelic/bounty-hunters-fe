@@ -1,7 +1,7 @@
 const userTypes = {
   EMPLOYEE: 'employee',
   ADMIN: 'admin',
-  SUPER_ADMIN: 'super_admin',
+  SUPERADMIN: 'superadmin',
 };
 
 export default userTypes;
