@@ -9,7 +9,7 @@ import {
   NotFound,
   Wallet,
   Store,
-  Product,
+  ProductDetails,
   MyOrders,
 } from './pages';
 import theme from './theme/index';
@@ -47,7 +47,7 @@ function App() {
               <Route path="/my-tasks" element={<MyTasksPage />} />
               <Route path="/wallet" element={<Wallet />} />
               <Route path="/store" element={<Store />} />
-              <Route path="/store/:id" element={<Product />} />
+              <Route path="/store/:id" element={<ProductDetails />} />
               <Route path="/my-orders" element={<MyOrders />} />
             </Route>
 
