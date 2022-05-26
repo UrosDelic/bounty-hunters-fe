@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function Sidebar() {
   return (
-    <Flex flexDirection="column" w={['100%']} backgroundColor="purple.300">
+    <Flex flexDirection="column" w={['100%']} backgroundColor="main.gray">
       <Text mx={4} fontSize="3xl" color="white" fontWeight={'bold'}>
         Bounty Hunters <DrawerCloseButton mt={1} fontSize="md" color="white" />
       </Text>
@@ -20,7 +20,6 @@ function Sidebar() {
             color="white"
             outline="none"
             textTransform="capitalize"
-            border="1px solid #EBE8F8"
             _activeLink={{ fontWeight: 'bold', border: '2px solid #EBE8F8' }}
           >
             <Flex padding="6px 20px" alignItems="center">
