@@ -9,7 +9,7 @@ import {
   NotFound,
   Wallet,
   Store,
-  Product,
+  ProductDetails,
   MyOrders,
 } from './pages';
 import theme from './theme/index';
@@ -32,7 +32,7 @@ function App() {
                   allowedRoles={[
                     userTypes.EMPLOYEE,
                     userTypes.ADMIN,
-                    userTypes.SUPER_ADMIN,
+                    userTypes.SUPERADMIN,
                   ]}
                 />
               }
@@ -53,7 +53,7 @@ function App() {
               />
               <Route path="/wallet" element={<Wallet />} />
               <Route path="/store" element={<Store />} />
-              <Route path="/store/:id" element={<Product />} />
+              <Route path="/store/:id" element={<ProductDetails />} />
               <Route path="/my-orders" element={<MyOrders />} />
             </Route>
 
@@ -65,9 +65,7 @@ function App() {
             </Route>
 
             <Route
-              element={
-                <ProtectedRoute allowedRoles={[userTypes.SUPER_ADMIN]} />
-              }
+              element={<ProtectedRoute allowedRoles={[userTypes.SUPERADMIN]} />}
             >
               <Route path="/users" element={<div>users</div>} />
               <Route path="/products" element={<div>products</div>} />

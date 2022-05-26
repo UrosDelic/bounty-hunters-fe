@@ -5,6 +5,9 @@ import {
   faWallet,
   faShop,
   faCartShopping,
+  faUsers,
+  faDolly,
+  faClipboardList,
 } from '@fortawesome/free-solid-svg-icons';
 
 const sidebarData = [
@@ -43,6 +46,30 @@ const sidebarData = [
     text: 'my orders',
     route: '/my-orders',
     icon: faCartShopping,
+  },
+  {
+    role: 'admin',
+    text: 'tasks',
+    route: '/tasks',
+    icon: faListCheck,
+  },
+  {
+    role: 'superadmin',
+    text: 'users',
+    route: '/users',
+    icon: faUsers,
+  },
+  {
+    role: 'superadmin',
+    text: 'products',
+    route: '/products',
+    icon: faDolly,
+  },
+  {
+    role: 'superadmin',
+    text: 'orders',
+    route: '/orders',
+    icon: faClipboardList,
   },
 ];
 

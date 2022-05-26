@@ -3,6 +3,7 @@ import { extendTheme } from '@chakra-ui/react';
 const theme = extendTheme({
   colors: {
     main: {
+      gray: '#2F3747',
       purple: '#A14EBF',
       violet: '#B794F4',
     },
@@ -16,6 +17,11 @@ const theme = extendTheme({
     },
     store: {
       violet: '#B794F4',
+    },
+    productDetails: {
+      violet: '#B794F4',
+      black: '#000000',
+      white: '#FFFFFF',
     },
     myOrders: {
       lightGray: '#B3C5CD',

@@ -4,9 +4,11 @@ import userTypes from './userTypes';
 const AppContext = createContext();
 
 function AppProvider({ children }) {
-  const [user] = useState(userTypes.EMPLOYEE);
+  const [userRole] = useState(userTypes.EMPLOYEE);
 
-  return <AppContext.Provider value={{ user }}>{children}</AppContext.Provider>;
+  return (
+    <AppContext.Provider value={{ userRole }}>{children}</AppContext.Provider>
+  );
 }
 
 function useAppContext() {
