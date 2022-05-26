@@ -8,7 +8,7 @@ function Header({ onOpen }) {
     <Flex
       minH="8vh"
       alignItems="center"
-      bg="main.purple"
+      bg="main.gray"
       color="white"
       padding="10px 15px"
       justifyContent="space-between"
