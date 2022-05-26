@@ -6,34 +6,39 @@ import {
   GridItem,
   Image,
   Text,
+  Button,
 } from '@chakra-ui/react';
 import shirt from '../img/shirt.jpg';
 import sticker from '../img/sticker.jpg';
 import mug from '../img/mug.jpg';
 
 function ProductDetails() {
+  const sizes = ['S', 'M', 'L', 'XL', 'XXL'];
+  const colors = ['productDetails.black', 'productDetails.white'];
+
   return (
     <Grid
-      templateColumns="repeat(2, 1fr)"
+      templateColumns={['none', 'none', 'none', 'repeat(2, 1fr)']}
       gap={5}
       maxW="75%"
       margin="auto"
       marginTop="80px"
+      marginBottom="50px"
     >
       <GridItem
         padding="10px"
         borderRadius="5px"
-        border="2px solid"
-        borderColor="main.violet"
-        gridRow="1/3"
+        // border="2px solid"
+        // borderColor="main.violet"
+        gridRow={['1/2', '1/2', '1/2', '1/3']}
       >
-        <Image src={shirt} />
+        <Image src={mug} margin="auto" width="100%" />
       </GridItem>
       <GridItem
         padding="10px"
         borderRadius="5px"
-        border="2px solid"
-        borderColor="main.violet"
+        // border="2px solid"
+        // borderColor="main.violet"
       >
         <Text>Product name: Quantox Shirt</Text>
         <Text>Price in points: 40</Text>
@@ -42,41 +47,58 @@ function ProductDetails() {
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veritatis
           facere saepe explicabo culpa dignissimos quas nisi rem molestias
           praesentium, doloremque dicta ipsam, obcaecati, sint repellendus omnis
-          quibusdam. Quam, eum fuga. Magnam inventore vero non recusandae unde,
-          saepe facilis deleniti odio quas maxime fugit necessitatibus, commodi
-          possimus officia velit? Vero ut ea cum praesentium, labore rem
-          voluptate repudiandae consectetur perferendis architecto. Corporis,
-          quod cumque facere quidem vitae officiis velit veritatis enim nisi,
-          non ut porro nesciunt saepe ducimus doloribus! Illo tempore
-          consectetur consequatur, dolor nisi dolorem iusto porro facere
-          voluptatum distinctio. Debitis ad quis amet at cumque illo! Quam
-          molestiae magnam vel, voluptatem accusantium architecto quibusdam,
-          illum explicabo quis autem odio optio similique aliquid aliquam.
+          quibusdam.
         </Text>
       </GridItem>
       <GridItem
         padding="10px"
         borderRadius="5px"
-        border="2px solid"
-        borderColor="main.violet"
+        // border="2px solid"
+        // borderColor="main.violet"
       >
-        <Text marginBottom="10px">Choose your size:</Text>
-        <Flex>
-          <Box padding="10px" backgroundColor="black">
-            S
+        <Flex flexDirection="column" height="100%">
+          <Box>
+            <Text marginBottom="10px">Choose your size:</Text>
+            <Flex marginBottom="15px">
+              {sizes.map(size => {
+                return (
+                  <Box
+                    width={['50px', '60px', '60px', '60px']}
+                    textAlign="center"
+                    padding="6px"
+                    borderColor="black"
+                    border="1px solid"
+                    marginRight="5px"
+                    cursor="pointer"
+                  >
+                    {size}
+                  </Box>
+                );
+              })}
+            </Flex>
           </Box>
-          <Box padding="10px" backgroundColor="black">
-            M
+          <Box>
+            <Text marginBottom="10px">Choose your color:</Text>
+            <Flex marginBottom="15px">
+              {colors.map(color => {
+                return (
+                  <Box
+                    width="30px"
+                    height="30px"
+                    borderRadius="50%"
+                    border="1px solid"
+                    borderColor="gray"
+                    marginRight="5px"
+                    backgroundColor={color}
+                    cursor="pointer"
+                  ></Box>
+                );
+              })}
+            </Flex>
           </Box>
-          <Box padding="10px" backgroundColor="black">
-            L
-          </Box>
-          <Box padding="10px" backgroundColor="black">
-            XL
-          </Box>
-          <Box padding="10px" backgroundColor="black">
-            XXL
-          </Box>
+          <Button marginTop="20px" width="100px">
+            Checkout
+          </Button>
         </Flex>
       </GridItem>
     </Grid>
