@@ -1,5 +1,5 @@
 import {
-  Heading,
+  //Heading,
   Box,
   Flex,
   Grid,
@@ -8,8 +8,8 @@ import {
   Text,
   Button,
 } from '@chakra-ui/react';
-import shirt from '../img/shirt.jpg';
-import sticker from '../img/sticker.jpg';
+// import shirt from '../img/shirt.jpg';
+// import sticker from '../img/sticker.jpg';
 import mug from '../img/mug.jpg';
 
 function ProductDetails() {
