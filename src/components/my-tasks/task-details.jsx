@@ -1,11 +1,27 @@
-import { Box, Container } from '@chakra-ui/react';
+import { Box, Flex, Spacer, Text } from '@chakra-ui/react';
 import React from 'react';
 
 const TaskDetails = () => {
-  return <Container className='test-details' width='50vw' height='50vh' bg='yellow' color='yellow' marginTop='50px'>
-    <Box>
-    </Box>
-  </Container>
+  return (
+    <Flex
+      direction="column"
+      className="test-details"
+      w="50vw"
+      h="50vh"
+      bg="task.lightGray"
+    >
+      <Text textAlign="center" marginTop="3">
+        Title
+      </Text>
+      <Flex>
+        <Text marginLeft="2">created at</Text>
+        <Spacer />
+        <Text marginRight="2">due date</Text>
+      </Flex>
+      <Text align="center"> Full Description</Text>
+      <Text marginLeft="2">Points</Text>
+    </Flex>
+  );
 };
 
 export default TaskDetails;

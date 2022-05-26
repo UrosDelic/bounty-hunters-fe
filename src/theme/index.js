@@ -30,10 +30,10 @@ const theme = extendTheme({
       violet: '#B794F4',
     },
   },
-  fonts: {
-    heading: 'Montserrat',
-    body: 'Inter',
-  },
+  // fonts: {
+  //   heading: 'Montserrat',
+  //   body: 'Inter',
+  // },
 });
 
 export default theme;
