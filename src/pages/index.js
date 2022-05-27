@@ -4,5 +4,14 @@ import Wallet from './Wallet';
 import Store from './Store';
 import ProductDetails from './ProductDetails';
 import MyOrders from './MyOrders';
+import Users from './Users';
 
-export { DefaultPage, NotFound, Wallet, Store, ProductDetails, MyOrders };
+export {
+  DefaultPage,
+  NotFound,
+  Wallet,
+  Store,
+  ProductDetails,
+  MyOrders,
+  Users,
+};

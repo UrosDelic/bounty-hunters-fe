@@ -11,6 +11,7 @@ import {
   Store,
   ProductDetails,
   MyOrders,
+  Users,
 } from './pages';
 import theme from './theme/index';
 import ProtectedRoute from './routes/ProtectedRoute';
@@ -61,7 +62,7 @@ function App() {
             <Route
               element={<ProtectedRoute allowedRoles={[userTypes.SUPERADMIN]} />}
             >
-              <Route path="/users" element={<div>users</div>} />
+              <Route path="/users" element={<Users />} />
               <Route path="/products" element={<div>products</div>} />
               <Route path="/orders" element={<div>orders</div>} />
             </Route>

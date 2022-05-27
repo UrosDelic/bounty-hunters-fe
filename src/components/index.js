@@ -5,6 +5,7 @@ import WalletTable from './WalletTable';
 import SumOfPoints from './SumOfPoints';
 import StoreItem from './StoreItem';
 import SingleOrder from './SingleOrder';
+import SingleUser from './SingleUser';
 
 export {
   Layout,
@@ -14,4 +15,5 @@ export {
   WalletTable,
   StoreItem,
   SingleOrder,
+  SingleUser,
 };

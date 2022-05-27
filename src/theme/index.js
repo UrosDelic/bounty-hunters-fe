@@ -29,6 +29,11 @@ const theme = extendTheme({
       yellow: '#FAFA05',
       violet: '#B794F4',
     },
+    users: {
+      white: '#ffffff',
+      lightGray: '#B3C5CD',
+      darkGray: '#2f3747',
+    },
   },
   fonts: {
     heading: 'Montserrat',

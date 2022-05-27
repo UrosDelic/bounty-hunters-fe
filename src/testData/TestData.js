@@ -171,4 +171,42 @@ const ordersList = [
   },
 ];
 
-export { gainedPoints, spentPoints, productsList, ordersList };
+const usersList = [
+  {
+    id: 1,
+    name: 'Vuk Stojanovic',
+    role: 'employee',
+  },
+  {
+    id: 2,
+    name: 'Milos Ciric',
+    role: 'superadmin',
+  },
+  {
+    id: 3,
+    name: 'Milan Jovanovic',
+    role: 'admin',
+  },
+  {
+    id: 4,
+    name: 'Stefan Meza',
+    role: 'employee',
+  },
+  {
+    id: 5,
+    name: 'Danilo Markicevic',
+    role: 'admin',
+  },
+  {
+    id: 6,
+    name: 'Vladimir Stojanovic',
+    role: 'superadmin',
+  },
+  {
+    id: 7,
+    name: 'Petar Antic',
+    role: 'employee',
+  },
+];
+
+export { gainedPoints, spentPoints, productsList, ordersList, usersList };
