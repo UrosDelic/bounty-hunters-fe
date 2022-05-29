@@ -58,6 +58,7 @@ function SingleUser({ name, role }) {
         width="fit-content"
         value={selectedValue}
         onChange={changeRole}
+        onBlur={hideSelect}
         display={isEditClicked ? 'block' : 'none'}
       >
         <option value="employee">Employee</option>
