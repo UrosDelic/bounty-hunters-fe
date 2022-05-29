@@ -1,7 +1,11 @@
 import { Box, Text, Flex, Avatar, Select } from '@chakra-ui/react';
 import { EditIcon } from '@chakra-ui/icons';
+import { useState } from 'react';
 
 function SingleUser({ name, role }) {
+  const [selectedValue, setSelectedValue] = useState(role);
+  const [isEditClicked, setIsEditClicked] = useState(false);
+
   return (
     <Flex padding="20px" direction="column" alignItems="center">
       <Avatar
