@@ -1,16 +1,9 @@
-import { Box, Text, Flex, Avatar } from '@chakra-ui/react';
+import { Box, Text, Flex, Avatar, Select } from '@chakra-ui/react';
 import { EditIcon } from '@chakra-ui/icons';
 
 function SingleUser({ name, role }) {
   return (
     <Flex padding="20px" direction="column" alignItems="center">
-      {/* <Box
-        width="90px"
-        height="90px"
-        borderRadius="50%"
-        backgroundColor="lightGray"
-        marginBottom="10px"
-      ></Box> */}
       <Avatar
         name={name}
         size="xl"
@@ -37,6 +30,11 @@ function SingleUser({ name, role }) {
         </Text>
         <EditIcon cursor="pointer" />
       </Flex>
+      {/* <Select size="sm" defaultValue={role}>
+        <option value="employee">Employee</option>
+        <option value="admin">Admin</option>
+        <option value="superadmin">Superadmin</option>
+      </Select> */}
     </Flex>
   );
 }
