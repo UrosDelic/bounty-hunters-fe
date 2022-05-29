@@ -1,10 +1,28 @@
 import { Box, Text, Flex, Avatar, Select } from '@chakra-ui/react';
 import { EditIcon } from '@chakra-ui/icons';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 function SingleUser({ name, role }) {
   const [selectedValue, setSelectedValue] = useState(role);
   const [isEditClicked, setIsEditClicked] = useState(false);
+  const selectElement = useRef();
+
+  function changeRole(e) {
+    setSelectedValue(e.target.value);
+    hideSelect();
+  }
+
+  function displaySelect() {
+    setIsEditClicked(true);
+  }
+
+  function hideSelect() {
+    setIsEditClicked(false);
+  }
+
+  useEffect(() => {
+    selectElement.current.focus();
+  }, [isEditClicked]);
 
   return (
     <Flex padding="20px" direction="column" alignItems="center">
@@ -23,18 +41,25 @@ function SingleUser({ name, role }) {
       >
         {name}
       </Text>
-      <Flex alignItems="center">
+      <Flex alignItems="center" display={isEditClicked ? 'none' : 'flex'}>
         <Text
           textAlign="center"
           color="users.lightGray"
           textTransform="capitalize"
           marginRight="5px"
         >
-          {role}
+          {selectedValue}
         </Text>
-        <EditIcon cursor="pointer" />
+        <EditIcon cursor="pointer" onClick={displaySelect} />
       </Flex>
-      <Select size="sm" defaultValue={role}>
+      <Select
+        ref={selectElement}
+        size="sm"
+        width="fit-content"
+        value={selectedValue}
+        onChange={changeRole}
+        display={isEditClicked ? 'block' : 'none'}
+      >
         <option value="employee">Employee</option>
         <option value="admin">Admin</option>
         <option value="superadmin">Superadmin</option>
