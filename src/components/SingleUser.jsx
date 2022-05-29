@@ -30,11 +30,11 @@ function SingleUser({ name, role }) {
         </Text>
         <EditIcon cursor="pointer" />
       </Flex>
-      {/* <Select size="sm" defaultValue={role}>
+      <Select size="sm" defaultValue={role}>
         <option value="employee">Employee</option>
         <option value="admin">Admin</option>
         <option value="superadmin">Superadmin</option>
-      </Select> */}
+      </Select>
     </Flex>
   );
 }
