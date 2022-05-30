@@ -2,15 +2,20 @@ import { Box, Text, Flex, Avatar, Select } from '@chakra-ui/react';
 import { EditIcon } from '@chakra-ui/icons';
 import { useEffect, useRef, useState } from 'react';
 
-function SingleUser({ name, role }) {
+type SingleUserProps = {
+  name: string;
+  role: string[];
+};
+
+function SingleUser({ name, role }: SingleUserProps) {
   const [selectedValue, setSelectedValue] = useState(role);
   const [isEditClicked, setIsEditClicked] = useState(false);
-  const selectElement = useRef();
+  const selectElement = useRef<HTMLInputElement>(null);
 
-  function changeRole(e) {
-    setSelectedValue(e.target.value);
-    hideSelect();
-  }
+  // function changeRole(e: ChangeEvent<HTMLInputElement>) {
+  //   setSelectedValue(e.target.value);
+  //   hideSelect();
+  // }
 
   function displaySelect() {
     setIsEditClicked(true);
@@ -21,7 +26,7 @@ function SingleUser({ name, role }) {
   }
 
   useEffect(() => {
-    selectElement.current.focus();
+    selectElement.current?.focus();
   }, [isEditClicked]);
 
   return (
@@ -62,7 +67,7 @@ function SingleUser({ name, role }) {
           </Text>
           {/* <EditIcon cursor="pointer" onClick={displaySelect} /> */}
         </Flex>
-        <Select
+        {/* <Select
           ref={selectElement}
           size="sm"
           width="fit-content"
@@ -74,7 +79,7 @@ function SingleUser({ name, role }) {
           <option value="employee">Employee</option>
           <option value="admin">Admin</option>
           <option value="superadmin">Superadmin</option>
-        </Select>
+        </Select> */}
       </Flex>
     </Box>
   );

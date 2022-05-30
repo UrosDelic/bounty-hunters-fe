@@ -1,16 +1,22 @@
-import { Box, Text, Flex, Select, Heading, Option } from '@chakra-ui/react';
-import { useState } from 'react';
+import { Box, Text, Flex, Select, Heading } from '@chakra-ui/react';
+import { ChangeEvent, useState } from 'react';
 
-function Order({ name, date, status }) {
+type OrderProps = {
+  name: string;
+  date: string;
+  status: string;
+};
+
+function Order({ name, date, status }: OrderProps) {
   const [statusValue, setStatusValue] = useState(status);
-  const statusColors = {
+  const statusColors: any = {
     pending: 'orders.purple',
-    'in progress': 'orders.oliveGreen',
+    inProgress: 'orders.oliveGreen',
     fulfilled: 'orders.lightGreen',
   };
   const selectColor = statusColors[statusValue];
 
-  function changeStatus(e) {
+  function changeStatus(e: ChangeEvent<HTMLSelectElement>) {
     setStatusValue(e.target.value);
   }
 

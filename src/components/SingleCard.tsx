@@ -8,7 +8,12 @@ import {
 } from '@chakra-ui/react';
 import { useState } from 'react';
 
-function SingleCard({ name, points }) {
+type SingleCardProps = {
+  name: string;
+  points: number;
+};
+
+function SingleCard({ name, points }: SingleCardProps) {
   const [isInactive, setIsInactive] = useState(false);
   const borderColor = isInactive ? 'main.gray' : '';
   const backgroundColor = isInactive ? '' : 'main.green';
