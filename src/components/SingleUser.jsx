@@ -58,9 +58,9 @@ function SingleUser({ name, role }) {
             textTransform="capitalize"
             marginRight="5px"
           >
-            {selectedValue}
+            {role.join(', ')}
           </Text>
-          <EditIcon cursor="pointer" onClick={displaySelect} />
+          {/* <EditIcon cursor="pointer" onClick={displaySelect} /> */}
         </Flex>
         <Select
           ref={selectElement}

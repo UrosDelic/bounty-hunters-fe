@@ -5,6 +5,8 @@ import Store from './Store';
 import ProductDetails from './ProductDetails';
 import MyOrders from './MyOrders';
 import Users from './Users';
+import Products from './Products';
+import Orders from './Orders';
 
 export {
   DefaultPage,
@@ -14,4 +16,6 @@ export {
   ProductDetails,
   MyOrders,
   Users,
+  Products,
+  Orders,
 };

@@ -15,7 +15,7 @@ function Users() {
       ]}
       gap={6}
       maxWidth="1200px"
-      padding="0px 25px"
+      padding="0px 25px 25px"
     >
       {usersList.map(user => {
         const { id } = user;

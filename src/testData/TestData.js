@@ -126,7 +126,7 @@ const productsList = [
 const ordersList = [
   {
     id: 1,
-    name: 'Quantox Shirt',
+    name: '#1',
     image: shirt,
     points: 40,
     status: 'pending',
@@ -135,7 +135,7 @@ const ordersList = [
   },
   {
     id: 2,
-    name: 'Quantox Mug',
+    name: '#2',
     image: mug,
     points: 20,
     status: 'in progress',
@@ -144,7 +144,7 @@ const ordersList = [
   },
   {
     id: 3,
-    name: 'Quantox Mug',
+    name: '#3',
     image: mug,
     points: 20,
     status: 'pending',
@@ -153,7 +153,7 @@ const ordersList = [
   },
   {
     id: 4,
-    name: 'Quantox Shirt',
+    name: '#4',
     image: shirt,
     points: 40,
     status: 'fulfilled',
@@ -162,7 +162,7 @@ const ordersList = [
   },
   {
     id: 5,
-    name: 'Quantox Sticker',
+    name: '#5',
     image: sticker,
     points: 10,
     status: 'fulfilled',
@@ -175,37 +175,37 @@ const usersList = [
   {
     id: 1,
     name: 'Vuk Stojanovic',
-    role: 'employee',
+    role: ['employee', 'admin', 'superadmin'],
   },
   {
     id: 2,
     name: 'Milos Ciric',
-    role: 'superadmin',
+    role: ['superadmin'],
   },
   {
     id: 3,
     name: 'Milan Jovanovic',
-    role: 'admin',
+    role: ['admin', 'superadmin'],
   },
   {
     id: 4,
     name: 'Stefan Meza',
-    role: 'employee',
+    role: ['employee', 'admin'],
   },
   {
     id: 5,
     name: 'Danilo Markicevic',
-    role: 'admin',
+    role: ['admin'],
   },
   {
     id: 6,
     name: 'Vladimir Stojanovic',
-    role: 'superadmin',
+    role: ['superadmin'],
   },
   {
     id: 7,
     name: 'Petar Antic',
-    role: 'employee',
+    role: ['employee'],
   },
 ];
 

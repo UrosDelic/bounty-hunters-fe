@@ -6,6 +6,8 @@ import SumOfPoints from './SumOfPoints';
 import StoreItem from './StoreItem';
 import SingleOrder from './SingleOrder';
 import SingleUser from './SingleUser';
+import SingleCard from './SingleCard';
+import Order from './Order';
 
 export {
   Layout,
@@ -16,4 +18,6 @@ export {
   StoreItem,
   SingleOrder,
   SingleUser,
+  SingleCard,
+  Order,
 };

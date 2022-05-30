@@ -6,6 +6,9 @@ const theme = extendTheme({
       gray: '#2F3747',
       purple: '#A14EBF',
       violet: '#B794F4',
+      green: '#38A169',
+      white: '#FFFFFF',
+      lightGray: '#EDF2F7',
     },
     task: {
       lightGray: '#E2E8F0',
@@ -33,6 +36,11 @@ const theme = extendTheme({
       white: '#ffffff',
       lightGray: '#B3C5CD',
       darkGray: '#2f3747',
+    },
+    orders: {
+      purple: '#7B61FF',
+      oliveGreen: '#96CA3A',
+      lightGreen: '#38A169',
     },
   },
   fonts: {
