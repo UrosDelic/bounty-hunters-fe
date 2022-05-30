@@ -20,11 +20,7 @@ function Users() {
       {usersList.map(user => {
         const { id } = user;
         return (
-          <GridItem
-            key={id}
-            backgroundColor="users.darkGray"
-            borderRadius="8px"
-          >
+          <GridItem key={id}>
             <SingleUser {...user} />
           </GridItem>
         );

@@ -25,47 +25,58 @@ function SingleUser({ name, role }) {
   }, [isEditClicked]);
 
   return (
-    <Flex padding="20px" direction="column" alignItems="center">
-      <Avatar
-        name={name}
-        size="xl"
-        marginBottom="10px"
-        bg="users.lightGray"
-        color="users.darkGray"
-      />
-      <Text
-        textAlign="center"
-        color="users.white"
-        textTransform="uppercase"
-        wordBreak="break-word"
-      >
-        {name}
-      </Text>
-      <Flex alignItems="center" display={isEditClicked ? 'none' : 'flex'}>
+    <Box
+      backgroundColor="users.darkGray"
+      borderRadius="8px"
+      width="100%"
+      height="100%"
+    >
+      <Flex padding="20px" direction="column" alignItems="center">
+        <Avatar
+          name={name}
+          size="xl"
+          marginBottom="10px"
+          bg="users.lightGray"
+          color="users.darkGray"
+        />
         <Text
           textAlign="center"
-          color="users.lightGray"
-          textTransform="capitalize"
-          marginRight="5px"
+          color="users.white"
+          textTransform="uppercase"
+          wordBreak="break-word"
         >
-          {selectedValue}
+          {name}
         </Text>
-        <EditIcon cursor="pointer" onClick={displaySelect} />
+        <Flex
+          alignItems="center"
+          display={isEditClicked ? 'none' : 'flex'}
+          minH="35px"
+        >
+          <Text
+            textAlign="center"
+            color="users.lightGray"
+            textTransform="capitalize"
+            marginRight="5px"
+          >
+            {selectedValue}
+          </Text>
+          <EditIcon cursor="pointer" onClick={displaySelect} />
+        </Flex>
+        <Select
+          ref={selectElement}
+          size="sm"
+          width="fit-content"
+          value={selectedValue}
+          onChange={changeRole}
+          onBlur={hideSelect}
+          display={isEditClicked ? 'block' : 'none'}
+        >
+          <option value="employee">Employee</option>
+          <option value="admin">Admin</option>
+          <option value="superadmin">Superadmin</option>
+        </Select>
       </Flex>
-      <Select
-        ref={selectElement}
-        size="sm"
-        width="fit-content"
-        value={selectedValue}
-        onChange={changeRole}
-        onBlur={hideSelect}
-        display={isEditClicked ? 'block' : 'none'}
-      >
-        <option value="employee">Employee</option>
-        <option value="admin">Admin</option>
-        <option value="superadmin">Superadmin</option>
-      </Select>
-    </Flex>
+    </Box>
   );
 }
 
