@@ -1,7 +1,14 @@
 import { Box, Flex, Image, Text, Link } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
 
-function StoreItem({ id, name, image, points }) {
+type StoreItemProps = {
+  id: number;
+  name: string;
+  image: string;
+  points: number;
+};
+
+function StoreItem({ id, name, image, points }: StoreItemProps) {
   return (
     <Flex direction="column" alignItems="center">
       <Link as={RouterLink} to={`/store/${id}`} width="100%">

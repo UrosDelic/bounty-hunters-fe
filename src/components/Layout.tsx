@@ -12,7 +12,7 @@ import { useRef } from 'react';
 
 function Layout() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const firstField = useRef();
+  const firstField = useRef(null);
   return (
     <Flex
       minH="100vh"

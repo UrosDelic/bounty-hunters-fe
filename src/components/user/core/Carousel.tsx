@@ -1,5 +1,5 @@
 //TODO: Properly handle user tabbing
-
+// @ts-nocheck
 import React, {
   useLayoutEffect,
   useCallback,

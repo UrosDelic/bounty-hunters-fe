@@ -1,12 +1,18 @@
 import { Box, Badge } from '@chakra-ui/react';
 
-const MyTask = ({ headline, text, status }) => {
+type MyTaskProps = {
+  headline: String,
+  text: String,
+  status: String
+}
+
+const MyTask = ({ headline , text, status}: MyTaskProps) => {
   return (
     <Box
       bg="task.lightGray"
       height="300px"
       marginTop="50px"
-      margin="10px"
+      margin="10px" 
       width="400px"
       borderRadius="lg"
     >

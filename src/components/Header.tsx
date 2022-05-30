@@ -3,7 +3,11 @@ import { HamburgerIcon } from '@chakra-ui/icons';
 import { ColorModeSwitcher } from '../ColorModeSwitcher';
 import { Box } from '@chakra-ui/react';
 
-function Header({ onOpen }) {
+type headerProps = {
+  onOpen: any,
+} 
+
+function Header({ onOpen } : headerProps) {
   return (
     <Flex
       minH="8vh"

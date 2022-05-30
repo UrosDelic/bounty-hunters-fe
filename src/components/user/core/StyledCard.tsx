@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box } from '@chakra-ui/react';
-function StyledCard({ children }) {
+function StyledCard({ children }:any) {
   return (
     <Box
       w={280}
