@@ -17,6 +17,7 @@ function DefaultPage() {
   if (userRole === userTypes.SUPERADMIN) {
     return <Navigate to="/users" state={{ from: location }} replace />;
   }
+  return <Navigate to='/'/>
 }
 
 export default DefaultPage;
