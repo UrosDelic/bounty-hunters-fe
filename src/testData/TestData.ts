@@ -123,13 +123,19 @@ const productsList = [
   },
 ];
 
+enum StatusColor {
+  pending = 'myOrders.violet',
+  in_progress = 'myOrders.yellow',
+  fulfilled = 'myOrders.green',
+}
+
 const ordersList = [
   {
     id: 1,
     name: 'Quantox Shirt',
     image: shirt,
     points: 40,
-    status: 'pending',
+    status: StatusColor.pending,
     date: '28/12/1992',
     shippingAdress: 'Cvijiceva br. 4',
   },
@@ -138,7 +144,7 @@ const ordersList = [
     name: 'Quantox Mug',
     image: mug,
     points: 20,
-    status: 'in progress',
+    status: StatusColor.in_progress,
     date: '27/12/1992',
     shippingAdress: 'Milentijeva br. 5',
   },
@@ -147,7 +153,7 @@ const ordersList = [
     name: 'Quantox Mug',
     image: mug,
     points: 20,
-    status: 'pending',
+    status: StatusColor.fulfilled,
     date: '28/12/1992',
     shippingAdress: 'Cvijiceva br. 4',
   },
@@ -156,7 +162,7 @@ const ordersList = [
     name: 'Quantox Shirt',
     image: shirt,
     points: 40,
-    status: 'fulfilled',
+    status: StatusColor.fulfilled,
     date: '20/12/1997',
     shippingAdress: 'Cvijiceva br. 4',
   },
@@ -165,7 +171,7 @@ const ordersList = [
     name: 'Quantox Sticker',
     image: sticker,
     points: 10,
-    status: 'fulfilled',
+    status: StatusColor.fulfilled,
     date: '20/11/2002',
     shippingAdress: 'Cvijiceva br. 4',
   },

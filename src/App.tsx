@@ -14,7 +14,7 @@ import {
 } from './pages';
 import theme from './theme/index';
 import ProtectedRoute from './routes/ProtectedRoute';
-import userTypes from './context/userTypes';
+import { UserTypes } from './context/userTypes';
 import MyTasksPage from './pages/MyTasks';
 
 function App() {
@@ -29,9 +29,9 @@ function App() {
               element={
                 <ProtectedRoute
                   allowedRoles={[
-                    userTypes.EMPLOYEE,
-                    userTypes.ADMIN,
-                    userTypes.SUPERADMIN,
+                    UserTypes.EMPLOYEE,
+                    UserTypes.ADMIN,
+                    UserTypes.SUPERADMIN,
                   ]}
                 />
               }
@@ -40,7 +40,7 @@ function App() {
             </Route>
 
             <Route
-              element={<ProtectedRoute allowedRoles={[userTypes.EMPLOYEE]} />}
+              element={<ProtectedRoute allowedRoles={[UserTypes.EMPLOYEE]} />}
             >
               <Route path="/feed" element={<Feed />} />
               <Route path="/new-tasks" element={<div>new tasks</div>} />
@@ -52,14 +52,14 @@ function App() {
             </Route>
 
             <Route
-              element={<ProtectedRoute allowedRoles={[userTypes.ADMIN]} />}
+              element={<ProtectedRoute allowedRoles={[UserTypes.ADMIN]} />}
             >
               <Route path="/tasks" element={<div>tasks</div>} />
               <Route path="/tasks/:id" element={<div>some task</div>} />
             </Route>
 
             <Route
-              element={<ProtectedRoute allowedRoles={[userTypes.SUPERADMIN]} />}
+              element={<ProtectedRoute allowedRoles={[UserTypes.SUPERADMIN]} />}
             >
               <Route path="/users" element={<div>users</div>} />
               <Route path="/products" element={<div>products</div>} />

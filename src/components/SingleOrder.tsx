@@ -1,5 +1,15 @@
 import { Flex, Box, Text, Image, Avatar } from '@chakra-ui/react';
 
+type SingleOrderProps = {
+  id: number;
+  name: string;
+  image?: React.ReactNode | any;
+  points: number;
+  status: string;
+  date?: string;
+  shippingAdress?: string;
+};
+
 function SingleOrder({
   id,
   name,
@@ -8,18 +18,12 @@ function SingleOrder({
   status,
   date,
   shippingAdress,
-}) {
-  const statusColor = {
-    pending: 'myOrders.violet',
-    'in progress': 'myOrders.yellow',
-    fulfilled: 'myOrders.green',
-  };
-
+}: SingleOrderProps) {
   return (
     <Flex margin="auto" width="fit-content" direction="column" height="100%">
       <Flex justifyContent="space-between" alignItems="center">
         <Box>
-          <Text fontSize="20px">Order #{id}</Text>
+          <Text fontSize="20px">`Order #{id}`</Text>
           <Text color="myOrders.lightGray">{date}</Text>
         </Box>
         <Avatar name="Vuk" backgroundColor="myOrders.lightGray" />
@@ -39,8 +43,8 @@ function SingleOrder({
         </Box>
       </Flex>
       <Box
-        color={statusColor[status]}
-        borderColor={statusColor[status]}
+        color={status}
+        borderColor={status}
         border="1px solid"
         borderRadius="5px"
         padding="8px"

@@ -1,6 +1,12 @@
 import { Flex, Text } from '@chakra-ui/react';
 
-function SumOfPoints({ text, color, sum }) {
+type SumOfPointsProps = {
+  text: string;
+  color: string;
+  sum: number;
+};
+
+function SumOfPoints({ text, color, sum }: SumOfPointsProps) {
   return (
     <Flex
       justifyContent="space-between"

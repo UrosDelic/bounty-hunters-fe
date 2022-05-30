@@ -1,7 +1,12 @@
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { useAppContext } from '../context/appContext';
+import { UserTypes } from '../context/userTypes';
 
-function ProtectedRoute({ allowedRoles }) {
+type AllowedRolesProp = {
+  allowedRoles: Array<UserTypes>;
+};
+
+function ProtectedRoute({ allowedRoles }: AllowedRolesProp) {
   const { userRole } = useAppContext();
   const location = useLocation();
 
@@ -11,9 +16,8 @@ function ProtectedRoute({ allowedRoles }) {
 
   if (allowedRoles.includes(userRole)) {
     return <Outlet />;
-  } else {
-    return <Navigate to="/" state={{ from: location }} replace />;
   }
+  return <Navigate to="/" state={{ from: location }} replace />;
 }
 
 export default ProtectedRoute;
