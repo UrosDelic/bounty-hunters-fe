@@ -8,15 +8,30 @@ import {
 } from '@chakra-ui/react';
 import { useState } from 'react';
 
+enum Status {
+  ACTIVE = 'ACTIVE',
+  INACTIVE = 'INACTIVE',
+}
+
 type SingleCardProps = {
   name: string;
-  points: number;
+  price: number;
+  status: Status;
 };
 
-function SingleProduct({ name, points }: SingleCardProps) {
-  const [isInactive, setIsInactive] = useState(false);
-  const borderColor = isInactive ? 'main.gray' : '';
-  const backgroundColor = isInactive ? '' : 'main.green';
+function SingleProduct({ name, price, status }: SingleCardProps) {
+  const [productStatus, setProductStatus] = useState(status);
+  const borderColor = productStatus === Status.INACTIVE ? 'main.gray' : '';
+  const backgroundColor = productStatus === Status.INACTIVE ? '' : 'main.green';
+
+  function changeStatus() {
+    if (productStatus === Status.ACTIVE) {
+      setProductStatus(Status.INACTIVE);
+    } else {
+      setProductStatus(Status.ACTIVE);
+    }
+  }
+
   return (
     <Flex
       direction={['column', 'row', 'row', 'row']}
@@ -28,16 +43,15 @@ function SingleProduct({ name, points }: SingleCardProps) {
     >
       <Box>
         <Heading fontSize="18px">{name}</Heading>
-        <Text fontSize="14px">{points} points</Text>
+        <Text fontSize="14px">{price} points</Text>
       </Box>
       <ButtonGroup>
         <Button
           borderColor={borderColor}
           backgroundColor={backgroundColor}
-          //   color="main.white"
-          onClick={() => setIsInactive(prev => !prev)}
+          onClick={changeStatus}
         >
-          Set as {isInactive ? 'active' : 'inactive'}
+          Set as {productStatus === Status.INACTIVE ? 'active' : 'inactive'}
         </Button>
       </ButtonGroup>
     </Flex>

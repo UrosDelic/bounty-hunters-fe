@@ -5,38 +5,24 @@ import {
   Avatar,
   // Select
 } from '@chakra-ui/react';
-// import { EditIcon } from '@chakra-ui/icons';
-import { useEffect, useRef, useState } from 'react';
 
 type SingleUserProps = {
-  name: string;
-  role: string[];
+  firstName: string;
+  lastName: string;
+  roles: RoleProps[];
 };
 
-function SingleUser({ name, role }: SingleUserProps) {
-  // const [selectedValue, setSelectedValue] = useState(role);
-  const [
-    isEditClicked,
-    //setIsEditClicked
-  ] = useState(false);
-  const selectElement = useRef<HTMLInputElement>(null);
+type RoleProps = {
+  role: {
+    id: string;
+    name: string;
+  };
+};
 
-  // function changeRole(e: ChangeEvent<HTMLInputElement>) {
-  //   setSelectedValue(e.target.value);
-  //   hideSelect();
-  // }
-
-  // function displaySelect() {
-  //   setIsEditClicked(true);
-  // }
-
-  // function hideSelect() {
-  //   setIsEditClicked(false);
-  // }
-
-  useEffect(() => {
-    selectElement.current?.focus();
-  }, [isEditClicked]);
+function SingleUser({ firstName, lastName, roles }: SingleUserProps) {
+  const rolesJoined = roles
+    .map((singleRole: any) => singleRole.role.name.toLowerCase())
+    .join(', ');
 
   return (
     <Box
@@ -47,7 +33,7 @@ function SingleUser({ name, role }: SingleUserProps) {
     >
       <Flex padding="20px" direction="column" alignItems="center">
         <Avatar
-          name={name}
+          name={`${firstName} ${lastName}`}
           size="xl"
           marginBottom="10px"
           bg="users.lightGray"
@@ -59,36 +45,18 @@ function SingleUser({ name, role }: SingleUserProps) {
           textTransform="uppercase"
           wordBreak="break-word"
         >
-          {name}
+          {`${firstName} ${lastName}`}
         </Text>
-        <Flex
-          alignItems="center"
-          display={isEditClicked ? 'none' : 'flex'}
-          minH="35px"
-        >
+        <Flex alignItems="center" minH="35px">
           <Text
             textAlign="center"
             color="users.lightGray"
             textTransform="capitalize"
             marginRight="5px"
           >
-            {role.join(', ')}
+            {rolesJoined || 'No role'}
           </Text>
-          {/* <EditIcon cursor="pointer" onClick={displaySelect} /> */}
         </Flex>
-        {/* <Select
-          ref={selectElement}
-          size="sm"
-          width="fit-content"
-          value={selectedValue}
-          onChange={changeRole}
-          onBlur={hideSelect}
-          display={isEditClicked ? 'block' : 'none'}
-        >
-          <option value="employee">Employee</option>
-          <option value="admin">Admin</option>
-          <option value="superadmin">Superadmin</option>
-        </Select> */}
       </Flex>
     </Box>
   );

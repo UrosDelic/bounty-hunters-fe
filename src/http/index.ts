@@ -11,7 +11,7 @@ class HttpCommunicator {
     return this.http
       .get(url)
       .then((data: any) => {
-        return { data };
+        return data.data;
       })
       .catch((error: any) => {
         return { error };
