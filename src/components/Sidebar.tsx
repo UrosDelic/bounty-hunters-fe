@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useAppContext } from '../context/appContext';
 
 function Sidebar() {
-  const { userRole } = useAppContext();
+  const { userRoles } = useAppContext();
 
   return (
     <Flex flexDirection="column" w={['100%']} backgroundColor="main.gray">
@@ -15,7 +15,7 @@ function Sidebar() {
 
       {sidebarData.map(link => {
         const { text, route, icon, role } = link;
-        const isLinkDisplayed = userRole === role ? 'block' : 'none';
+        const isLinkDisplayed = userRoles?.includes(role) ? 'block' : 'none';
         return (
           <Link
             key={text}

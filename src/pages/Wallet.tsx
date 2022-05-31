@@ -13,7 +13,7 @@ function Wallet() {
   );
 
   return (
-    <Box maxWidth="1200px" margin="auto" padding="0px 15px 15px">
+    <Box maxWidth="1200px" margin="auto" padding="0px 25px 25px 25px">
       <Flex
         flexDirection="column"
         alignItems="center"

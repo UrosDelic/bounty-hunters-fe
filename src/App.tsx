@@ -57,8 +57,8 @@ function App() {
             <Route
               element={<ProtectedRoute allowedRoles={[UserTypes.ADMIN]} />}
             >
-              <Route path="/tasks" element={<div>tasks</div>} />
-              <Route path="/tasks/:id" element={<div>some task</div>} />
+              <Route path="/all-tasks" element={<div>tasks</div>} />
+              <Route path="/all-tasks/:id" element={<div>some task</div>} />
             </Route>
 
             <Route
@@ -66,7 +66,7 @@ function App() {
             >
               <Route path="/users" element={<Users />} />
               <Route path="/products" element={<Products />} />
-              <Route path="/orders" element={<Orders />} />
+              <Route path="/all-orders" element={<Orders />} />
             </Route>
           </Route>
 

@@ -123,10 +123,10 @@ const productsList = [
   },
 ];
 
-enum StatusColor {
-  pending = 'myOrders.violet',
-  in_progress = 'myOrders.yellow',
-  fulfilled = 'myOrders.green',
+enum Status {
+  pending = 'pending',
+  in_progress = 'in progress',
+  fulfilled = 'fulfilled',
 }
 
 const ordersList = [
@@ -135,7 +135,7 @@ const ordersList = [
     name: '#1',
     image: shirt,
     points: 40,
-    status: StatusColor.pending,
+    status: Status.pending,
     date: '28/12/1992',
     shippingAdress: 'Cvijiceva br. 4',
   },
@@ -144,7 +144,7 @@ const ordersList = [
     name: '#2',
     image: mug,
     points: 20,
-    status: StatusColor.in_progress,
+    status: Status.in_progress,
     date: '27/12/1992',
     shippingAdress: 'Milentijeva br. 5',
   },
@@ -153,7 +153,7 @@ const ordersList = [
     name: '#3',
     image: mug,
     points: 20,
-    status: StatusColor.fulfilled,
+    status: Status.fulfilled,
     date: '28/12/1992',
     shippingAdress: 'Cvijiceva br. 4',
   },
@@ -162,7 +162,7 @@ const ordersList = [
     name: '#4',
     image: shirt,
     points: 40,
-    status: StatusColor.fulfilled,
+    status: Status.fulfilled,
     date: '20/12/1997',
     shippingAdress: 'Cvijiceva br. 4',
   },
@@ -171,7 +171,7 @@ const ordersList = [
     name: '#5',
     image: sticker,
     points: 10,
-    status: StatusColor.fulfilled,
+    status: Status.fulfilled,
     date: '20/11/2002',
     shippingAdress: 'Cvijiceva br. 4',
   },

@@ -7,14 +7,14 @@ type AllowedRolesProp = {
 };
 
 function ProtectedRoute({ allowedRoles }: AllowedRolesProp) {
-  const { userRole } = useAppContext();
+  const { userRoles } = useAppContext();
   const location = useLocation();
 
-  if (!userRole) {
+  if (!userRoles) {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
 
-  if (allowedRoles.includes(userRole)) {
+  if (userRoles.some(role => allowedRoles.includes(role))) {
     return <Outlet />;
   }
   return <Navigate to="/" state={{ from: location }} replace />;

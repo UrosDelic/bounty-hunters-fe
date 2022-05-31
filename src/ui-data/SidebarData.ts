@@ -1,5 +1,6 @@
 import {
   faComment,
+  faList,
   faListCheck,
   faListOl,
   faWallet,
@@ -10,71 +11,72 @@ import {
   faClipboardList,
   IconDefinition,
 } from '@fortawesome/free-solid-svg-icons';
+import { UserTypes } from '../context/userTypes';
 
 const sidebarData: Array<{
-  role: string;
+  role: UserTypes;
   text: string;
   route: string;
   icon: IconDefinition;
 }> = [
   {
-    role: 'employee',
+    role: UserTypes.EMPLOYEE,
     text: 'feed',
     route: '/feed',
     icon: faComment,
   },
   {
-    role: 'employee',
+    role: UserTypes.EMPLOYEE,
     text: 'new tasks',
     route: '/new-tasks',
     icon: faListCheck,
   },
   {
-    role: 'employee',
+    role: UserTypes.EMPLOYEE,
     text: 'my tasks',
     route: '/my-tasks',
     icon: faListOl,
   },
   {
-    role: 'employee',
+    role: UserTypes.EMPLOYEE,
     text: 'wallet',
     route: '/wallet',
     icon: faWallet,
   },
   {
-    role: 'employee',
+    role: UserTypes.EMPLOYEE,
     text: 'store',
     route: '/store',
     icon: faShop,
   },
   {
-    role: 'employee',
+    role: UserTypes.EMPLOYEE,
     text: 'my orders',
     route: '/my-orders',
     icon: faCartShopping,
   },
   {
-    role: 'admin',
-    text: 'tasks',
-    route: '/tasks',
-    icon: faListCheck,
+    role: UserTypes.ADMIN,
+    text: 'all tasks',
+    route: '/all-tasks',
+    icon: faList,
   },
   {
-    role: 'superadmin',
+    role: UserTypes.SUPERADMIN,
     text: 'users',
     route: '/users',
     icon: faUsers,
   },
   {
-    role: 'superadmin',
+    role: UserTypes.SUPERADMIN,
     text: 'products',
     route: '/products',
     icon: faDolly,
   },
   {
-    role: 'superadmin',
-    text: 'orders',
-    route: '/orders',
+    role: UserTypes.SUPERADMIN,
+    text: 'all orders',
+    route: '/all-orders',
     icon: faClipboardList,
   },
 ];

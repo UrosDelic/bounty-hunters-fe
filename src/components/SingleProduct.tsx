@@ -13,7 +13,7 @@ type SingleCardProps = {
   points: number;
 };
 
-function SingleCard({ name, points }: SingleCardProps) {
+function SingleProduct({ name, points }: SingleCardProps) {
   const [isInactive, setIsInactive] = useState(false);
   const borderColor = isInactive ? 'main.gray' : '';
   const backgroundColor = isInactive ? '' : 'main.green';
@@ -44,4 +44,4 @@ function SingleCard({ name, points }: SingleCardProps) {
   );
 }
 
-export default SingleCard;
+export default SingleProduct;

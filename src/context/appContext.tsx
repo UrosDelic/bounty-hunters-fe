@@ -1,24 +1,28 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, ReactNode, useContext, useState } from 'react';
 import { UserTypes } from './userTypes';
 
 interface AppContextProps {
-  userRole: UserTypes | null;
+  userRoles: UserTypes[] | null;
 }
 
 const AppContext = createContext<AppContextProps>({
-  userRole: null,
+  userRoles: null,
 });
 
 type appProviderProp = {
-  children: any;
+  children: ReactNode;
 };
 
 function AppProvider({ children }: appProviderProp) {
   // change user type when we get it from the server
-  const [userRole] = useState<AppContextProps['userRole']>(UserTypes.EMPLOYEE);
+  const [userRoles] = useState<AppContextProps['userRoles']>([
+    UserTypes.EMPLOYEE,
+    UserTypes.SUPERADMIN,
+    UserTypes.ADMIN,
+  ]);
 
   return (
-    <AppContext.Provider value={{ userRole }}>{children}</AppContext.Provider>
+    <AppContext.Provider value={{ userRoles }}>{children}</AppContext.Provider>
   );
 }
 

@@ -4,7 +4,13 @@ import { productsList } from '../testData/TestData';
 
 function Store() {
   return (
-    <Box maxW="75%" margin="auto" marginBottom="50px" boxSizing="border-box">
+    <Box
+      maxW="1200px"
+      margin="auto"
+      marginBottom="50px"
+      padding="0px 25px 25px"
+      boxSizing="border-box"
+    >
       <Heading as="h1" textAlign="center" marginTop="50px">
         Available products
       </Heading>

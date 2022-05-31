@@ -6,7 +6,7 @@ import SumOfPoints from './SumOfPoints';
 import StoreItem from './StoreItem';
 import SingleOrder from './SingleOrder';
 import SingleUser from './SingleUser';
-import SingleCard from './SingleCard';
+import SingleProduct from './SingleProduct';
 import Order from './Order';
 
 export {
@@ -18,6 +18,6 @@ export {
   StoreItem,
   SingleOrder,
   SingleUser,
-  SingleCard,
+  SingleProduct,
   Order,
 };
