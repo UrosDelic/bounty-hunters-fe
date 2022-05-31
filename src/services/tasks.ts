@@ -4,9 +4,11 @@ class TasksService {
   constructor() {
     this.http = initHttp();
   }
-
-  getTasks() {
-    return this.http.get('api/users?page=2');
+getTasks(){
+  return this.http.get('/tasks');
+}
+  getTasksById(id) {
+    return this.http.get(`/tasks/${id}`);
   }
 }
 

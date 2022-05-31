@@ -17,7 +17,7 @@ const MyTasksPage = () => {
   return (
     <Box display="flex" flexDirection="row">
       {tasks.map(task => (
-        <Link to={`/task-details/${task.id}`}>
+        <Link key={task.id} to={`/task-details/${task.id}`}>
           <MyTask
             key={task.id}
             headline={task.headline}
