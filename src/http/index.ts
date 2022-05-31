@@ -2,23 +2,24 @@ import axios from 'axios';
 import config from '../config';
 
 class HttpCommunicator {
+  http: any;
   constructor() {
     this.http = axios.create(config);
   }
 
-  get(url) {
+  get(url: string) {
     return this.http
       .get(url)
-      .then(data => {
+      .then((data: any) => {
         return { data };
       })
-      .catch(error => {
+      .catch((error: any) => {
         return { error };
       });
   }
 }
 
-let instance = null;
+let instance: HttpCommunicator | null = null;
 export function initHttp() {
   if (!instance) {
     instance = new HttpCommunicator();

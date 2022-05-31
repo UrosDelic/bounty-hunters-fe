@@ -17,8 +17,9 @@ import {
 } from './pages';
 import theme from './theme/index';
 import ProtectedRoute from './routes/ProtectedRoute';
+import MyTasksPage from './pages/my-tasks/MyTasks';
+import TaskDetailsPage from './pages/my-tasks/taskDetails';
 import { UserTypes } from './context/userTypes';
-import MyTasksPage from './pages/MyTasks';
 
 function App() {
   return (
@@ -48,6 +49,7 @@ function App() {
               <Route path="/feed" element={<Feed />} />
               <Route path="/new-tasks" element={<div>new tasks</div>} />
               <Route path="/my-tasks" element={<MyTasksPage />} />
+              <Route path="/task-details/:id" element={<TaskDetailsPage />} />
               <Route path="/wallet" element={<Wallet />} />
               <Route path="/store" element={<Store />} />
               <Route path="/store/:id" element={<ProductDetails />} />

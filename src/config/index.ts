@@ -1,3 +1,3 @@
-const baseURL = { baseURL: 'www.google.com' };
+const baseURL = { baseURL: 'https://bounty-hunters-api.herokuapp.com/api' };
 
 export default baseURL;

@@ -43,10 +43,10 @@ const theme = extendTheme({
       lightGreen: '#38A169',
     },
   },
-  fonts: {
-    heading: 'Montserrat',
-    body: 'Inter',
-  },
+  // fonts: {
+  //   heading: 'Montserrat',
+  //   body: 'Inter',
+  // },
 });
 
 export default theme;
