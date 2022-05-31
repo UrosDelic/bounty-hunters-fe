@@ -3,7 +3,6 @@ import { ordersList } from '../testData/TestData';
 import { Order } from '../components/index';
 
 function Orders() {
-  throw Error('oops');
   return (
     <Box
       maxW="1200px"
