@@ -8,6 +8,7 @@ import SingleOrder from './SingleOrder';
 import SingleUser from './SingleUser';
 import SingleProduct from './SingleProduct';
 import Order from './Order';
+import ErrorBoundary from './ErrorBoundary';
 
 export {
   Layout,
@@ -20,4 +21,5 @@ export {
   SingleUser,
   SingleProduct,
   Order,
+  ErrorBoundary,
 };
