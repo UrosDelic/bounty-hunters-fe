@@ -11,8 +11,14 @@ import {
   Flex,
 } from '@chakra-ui/react';
 
-function CustomTable({ data, title, color }) {
-  if (data)
+type TableProps = {
+  data : any, 
+  title: any, 
+}
+
+
+function CustomTable({ data, title} : TableProps) {
+  if (data) {
     return (
       <TableContainer rounded={'xl'} bg="white" boxShadow="dark-lg">
         <Text fontSize="xl" m={2}>
@@ -20,7 +26,7 @@ function CustomTable({ data, title, color }) {
         </Text>
         <Table variant="striped" size="sm">
           <Tbody>
-            {data.map(row => {
+            {data.map((row:any) => {
               return (
                 <Tr key={row.id}>
                   <Td>
@@ -55,6 +61,10 @@ function CustomTable({ data, title, color }) {
         </Table>
       </TableContainer>
     );
+  }
+
+  return <Text>No Data to display</Text>
+   
 }
 
 export default CustomTable;

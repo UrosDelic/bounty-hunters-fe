@@ -5,6 +5,9 @@ import WalletTable from './WalletTable';
 import SumOfPoints from './SumOfPoints';
 import StoreItem from './StoreItem';
 import SingleOrder from './SingleOrder';
+import SingleUser from './SingleUser';
+import SingleCard from './SingleCard';
+import Order from './Order';
 
 export {
   Layout,
@@ -14,4 +17,7 @@ export {
   WalletTable,
   StoreItem,
   SingleOrder,
+  SingleUser,
+  SingleCard,
+  Order,
 };

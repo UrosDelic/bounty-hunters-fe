@@ -9,7 +9,13 @@ import {
   Text,
 } from '@chakra-ui/react';
 
-function WalletTable({ data, headers, title }) {
+type WalletTableProps = {
+  data: any;
+  headers: any;
+  title: any;
+};
+
+function WalletTable({ data, headers, title }: WalletTableProps) {
   return (
     <TableContainer>
       <Text fontSize="xl" m={2}>
@@ -24,7 +30,7 @@ function WalletTable({ data, headers, title }) {
           </Tr>
         </Thead>
         <Tbody wordBreak="break-word">
-          {data.map(item => {
+          {data.map((item: any) => {
             const { id, name, points, date } = item;
             return (
               <Tr key={id}>

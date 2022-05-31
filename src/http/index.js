@@ -1,11 +1,9 @@
 import axios from 'axios';
-import generateConfig from '../config';
-
-const config = generateConfig();
+import config from '../config';
 
 class HttpCommunicator {
   constructor() {
-    this.http = axios.create({ baseURL: config.baseURL });
+    this.http = axios.create(config);
   }
 
   get(url) {

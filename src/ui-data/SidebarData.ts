@@ -8,9 +8,15 @@ import {
   faUsers,
   faDolly,
   faClipboardList,
+  IconDefinition,
 } from '@fortawesome/free-solid-svg-icons';
 
-const sidebarData = [
+const sidebarData: Array<{
+  role: string;
+  text: string;
+  route: string;
+  icon: IconDefinition;
+}> = [
   {
     role: 'employee',
     text: 'feed',

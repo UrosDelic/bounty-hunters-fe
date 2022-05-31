@@ -15,7 +15,7 @@ import CustomTable from './core/CustomTable';
 import StyledCard from './core/StyledCard';
 import shirt from '../../img/shirt.jpg';
 import sticker from '../../img/sticker.jpg';
-import mug from '../../img/mug.jpg';
+import  mug  from '../../img/mug.jpg';
 import Carousel from './core/Carousel';
 
 const taskComplete = [

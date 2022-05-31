@@ -11,12 +11,15 @@ import {
   Store,
   ProductDetails,
   MyOrders,
+  Users,
+  Products,
+  Orders,
 } from './pages';
 import theme from './theme/index';
 import ProtectedRoute from './routes/ProtectedRoute';
-import userTypes from './context/userTypes';
 import MyTasksPage from './pages/my-tasks/MyTasks';
 import TaskDetailsPage from './pages/my-tasks/taskDetails';
+import { UserTypes } from './context/userTypes';
 
 function App() {
   return (
@@ -30,9 +33,9 @@ function App() {
               element={
                 <ProtectedRoute
                   allowedRoles={[
-                    userTypes.EMPLOYEE,
-                    userTypes.ADMIN,
-                    userTypes.SUPERADMIN,
+                    UserTypes.EMPLOYEE,
+                    UserTypes.ADMIN,
+                    UserTypes.SUPERADMIN,
                   ]}
                 />
               }
@@ -41,16 +44,12 @@ function App() {
             </Route>
 
             <Route
-              element={<ProtectedRoute allowedRoles={[userTypes.EMPLOYEE]} />}
+              element={<ProtectedRoute allowedRoles={[UserTypes.EMPLOYEE]} />}
             >
               <Route path="/feed" element={<Feed />} />
               <Route path="/new-tasks" element={<div>new tasks</div>} />
-              <Route exact path="/my-tasks" element={<MyTasksPage />} />
-              <Route
-                exact
-                path="/task-details/:id"
-                element={<TaskDetailsPage />}
-              />
+              <Route path="/my-tasks" element={<MyTasksPage />} />
+              <Route path="/task-details/:id" element={<TaskDetailsPage />} />
               <Route path="/wallet" element={<Wallet />} />
               <Route path="/store" element={<Store />} />
               <Route path="/store/:id" element={<ProductDetails />} />
@@ -58,18 +57,18 @@ function App() {
             </Route>
 
             <Route
-              element={<ProtectedRoute allowedRoles={[userTypes.ADMIN]} />}
+              element={<ProtectedRoute allowedRoles={[UserTypes.ADMIN]} />}
             >
               <Route path="/tasks" element={<div>tasks</div>} />
               <Route path="/tasks/:id" element={<div>some task</div>} />
             </Route>
 
             <Route
-              element={<ProtectedRoute allowedRoles={[userTypes.SUPERADMIN]} />}
+              element={<ProtectedRoute allowedRoles={[UserTypes.SUPERADMIN]} />}
             >
-              <Route path="/users" element={<div>users</div>} />
-              <Route path="/products" element={<div>products</div>} />
-              <Route path="/orders" element={<div>orders</div>} />
+              <Route path="/users" element={<Users />} />
+              <Route path="/products" element={<Products />} />
+              <Route path="/orders" element={<Orders />} />
             </Route>
           </Route>
 

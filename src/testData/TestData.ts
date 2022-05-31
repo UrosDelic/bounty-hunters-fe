@@ -123,52 +123,96 @@ const productsList = [
   },
 ];
 
+enum StatusColor {
+  pending = 'myOrders.violet',
+  in_progress = 'myOrders.yellow',
+  fulfilled = 'myOrders.green',
+}
+
 const ordersList = [
   {
     id: 1,
-    name: 'Quantox Shirt',
+    name: '#1',
     image: shirt,
     points: 40,
-    status: 'pending',
+    status: StatusColor.pending,
     date: '28/12/1992',
     shippingAdress: 'Cvijiceva br. 4',
   },
   {
     id: 2,
-    name: 'Quantox Mug',
+    name: '#2',
     image: mug,
     points: 20,
-    status: 'in progress',
+    status: StatusColor.in_progress,
     date: '27/12/1992',
     shippingAdress: 'Milentijeva br. 5',
   },
   {
     id: 3,
-    name: 'Quantox Mug',
+    name: '#3',
     image: mug,
     points: 20,
-    status: 'pending',
+    status: StatusColor.fulfilled,
     date: '28/12/1992',
     shippingAdress: 'Cvijiceva br. 4',
   },
   {
     id: 4,
-    name: 'Quantox Shirt',
+    name: '#4',
     image: shirt,
     points: 40,
-    status: 'fulfilled',
+    status: StatusColor.fulfilled,
     date: '20/12/1997',
     shippingAdress: 'Cvijiceva br. 4',
   },
   {
     id: 5,
-    name: 'Quantox Sticker',
+    name: '#5',
     image: sticker,
     points: 10,
-    status: 'fulfilled',
+    status: StatusColor.fulfilled,
     date: '20/11/2002',
     shippingAdress: 'Cvijiceva br. 4',
   },
 ];
 
-export { gainedPoints, spentPoints, productsList, ordersList };
+const usersList = [
+  {
+    id: 1,
+    name: 'Vuk Stojanovic',
+    role: ['employee', 'admin', 'superadmin'],
+  },
+  {
+    id: 2,
+    name: 'Milos Ciric',
+    role: ['superadmin'],
+  },
+  {
+    id: 3,
+    name: 'Milan Jovanovic',
+    role: ['admin', 'superadmin'],
+  },
+  {
+    id: 4,
+    name: 'Stefan Meza',
+    role: ['employee', 'admin'],
+  },
+  {
+    id: 5,
+    name: 'Danilo Markicevic',
+    role: ['admin'],
+  },
+  {
+    id: 6,
+    name: 'Vladimir Stojanovic',
+    role: ['superadmin'],
+  },
+  {
+    id: 7,
+    name: 'Petar Antic',
+    role: ['employee'],
+  },
+];
+
+export { gainedPoints, spentPoints, productsList, ordersList, usersList };
