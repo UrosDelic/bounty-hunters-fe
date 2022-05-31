@@ -11,7 +11,7 @@ class TasksService {
     return this.http.get('/tasks');
   }
 
-  getTasksById(id: any) {
+  getTasksById(id: string) {
     return this.http.get(`/tasks/${id}`);
   }
 }

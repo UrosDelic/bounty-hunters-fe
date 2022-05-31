@@ -1,4 +1,3 @@
-import React from 'react';
 import TaskDetails from '../../components/my-tasks/task-details';
 import { useParams } from 'react-router-dom';
 import TasksService from '../../services/tasks';
@@ -10,7 +9,7 @@ const TaskDetailsPage = () => {
   useEffect(() => {
     service.getTasksById(id);
     console.log(id);
-  }, []);
+  });
   return <TaskDetails />;
 };
 
