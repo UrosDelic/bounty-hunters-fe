@@ -7,8 +7,9 @@ const TaskDetailsPage = () => {
   const service = new TasksService();
   const { id } = useParams();
   useEffect(() => {
-    service.getTasksById(id);
-    console.log(id);
+    if (id) {
+      service.getTasksById(id);
+    }
   });
   return <TaskDetails />;
 };
