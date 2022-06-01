@@ -36,7 +36,7 @@ function Products() {
   return (
     <Box maxW="1200px" margin="auto" marginTop="50px" padding="0px 25px 25px">
       {isSuccess &&
-        data?.data?.products.map((product: ProductProps) => {
+        data?.products.map((product: ProductProps) => {
           const { id, name, price, status } = product;
           return (
             <SingleProduct key={id} name={name} price={price} status={status} />

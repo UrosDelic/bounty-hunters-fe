@@ -10,8 +10,8 @@ class HttpCommunicator {
   get(url: string) {
     return this.http
       .get(url)
-      .then((data: any) => {
-        return data.data;
+      .then((res: any) => {
+        return res.data.data;
       })
       .catch((error: any) => {
         return { error };

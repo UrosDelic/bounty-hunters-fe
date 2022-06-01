@@ -123,10 +123,10 @@ const productsList = [
   },
 ];
 
-enum Status {
-  pending = 'pending',
-  in_progress = 'in progress',
-  fulfilled = 'fulfilled',
+export enum Status {
+  pending = 'PENDING',
+  in_progress = 'IN_PROGRESS',
+  fulfilled = 'FULFILLED',
 }
 
 const ordersList = [

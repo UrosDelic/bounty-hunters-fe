@@ -1,13 +1,14 @@
 import { Box, Text, Flex, Select, Heading } from '@chakra-ui/react';
 import { ChangeEvent, useState } from 'react';
+import { Status } from '../testData/TestData';
 
 type OrderProps = {
-  name: string;
-  date: string;
+  id: string;
+  createdAt: string;
   status: string;
 };
 
-function Order({ name, date, status }: OrderProps) {
+function Order({ id, createdAt, status }: OrderProps) {
   const [statusValue, setStatusValue] = useState(status);
   const statusColors: any = {
     pending: 'orders.purple',
@@ -29,8 +30,8 @@ function Order({ name, date, status }: OrderProps) {
       padding="20px 24px"
     >
       <Box>
-        <Heading fontSize="18px">{name}</Heading>
-        <Text fontSize="14px">{date}</Text>
+        <Heading fontSize="18px">{id}</Heading>
+        <Text fontSize="14px">{createdAt}</Text>
       </Box>
       <Select
         value={statusValue}
