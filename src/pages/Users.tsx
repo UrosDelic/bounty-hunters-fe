@@ -1,4 +1,4 @@
-import { Grid, GridItem, Heading } from '@chakra-ui/react';
+import { Grid, GridItem } from '@chakra-ui/react';
 import { SingleUser, SpinnerLoader, FetchingError } from '../components/index';
 import UsersService from '../services/users';
 import { useQuery } from 'react-query';
