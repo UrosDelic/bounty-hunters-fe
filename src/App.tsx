@@ -14,6 +14,7 @@ import {
   Users,
   Products,
   Orders,
+  NewTasks
 } from './pages';
 import theme from './theme/index';
 import ProtectedRoute from './routes/ProtectedRoute';
@@ -47,7 +48,7 @@ function App() {
               element={<ProtectedRoute allowedRoles={[UserTypes.EMPLOYEE]} />}
             >
               <Route path="/feed" element={<Feed />} />
-              <Route path="/new-tasks" element={<div>new tasks</div>} />
+              <Route path="/new-tasks" element={<NewTasks />} />
               <Route path="/my-tasks" element={<MyTasksPage />} />
               <Route path="/task-details/:id" element={<TaskDetailsPage />} />
               <Route path="/wallet" element={<Wallet />} />

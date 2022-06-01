@@ -1,4 +1,4 @@
-import MyTask from '../components/myTask';
+import MyTask from '../components/MyTask';
 import { Box } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import TasksService from '../services/tasks';

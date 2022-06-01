@@ -5,6 +5,7 @@ import {
   DrawerOverlay,
   DrawerContent,
   useDisclosure,
+  Container
 } from '@chakra-ui/react';
 import { Header, Sidebar } from './index';
 import { Outlet } from 'react-router-dom';
@@ -36,9 +37,9 @@ function Layout() {
           </DrawerContent>
         </Drawer>
 
-        <Box flex={1}>
+        <Container maxW='fullwidth' minH='100%'  >
           <Outlet />
-        </Box>
+        </Container>
       </Flex>
     </Flex>
   );

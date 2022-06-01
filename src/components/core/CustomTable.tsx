@@ -10,7 +10,7 @@ import {
   Image,
   Flex,
 } from '@chakra-ui/react';
-
+import StyledCard from './StyledCard'
 type TableProps = {
   data : any, 
   title: any, 
@@ -24,7 +24,7 @@ function CustomTable({ data, title} : TableProps) {
         <Text fontSize="xl" m={2}>
           {title}
         </Text>
-        <Table variant="striped" size="sm">
+        <Table   size="sm">
           <Tbody>
             {data.map((row:any) => {
               return (

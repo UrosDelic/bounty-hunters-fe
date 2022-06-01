@@ -7,10 +7,12 @@ import MyOrders from './MyOrders';
 import Users from './Users';
 import Products from './Products';
 import Orders from './Orders';
+import NewTasks from './NewTasks';
 
 export {
   DefaultPage,
   NotFound,
+  NewTasks,
   Wallet,
   Store,
   ProductDetails,

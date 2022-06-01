@@ -11,12 +11,12 @@ import {
   Flex,
   Container,
 } from '@chakra-ui/react';
-import CustomTable from './core/CustomTable';
-import StyledCard from './core/StyledCard';
+import CustomTable from '../core/CustomTable';
+
 import shirt from '../../img/shirt.jpg';
 import sticker from '../../img/sticker.jpg';
-import  mug  from '../../img/mug.jpg';
-import Carousel from './core/Carousel';
+import mug from '../../img/mug.jpg';
+
 
 const taskComplete = [
   {
@@ -130,32 +130,7 @@ const Feed = () => {
 
           <GridItem>
             <Grid templateColumns={{ base: '90vw', xl: '60% 40%' }} gap={8}>
-              <GridItem>
-                <Container minW={{ md: '100%' }} py={8} px={6}>
-                  <Text fontWeight={'bold'} fontSize={'20'} mb={5}>
-                    Check out the Latest Orders from Q-Store!
-                  </Text>
-                  <Carousel gap={32}>
-                    {latestOrders.slice(0, 4).map((data, index) => (
-                      <StyledCard key={index}>
-                        <Flex alignItems="center" p={3}>
-                          <Avatar size="md" name={data.name} />
-                          <Text fontWeight="bold" mx={4}>
-                            {data.name}
-                          </Text>
-                        </Flex>
-                        <Text mx={4}>{data.desc}</Text>
-                        <Image
-                          src={data.data.img}
-                          boxSize="150px"
-                          position="absolute"
-                          mx={12}
-                        />
-                      </StyledCard>
-                    ))}
-                  </Carousel>
-                </Container>
-              </GridItem>
+
               <GridItem>
                 <CustomTable data={latestOrders} title="Latest Orders!" />
               </GridItem>

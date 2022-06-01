@@ -42,6 +42,7 @@ const theme = extendTheme({
       oliveGreen: '#96CA3A',
       lightGreen: '#38A169',
     },
+  
   },
   // fonts: {
   //   heading: 'Montserrat',
