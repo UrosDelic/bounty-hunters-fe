@@ -2,9 +2,7 @@ import { Box } from '@chakra-ui/react';
 import { Order } from '../components/index';
 import OrdersService from '../services/orders';
 import { useQuery } from 'react-query';
-import { useEffect } from 'react';
 import { SpinnerLoader, FetchingError } from '../components/index';
-import { Status } from '../testData/TestData';
 
 type OrderProps = {
   id: string;
@@ -17,10 +15,6 @@ function Orders() {
   const { data, isLoading, isError, isSuccess } = useQuery(['orders'], () =>
     service.getOrders()
   );
-
-  useEffect(() => {
-    console.log(data);
-  }, [isSuccess]);
 
   if (isLoading) {
     return <SpinnerLoader />;

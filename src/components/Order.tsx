@@ -1,6 +1,6 @@
 import { Box, Text, Flex, Select, Heading } from '@chakra-ui/react';
 import { ChangeEvent, useState } from 'react';
-import { Status } from '../testData/TestData';
+import dayjs from 'dayjs';
 
 type OrderProps = {
   id: string;
@@ -31,7 +31,7 @@ function Order({ id, createdAt, status }: OrderProps) {
     >
       <Box>
         <Heading fontSize="18px">{id}</Heading>
-        <Text fontSize="14px">{createdAt}</Text>
+        <Text fontSize="14px">{dayjs(createdAt).format('DD-MM-YYYY')}</Text>
       </Box>
       <Select
         value={statusValue}
