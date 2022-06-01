@@ -1,8 +1,21 @@
 import { Grid, GridItem, Heading } from '@chakra-ui/react';
-import { usersList } from '../testData/TestData';
-import { SingleUser, SpinnerLoader } from '../components/index';
+import { SingleUser, SpinnerLoader, FetchingError } from '../components/index';
 import UsersService from '../services/users';
 import { useQuery } from 'react-query';
+
+export type UserProps = {
+  id: string;
+  firstName: string;
+  lastName: string;
+  roles: RoleProps[];
+};
+
+export type RoleProps = {
+  role: {
+    id: string;
+    name: string;
+  };
+};
 
 function Users() {
   const service = new UsersService();
@@ -15,7 +28,7 @@ function Users() {
   }
 
   if (isError) {
-    return <Heading>Error happened</Heading>;
+    return <FetchingError />;
   }
 
   return (
@@ -34,7 +47,7 @@ function Users() {
           maxWidth="1200px"
           padding="0px 25px 25px"
         >
-          {data.data.users.map((user: any) => {
+          {data.data.users.map((user: UserProps) => {
             const { id } = user;
             return (
               <GridItem key={id}>

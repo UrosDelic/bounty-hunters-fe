@@ -7,11 +7,7 @@ import {
   Heading,
 } from '@chakra-ui/react';
 import { useState } from 'react';
-
-enum Status {
-  ACTIVE = 'ACTIVE',
-  INACTIVE = 'INACTIVE',
-}
+import { Status } from '../pages/Products';
 
 type SingleCardProps = {
   name: string;

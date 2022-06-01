@@ -5,23 +5,11 @@ import {
   Avatar,
   // Select
 } from '@chakra-ui/react';
+import { UserProps, RoleProps } from '../pages/Users';
 
-type SingleUserProps = {
-  firstName: string;
-  lastName: string;
-  roles: RoleProps[];
-};
-
-type RoleProps = {
-  role: {
-    id: string;
-    name: string;
-  };
-};
-
-function SingleUser({ firstName, lastName, roles }: SingleUserProps) {
+function SingleUser({ firstName, lastName, roles }: UserProps) {
   const rolesJoined = roles
-    .map((singleRole: any) => singleRole.role.name.toLowerCase())
+    .map((singleRole: RoleProps) => singleRole.role.name.toLowerCase())
     .join(', ');
 
   return (

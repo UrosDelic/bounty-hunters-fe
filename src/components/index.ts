@@ -10,6 +10,7 @@ import SingleProduct from './SingleProduct';
 import Order from './Order';
 import ErrorBoundary from './ErrorBoundary';
 import SpinnerLoader from './SpinnerLoader';
+import FetchingError from './FetchingError';
 
 export {
   Layout,
@@ -24,4 +25,5 @@ export {
   Order,
   ErrorBoundary,
   SpinnerLoader,
+  FetchingError,
 };
