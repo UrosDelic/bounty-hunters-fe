@@ -1,15 +1,13 @@
 import React from 'react';
 import { Box } from '@chakra-ui/react';
-function StyledCard({ children }:any) {
+function StyledCard({ children,bg }:any) {
   return (
     <Box
-      w={280}
-      h={280}
+      bgGradient={bg}
       mx={'auto'}
       boxShadow="dark-lg"
       p="2"
       rounded="md"
-      bg="white"
     >
       {children}
     </Box>

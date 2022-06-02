@@ -10,14 +10,18 @@ import {
   SimpleGrid,
   Flex,
   Container,
+  Spacer,
+  Alert,
+
+  Stack
 } from '@chakra-ui/react';
-import CustomTable from './core/CustomTable';
-import StyledCard from './core/StyledCard';
+import CustomTable from '../core/CustomTable';
+
 import shirt from '../../img/shirt.jpg';
 import sticker from '../../img/sticker.jpg';
-import  mug  from '../../img/mug.jpg';
-import Carousel from './core/Carousel';
-
+import mug from '../../img/mug.jpg';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBell, faBullseye, faBoxOpen } from '@fortawesome/free-solid-svg-icons';
 const taskComplete = [
   {
     id: 1,
@@ -115,60 +119,120 @@ const taskCreated = [
     data: '10/19/2022',
   },
 ];
-
+const notification = [
+  {
+    id: 1,
+    title: 'You have received 100 points for task XY!',
+  },
+  {
+    id: 2,
+    title: 'Your order for new Mug is processed!',
+  },
+  {
+    id: 3,
+    title: 'Your order for new Shirt is processed!',
+  },
+  {
+    id: 4,
+    title: 'Your order for new Mug is processed!',
+  },
+  {
+    id: 5,
+    title: 'New Task assigned to you!',
+  },
+  {
+    id: 6,
+    title: 'Your order for new Mug is processed!',
+  },
+  {
+    id: 7,
+    title: 'New Login at 09:00!',
+  }, {
+    id: 8,
+    title: 'Your order for new Mug is processed!',
+  }, {
+    id: 9,
+    title: 'New Login at 12:00!',
+  }, {
+    id: 10,
+    title: 'New Task assigned to you!',
+  }, {
+    id: 11,
+    title: 'Your order for new Mug is processed!',
+  }, {
+    id: 13,
+    title: 'New Task assigned to you!',
+  }, {
+    id: 14,
+    title: 'Your order for new Mug is processed!',
+  }, {
+    id: 15,
+    title: 'New Task assigned to you!',
+  }, {
+    id: 16,
+    title: 'Your order for new Mug is processed!',
+  }, {
+    id: 17,
+    title: 'New Login at 02:00!',
+  }, {
+    id: 11,
+    title: 'Your order for new Mug is processed!',
+  }, {
+    id: 18,
+    title: 'New Task assigned to you!',
+  }, {
+    id: 19,
+    title: 'New Login at 19:00!',
+  }, {
+    id: 20,
+    title: 'Your order for new Mug is processed!',
+  }
+]
 const Feed = () => {
   return (
     <>
-      <Box m="auto" p={{ base: 0, md: 5 }}>
-        <SimpleGrid gap={8} p={6}>
-          <Flex alignItems={'center'}>
-            <Avatar src="https://bit.ly/ryan-florence" mx={2} size="lg" />
-            <Heading as={'h3'} mt={2} ml={2} fontWeight={'bold'}>
-              Welcome Back, User!
-            </Heading>
-          </Flex>
-
+      <Box >
+        <Grid templateRows={{ base: 'repeat(2, 1fr)', md: '1fr' }} templateColumns={{ base: '1fr', md: '2fr 1fr' }}>
           <GridItem>
-            <Grid templateColumns={{ base: '90vw', xl: '60% 40%' }} gap={8}>
-              <GridItem>
-                <Container minW={{ md: '100%' }} py={8} px={6}>
-                  <Text fontWeight={'bold'} fontSize={'20'} mb={5}>
-                    Check out the Latest Orders from Q-Store!
-                  </Text>
-                  <Carousel gap={32}>
-                    {latestOrders.slice(0, 4).map((data, index) => (
-                      <StyledCard key={index}>
-                        <Flex alignItems="center" p={3}>
-                          <Avatar size="md" name={data.name} />
-                          <Text fontWeight="bold" mx={4}>
-                            {data.name}
-                          </Text>
-                        </Flex>
-                        <Text mx={4}>{data.desc}</Text>
-                        <Image
-                          src={data.data.img}
-                          boxSize="150px"
-                          position="absolute"
-                          mx={12}
-                        />
-                      </StyledCard>
-                    ))}
-                  </Carousel>
-                </Container>
-              </GridItem>
-              <GridItem>
-                <CustomTable data={latestOrders} title="Latest Orders!" />
-              </GridItem>
-              <GridItem>
-                <CustomTable data={taskCreated} title="New Task Created" />
-              </GridItem>
-              <GridItem>
-                <CustomTable data={taskComplete} title="Completed Tasks" />
-              </GridItem>
+            <Grid templateRows={'repeat(3, 1fr)'} p={5}>
+              <GridItem colSpan={2} width={{ base: '90vw', md: 'full' }} > <CustomTable data={taskComplete} /></GridItem>
+              <GridItem colSpan={2} width={{ base: '90vw', md: 'full' }} >  <CustomTable data={taskCreated} /></GridItem>
+              <GridItem colSpan={2} width={{ base: '90vw', md: 'full' }}  >  <CustomTable data={latestOrders} /></GridItem>
             </Grid>
           </GridItem>
-        </SimpleGrid>
-      </Box>
+
+          <GridItem bg='gray.50'>
+            <Flex flexDirection='column' justifyContent='space-between'   >
+              <Box
+                minH={'30vh'} display='flex' alignItems='center' flexDirection='column' mt={10} >
+                <Text textAlign={'center'} fontSize='5xl' mb={4}>Welcome Back, User</Text>
+                <Avatar size='2xl' name='Kent Dodds' src='https://bit.ly/kent-c-dodds' />
+                <Box display='flex' justifyContent='space-between' mt={10} mb={{ base: 5, md: 0 }}>
+                  <Text fontSize='xl' mx={10} textAlign={'center'}> Points Available: <b>500</b> <FontAwesomeIcon icon={faBullseye} /></Text>
+                  <Text fontSize='xl' mx={10} textAlign={'center'}>Pending Bounties: <b>5</b> <FontAwesomeIcon icon={faBoxOpen} /> </Text>
+                </Box>
+              </Box>
+
+
+              <Box overflow='auto' borderTop='1px solid lightgray ' maxH={{ base: 600, md: 600 }} w='90%' mx='auto' mt={{ base: 10, md: 10 }} >
+                {notification.map((n: any) => (
+                  <Stack>
+                    <Alert bg='purple.200' m={2} w='600' boxShadow='lg' key={n.id} px={8} rounded="md">
+                      <FontAwesomeIcon icon={faBell} fontSize={20} />
+                      <Text fontSize='xl' mx={4}>{n.title}</Text>
+                    </Alert>
+                  </Stack>
+                ))}
+              </Box>
+
+            </Flex>
+
+
+
+          </GridItem>
+        </Grid>
+
+      </Box >
     </>
   );
 };

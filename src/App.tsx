@@ -14,11 +14,12 @@ import {
   Users,
   Products,
   Orders,
+  NewTasks,
 } from './pages';
 import theme from './theme/index';
 import ProtectedRoute from './routes/ProtectedRoute';
-import MyTasksPage from './pages/my-tasks/MyTasks';
-import TaskDetailsPage from './pages/my-tasks/taskDetails';
+import MyTasksPage from './pages/my-tasks/MyTask';
+import TaskDetailsPage from './pages/my-tasks/TaskDetails';
 import { UserTypes } from './context/userTypes';
 
 function App() {
@@ -47,7 +48,7 @@ function App() {
               element={<ProtectedRoute allowedRoles={[UserTypes.EMPLOYEE]} />}
             >
               <Route path="/feed" element={<Feed />} />
-              <Route path="/new-tasks" element={<div>new tasks</div>} />
+              <Route path="/new-tasks" element={<NewTasks />} />
               <Route path="/my-tasks" element={<MyTasksPage />} />
               <Route path="/task-details/:id" element={<TaskDetailsPage />} />
               <Route path="/wallet" element={<Wallet />} />
