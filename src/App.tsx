@@ -14,11 +14,11 @@ import {
   Users,
   Products,
   Orders,
-  NewTasks
+  NewTasks,
 } from './pages';
 import theme from './theme/index';
 import ProtectedRoute from './routes/ProtectedRoute';
-import MyTasksPage from './pages/my-tasks/MyTasks';
+import MyTasksPage from './pages/my-tasks/MyTask';
 import TaskDetailsPage from './pages/my-tasks/taskDetails';
 import { UserTypes } from './context/userTypes';
 

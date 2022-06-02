@@ -1,4 +1,4 @@
-import TaskDetails from '../../components/my-tasks/task-details';
+import TaskDetails from '../../components/my-tasks/TaskDetails';
 import { useParams } from 'react-router-dom';
 import TasksService from '../../services/tasks';
 import { useEffect } from 'react';
