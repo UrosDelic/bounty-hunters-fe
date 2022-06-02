@@ -19,7 +19,7 @@ import {
 import theme from './theme/index';
 import ProtectedRoute from './routes/ProtectedRoute';
 import MyTasksPage from './pages/my-tasks/MyTask';
-import TaskDetailsPage from './pages/my-tasks/taskDetails';
+import TaskDetailsPage from './pages/my-tasks/TaskDetails';
 import { UserTypes } from './context/userTypes';
 
 function App() {
