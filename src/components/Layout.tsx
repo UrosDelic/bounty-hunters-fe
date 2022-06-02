@@ -37,7 +37,7 @@ function Layout() {
           </DrawerContent>
         </Drawer>
 
-        <Container maxW='fullwidth' minH='100%'  >
+        <Container maxW='100%' minH='100%' p={0}  >
           <Outlet />
         </Container>
       </Flex>

@@ -12,21 +12,19 @@ import {
 } from '@chakra-ui/react';
 import StyledCard from './StyledCard'
 type TableProps = {
-  data : any, 
-  title: any, 
+  data: any,
+
 }
 
 
-function CustomTable({ data, title} : TableProps) {
+function CustomTable({ data }: TableProps) {
   if (data) {
     return (
       <TableContainer rounded={'xl'} bg="white" boxShadow="dark-lg">
-        <Text fontSize="xl" m={2}>
-          {title}
-        </Text>
-        <Table   size="sm">
+
+        <Table size="sm">
           <Tbody>
-            {data.map((row:any) => {
+            {data.map((row: any) => {
               return (
                 <Tr key={row.id}>
                   <Td>
@@ -64,7 +62,7 @@ function CustomTable({ data, title} : TableProps) {
   }
 
   return <Text>No Data to display</Text>
-   
+
 }
 
 export default CustomTable;

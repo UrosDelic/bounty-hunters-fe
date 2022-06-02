@@ -84,15 +84,15 @@ const NewTasks = () => {
 
   return (
     <>
-      <Box m={4} >
+      <Box  >
         <Grid
           templateRows='250px, 1fr, 1fr'
           gap={10}
           p={10}
         >
           <GridItem colSpan={2} >
-            <Flex justifyContent='space-between' alignItems='center'>
-              <Text fontSize='2xl'>
+            <Flex justifyContent='space-between' flexDirection={{ base: 'column', md: 'row' }} alignItems='center'>
+              <Text fontSize='2xl' mb={{ base: 2, md: 0 }}>
                 <b>Search For New Tasks</b>
                 <br />
               </Text>
@@ -111,11 +111,10 @@ const NewTasks = () => {
               </Box>
             </Flex>
           </GridItem>
-          <GridItem colSpan={2}  >
 
 
-          </GridItem>
-          <GridItem colSpan={2} w='100%' m='auto' >
+          <GridItem colSpan={2} width={{ base: '80vw', md: 'full' }} m='auto' >
+
             <NewCustomTable columns={columns} loading={loading}>
 
               {data.map((d: any) => (
