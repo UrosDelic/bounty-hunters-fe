@@ -14,7 +14,7 @@ function DefaultPage() {
     return <Navigate to="/tasks" state={{ from: location }} replace />;
   }
 
-  if (userRoles?.includes(UserTypes.SUPERADMIN)) {
+  if (userRoles?.includes(UserTypes.SUPER_ADMIN)) {
     return <Navigate to="/users" state={{ from: location }} replace />;
   }
   return <Navigate to="/" />;

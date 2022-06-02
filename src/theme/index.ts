@@ -36,6 +36,7 @@ const theme = extendTheme({
       white: '#ffffff',
       lightGray: '#B3C5CD',
       darkGray: '#2f3747',
+      lightGreen: '#38A169',
     },
     orders: {
       purple: '#7B61FF',

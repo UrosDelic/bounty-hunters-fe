@@ -62,19 +62,19 @@ const sidebarData: Array<{
     icon: faList,
   },
   {
-    role: UserTypes.SUPERADMIN,
+    role: UserTypes.SUPER_ADMIN,
     text: 'users',
     route: '/users',
     icon: faUsers,
   },
   {
-    role: UserTypes.SUPERADMIN,
+    role: UserTypes.SUPER_ADMIN,
     text: 'products',
     route: '/products',
     icon: faDolly,
   },
   {
-    role: UserTypes.SUPERADMIN,
+    role: UserTypes.SUPER_ADMIN,
     text: 'all orders',
     route: '/all-orders',
     icon: faClipboardList,

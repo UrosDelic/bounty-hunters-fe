@@ -11,6 +11,8 @@ import Order from './Order';
 import ErrorBoundary from './ErrorBoundary';
 import SpinnerLoader from './SpinnerLoader';
 import FetchingError from './FetchingError';
+import ModalLayout from './ModalLayout';
+import UserModal from './UserModal';
 
 export {
   Layout,
@@ -26,4 +28,6 @@ export {
   ErrorBoundary,
   SpinnerLoader,
   FetchingError,
+  ModalLayout,
+  UserModal,
 };

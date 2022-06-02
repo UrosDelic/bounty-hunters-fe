@@ -17,7 +17,7 @@ function AppProvider({ children }: appProviderProp) {
   // change user type when we get it from the server
   const [userRoles] = useState<AppContextProps['userRoles']>([
     UserTypes.EMPLOYEE,
-    UserTypes.SUPERADMIN,
+    UserTypes.SUPER_ADMIN,
     UserTypes.ADMIN,
   ]);
 

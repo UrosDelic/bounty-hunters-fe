@@ -1,5 +1,5 @@
 export enum UserTypes {
-  EMPLOYEE = 'employee',
-  ADMIN = 'admin',
-  SUPERADMIN = 'superadmin',
+  EMPLOYEE = 'EMPLOYEE',
+  ADMIN = 'ADMIN',
+  SUPER_ADMIN = 'SUPER_ADMIN',
 }

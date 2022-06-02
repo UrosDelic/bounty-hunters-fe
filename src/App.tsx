@@ -35,7 +35,7 @@ function App() {
                   allowedRoles={[
                     UserTypes.EMPLOYEE,
                     UserTypes.ADMIN,
-                    UserTypes.SUPERADMIN,
+                    UserTypes.SUPER_ADMIN,
                   ]}
                 />
               }
@@ -64,7 +64,9 @@ function App() {
             </Route>
 
             <Route
-              element={<ProtectedRoute allowedRoles={[UserTypes.SUPERADMIN]} />}
+              element={
+                <ProtectedRoute allowedRoles={[UserTypes.SUPER_ADMIN]} />
+              }
             >
               <Route path="/users" element={<Users />} />
               <Route path="/products" element={<Products />} />
