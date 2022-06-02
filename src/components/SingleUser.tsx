@@ -5,12 +5,17 @@ import {
   Avatar,
   // Select
 } from '@chakra-ui/react';
+import { EditIcon } from '@chakra-ui/icons';
 import { UserProps, RoleProps } from '../pages/Users';
+import { useQuery } from 'react-query';
+import UsersService from '../services/users';
 
 function SingleUser({ firstName, lastName, roles }: UserProps) {
+  // const service = new UsersService();
   const rolesJoined = roles
     .map((singleRole: RoleProps) => singleRole.role.name.toLowerCase())
     .join(', ');
+  // const {data} = useQuery(['roles'], () => service.updateUserRoles());
 
   return (
     <Box
@@ -19,7 +24,7 @@ function SingleUser({ firstName, lastName, roles }: UserProps) {
       width="100%"
       height="100%"
     >
-      <Flex padding="20px" direction="column" alignItems="center">
+      <Flex padding="20px" direction="column" alignItems="center" height="100%">
         <Avatar
           name={`${firstName} ${lastName}`}
           size="xl"
@@ -35,15 +40,18 @@ function SingleUser({ firstName, lastName, roles }: UserProps) {
         >
           {`${firstName} ${lastName}`}
         </Text>
-        <Flex alignItems="center" minH="35px">
-          <Text
-            textAlign="center"
-            color="users.lightGray"
-            textTransform="capitalize"
-            marginRight="5px"
-          >
-            {rolesJoined || 'No role'}
-          </Text>
+        <Text
+          textAlign="center"
+          color="users.lightGray"
+          textTransform="capitalize"
+          marginRight="5px"
+          marginBottom="15px"
+        >
+          {rolesJoined || 'No role'}
+        </Text>
+        <Flex alignItems="center" justifyContent="center" marginTop="auto">
+          <Text marginRight="5px">Edit roles</Text>{' '}
+          <EditIcon cursor="pointer" />
         </Flex>
       </Flex>
     </Box>
