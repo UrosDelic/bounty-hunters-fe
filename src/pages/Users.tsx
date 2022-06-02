@@ -50,7 +50,7 @@ function Users() {
           {data.users.map((user: UserProps) => {
             const { id } = user;
             return (
-              <GridItem key={id}>
+              <GridItem key={id} boxShadow="dark-lg" borderRadius="8px">
                 <SingleUser {...user} />
               </GridItem>
             );

@@ -37,13 +37,13 @@ const theme = extendTheme({
       lightGray: '#B3C5CD',
       darkGray: '#2f3747',
       lightGreen: '#38A169',
+      black: '#3B3B3D',
     },
     orders: {
       purple: '#7B61FF',
       oliveGreen: '#96CA3A',
       lightGreen: '#38A169',
     },
-  
   },
   // fonts: {
   //   heading: 'Montserrat',

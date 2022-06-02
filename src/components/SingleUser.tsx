@@ -1,11 +1,4 @@
-import {
-  Box,
-  Text,
-  Flex,
-  Avatar,
-  useDisclosure,
-  // Select
-} from '@chakra-ui/react';
+import { Box, Text, Flex, Avatar, useDisclosure } from '@chakra-ui/react';
 import { EditIcon } from '@chakra-ui/icons';
 import { UserProps, RoleProps } from '../pages/Users';
 import { UserModal } from './index';
