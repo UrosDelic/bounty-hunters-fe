@@ -7,24 +7,26 @@ import {
   Heading,
 } from '@chakra-ui/react';
 import { useState } from 'react';
-import { Status } from '../pages/Products';
+import { ProductStatus } from '../types';
 
 type SingleCardProps = {
   name: string;
   price: number;
-  status: Status;
+  status: ProductStatus;
 };
 
 function SingleProduct({ name, price, status }: SingleCardProps) {
   const [productStatus, setProductStatus] = useState(status);
-  const borderColor = productStatus === Status.INACTIVE ? 'main.gray' : '';
-  const backgroundColor = productStatus === Status.INACTIVE ? '' : 'main.green';
+  const borderColor =
+    productStatus === ProductStatus.INACTIVE ? 'main.gray' : '';
+  const backgroundColor =
+    productStatus === ProductStatus.INACTIVE ? '' : 'main.green';
 
   function changeStatus() {
-    if (productStatus === Status.ACTIVE) {
-      setProductStatus(Status.INACTIVE);
+    if (productStatus === ProductStatus.ACTIVE) {
+      setProductStatus(ProductStatus.INACTIVE);
     } else {
-      setProductStatus(Status.ACTIVE);
+      setProductStatus(ProductStatus.ACTIVE);
     }
   }
 
@@ -47,7 +49,8 @@ function SingleProduct({ name, price, status }: SingleCardProps) {
           backgroundColor={backgroundColor}
           onClick={changeStatus}
         >
-          Set as {productStatus === Status.INACTIVE ? 'active' : 'inactive'}
+          Set as{' '}
+          {productStatus === ProductStatus.INACTIVE ? 'active' : 'inactive'}
         </Button>
       </ButtonGroup>
     </Flex>

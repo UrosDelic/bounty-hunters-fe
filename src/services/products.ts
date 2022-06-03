@@ -1,14 +1,14 @@
 import { initHttp } from '../http';
+import { PaginationInfo } from '../types';
+import { Product } from '../types/product';
 
 class ProductsService {
-  http: any;
-
-  constructor() {
-    this.http = initHttp();
-  }
+  constructor(private http = initHttp()) {}
 
   getProducts() {
-    return this.http.get('/products');
+    return this.http.get<{ info: PaginationInfo; products: Product[] }>(
+      '/products'
+    );
   }
 }
 

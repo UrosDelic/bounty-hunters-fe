@@ -1,14 +1,15 @@
 import { initHttp } from '../http';
+import { Task } from '../types';
 
 class TasksService {
-  http: any;
+  constructor(private http = initHttp()) {}
 
-  constructor() {
-    this.http = initHttp();
-  }
+  async getTasks() {
+    const { data, error } = await this.http.get<Task[]>('/tasks');
 
-  getTasks() {
-    return this.http.get('/tasks');
+    console.log(data, error);
+
+    return data || error;
   }
 
   getTasksById(id: string) {
