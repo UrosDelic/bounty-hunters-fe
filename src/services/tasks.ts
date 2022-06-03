@@ -5,11 +5,7 @@ class TasksService {
   constructor(private http = initHttp()) {}
 
   async getTasks() {
-    const { data, error } = await this.http.get<Task[]>('/tasks');
-
-    console.log(data, error);
-
-    return data || error;
+    return this.http.get<Task[]>('/tasks');
   }
 
   getTasksById(id: string) {
