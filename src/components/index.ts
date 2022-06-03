@@ -13,6 +13,9 @@ import SpinnerLoader from './SpinnerLoader';
 import FetchingError from './FetchingError';
 import ModalLayout from './ModalLayout';
 import UserModal from './UserModal';
+import DoughnutChart from './DoughnutChart';
+import PointBreakdown from './PointBreakdown';
+import TransactionTable from './TransactionTable';
 
 export {
   Layout,
@@ -30,4 +33,7 @@ export {
   FetchingError,
   ModalLayout,
   UserModal,
+  DoughnutChart,
+  PointBreakdown,
+  TransactionTable,
 };

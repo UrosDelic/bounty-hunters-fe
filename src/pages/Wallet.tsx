@@ -1,6 +1,11 @@
-import { Box, Flex, Heading, Text, Grid, GridItem } from '@chakra-ui/react';
-import { WalletTable, SumOfPoints } from '../components/index';
+import { Box, Flex } from '@chakra-ui/react';
 import { gainedPoints, spentPoints } from '../testData/TestData';
+import { ArrowUpIcon, ArrowDownIcon } from '@chakra-ui/icons';
+import {
+  DoughnutChart,
+  PointBreakdown,
+  TransactionTable,
+} from '../components/index';
 
 function Wallet() {
   const sumOfGainedPoints = gainedPoints.reduce(
@@ -13,51 +18,27 @@ function Wallet() {
   );
 
   return (
-    <Box maxWidth="1200px" margin="auto" padding="0px 25px 25px 25px">
-      <Flex
-        flexDirection="column"
-        alignItems="center"
-        marginTop="30px"
-        marginBottom="80px"
-        padding="10px"
-      >
-        <Text marginBottom="10px">Your current number of points is</Text>
-        <Heading marginBottom="20px">
-          {sumOfGainedPoints - sumOfSpentPoints}
-        </Heading>
-        <Box>
-          <SumOfPoints
-            text="Points gained"
-            color="wallet.green"
-            sum={sumOfGainedPoints}
-          />
-          <SumOfPoints
-            text="Points spent"
-            color="wallet.red"
-            sum={sumOfSpentPoints}
-          />
-        </Box>
+    <Box
+      maxWidth="1200px"
+      margin="auto"
+      marginTop="50px"
+      padding="0px 25px 25px 25px"
+    >
+      <Flex justifyContent="center" alignItems="center" marginBottom="80px">
+        <Flex alignItems="center" marginRight="20px">
+          <DoughnutChart iconName={ArrowUpIcon} primaryColor="#38A169" />
+          <PointBreakdown name="Gained points" number={sumOfGainedPoints} />
+        </Flex>
+        <Flex alignItems="center" marginRight="20px">
+          <DoughnutChart iconName={ArrowDownIcon} primaryColor="#B794F4" />
+          <PointBreakdown name="Spent points" number={sumOfSpentPoints} />
+        </Flex>
+        <PointBreakdown
+          name="Balance"
+          number={sumOfGainedPoints - sumOfSpentPoints}
+        />
       </Flex>
-      <Grid
-        templateColumns={['none', 'none', 'repeat(2, 1fr)']}
-        gap={10}
-        width="100%"
-      >
-        <GridItem>
-          <WalletTable
-            data={gainedPoints}
-            headers={['task', 'points', 'date']}
-            title="Tasks you got points for"
-          />
-        </GridItem>
-        <GridItem>
-          <WalletTable
-            data={spentPoints}
-            headers={['product', 'points', 'date']}
-            title="Products you spent points on"
-          />
-        </GridItem>
-      </Grid>
+      <TransactionTable data={gainedPoints} />
     </Box>
   );
 }
