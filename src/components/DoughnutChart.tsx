@@ -21,6 +21,7 @@ function DoughnutChart({ iconName, primaryColor }: DoughnutChartProps) {
   };
 
   const options = {
+    responsive: true,
     cutout: '80%',
   };
 

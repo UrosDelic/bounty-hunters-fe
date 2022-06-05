@@ -16,6 +16,7 @@ import UserModal from './UserModal';
 import DoughnutChart from './DoughnutChart';
 import PointBreakdown from './PointBreakdown';
 import TransactionTable from './TransactionTable';
+import BarChart from './BarChart';
 
 export {
   Layout,
@@ -36,4 +37,5 @@ export {
   DoughnutChart,
   PointBreakdown,
   TransactionTable,
+  BarChart,
 };

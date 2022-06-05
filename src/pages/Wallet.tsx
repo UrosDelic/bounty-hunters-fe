@@ -1,11 +1,13 @@
-import { Box, Flex } from '@chakra-ui/react';
+import { Box, Flex, Grid, GridItem } from '@chakra-ui/react';
 import { gainedPoints, spentPoints } from '../testData/TestData';
 import { ArrowUpIcon, ArrowDownIcon } from '@chakra-ui/icons';
 import {
   DoughnutChart,
   PointBreakdown,
   TransactionTable,
+  BarChart,
 } from '../components/index';
+import { useUniqueDates } from '../custom-hooks/useUniqueDates';
 
 function Wallet() {
   const sumOfGainedPoints = gainedPoints.reduce(
@@ -16,6 +18,7 @@ function Wallet() {
     (acc, current) => acc + current.points,
     0
   );
+  const dateObj = useUniqueDates(gainedPoints, spentPoints);
 
   return (
     <Box
@@ -24,21 +27,52 @@ function Wallet() {
       marginTop="50px"
       padding="0px 25px 25px 25px"
     >
-      <Flex justifyContent="center" alignItems="center" marginBottom="80px">
-        <Flex alignItems="center" marginRight="20px">
+      {/* <Grid
+        templateColumns={['repeat(1, 1fr)', 'repeat(3, 1fr)']}
+        maxWidth="fit-content"
+        margin="auto"
+        marginBottom="80px"
+        rowGap={4}
+      >
+        <GridItem>
+          <PointBreakdown name="Gained points" number={sumOfGainedPoints}>
+            <DoughnutChart iconName={ArrowUpIcon} primaryColor="#38A169" />
+          </PointBreakdown>
+        </GridItem>
+        <GridItem>
+          <PointBreakdown name="Spent points" number={sumOfSpentPoints}>
+            <DoughnutChart iconName={ArrowDownIcon} primaryColor="#B794F4" />
+          </PointBreakdown>
+        </GridItem>
+        <GridItem>
+          <PointBreakdown
+            name="Balance"
+            number={sumOfGainedPoints - sumOfSpentPoints}
+          />
+        </GridItem>
+      </Grid> */}
+      <Flex
+        justifyContent="center"
+        alignItems={['flex-start', 'center']}
+        marginBottom="80px"
+        direction={['column', 'row']}
+      >
+        <PointBreakdown name="Gained points" number={sumOfGainedPoints}>
           <DoughnutChart iconName={ArrowUpIcon} primaryColor="#38A169" />
-          <PointBreakdown name="Gained points" number={sumOfGainedPoints} />
-        </Flex>
-        <Flex alignItems="center" marginRight="20px">
+        </PointBreakdown>
+        <PointBreakdown name="Spent points" number={sumOfSpentPoints}>
           <DoughnutChart iconName={ArrowDownIcon} primaryColor="#B794F4" />
-          <PointBreakdown name="Spent points" number={sumOfSpentPoints} />
-        </Flex>
+        </PointBreakdown>
         <PointBreakdown
           name="Balance"
           number={sumOfGainedPoints - sumOfSpentPoints}
         />
       </Flex>
-      <TransactionTable data={gainedPoints} />
+      <BarChart dateObj={dateObj} />
+      <Flex justifyContent="center">
+        <TransactionTable data={gainedPoints} />
+        <TransactionTable data={spentPoints} />
+      </Flex>
     </Box>
   );
 }

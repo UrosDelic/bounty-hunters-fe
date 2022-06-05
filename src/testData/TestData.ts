@@ -13,7 +13,7 @@ const gainedPoints = [
     id: 2,
     name: 'writing article',
     points: 40,
-    date: '10/19/2022',
+    date: '10/18/2022',
   },
   {
     id: 3,
@@ -34,13 +34,13 @@ const spentPoints = [
     id: 1,
     name: 'quantox shirt',
     points: 70,
-    date: '10/19/2022',
+    date: '10/18/2022',
   },
   {
     id: 2,
     name: 'quantox mug',
     points: 50,
-    date: '10/19/2022',
+    date: '09/19/2022',
   },
   {
     id: 3,

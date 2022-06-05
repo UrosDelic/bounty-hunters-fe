@@ -14,13 +14,17 @@ type TransactionTableProps = {
 
 function TransactionTable({ data }: TransactionTableProps) {
   return (
-    <TableContainer>
-      <Table variant="simple">
+    <TableContainer flex="1">
+      <Table variant="unstyled" wordBreak="break-word">
         <Thead>
           <Tr color="#B3C5CD">
-            <Th textTransform="uppercase">Transaction</Th>
+            <Th wordBreak="break-word" textTransform="uppercase">
+              Transaction
+            </Th>
             <Th textTransform="uppercase">Date</Th>
-            <Th textTransform="uppercase">Amount</Th>
+            <Th textAlign="right" textTransform="uppercase">
+              Amount
+            </Th>
           </Tr>
         </Thead>
         <Tbody>
@@ -34,7 +38,12 @@ function TransactionTable({ data }: TransactionTableProps) {
                 <Td maxWidth="150px" color="#B3C5CD" wordBreak="break-word">
                   {date}
                 </Td>
-                <Td maxWidth="150px" color="#FFFFFF" wordBreak="break-word">
+                <Td
+                  maxWidth="150px"
+                  color="#FFFFFF"
+                  wordBreak="break-word"
+                  textAlign="right"
+                >
                   {points}
                 </Td>
               </Tr>
