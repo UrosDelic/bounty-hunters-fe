@@ -1,11 +1,11 @@
 import { Box, Text, Flex, Avatar, useDisclosure } from '@chakra-ui/react';
 import { EditIcon } from '@chakra-ui/icons';
-import { UserProps, RoleProps } from '../pages/Users';
 import { UserModal } from './index';
+import { UserRoles, Users } from 'types';
 
-function SingleUser({ firstName, lastName, roles }: UserProps) {
+function SingleUser({ firstName, lastName, roles }: Users) {
   const rolesJoined = roles
-    .map((singleRole: RoleProps) => singleRole.role.name.toLowerCase())
+    .map((singleRole: UserRoles) => singleRole.role.name.toLowerCase())
     .join(', ');
   const { isOpen, onOpen, onClose } = useDisclosure();
 

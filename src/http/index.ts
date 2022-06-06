@@ -14,6 +14,20 @@ class HttpCommunicator {
         return { error };
       });
   }
+
+  patch<T = unknown>(
+    url: string,
+    data: any
+  ): Promise<{ data?: T; error?: any }> {
+    return this.http
+      .patch(url, data)
+      .then((res: any) => {
+        return res.data;
+      })
+      .catch((error: any) => {
+        return { error };
+      });
+  }
 }
 
 let instance: HttpCommunicator | null = null;

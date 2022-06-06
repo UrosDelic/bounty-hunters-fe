@@ -1,14 +1,11 @@
+import { UserRoles } from 'types';
 import { initHttp } from '../http';
 
 class RolesService {
-  http: any;
-
-  constructor() {
-    this.http = initHttp();
-  }
+  constructor(private http = initHttp()) {}
 
   getRoles() {
-    return this.http.get('/roles');
+    return this.http.get<UserRoles[]>('/roles');
   }
 }
 
