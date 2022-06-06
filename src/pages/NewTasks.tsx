@@ -8,15 +8,20 @@ import {
   InputGroup,
   InputRightElement,
   Input,
-  Tr,
-  Td,
+  Avatar,
   Skeleton
 
 } from '@chakra-ui/react';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faBullseye,
+  faCalendarAlt
+} from '@fortawesome/free-solid-svg-icons';
 import { Search2Icon } from '@chakra-ui/icons'
+import StyledTable from '../components/core/StyledTable'
+import TableRow from '../components/core/TableRow'
 
-import NewCustomTable from '../components/core/NewCustomTable'
+
 const data = [
   {
     title: "Write Blog Post",
@@ -54,21 +59,20 @@ const data = [
     bg: 'blue'
   }
 ]
-const columns = [
-  {
-    name: 'Title',
-  },
-  {
-    name: 'Points',
-  },
-  {
-    name: 'Posted at',
-  },
-  {
-    name: 'Deadline',
-  }
-]
-
+const backgrounds = [
+  "url('/bg/bg1.png')",
+  "url('/bg/bg2.png')",
+  "url('/bg/bg3.png')",
+  "url('/bg/bg4.png')",
+  "url('/bg/bg5.png')",
+];
+const avatars = [
+  'https://bit.ly/dan-abramov',
+  'https://bit.ly/kent-c-dodds',
+  'https://bit.ly/ryan-florence',
+  'https://bit.ly/prosper-baba',
+  'https://bit.ly/code-beast',
+];
 
 
 const NewTasks = () => {
@@ -90,44 +94,39 @@ const NewTasks = () => {
           gap={10}
           p={10}
         >
-          <GridItem colSpan={2} >
-            <Flex justifyContent='space-between' flexDirection={{ base: 'column', md: 'row' }} alignItems='center'>
-              <Text fontSize='2xl' mb={{ base: 2, md: 0 }}>
-                <b>Search For New Tasks</b>
-                <br />
-              </Text>
-
-              <Box >
-
-                {loading ? (<Skeleton width='270px' height='50px' my={3} />) :
-                  (<InputGroup>
-                    <InputRightElement
-                      pointerEvents='none'
-                      children={<Search2Icon mt={2} color='gray.300' />}
-                    />
-                    <Input variant='outline' size='lg' placeholder='Search Tasks' />
-                  </InputGroup>)
-                }
-              </Box>
-            </Flex>
-          </GridItem>
 
 
-          <GridItem colSpan={2} width={{ base: '80vw', md: 'full' }} m='auto' >
 
-            <NewCustomTable columns={columns} loading={loading}>
+          <GridItem colSpan={2} width={{ base: '80%', md: '60%' }} m='auto' >
 
-              {data.map((d: any) => (
-                <Tr>
-                  <Td>
-                    {d.title}
-                  </Td>
-                  <Td>{d.points}</Td>
-                  <Td>{d.posted_at}</Td>
-                  <Td>{d.deadline}</Td>
-                </Tr>
+            <StyledTable
+              loading={loading}
+              title={'Check out New Tasks!'}
+              type={'table-row'}
+            >
+              {data.map((task, key) => (
+                <TableRow bg={backgrounds[key]}>
+                  <Flex alignItems='center'>
+                    <Avatar size="lg" src={avatars[key]} m={2} />
+
+
+                    <Text as="sup" textAlign='start' fontSize="xs" >
+                      {task.posted_at} : 20:00
+                    </Text>
+
+                  </Flex>
+                  <Text>{task.title}</Text>
+                  <Flex flexDirection='column'>
+                    <Text my={3} fontSize="sm" as="sup">
+                      <FontAwesomeIcon icon={faCalendarAlt} />{' '}{task.deadline}
+                    </Text>
+                    <Text my={3} fontSize="sm" as="sup">
+                      <FontAwesomeIcon icon={faBullseye} />{task.points}
+                    </Text>
+                  </Flex>
+                </TableRow>
               ))}
-            </NewCustomTable>
+            </StyledTable>
 
 
           </GridItem>
