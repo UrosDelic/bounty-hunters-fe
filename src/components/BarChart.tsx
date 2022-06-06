@@ -34,7 +34,12 @@ function BarChart({ dateObj }: BarChartProps) {
   };
 
   return (
-    <Box maxWidth="500px" margin="auto" marginBottom="30px">
+    <Box
+      maxWidth="700px"
+      margin="auto"
+      marginBottom="30px"
+      display={['none', 'block']}
+    >
       <Bar data={data} options={options} />
     </Box>
   );

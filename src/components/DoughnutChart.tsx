@@ -26,12 +26,12 @@ function DoughnutChart({ iconName, primaryColor }: DoughnutChartProps) {
   };
 
   return (
-    <Box width="70px" position="relative">
+    <Box width="60px" position="relative">
       <Doughnut data={data} options={options} />
       <Icon
         as={iconName}
-        w={6}
-        h={6}
+        w={5}
+        h={5}
         position="absolute"
         top="50%"
         left="50%"

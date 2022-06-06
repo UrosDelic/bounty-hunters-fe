@@ -10,16 +10,17 @@ import {
 
 type TransactionTableProps = {
   data: any;
+  transaction: string;
 };
 
-function TransactionTable({ data }: TransactionTableProps) {
+function TransactionTable({ data, transaction }: TransactionTableProps) {
   return (
     <TableContainer flex="1">
       <Table variant="unstyled" wordBreak="break-word">
         <Thead>
           <Tr color="#B3C5CD">
             <Th wordBreak="break-word" textTransform="uppercase">
-              Transaction
+              {transaction}
             </Th>
             <Th textTransform="uppercase">Date</Th>
             <Th textAlign="right" textTransform="uppercase">
@@ -32,16 +33,16 @@ function TransactionTable({ data }: TransactionTableProps) {
             const { id, name, points, date } = item;
             return (
               <Tr key={id}>
-                <Td maxWidth="150px" color="#FFFFFF" wordBreak="break-word">
+                <Td maxWidth="150px" color="#FFFFFF" wordBreak="break-all">
                   {name}
                 </Td>
-                <Td maxWidth="150px" color="#B3C5CD" wordBreak="break-word">
+                <Td maxWidth="150px" color="#B3C5CD" wordBreak="break-all">
                   {date}
                 </Td>
                 <Td
                   maxWidth="150px"
                   color="#FFFFFF"
-                  wordBreak="break-word"
+                  wordBreak="break-all"
                   textAlign="right"
                 >
                   {points}

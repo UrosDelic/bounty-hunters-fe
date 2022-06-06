@@ -27,8 +27,8 @@ function Wallet() {
       marginTop="50px"
       padding="0px 25px 25px 25px"
     >
-      {/* <Grid
-        templateColumns={['repeat(1, 1fr)', 'repeat(3, 1fr)']}
+      <Grid
+        templateColumns={['repeat(1, 1fr)', '3fr 3fr 2fr']}
         maxWidth="fit-content"
         margin="auto"
         marginBottom="80px"
@@ -50,8 +50,8 @@ function Wallet() {
             number={sumOfGainedPoints - sumOfSpentPoints}
           />
         </GridItem>
-      </Grid> */}
-      <Flex
+      </Grid>
+      {/* <Flex
         justifyContent="center"
         alignItems={['flex-start', 'center']}
         marginBottom="80px"
@@ -67,11 +67,19 @@ function Wallet() {
           name="Balance"
           number={sumOfGainedPoints - sumOfSpentPoints}
         />
-      </Flex>
+      </Flex> */}
       <BarChart dateObj={dateObj} />
-      <Flex justifyContent="center">
-        <TransactionTable data={gainedPoints} />
-        <TransactionTable data={spentPoints} />
+      <Flex justifyContent="center" direction={['column', 'column', 'row']}>
+        <TransactionTable transaction="tasks" data={gainedPoints} />
+        <TransactionTable transaction="products" data={spentPoints} />
+        {/* <WalletTable
+          headers={['tasks', 'date', 'amount']}
+          data={gainedPoints}
+        />
+        <WalletTable
+          headers={['products', 'date', 'amount']}
+          data={spentPoints}
+        /> */}
       </Flex>
     </Box>
   );
