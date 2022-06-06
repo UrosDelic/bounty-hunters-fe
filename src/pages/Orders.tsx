@@ -4,12 +4,6 @@ import OrdersService from '../services/orders';
 import { useQuery } from 'react-query';
 import { SpinnerLoader, FetchingError } from '../components/index';
 
-type OrderProps = {
-  id: string;
-  createdAt: string;
-  status: string;
-};
-
 function Orders() {
   const service = new OrdersService();
   const { data, isLoading, isError, isSuccess } = useQuery(['orders'], () =>
@@ -32,7 +26,7 @@ function Orders() {
       padding="0px 25px 25px 25px"
     >
       {isSuccess &&
-        data.map((order: OrderProps) => {
+        data.data?.map(order => {
           const { id } = order;
           return <Order key={id} {...order} />;
         })}

@@ -1,10 +1,11 @@
+import { Orders } from 'types';
 import { initHttp } from '../http';
 
 class OrdersService {
   constructor(private http = initHttp()) {}
 
   getOrders() {
-    return this.http.get('/orders');
+    return this.http.get<Orders[]>('/orders');
   }
 }
 
