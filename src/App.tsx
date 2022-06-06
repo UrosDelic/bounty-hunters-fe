@@ -3,7 +3,7 @@ import { ChakraProvider } from '@chakra-ui/react';
 import { Routes, Route } from 'react-router-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { Layout } from './components';
-import Feed from './components/user/Feed';
+import Feed from './pages/Feed';
 import {
   DefaultPage,
   NotFound,
@@ -21,7 +21,7 @@ import ProtectedRoute from './routes/ProtectedRoute';
 import MyTasksPage from './pages/my-tasks/MyTask';
 import TaskDetailsPage from './pages/my-tasks/TaskDetails';
 import { UserTypes } from './context/userTypes';
-
+import './theme/styles.css'
 function App() {
   return (
     <ChakraProvider theme={theme}>

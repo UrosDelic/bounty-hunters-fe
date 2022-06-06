@@ -1,6 +1,16 @@
 import { extendTheme } from '@chakra-ui/react';
 
 const theme = extendTheme({
+  styles: {
+    global: {
+      body: {
+        maxWidth: '100%',
+        overflowX: 'hidden',
+        
+      },
+    },
+  },
+
   colors: {
     main: {
       gray: '#2F3747',
@@ -45,6 +55,7 @@ const theme = extendTheme({
       lightGreen: '#38A169',
     },
   },
+  
   // fonts: {
   //   heading: 'Montserrat',
   //   body: 'Inter',

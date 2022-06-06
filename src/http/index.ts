@@ -2,16 +2,27 @@ import axios from 'axios';
 import config from '../config';
 
 class HttpCommunicator {
-  http: any;
-  constructor() {
-    this.http = axios.create(config);
-  }
+  constructor(private http = axios.create(config)) {}
 
-  get(url: string) {
+  get<T = unknown>(url: string): Promise<{ data?: T; error?: any }> {
     return this.http
       .get(url)
       .then((res: any) => {
-        return res.data.data;
+        return res.data;
+      })
+      .catch((error: any) => {
+        return { error };
+      });
+  }
+
+  patch<T = unknown>(
+    url: string,
+    data: any
+  ): Promise<{ data?: T; error?: any }> {
+    return this.http
+      .patch(url, data)
+      .then((res: any) => {
+        return res.data;
       })
       .catch((error: any) => {
         return { error };

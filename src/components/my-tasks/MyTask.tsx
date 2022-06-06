@@ -9,7 +9,8 @@ type MyTaskProps = {
 const MyTask = ({ headline, text, status }: MyTaskProps) => {
   return (
     <Box
-      bg="task.lightGray"
+      color="black"
+      bg="gray.300"
       height="300px"
       marginTop="50px"
       margin="10px"
@@ -18,7 +19,7 @@ const MyTask = ({ headline, text, status }: MyTaskProps) => {
     >
       <Box textAlign="center">{headline}</Box>
       <Box ml={1}>
-        <Badge borderRadius="full" px="5" bg="task.status">
+        <Badge color="black" borderRadius="full" px="5" bg="task.status">
           {status}
         </Badge>
       </Box>
