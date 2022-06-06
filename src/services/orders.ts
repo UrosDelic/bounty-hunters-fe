@@ -1,11 +1,7 @@
 import { initHttp } from '../http';
 
 class OrdersService {
-  http: any;
-
-  constructor() {
-    this.http = initHttp();
-  }
+  constructor(private http = initHttp()) {}
 
   getOrders() {
     return this.http.get('/orders');

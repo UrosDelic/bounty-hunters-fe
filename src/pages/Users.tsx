@@ -3,20 +3,6 @@ import { SingleUser, SpinnerLoader, FetchingError } from '../components/index';
 import UsersService from '../services/users';
 import { useQuery } from 'react-query';
 
-export type UserProps = {
-  id: string;
-  firstName: string;
-  lastName: string;
-  roles: RoleProps[];
-};
-
-export type RoleProps = {
-  role: {
-    id: string;
-    name: string;
-  };
-};
-
 function Users() {
   const service = new UsersService();
   const { data, isLoading, isError, isSuccess } = useQuery(['users'], () =>
@@ -47,7 +33,7 @@ function Users() {
           maxWidth="1200px"
           padding="0px 25px 25px"
         >
-          {data.users.map((user: UserProps) => {
+          {data.data?.users.map(user => {
             const { id } = user;
             return (
               <GridItem key={id} boxShadow="dark-lg" borderRadius="8px">

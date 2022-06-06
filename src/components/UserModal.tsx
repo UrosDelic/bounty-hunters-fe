@@ -10,13 +10,13 @@ import {
 import { ModalLayout } from './index';
 import { useQuery } from 'react-query';
 import RolesService from '../services/roles';
-import { RoleProps } from '../pages/Users';
+import { UserRoles } from 'types';
 
 export type UserModalProps = {
   isOpen: boolean;
   onClose: () => void;
   name: string;
-  roles: RoleProps[];
+  roles: UserRoles[];
 };
 
 function UserModal({ isOpen, onClose, name, roles }: UserModalProps) {
@@ -24,7 +24,7 @@ function UserModal({ isOpen, onClose, name, roles }: UserModalProps) {
   const { data, isLoading, isSuccess } = useQuery(['roles'], () =>
     service.getRoles()
   );
-  const roleIds = roles.map((singleRole: RoleProps) => singleRole.role.id);
+  const roleIds = roles.map(singleRole => singleRole.role.id);
   const { value, getCheckboxProps } = useCheckboxGroup({
     defaultValue: roleIds,
   });
@@ -39,7 +39,7 @@ function UserModal({ isOpen, onClose, name, roles }: UserModalProps) {
       {isSuccess && (
         <>
           <Stack spacing={3} paddingBottom="15px">
-            {data.map((role: any) => {
+            {data.data?.map((role: any) => {
               const { id, name } = role;
               return (
                 <Checkbox key={id} {...getCheckboxProps({ value: id })}>
