@@ -1,4 +1,4 @@
-import { Box, Badge } from '@chakra-ui/react';
+import { Box, Badge, Flex } from '@chakra-ui/react';
 import { observer } from 'mobx-react';
 interface MyTaskProps {
   headline: string;
@@ -35,8 +35,11 @@ const MyTask = ({
         </Badge>
       </Box>
       <Box textAlign="center">{description}</Box>
-      <Box textAlign="center">{createdAt}</Box>
-      <Box textAlign="center">{updatedAt}</Box>
+      <Flex>
+        <Box textAlign="center">{createdAt}</Box>
+        <Box textAlign="center">{updatedAt}</Box>
+      </Flex>
+
       <Box textAlign="center">{points}</Box>
     </Box>
   );
