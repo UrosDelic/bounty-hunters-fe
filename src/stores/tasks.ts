@@ -32,7 +32,6 @@ class TasksStore {
       this._tasks.loading = false;
       if (data) {
         this._tasks.data = data;
-        console.log(data, 'iz stora');
       }
     });
   };

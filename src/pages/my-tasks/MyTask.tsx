@@ -1,6 +1,5 @@
 import { Box, Text } from '@chakra-ui/react';
 import { useEffect } from 'react';
-// import TasksService from '../../services/tasks';
 import TasksStore from '../../stores/tasks';
 import { Link } from 'react-router-dom';
 import MyTask from '../../components/my-tasks/MyTask';
@@ -13,10 +12,6 @@ const MyTasksPage = () => {
   useEffect(() => {
     TasksStore.getTasks();
   }, []);
-
-  // if (loading) {
-  //   return <SpinnerLoader />;
-  // }
 
   return (
     <Box display="flex" flexDirection="row">
