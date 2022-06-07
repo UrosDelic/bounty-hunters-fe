@@ -1,33 +1,44 @@
-import { Box } from '@chakra-ui/react';
+import { Box, Text } from '@chakra-ui/react';
 import { useEffect } from 'react';
-import TasksService from '../../services/tasks';
+// import TasksService from '../../services/tasks';
+import TasksStore from '../../stores/tasks';
 import { Link } from 'react-router-dom';
 import MyTask from '../../components/my-tasks/MyTask';
-const tasks = [
-  { id: 1, headline: 'task 1 headline', txt: 'task 1 text', status: 'To Do' },
-  { id: 2, headline: 'task 2 headline', txt: 'task 2 text', status: 'Done' },
-];
-
-const service = new TasksService();
+import { observer } from 'mobx-react';
+import { SpinnerLoader } from 'components';
 
 const MyTasksPage = () => {
+  const { loading, tasks } = TasksStore;
+
   useEffect(() => {
-    service.getTasks();
+    TasksStore.getTasks();
   }, []);
+
+  // if (loading) {
+  //   return <SpinnerLoader />;
+  // }
+
   return (
     <Box display="flex" flexDirection="row">
-      {tasks.map(task => (
-        <Link key={task.id} to={`/task-details/${task.id}`}>
-          <MyTask
-            key={task.id}
-            headline={task.headline}
-            text={task.txt}
-            status={task.status}
-          ></MyTask>
-        </Link>
-      ))}
+      <>
+        {loading && <SpinnerLoader />}
+        {tasks ? (
+          tasks.map(task => (
+            <Link key={task.id} to={`/task-details/${task.id}`}>
+              <MyTask
+                key={task.id}
+                headline={task.title}
+                text={task.description}
+                status={task.status}
+              ></MyTask>
+            </Link>
+          ))
+        ) : (
+          <Text>No tasks data</Text>
+        )}
+      </>
     </Box>
   );
 };
 
-export default MyTasksPage;
+export default observer(MyTasksPage);
