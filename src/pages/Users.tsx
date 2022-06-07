@@ -33,7 +33,7 @@ function Users() {
           maxWidth="1200px"
           padding="0px 25px 25px"
         >
-          {data.data?.users.map(user => {
+          {data?.data?.users.map(user => {
             const { id } = user;
             return (
               <GridItem key={id} boxShadow="dark-lg" borderRadius="8px">

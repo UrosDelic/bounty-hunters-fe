@@ -51,35 +51,10 @@ function Wallet() {
           />
         </GridItem>
       </Grid>
-      {/* <Flex
-        justifyContent="center"
-        alignItems={['flex-start', 'center']}
-        marginBottom="80px"
-        direction={['column', 'row']}
-      >
-        <PointBreakdown name="Gained points" number={sumOfGainedPoints}>
-          <DoughnutChart iconName={ArrowUpIcon} primaryColor="#38A169" />
-        </PointBreakdown>
-        <PointBreakdown name="Spent points" number={sumOfSpentPoints}>
-          <DoughnutChart iconName={ArrowDownIcon} primaryColor="#B794F4" />
-        </PointBreakdown>
-        <PointBreakdown
-          name="Balance"
-          number={sumOfGainedPoints - sumOfSpentPoints}
-        />
-      </Flex> */}
       <BarChart dateObj={dateObj} />
       <Flex justifyContent="center" direction={['column', 'column', 'row']}>
         <TransactionTable transaction="tasks" data={gainedPoints} />
         <TransactionTable transaction="products" data={spentPoints} />
-        {/* <WalletTable
-          headers={['tasks', 'date', 'amount']}
-          data={gainedPoints}
-        />
-        <WalletTable
-          headers={['products', 'date', 'amount']}
-          data={spentPoints}
-        /> */}
       </Flex>
     </Box>
   );

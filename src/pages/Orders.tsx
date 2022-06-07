@@ -26,7 +26,7 @@ function Orders() {
       padding="0px 25px 25px 25px"
     >
       {isSuccess &&
-        data.data?.map(order => {
+        data?.data?.map(order => {
           const { id } = order;
           return <Order key={id} {...order} />;
         })}

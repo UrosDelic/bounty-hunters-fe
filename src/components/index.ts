@@ -16,6 +16,8 @@ import DoughnutChart from './DoughnutChart';
 import PointBreakdown from './PointBreakdown';
 import TransactionTable from './TransactionTable';
 import BarChart from './BarChart';
+import SizeRadioButton from './SizeRadioButton';
+import SizeGroup from './SizeGroup';
 
 export {
   Layout,
@@ -36,4 +38,6 @@ export {
   PointBreakdown,
   TransactionTable,
   BarChart,
+  SizeRadioButton,
+  SizeGroup,
 };

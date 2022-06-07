@@ -1,5 +1,5 @@
 import {
-  //Heading,
+  Heading,
   Box,
   Flex,
   Grid,
@@ -8,9 +8,10 @@ import {
   Text,
   Button,
 } from '@chakra-ui/react';
-// import shirt from '../img/shirt.jpg';
+import { SizeGroup } from '../components/index';
+import shirt from '../img/shirt.jpg';
 // import sticker from '../img/sticker.jpg';
-import mug from '../img/mug.jpg';
+// import mug from '../img/mug.jpg';
 
 function ProductDetails() {
   const sizes = ['S', 'M', 'L', 'XL', 'XXL'];
@@ -25,64 +26,31 @@ function ProductDetails() {
       marginTop="80px"
       marginBottom="50px"
     >
-      <GridItem
-        padding="10px"
-        borderRadius="5px"
-        // border="2px solid"
-        // borderColor="main.violet"
-        gridRow={['1/2', '1/2', '1/2', '1/3']}
-      >
-        <Image src={mug} margin="auto" width="100%" />
+      <GridItem padding="10px" borderRadius="5px">
+        <Image src={shirt} margin="auto" width="100%" />
       </GridItem>
-      <GridItem
-        padding="10px"
-        borderRadius="5px"
-        // border="2px solid"
-        // borderColor="main.violet"
-      >
-        <Text>Product name: Quantox Shirt</Text>
-        <Text>Price in points: 40</Text>
-        <Text>Product description:</Text>
-        <Text>
+      <GridItem padding="10px" borderRadius="5px">
+        <Heading as="h1" size="xl" marginBottom={4}>
+          Quantox Shirt
+        </Heading>
+        <Heading as="h3" size="md" marginBottom={4}>
+          40 points
+        </Heading>
+        <Text marginBottom={4}>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veritatis
           facere saepe explicabo culpa dignissimos quas nisi rem molestias
           praesentium, doloremque dicta ipsam, obcaecati, sint repellendus omnis
           quibusdam.
         </Text>
-      </GridItem>
-      <GridItem
-        padding="10px"
-        borderRadius="5px"
-        // border="2px solid"
-        // borderColor="main.violet"
-      >
         <Flex flexDirection="column" height="100%">
-          <Box>
-            <Text marginBottom="10px">Choose your size:</Text>
-            <Flex marginBottom="15px">
-              {sizes.map(size => {
-                return (
-                  <Box
-                    width={['50px', '60px', '60px', '60px']}
-                    textAlign="center"
-                    padding="6px"
-                    borderColor="black"
-                    border="1px solid"
-                    marginRight="5px"
-                    cursor="pointer"
-                  >
-                    {size}
-                  </Box>
-                );
-              })}
-            </Flex>
-          </Box>
+          <SizeGroup />
           <Box>
             <Text marginBottom="10px">Choose your color:</Text>
             <Flex marginBottom="15px">
               {colors.map(color => {
                 return (
                   <Box
+                    key={color}
                     width="30px"
                     height="30px"
                     borderRadius="50%"

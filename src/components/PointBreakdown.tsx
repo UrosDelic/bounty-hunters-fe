@@ -1,4 +1,4 @@
-import { Box, Flex, Text, Grid, GridItem } from '@chakra-ui/react';
+import { Box, Text, Grid, GridItem } from '@chakra-ui/react';
 import { PropsWithChildren } from 'react';
 
 type PointBreakdownProps = {
@@ -23,15 +23,6 @@ function PointBreakdown({
         </Box>
       </GridItem>
     </Grid>
-    // <Flex alignItems="center" marginRight="20px" marginBottom="10px">
-    //   {children}
-    //   <Box marginLeft="10px">
-    //     <Text color="#B3C5CD">{name}</Text>
-    //     <Text fontSize={25} color="#FFFFFF">
-    //       {number}
-    //     </Text>
-    //   </Box>
-    // </Flex>
   );
 }
 
