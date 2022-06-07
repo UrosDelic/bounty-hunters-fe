@@ -39,6 +39,7 @@ function Order({ id, createdAt, status }: OrderProps) {
         backgroundColor={selectColor}
         width="fit-content"
         textTransform="capitalize"
+        _focus={{ outline: 0 }}
       >
         <option style={{ backgroundColor: 'inherit' }} value="pending">
           pending

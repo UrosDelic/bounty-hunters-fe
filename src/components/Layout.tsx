@@ -5,7 +5,7 @@ import {
   DrawerOverlay,
   DrawerContent,
   useDisclosure,
-  Container
+  Container,
 } from '@chakra-ui/react';
 import { Header, Sidebar } from './index';
 import { Outlet } from 'react-router-dom';
@@ -22,7 +22,7 @@ function Layout() {
       flexDirection="column"
     >
       <Header onOpen={onOpen} />
-      <Flex flex={1} flexDirection={['column', 'row']}>
+      <Flex flex={1} flexDirection={['column', 'row']} paddingTop="8vh">
         <Drawer
           isOpen={isOpen}
           placement="left"
@@ -37,7 +37,7 @@ function Layout() {
           </DrawerContent>
         </Drawer>
 
-        <Container maxW='100%' minH='100%' p={0}  >
+        <Container maxW="100%" minH="100%" p={0}>
           <Outlet />
         </Container>
       </Flex>

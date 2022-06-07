@@ -11,7 +11,12 @@ type StoreItemProps = {
 function StoreItem({ id, name, image, points }: StoreItemProps) {
   return (
     <Flex direction="column" alignItems="center">
-      <Link as={RouterLink} to={`/store/${id}`} width="100%">
+      <Link
+        as={RouterLink}
+        to={`/store/${id}`}
+        width="100%"
+        _focus={{ outline: 0 }}
+      >
         <Image
           src={image}
           alt={name}

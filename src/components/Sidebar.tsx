@@ -10,7 +10,13 @@ function Sidebar() {
   return (
     <Flex flexDirection="column" w={['100%']} backgroundColor="main.gray">
       <Text mx={4} fontSize="3xl" color="white" fontWeight={'bold'}>
-        Bounty Hunters <DrawerCloseButton mt={1} fontSize="md" color="white" />
+        Bounty Hunters{' '}
+        <DrawerCloseButton
+          mt={1}
+          fontSize="md"
+          color="white"
+          _focus={{ outline: 0 }}
+        />
       </Text>
 
       {sidebarData.map(link => {
@@ -26,6 +32,7 @@ function Sidebar() {
             textTransform="capitalize"
             _activeLink={{ fontWeight: 'bold', border: '2px solid #EBE8F8' }}
             display={isLinkDisplayed}
+            _focus={{ outline: 0 }}
           >
             <Flex padding="6px 20px" alignItems="center">
               <Flex alignItems="center" w="30px">

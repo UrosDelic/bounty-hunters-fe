@@ -4,10 +4,10 @@ import { ColorModeSwitcher } from '../ColorModeSwitcher';
 import { Box } from '@chakra-ui/react';
 
 type headerProps = {
-  onOpen: any,
-} 
+  onOpen: any;
+};
 
-function Header({ onOpen } : headerProps) {
+function Header({ onOpen }: headerProps) {
   return (
     <Flex
       minH="8vh"
@@ -16,6 +16,9 @@ function Header({ onOpen } : headerProps) {
       color="white"
       padding="10px 15px"
       justifyContent="space-between"
+      position="fixed"
+      zIndex={2}
+      w="100%"
     >
       <HamburgerIcon cursor="pointer" w={8} h={8} onClick={onOpen} />
 
