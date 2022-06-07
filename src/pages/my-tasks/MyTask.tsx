@@ -23,8 +23,11 @@ const MyTasksPage = () => {
               <MyTask
                 key={task.id}
                 headline={task.title}
-                text={task.description}
+                description={task.description}
                 status={task.status}
+                createdAt={task.createdAt}
+                updatedAt={task.updatedAt}
+                points={task.points}
               ></MyTask>
             </Link>
           ))

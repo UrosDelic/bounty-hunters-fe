@@ -1,12 +1,23 @@
 import { Box, Badge } from '@chakra-ui/react';
 import { observer } from 'mobx-react';
-type MyTaskProps = {
-  headline: String;
-  text: String | null;
-  status: String;
-};
+interface MyTaskProps {
+  headline: string;
+  description: string | null;
+  status: string;
+  createdAt: string;
+  updatedAt: string;
+  solution?: string | null;
+  points: number;
+}
 
-const MyTask = ({ headline, text, status }: MyTaskProps) => {
+const MyTask = ({
+  headline,
+  description,
+  status,
+  createdAt,
+  updatedAt,
+  points,
+}: MyTaskProps) => {
   return (
     <Box
       color="black"
@@ -23,7 +34,10 @@ const MyTask = ({ headline, text, status }: MyTaskProps) => {
           {status}
         </Badge>
       </Box>
-      <Box textAlign="center">{text}</Box>
+      <Box textAlign="center">{description}</Box>
+      <Box textAlign="center">{createdAt}</Box>
+      <Box textAlign="center">{updatedAt}</Box>
+      <Box textAlign="center">{points}</Box>
     </Box>
   );
 };
