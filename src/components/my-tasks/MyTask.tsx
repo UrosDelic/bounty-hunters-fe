@@ -1,5 +1,5 @@
 import { Box, Badge } from '@chakra-ui/react';
-
+import { observer } from 'mobx-react';
 type MyTaskProps = {
   headline: String;
   text: String | null;
@@ -28,4 +28,4 @@ const MyTask = ({ headline, text, status }: MyTaskProps) => {
   );
 };
 
-export default MyTask;
+export default observer(MyTask);

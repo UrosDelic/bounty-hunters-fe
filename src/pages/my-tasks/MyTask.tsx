@@ -7,19 +7,21 @@ import MyTask from '../../components/my-tasks/MyTask';
 import { observer } from 'mobx-react';
 import { SpinnerLoader } from 'components';
 
-const { loading, tasks } = TasksStore;
 const MyTasksPage = () => {
+  const { loading, tasks } = TasksStore;
+
   useEffect(() => {
     TasksStore.getTasks();
   }, []);
 
-  if (loading) {
-    return <SpinnerLoader />;
-  }
+  // if (loading) {
+  //   return <SpinnerLoader />;
+  // }
 
   return (
     <Box display="flex" flexDirection="row">
       <>
+        {loading && <SpinnerLoader />}
         {tasks ? (
           tasks.map(task => (
             <Link key={task.id} to={`/task-details/${task.id}`}>
@@ -32,7 +34,7 @@ const MyTasksPage = () => {
             </Link>
           ))
         ) : (
-          <Text>No tasks to display</Text>
+          <Text>No tasks data</Text>
         )}
       </>
     </Box>

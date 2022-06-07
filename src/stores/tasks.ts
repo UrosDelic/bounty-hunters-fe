@@ -1,4 +1,3 @@
-import { createDataTransfer } from '@testing-library/user-event/dist/types/utils';
 import { initHttp } from 'http/index';
 import { makeAutoObservable, runInAction } from 'mobx';
 import { Task } from 'types';
@@ -28,7 +27,7 @@ class TasksStore {
 
   getTasks = async () => {
     this._tasks.loading = true;
-    const { data, error } = await this.http.get<Task[]>('/tasks');
+    const { data } = await this.http.get<Task[]>('/tasks');
     runInAction(() => {
       this._tasks.loading = false;
       if (data) {
