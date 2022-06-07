@@ -2,7 +2,7 @@ import { Box, Badge } from '@chakra-ui/react';
 
 type MyTaskProps = {
   headline: String;
-  text: String;
+  text: String | null;
   status: String;
 };
 
