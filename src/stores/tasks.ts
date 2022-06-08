@@ -6,12 +6,14 @@ import { Task } from 'types';
 interface TaskStoreProps {
   loading: boolean;
   data: Task[];
+  taskById: Task | undefined;
 }
 
 class TasksStore {
   _tasks: TaskStoreProps = {
     loading: false,
     data: [],
+    taskById: undefined,
   };
 
   constructor(private http = initHttp()) {
@@ -49,11 +51,11 @@ class TasksStore {
 
   getTaskDetailsById = async (id: string) => {
     this._tasks.loading = true;
-    const { data } = await this.http.get<Task[]>(`/tasks/${id}`);
+    const { data } = await this.http.get<Task>(`/tasks/${id}`);
     runInAction(() => {
       this._tasks.loading = false;
       if (data) {
-        this._tasks.data = data;
+        this._tasks.taskById = data;
       }
     });
   };
