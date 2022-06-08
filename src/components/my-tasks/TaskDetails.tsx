@@ -6,10 +6,10 @@ const TaskDetails = () => {
       direction="column"
       className="test-details"
       bg="task.lightGray"
-      w="auto"
-      minW="10rem"
-      maxW="60rem"
+      w="50rem"
+      h="30rem"
       p="5"
+      color="black"
       m="5"
     >
       <Text textAlign="center" marginTop="3">
