@@ -14,10 +14,16 @@ const MyTasksPage = () => {
   }, []);
 
   return (
-    <Box display="flex" flexDirection="row">
+    <Box
+      className="my-tasks-page"
+      display="flex"
+      alignItems={{ sm: 'center' }}
+      flexDirection={['column', 'column', 'column', 'row']}
+    >
       <>
-        {loading && <SpinnerLoader />}
-        {tasks ? (
+        {loading ? (
+          <SpinnerLoader />
+        ) : (
           tasks.map(task => (
             <Link key={task.id} to={`/task-details/${task.id}`}>
               <MyTask
@@ -31,9 +37,8 @@ const MyTasksPage = () => {
               ></MyTask>
             </Link>
           ))
-        ) : (
-          <Text>No tasks data</Text>
         )}
+        {!loading && tasks.length === 0 ? <Text>No tasks data</Text> : null}
       </>
     </Box>
   );
