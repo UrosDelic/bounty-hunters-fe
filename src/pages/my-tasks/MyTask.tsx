@@ -25,8 +25,8 @@ const MyTasksPage = () => {
                 headline={task.title}
                 description={task.description}
                 status={task.status}
-                createdAt={task.createdAt}
-                updatedAt={task.updatedAt}
+                createdAt={task.createdAtDate}
+                updatedAt={task.updatedAtDate}
                 points={task.points}
               ></MyTask>
             </Link>
