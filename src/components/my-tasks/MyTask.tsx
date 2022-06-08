@@ -31,8 +31,9 @@ const MyTask = ({
       color="black"
       bg="gray.300"
       margin="1rem"
-      w={['250px', '400px', '500px', '400px']}
-      h={['250px', '400px', '500px', '400px']}
+      w="auto"
+      minW="10rem"
+      maxW="60rem"
       p={2}
     >
       <Box textAlign="center">{headline}</Box>

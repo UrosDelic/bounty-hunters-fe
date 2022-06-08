@@ -5,9 +5,12 @@ const TaskDetails = () => {
     <Flex
       direction="column"
       className="test-details"
-      w="50vw"
-      h="50vh"
       bg="task.lightGray"
+      w="auto"
+      minW="10rem"
+      maxW="60rem"
+      p="5"
+      m="5"
     >
       <Text textAlign="center" marginTop="3">
         Title
