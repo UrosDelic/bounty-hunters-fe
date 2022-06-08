@@ -8,7 +8,7 @@ import {
   Text,
   Button,
 } from '@chakra-ui/react';
-import { SizeGroup } from '../components/index';
+import { SizeGroup, ColorGroup } from '../components/index';
 import shirt from '../img/shirt.jpg';
 // import sticker from '../img/sticker.jpg';
 // import mug from '../img/mug.jpg';
@@ -44,26 +44,7 @@ function ProductDetails() {
         </Text>
         <Flex flexDirection="column" height="100%">
           <SizeGroup />
-          <Box>
-            <Text marginBottom="10px">Choose your color:</Text>
-            <Flex marginBottom="15px">
-              {colors.map(color => {
-                return (
-                  <Box
-                    key={color}
-                    width="30px"
-                    height="30px"
-                    borderRadius="50%"
-                    border="1px solid"
-                    borderColor="gray"
-                    marginRight="5px"
-                    backgroundColor={color}
-                    cursor="pointer"
-                  ></Box>
-                );
-              })}
-            </Flex>
-          </Box>
+          <ColorGroup />
           <Button marginTop="20px" width="100px">
             Checkout
           </Button>

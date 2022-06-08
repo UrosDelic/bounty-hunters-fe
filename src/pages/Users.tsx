@@ -2,6 +2,7 @@ import { Grid, GridItem } from '@chakra-ui/react';
 import { SingleUser, SpinnerLoader, FetchingError } from '../components/index';
 import UsersService from '../services/users';
 import { useQuery } from 'react-query';
+import { usersList } from '../testData/TestData';
 
 function Users() {
   const service = new UsersService();
@@ -32,8 +33,9 @@ function Users() {
           gap={6}
           maxWidth="1200px"
           padding="0px 25px 25px"
+          // width="fit-content"
         >
-          {data?.data?.users.map(user => {
+          {usersList.map(user => {
             const { id } = user;
             return (
               <GridItem key={id} boxShadow="dark-lg" borderRadius="8px">

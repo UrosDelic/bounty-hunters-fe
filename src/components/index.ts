@@ -18,6 +18,8 @@ import TransactionTable from './TransactionTable';
 import BarChart from './BarChart';
 import SizeRadioButton from './SizeRadioButton';
 import SizeGroup from './SizeGroup';
+import ColorRadioButton from './ColorRadioButton';
+import ColorGroup from './ColorGroup';
 
 export {
   Layout,
@@ -40,4 +42,6 @@ export {
   BarChart,
   SizeRadioButton,
   SizeGroup,
+  ColorRadioButton,
+  ColorGroup,
 };

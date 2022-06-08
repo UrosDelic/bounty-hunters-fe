@@ -1,8 +1,11 @@
 import { HStack, Box, Text, useRadioGroup } from '@chakra-ui/react';
-import { SizeRadioButton } from './index';
+import { ColorRadioButton } from './index';
+import shirt from '../img/shirt.jpg';
+import mug from '../img/mug.jpg';
+import sticker from '../img/sticker.jpg';
 
-function SizeGroup() {
-  const options = ['s', 'm', 'l', 'xl', 'xxl'];
+function ColorGroup() {
+  const options = [shirt, mug, sticker];
 
   const { getRootProps, getRadioProps } = useRadioGroup({
     name: 'size',
@@ -14,19 +17,15 @@ function SizeGroup() {
 
   return (
     <Box marginBottom={4}>
-      <Text marginBottom={2}>Choose a size</Text>
+      <Text marginBottom={2}>Choose a color</Text>
       <HStack wrap="wrap" {...group}>
         {options.map(value => {
           const radio = getRadioProps({ value });
-          return (
-            <SizeRadioButton key={value} {...radio}>
-              {value}
-            </SizeRadioButton>
-          );
+          return <ColorRadioButton key={value} img={value} {...radio} />;
         })}
       </HStack>
     </Box>
   );
 }
 
-export default SizeGroup;
+export default ColorGroup;

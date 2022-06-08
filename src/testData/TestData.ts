@@ -179,39 +179,106 @@ const ordersList = [
 
 const usersList = [
   {
-    id: 1,
-    name: 'Vuk Stojanovic',
-    role: ['employee', 'admin', 'superadmin'],
+    id: '1',
+    firstName: 'Vuk',
+    lastName: 'Stojanovic',
+    roles: [
+      {
+        role: {
+          id: '1',
+          name: 'EMPLOYEE',
+        },
+      },
+      {
+        role: {
+          id: '2',
+          name: 'ADMIN',
+        },
+      },
+      {
+        role: {
+          id: '3',
+          name: 'SUPER_ADMIN',
+        },
+      },
+    ],
   },
   {
-    id: 2,
-    name: 'Milos Ciric',
-    role: ['superadmin'],
+    id: '2',
+    firstName: 'Milos',
+    lastName: 'Ciric',
+    roles: [
+      {
+        role: {
+          id: '3',
+          name: 'SUPER_ADMIN',
+        },
+      },
+    ],
   },
   {
-    id: 3,
-    name: 'Milan Jovanovic',
-    role: ['admin', 'superadmin'],
+    id: '3',
+    firstName: 'Stefan',
+    lastName: 'Meza',
+    roles: [
+      {
+        role: {
+          id: '1',
+          name: 'EMPLOYEE',
+        },
+      },
+    ],
   },
   {
-    id: 4,
-    name: 'Stefan Meza',
-    role: ['employee', 'admin'],
+    id: '4',
+    firstName: 'Danilo',
+    lastName: 'Markicevic',
+    roles: [
+      {
+        role: {
+          id: '1',
+          name: 'EMPLOYEE',
+        },
+      },
+      {
+        role: {
+          id: '2',
+          name: 'ADMIN',
+        },
+      },
+    ],
   },
   {
-    id: 5,
-    name: 'Danilo Markicevic',
-    role: ['admin'],
+    id: '5',
+    firstName: 'Vladimir',
+    lastName: 'Stojanovic',
+    roles: [
+      {
+        role: {
+          id: '1',
+          name: 'EMPLOYEE',
+        },
+      },
+      {
+        role: {
+          id: '3',
+          name: 'SUPER_ADMIN',
+        },
+      },
+    ],
   },
   {
-    id: 6,
-    name: 'Vladimir Stojanovic',
-    role: ['superadmin'],
-  },
-  {
-    id: 7,
-    name: 'Petar Antic',
-    role: ['employee'],
+    id: '6',
+    firstName: 'Petar',
+    lastName: 'Antic',
+    roles: [
+      {
+        role: {
+          id: '2',
+          name: 'ADMIN',
+        },
+      },
+    ],
   },
 ];
 
