@@ -46,6 +46,17 @@ class TasksStore {
       }
     });
   };
+
+  getTaskDetailsById = async (id: string) => {
+    this._tasks.loading = true;
+    const { data } = await this.http.get<Task[]>(`/tasks/${id}`);
+    runInAction(() => {
+      this._tasks.loading = false;
+      if (data) {
+        this._tasks.data = data;
+      }
+    });
+  };
 }
 
 export default new TasksStore();

@@ -17,7 +17,7 @@ const MyTasksPage = () => {
     <Box
       className="my-tasks-page"
       display="flex"
-      alignItems={{ sm: 'center' }}
+      alignItems={['center', 'center']}
       flexDirection={['column', 'column', 'column', 'row']}
     >
       <>
