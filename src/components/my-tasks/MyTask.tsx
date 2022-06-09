@@ -31,9 +31,9 @@ const MyTask = ({
       color="black"
       bg="gray.300"
       margin="1rem"
-      w="auto"
-      minW="10rem"
-      maxW="60rem"
+      w={['15rem', '25rem', '25rem', '30rem']}
+      //minW="10rem"
+      // maxW="50rem"
       p={2}
     >
       <Box textAlign="center">{title}</Box>
@@ -52,7 +52,7 @@ const MyTask = ({
       </Box>
       <Flex px={2} my={2} justify="space-between">
         <Box textAlign="center">{createdAt}</Box>
-
+        {/* <Divider></Divider> */}
         <Box textAlign="center">{updatedAt}</Box>
       </Flex>
       <Box textAlign="center">{points}</Box>
