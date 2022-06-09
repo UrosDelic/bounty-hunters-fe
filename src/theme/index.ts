@@ -6,8 +6,10 @@ const theme = extendTheme({
       body: {
         maxWidth: '100%',
         overflowX: 'hidden',
-        
+       
       },
+    
+ 
     },
   },
 

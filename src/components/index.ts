@@ -16,6 +16,11 @@ import DoughnutChart from './DoughnutChart';
 import PointBreakdown from './PointBreakdown';
 import TransactionTable from './TransactionTable';
 import BarChart from './BarChart';
+import NewTasksFeed from './feed/NewTasksFeed';
+import TaskCompletedFeed from './feed/TaskCompletedFeed';
+import HorizontalCard from './core/HorizontalCard'
+import NestedNavigation from './core/NestedNavigation';
+import InfiniteScroll from './core/InfiniteScroll'
 
 export {
   Layout,
@@ -36,4 +41,9 @@ export {
   PointBreakdown,
   TransactionTable,
   BarChart,
+  NewTasksFeed,
+  TaskCompletedFeed,
+  HorizontalCard,
+  NestedNavigation,
+  InfiniteScroll
 };

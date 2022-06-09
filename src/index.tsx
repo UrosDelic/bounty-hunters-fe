@@ -13,14 +13,14 @@ const root = ReactDOM.createRoot(
 );
 
 root.render(
-  <React.StrictMode>
-    <QueryClientProvider client={newClient}>
-      <ErrorBoundary>
-        <AppProvider>
-          <ColorModeScript />
-          <App />
-        </AppProvider>
-      </ErrorBoundary>
-    </QueryClientProvider>
-  </React.StrictMode>
+
+  <QueryClientProvider client={newClient}>
+    <ErrorBoundary>
+      <AppProvider>
+        <ColorModeScript />
+        <App />
+      </AppProvider>
+    </ErrorBoundary>
+  </QueryClientProvider>
+
 );

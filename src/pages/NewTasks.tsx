@@ -19,7 +19,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { Search2Icon } from '@chakra-ui/icons'
 import StyledTable from '../components/core/StyledTable'
-import TableRow from '../components/core/TableRow'
+import TableRow from '../components/core/HorizontalCard'
 
 
 const data = [
@@ -104,8 +104,8 @@ const NewTasks = () => {
               title={'Check out New Tasks!'}
               type={'table-row'}
             >
-              {data.map((task, key) => (
-                <TableRow bg={backgrounds[key]}>
+              {/* {data.map((task, key) => (
+                <TableRow bg={backgrounds[key]} loading={false}>
                   <Flex alignItems='center'>
                     <Avatar size="lg" src={avatars[key]} m={2} />
 
@@ -125,7 +125,7 @@ const NewTasks = () => {
                     </Text>
                   </Flex>
                 </TableRow>
-              ))}
+              ))} */}
             </StyledTable>
 
 
