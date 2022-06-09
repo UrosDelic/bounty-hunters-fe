@@ -4,9 +4,9 @@ import { useEffect } from 'react';
 import { Flex } from '@chakra-ui/react';
 import TasksStore from '../../stores/tasks';
 import { observer } from 'mobx-react';
-
+import { SpinnerLoader } from 'components';
 const TaskDetailsPage = () => {
-  const { tasksById } = TasksStore;
+  const { loading, tasksById } = TasksStore;
   const { id } = useParams();
 
   useEffect(() => {
@@ -16,7 +16,9 @@ const TaskDetailsPage = () => {
   }, [id]);
   return (
     <Flex justify="center">
-      {tasksById && <TaskDetails task={tasksById} />}
+      {' '}
+      {loading ? <SpinnerLoader /> : null}
+      {tasksById && !loading ? <TaskDetails task={tasksById} /> : null}
     </Flex>
   );
 };
