@@ -1,31 +1,28 @@
 import { Grid, GridItem } from '@chakra-ui/react';
-import { SingleUser, SpinnerLoader, FetchingError } from '../components/index';
-import UsersService from '../services/users';
-import { useQuery } from 'react-query';
+import { SingleUser, SpinnerLoader } from '../components/index';
 // import { usersList } from '../testData/TestData';
+import UsersStore from '../stores/users';
+import { observer } from 'mobx-react';
 import { useEffect } from 'react';
 
 function Users() {
-  const service = new UsersService();
-  const { data, isLoading, isError, isSuccess } = useQuery(['users'], () =>
-    service.getUsers()
-  );
+  const { loading, success, data } = UsersStore;
 
   useEffect(() => {
-    console.log(data);
-  }, [isLoading]);
+    UsersStore.getUsers();
+  }, []);
 
-  if (isLoading) {
+  if (loading) {
     return <SpinnerLoader />;
   }
 
-  if (isError) {
-    return <FetchingError />;
-  }
+  // if (isError) {
+  //   return <FetchingError />;
+  // }
 
   return (
     <>
-      {isSuccess && (
+      {success && (
         <Grid
           margin="auto"
           marginTop="50px"
@@ -40,7 +37,7 @@ function Users() {
           padding="0px 25px 25px"
           // width="fit-content"
         >
-          {data?.data?.users?.map(user => {
+          {data.map(user => {
             const { id } = user;
             return (
               <GridItem key={id} boxShadow="dark-lg" borderRadius="8px">
@@ -54,4 +51,4 @@ function Users() {
   );
 }
 
-export default Users;
+export default observer(Users);
