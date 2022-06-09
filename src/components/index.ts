@@ -20,6 +20,11 @@ import SizeRadioButton from './SizeRadioButton';
 import SizeGroup from './SizeGroup';
 import ColorRadioButton from './ColorRadioButton';
 import ColorGroup from './ColorGroup';
+import NewTasksFeed from './feed/NewTasksFeed';
+import TaskCompletedFeed from './feed/TaskCompletedFeed';
+import HorizontalCard from './core/HorizontalCard';
+import NestedNavigation from './core/NestedNavigation';
+import InfiniteScroll from './core/InfiniteScroll';
 
 export {
   Layout,
@@ -44,4 +49,9 @@ export {
   SizeGroup,
   ColorRadioButton,
   ColorGroup,
+  NewTasksFeed,
+  TaskCompletedFeed,
+  HorizontalCard,
+  NestedNavigation,
+  InfiniteScroll,
 };

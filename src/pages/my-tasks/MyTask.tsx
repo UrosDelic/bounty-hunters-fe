@@ -1,6 +1,5 @@
 import { Box, Text } from '@chakra-ui/react';
 import { useEffect } from 'react';
-// import TasksService from '../../services/tasks';
 import TasksStore from '../../stores/tasks';
 import { Link } from 'react-router-dom';
 import MyTask from '../../components/my-tasks/MyTask';
@@ -14,28 +13,32 @@ const MyTasksPage = () => {
     TasksStore.getTasks();
   }, []);
 
-  // if (loading) {
-  //   return <SpinnerLoader />;
-  // }
-
   return (
-    <Box display="flex" flexDirection="row">
+    <Box
+      className="my-tasks-page"
+      display="flex"
+      alignItems={['center', 'center']}
+      flexDirection={['column', 'column', 'column', 'row']}
+    >
       <>
-        {loading && <SpinnerLoader />}
-        {tasks ? (
-          tasks.map(task => (
+        {loading ? (
+          <SpinnerLoader />
+        ) : (
+          tasks.map(({ task, createdAtDate, updatedAtDate }) => (
             <Link key={task.id} to={`/task-details/${task.id}`}>
               <MyTask
                 key={task.id}
-                headline={task.title}
-                text={task.description}
+                title={task.title}
+                description={task.description}
                 status={task.status}
+                createdAt={createdAtDate}
+                updatedAt={updatedAtDate}
+                points={task.points}
               ></MyTask>
             </Link>
           ))
-        ) : (
-          <Text>No tasks data</Text>
         )}
+        {!loading && tasks.length === 0 ? <Text>No tasks data</Text> : null}
       </>
     </Box>
   );

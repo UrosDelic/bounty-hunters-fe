@@ -1,17 +1,26 @@
 import TaskDetails from '../../components/my-tasks/TaskDetails';
 import { useParams } from 'react-router-dom';
-import TasksService from '../../services/tasks';
 import { useEffect } from 'react';
-
+import { Flex } from '@chakra-ui/react';
+import TasksStore from '../../stores/tasks';
+import { observer } from 'mobx-react';
+import { SpinnerLoader } from 'components';
 const TaskDetailsPage = () => {
-  const service = new TasksService();
+  const { loading, tasksById } = TasksStore;
   const { id } = useParams();
+
   useEffect(() => {
     if (id) {
-      service.getTasksById(id);
+      TasksStore.getTaskDetailsById(id);
     }
-  });
-  return <TaskDetails />;
+  }, [id]);
+  return (
+    <Flex justify="center">
+      {' '}
+      {loading ? <SpinnerLoader /> : null}
+      {tasksById && !loading ? <TaskDetails task={tasksById} /> : null}
+    </Flex>
+  );
 };
 
-export default TaskDetailsPage;
+export default observer(TaskDetailsPage);

@@ -1,14 +1,14 @@
 // TODO double check type
 export interface Task {
   createdAt: string;
-  deadline: string | null;
+  deadline?: string | null;
   description: string | null;
-  id: string;
+  id?: string;
   points: number;
-  rejectedMessage: string | null;
-  solution: string | null;
+  rejectedMessage?: string | null;
+  solution?: string | null;
   status: string;
   title: string;
   updatedAt: string;
-  userId: string | null;
+  userId?: string | null;
 }

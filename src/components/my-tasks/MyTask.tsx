@@ -1,29 +1,64 @@
-import { Box, Badge } from '@chakra-ui/react';
+import { Box, Badge, Flex } from '@chakra-ui/react';
 import { observer } from 'mobx-react';
-type MyTaskProps = {
-  headline: String;
-  text: String | null;
-  status: String;
-};
+interface MyTaskProps {
+  title: string;
+  description: string | null;
+  status: string;
+  createdAt: string;
+  updatedAt: string;
+  solution?: string | null;
+  points: number;
+}
 
-const MyTask = ({ headline, text, status }: MyTaskProps) => {
+const MyTask = ({
+  title,
+  description,
+  status,
+  createdAt,
+  updatedAt,
+  points,
+}: MyTaskProps) => {
+  const switchStatusColor = (status: string) => {
+    if (status === 'PENDING') {
+      return '';
+    }
+    if (status === 'SUCCESS') {
+      return 'green';
+    } else return 'red';
+  };
+
   return (
     <Box
+      borderWidth="1px"
+      borderRadius="lg"
       color="black"
       bg="gray.300"
-      height="300px"
-      marginTop="50px"
-      margin="10px"
-      width="400px"
-      borderRadius="lg"
+      margin="1rem"
+      w={['15rem', '25rem', '25rem', '30rem']}
+      //minW="10rem"
+      // maxW="50rem"
+      p={2}
     >
-      <Box textAlign="center">{headline}</Box>
-      <Box ml={1}>
-        <Badge color="black" borderRadius="full" px="5" bg="task.status">
+      <Box textAlign="center">{title}</Box>
+      <Box my={2} px={2}>
+        <Badge
+          px="5"
+          color="black"
+          borderRadius="full"
+          colorScheme={switchStatusColor(status)}
+        >
           {status}
         </Badge>
       </Box>
-      <Box textAlign="center">{text}</Box>
+      <Box px={2} my={2} textAlign="center">
+        {description}
+      </Box>
+      <Flex px={2} my={2} justify="space-between">
+        <Box textAlign="center">{createdAt}</Box>
+        {/* <Divider></Divider> */}
+        <Box textAlign="center">{updatedAt}</Box>
+      </Flex>
+      <Box textAlign="center">{points}</Box>
     </Box>
   );
 };
