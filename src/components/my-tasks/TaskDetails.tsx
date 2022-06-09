@@ -1,6 +1,6 @@
 import { Flex, Spacer, Text, Box, Badge } from '@chakra-ui/react';
 import { Task } from 'types';
-import { format } from 'date-fns';
+import dayjs from 'dayjs';
 import { observer } from 'mobx-react';
 
 interface Props {
@@ -25,9 +25,7 @@ const TaskDetails = ({
         {title}
       </Text>
       <Flex>
-        <Text marginLeft="2">
-          {format(new Date(createdAt), 'LLLL d, yyyy hh:mm a')}
-        </Text>
+        <Text marginLeft="2">{dayjs(createdAt).format('DD-MM-YYYY')}</Text>
         <Spacer />
         <Text marginRight="2">{deadline}</Text>
       </Flex>

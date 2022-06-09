@@ -1,6 +1,6 @@
-import { format } from 'date-fns';
 import { initHttp } from 'http/index';
 import { makeAutoObservable, runInAction } from 'mobx';
+import dayjs from 'dayjs';
 import { Task } from 'types';
 
 interface TaskStoreProps {
@@ -62,14 +62,8 @@ class TasksStore {
       this._tasks.loading = false;
       if (data) {
         this._tasks.data = data.map(data => {
-          const createdAtDate = format(
-            new Date(data.createdAt),
-            'LLLL d, yyyy hh:mm a'
-          );
-          const updatedAtDate = format(
-            new Date(data.updatedAt),
-            'LLLL d, yyyy hh:mm a'
-          );
+          const createdAtDate = dayjs(data.createdAt).format('DD-MM-YYYY');
+          const updatedAtDate = dayjs(data.updatedAt).format('DD-MM-YYYY');
           return { task: data, createdAtDate, updatedAtDate };
         });
       }
