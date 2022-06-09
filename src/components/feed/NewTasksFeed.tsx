@@ -24,7 +24,7 @@ const NewTasksFeed = () => {
                     <InfiniteScroll loadMoreData={() => FeedStore.loadNewTasks()}>
                         {newTasks &&
                             newTasks.map((p, key: any) => (
-                                <HorizontalCard>
+                                <HorizontalCard key={key}>
                                     <p>{p.id}</p> <p>{p.title}</p> <p>{p.body}</p>{' '}
                                 </HorizontalCard>
                             ))}

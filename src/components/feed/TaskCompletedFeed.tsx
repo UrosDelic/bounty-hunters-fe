@@ -23,12 +23,10 @@ const TaskCompletedFeed = () => {
                 <Box h={500}>
                     <InfiniteScroll loadMoreData={() => FeedStore.loadCompletedTasks()}>
                         {completedTasks &&
-                            completedTasks.map((p: any) => (
-                                <>
-                                    <HorizontalCard>
-                                        <p>{p.id}</p> <p>{p.title}</p> <p>{p.body}</p>{' '}
-                                    </HorizontalCard>
-                                </>
+                            completedTasks.map((p, key: any) => (
+                                <HorizontalCard key={key}>
+                                    <p>{p.id}</p> <p>{p.title}</p> <p>{p.body}</p>{' '}
+                                </HorizontalCard>
                             ))}
                         <Skeleton minH={60} w={'90%'} mx={'auto'} my={8} />
                     </InfiniteScroll>
