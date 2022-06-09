@@ -1,4 +1,4 @@
-import { Box, Badge, Flex, Divider } from '@chakra-ui/react';
+import { Box, Badge, Flex } from '@chakra-ui/react';
 import { observer } from 'mobx-react';
 interface MyTaskProps {
   title: string;
