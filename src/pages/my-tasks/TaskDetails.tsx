@@ -16,17 +16,7 @@ const TaskDetailsPage = () => {
   }, [id]);
   return (
     <Flex justify="center">
-      {tasksById && (
-        <TaskDetails
-          title={tasksById.title}
-          description={tasksById.description}
-          points={tasksById.points}
-          createdAt={tasksById.createdAt}
-          deadline={tasksById.deadline}
-          status={tasksById.status}
-          updatedAt={tasksById.updatedAt}
-        />
-      )}
+      {tasksById && <TaskDetails task={tasksById} />}
     </Flex>
   );
 };
