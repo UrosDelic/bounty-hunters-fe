@@ -3,9 +3,9 @@ import { Task } from 'types';
 import { format } from 'date-fns';
 import { observer } from 'mobx-react';
 
-interface TaskDetailsProps {
-  taskDetails: Task;
-}
+// interface TaskDetailsProps {
+//   taskDetails: Task;
+// }
 
 const TaskDetails = ({
   title,

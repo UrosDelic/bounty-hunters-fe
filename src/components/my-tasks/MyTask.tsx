@@ -20,8 +20,11 @@ const MyTask = ({
 }: MyTaskProps) => {
   const switchStatusColor = (status: string) => {
     if (status === 'PENDING') {
-      return 'red';
-    } else return 'green';
+      return '';
+    }
+    if (status === 'SUCCESS') {
+      return 'green';
+    } else return 'red';
   };
 
   return (
