@@ -10,7 +10,7 @@ type headerProps = {
 function Header({ onOpen }: headerProps) {
   return (
     <Flex
-      minH="8vh"
+      minH="6vh"
       alignItems="center"
       bg="main.gray"
       color="white"

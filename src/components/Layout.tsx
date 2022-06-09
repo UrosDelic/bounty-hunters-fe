@@ -22,7 +22,7 @@ function Layout() {
       flexDirection="column"
     >
       <Header onOpen={onOpen} />
-      <Flex flex={1} flexDirection={['column', 'row']} paddingTop="8vh">
+      <Flex flex={1} flexDirection={['column', 'row']} paddingTop="6vh">
         <Drawer
           isOpen={isOpen}
           placement="left"

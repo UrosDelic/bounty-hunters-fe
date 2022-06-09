@@ -7,7 +7,6 @@ function Store() {
     <Box
       maxW="1200px"
       margin="auto"
-      marginBottom="50px"
       padding="0px 25px 25px"
       boxSizing="border-box"
     >
@@ -29,9 +28,9 @@ function Store() {
           return (
             <GridItem
               key={id}
-              border="2px solid"
-              borderColor="main.violet"
-              borderRadius="8px"
+              // border="2px solid"
+              // borderColor="main.violet"
+              // borderRadius="8px"
             >
               <StoreItem {...product} />
             </GridItem>

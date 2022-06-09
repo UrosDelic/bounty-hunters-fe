@@ -2,13 +2,18 @@ import { Grid, GridItem } from '@chakra-ui/react';
 import { SingleUser, SpinnerLoader, FetchingError } from '../components/index';
 import UsersService from '../services/users';
 import { useQuery } from 'react-query';
-import { usersList } from '../testData/TestData';
+// import { usersList } from '../testData/TestData';
+import { useEffect } from 'react';
 
 function Users() {
   const service = new UsersService();
   const { data, isLoading, isError, isSuccess } = useQuery(['users'], () =>
     service.getUsers()
   );
+
+  useEffect(() => {
+    console.log(data);
+  }, [isLoading]);
 
   if (isLoading) {
     return <SpinnerLoader />;
@@ -35,7 +40,7 @@ function Users() {
           padding="0px 25px 25px"
           // width="fit-content"
         >
-          {usersList.map(user => {
+          {data?.data?.users?.map(user => {
             const { id } = user;
             return (
               <GridItem key={id} boxShadow="dark-lg" borderRadius="8px">
