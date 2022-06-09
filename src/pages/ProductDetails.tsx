@@ -1,6 +1,5 @@
 import {
   Heading,
-  Box,
   Flex,
   Grid,
   GridItem,
@@ -21,10 +20,10 @@ function ProductDetails() {
     <Grid
       templateColumns={['none', 'none', 'none', 'repeat(2, 1fr)']}
       gap={5}
-      maxW="75%"
+      maxW="1200px"
       margin="auto"
-      marginTop="80px"
-      marginBottom="50px"
+      marginTop="50px"
+      padding="0px 25px 25px"
     >
       <GridItem padding="10px" borderRadius="5px">
         <Image src={shirt} margin="auto" width="100%" />
@@ -42,7 +41,7 @@ function ProductDetails() {
           praesentium, doloremque dicta ipsam, obcaecati, sint repellendus omnis
           quibusdam.
         </Text>
-        <Flex flexDirection="column" height="100%">
+        <Flex flexDirection="column">
           <SizeGroup />
           <ColorGroup />
           <Button marginTop="20px" width="100px">

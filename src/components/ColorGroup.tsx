@@ -9,7 +9,7 @@ function ColorGroup() {
 
   const { getRootProps, getRadioProps } = useRadioGroup({
     name: 'size',
-    defaultValue: 'react',
+    defaultValue: options[0],
     onChange: value => console.log(value),
   });
 
