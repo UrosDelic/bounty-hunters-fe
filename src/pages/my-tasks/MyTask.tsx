@@ -24,15 +24,15 @@ const MyTasksPage = () => {
         {loading ? (
           <SpinnerLoader />
         ) : (
-          tasks.map(task => (
+          tasks.map(({ task, createdAtDate, updatedAtDate }) => (
             <Link key={task.id} to={`/task-details/${task.id}`}>
               <MyTask
                 key={task.id}
-                headline={task.title}
+                title={task.title}
                 description={task.description}
                 status={task.status}
-                createdAt={task.createdAtDate}
-                updatedAt={task.updatedAtDate}
+                createdAt={createdAtDate}
+                updatedAt={updatedAtDate}
                 points={task.points}
               ></MyTask>
             </Link>

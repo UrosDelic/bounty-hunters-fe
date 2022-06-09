@@ -5,7 +5,7 @@ import { Task } from 'types';
 
 interface TaskStoreProps {
   loading: boolean;
-  data: Task[];
+  data: { task: Task; createdAtDate: string; updatedAtDate: string }[];
   taskById: Task | undefined;
 }
 
@@ -21,17 +21,34 @@ class TasksStore {
   }
 
   get tasks() {
-    return this._tasks.data.map(data => {
-      const createdAtDate = format(
-        new Date(data.createdAt),
-        'LLLL d, yyyy hh:mm a'
-      );
-      const updatedAtDate = format(
-        new Date(data.updatedAt),
-        'LLLL d, yyyy hh:mm a'
-      );
-      return { ...data, createdAtDate, updatedAtDate };
-    });
+    return this._tasks.data;
+    // return this._tasks.data.map(data => {
+    //   const createdAtDate = format(
+    //     new Date(data.createdAt),
+    //     'LLLL d, yyyy hh:mm a'
+    //   );
+    //   const updatedAtDate = format(
+    //     new Date(data.updatedAt),
+    //     'LLLL d, yyyy hh:mm a'
+    //   );
+    //   return { ...data, createdAtDate, updatedAtDate };
+    // });
+  }
+
+  get tasksById() {
+    return this._tasks.taskById;
+    // if (!this._tasks.taskById) {
+    //   return;
+    // }
+    // const createdAtDate = format(
+    //   new Date(this._tasks.taskById.createdAt),
+    //   'LLLL d, yyyy hh:mm a'
+    // );
+    // const updatedAtDate = format(
+    //   new Date(this._tasks.taskById.updatedAt),
+    //   'LLLL d, yyyy hh:mm a'
+    // );
+    // return { ...this._tasks.taskById, createdAtDate, updatedAtDate };
   }
 
   get loading() {
@@ -44,7 +61,17 @@ class TasksStore {
     runInAction(() => {
       this._tasks.loading = false;
       if (data) {
-        this._tasks.data = data;
+        this._tasks.data = data.map(data => {
+          const createdAtDate = format(
+            new Date(data.createdAt),
+            'LLLL d, yyyy hh:mm a'
+          );
+          const updatedAtDate = format(
+            new Date(data.updatedAt),
+            'LLLL d, yyyy hh:mm a'
+          );
+          return { task: data, createdAtDate, updatedAtDate };
+        });
       }
     });
   };

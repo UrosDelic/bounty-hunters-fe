@@ -1,6 +1,20 @@
 import { Flex, Spacer, Text } from '@chakra-ui/react';
+import { Task } from 'types';
+import { observer } from 'mobx-react';
 
-const TaskDetails = () => {
+interface TaskDetailsProps {
+  taskDetails: Task;
+}
+
+const TaskDetails = ({
+  title,
+  description,
+  status,
+  createdAt,
+  deadline,
+  updatedAt,
+  points,
+}: Task) => {
   return (
     <Flex
       direction="column"
@@ -13,17 +27,17 @@ const TaskDetails = () => {
       m="5"
     >
       <Text textAlign="center" marginTop="3">
-        Title
+        {title}
       </Text>
       <Flex>
-        <Text marginLeft="2">created at</Text>
+        <Text marginLeft="2">{createdAt}</Text>
         <Spacer />
-        <Text marginRight="2">due date</Text>
+        <Text marginRight="2">{deadline}</Text>
       </Flex>
-      <Text align="center"> Full Description</Text>
-      <Text marginLeft="2">Points</Text>
+      <Text align="center"> {description}</Text>
+      <Text marginLeft="2">{points}</Text>
     </Flex>
   );
 };
 
-export default TaskDetails;
+export default observer(TaskDetails);

@@ -1,7 +1,7 @@
 import { Box, Badge, Flex, Divider } from '@chakra-ui/react';
 import { observer } from 'mobx-react';
 interface MyTaskProps {
-  headline: string;
+  title: string;
   description: string | null;
   status: string;
   createdAt: string;
@@ -11,7 +11,7 @@ interface MyTaskProps {
 }
 
 const MyTask = ({
-  headline,
+  title,
   description,
   status,
   createdAt,
@@ -36,7 +36,7 @@ const MyTask = ({
       maxW="60rem"
       p={2}
     >
-      <Box textAlign="center">{headline}</Box>
+      <Box textAlign="center">{title}</Box>
       <Box my={2} px={2}>
         <Badge
           px="5"

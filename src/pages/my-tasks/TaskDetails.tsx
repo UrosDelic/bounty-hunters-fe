@@ -3,19 +3,31 @@ import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { Box, Flex } from '@chakra-ui/react';
 import TasksStore from '../../stores/tasks';
+import { observer } from 'mobx-react';
 
 const TaskDetailsPage = () => {
+  const { tasksById } = TasksStore;
   const { id } = useParams();
   useEffect(() => {
     if (id) {
       TasksStore.getTaskDetailsById(id);
     }
-  });
+  }, []);
   return (
     <Flex justify="center">
-      <TaskDetails />
+      {tasksById && (
+        <TaskDetails
+          title={tasksById.title}
+          description={tasksById.description}
+          points={tasksById.points}
+          createdAt={tasksById.createdAt}
+          deadline={tasksById.deadline}
+          status={tasksById.status}
+          updatedAt={tasksById.updatedAt}
+        />
+      )}
     </Flex>
   );
 };
 
-export default TaskDetailsPage;
+export default observer(TaskDetailsPage);
