@@ -3,13 +3,13 @@ import { Task } from 'types';
 import { format } from 'date-fns';
 import { observer } from 'mobx-react';
 
-interface TaskDetailsProps {
+interface Props {
   task: Task;
 }
 
 const TaskDetails = ({
   task: { title, description, createdAt, deadline, points },
-}: TaskDetailsProps) => {
+}: Props) => {
   return (
     <Flex
       direction="column"
