@@ -25,6 +25,7 @@ const InfiniteScroll = ({ children, loadMoreData }: InfiniteScrollProps) => {
                 overflow="auto"
                 ref={ref}
                 onScroll={handleScroll}
+                className={'infinite-scrol'}
             >
                 {children}
             </Box>

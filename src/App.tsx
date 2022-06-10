@@ -1,7 +1,7 @@
 import { ChakraProvider } from '@chakra-ui/react';
 import { Routes, Route } from 'react-router-dom';
 import { BrowserRouter } from 'react-router-dom';
-import { Layout, TaskCompletedFeed } from './components';
+import { Layout } from './components';
 
 import {
   DefaultPage,
@@ -47,11 +47,7 @@ function App() {
             <Route
               element={<ProtectedRoute allowedRoles={[UserTypes.EMPLOYEE]} />}
             >
-              <Route path="/feed" element={<Feed />}></Route>
-              <Route
-                path="/feed/task-completed"
-                element={<TaskCompletedFeed />}
-              />
+              <Route path="/feed/*" element={<Feed />} />
               <Route path="/new-tasks" element={<NewTasks />} />
               <Route path="/my-tasks" element={<MyTasksPage />} />
               <Route path="/task-details/:id" element={<TaskDetailsPage />} />

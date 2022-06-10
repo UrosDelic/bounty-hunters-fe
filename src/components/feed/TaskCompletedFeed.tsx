@@ -5,7 +5,6 @@ import { observer } from 'mobx-react';
 
 import {
     HorizontalCard,
-    NestedNavigation,
     InfiniteScroll,
 } from 'components/index';
 const TaskCompletedFeed = () => {
@@ -18,17 +17,19 @@ const TaskCompletedFeed = () => {
 
     return (
         <>
-            <Box>
-                <NestedNavigation />
-                <Box h={500}>
+
+            <Box w={'90%'} mx='auto'>
+                <Box h={600} >
                     <InfiniteScroll loadMoreData={() => FeedStore.loadCompletedTasks()}>
                         {completedTasks &&
                             completedTasks.map((p, key: any) => (
-                                <HorizontalCard key={key}>
-                                    <p>{p.id}</p> <p>{p.title}</p> <p>{p.body}</p>{' '}
-                                </HorizontalCard>
+                                <Box key={key} w={'100%'} mx='auto' p={8} >
+                                    <HorizontalCard>
+                                        <p>{p.id}</p> <p>{p.title}</p> <p>{p.body}</p>
+                                    </HorizontalCard>
+                                </Box>
                             ))}
-                        <Skeleton minH={60} w={'90%'} mx={'auto'} my={8} />
+                        <Skeleton minH={60} maxW={'100%'} mx={8} />
                     </InfiniteScroll>
                 </Box>
             </Box>
