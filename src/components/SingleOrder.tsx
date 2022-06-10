@@ -1,59 +1,26 @@
-import { Flex, Box, Text, Image, Avatar } from '@chakra-ui/react';
-
-type SingleOrderProps = {
-  id: number;
-  name: string;
-  image?: React.ReactNode | any;
-  points: number;
-  status: string;
-  date?: string;
-  shippingAdress?: string;
-};
+import { Flex, Box, Text } from '@chakra-ui/react';
+import dayjs from 'dayjs';
+import { Orders } from 'types';
+import axios from 'axios';
+import { useEffect } from 'react';
 
 function SingleOrder({
-  id,
-  name,
-  image,
-  points,
+  createdAt,
+  updatedAt,
+  shippingAddress,
   status,
-  date,
-  shippingAdress,
-}: SingleOrderProps) {
+  userId,
+}: Orders) {
   return (
-    <Flex margin="auto" width="fit-content" direction="column" height="100%">
-      <Flex justifyContent="space-between" alignItems="center">
-        <Box>
-          <Text fontSize="20px">`Order #{id}`</Text>
-          <Text color="myOrders.lightGray">{date}</Text>
-        </Box>
-        <Avatar name="Vuk" backgroundColor="myOrders.lightGray" />
-      </Flex>
-      <Flex marginBottom="8px" marginTop="8px">
-        <Image
-          src={image}
-          alt={image}
-          width="80px"
-          height="80px"
-          padding="5px"
-        />
-        <Box>
-          <Text fontSize="20px">{name}</Text>
-          <Text color="myOrders.lightGray">{shippingAdress}</Text>
-          <Text>Points: {points}</Text>
-        </Box>
-      </Flex>
-      <Box
-        color={status}
-        borderColor={status}
-        border="1px solid"
-        borderRadius="5px"
-        padding="8px"
-        textTransform="uppercase"
-        width="100%"
-        textAlign="center"
-        marginTop="auto"
-      >
-        {status}
+    <Flex
+      justifyContent="space-between"
+      alignItems="center"
+      borderBottom="2px solid gray"
+      padding="10px"
+    >
+      <Box>
+        <Text>{dayjs(createdAt).format('DD/MM/YYYY')}</Text>
+        <Text>{shippingAddress}</Text>
       </Box>
     </Flex>
   );
