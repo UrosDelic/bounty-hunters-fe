@@ -1,8 +1,11 @@
-import { Flex, Spacer, Text, Box, Badge } from '@chakra-ui/react';
+import { Flex, Spacer, Text, Box, Badge, Button } from '@chakra-ui/react';
+import { EditIcon } from '@chakra-ui/icons';
 import { Task } from 'types';
 import dayjs from 'dayjs';
 import BhEditor from '../core/bh-editor/BhEditor';
 import { observer } from 'mobx-react';
+import { useState } from 'react';
+
 interface Props {
   task: Task;
 }
@@ -10,6 +13,11 @@ interface Props {
 const TaskDetails = ({
   task: { title, description, createdAt, deadline, points },
 }: Props) => {
+  const [showEditor, setShowEditor] = useState(false);
+
+  const onAddDescription = () => {
+    setShowEditor(true);
+  };
   return (
     <Flex
       direction="column"
@@ -25,17 +33,34 @@ const TaskDetails = ({
         {title}
       </Text>
       <Flex>
-        <Text marginLeft="2">{dayjs(createdAt).format('DD-MM-YYYY')}</Text>
+        <Text>{dayjs(createdAt).format('DD-MM-YYYY')}</Text>
         <Spacer />
-        <Text marginRight="2">{deadline}</Text>
+        <Text>{deadline}</Text>
       </Flex>
       <Text align="center"> {description}</Text>
-      <Box my={2} px={2}>
-        <Badge px="5" bg="purple.300" color="black" borderRadius="10px">
-          {points}
-        </Badge>
-      </Box>
-      <BhEditor />
+      <Flex justify="space-between">
+        <Box my={2}>
+          <Badge px="5" bg="purple.300" color="black" borderRadius="10px">
+            {points}
+          </Badge>
+        </Box>
+        <Box>
+          <Button
+            colorScheme="purple"
+            variant="ghost"
+            onClick={onAddDescription}
+          >
+            Add description
+            <EditIcon marginLeft={1} />
+          </Button>
+        </Box>
+      </Flex>
+
+      {showEditor ? (
+        <Box p={5}>
+          <BhEditor />
+        </Box>
+      ) : null}
     </Flex>
   );
 };
