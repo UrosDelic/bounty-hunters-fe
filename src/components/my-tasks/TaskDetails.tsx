@@ -1,8 +1,8 @@
 import { Flex, Spacer, Text, Box, Badge } from '@chakra-ui/react';
 import { Task } from 'types';
 import dayjs from 'dayjs';
+import BhEditor from '../core/bh-editor/BhEditor';
 import { observer } from 'mobx-react';
-
 interface Props {
   task: Task;
 }
@@ -35,6 +35,7 @@ const TaskDetails = ({
           {points}
         </Badge>
       </Box>
+      <BhEditor />
     </Flex>
   );
 };
