@@ -13,8 +13,8 @@ import shirt from '../img/shirt.jpg';
 // import mug from '../img/mug.jpg';
 
 function ProductDetails() {
-  const sizes = ['S', 'M', 'L', 'XL', 'XXL'];
-  const colors = ['productDetails.black', 'productDetails.white'];
+  // const sizes = ['S', 'M', 'L', 'XL', 'XXL'];
+  // const colors = ['productDetails.black', 'productDetails.white'];
 
   return (
     <Grid

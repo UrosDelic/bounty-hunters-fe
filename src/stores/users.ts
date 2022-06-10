@@ -1,6 +1,6 @@
 import { initHttp } from 'http/index';
 import { makeAutoObservable, runInAction } from 'mobx';
-import { Users, UserRoles } from 'types';
+import { Users } from 'types';
 
 interface UsersStoreProps {
   loading: boolean;
@@ -31,7 +31,7 @@ class UsersStore {
     return this._users.success;
   }
 
-  get data() {
+  get users() {
     return this._users.data;
   }
 

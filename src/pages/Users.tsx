@@ -6,7 +6,7 @@ import { observer } from 'mobx-react';
 import { useEffect } from 'react';
 
 function Users() {
-  const { loading, success, data } = UsersStore;
+  const { loading, success, users } = UsersStore;
 
   useEffect(() => {
     UsersStore.getUsers();
@@ -15,10 +15,6 @@ function Users() {
   if (loading) {
     return <SpinnerLoader />;
   }
-
-  // if (isError) {
-  //   return <FetchingError />;
-  // }
 
   return (
     <>
@@ -37,7 +33,7 @@ function Users() {
           padding="0px 25px 25px"
           // width="fit-content"
         >
-          {data.map(user => {
+          {users.map(user => {
             const { id } = user;
             return (
               <GridItem key={id} boxShadow="dark-lg" borderRadius="8px">

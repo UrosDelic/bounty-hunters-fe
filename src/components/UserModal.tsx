@@ -21,9 +21,7 @@ export type UserModalProps = {
 
 function UserModal({ isOpen, onClose, name, roles }: UserModalProps) {
   const service = new RolesService();
-  const { data, isLoading, isSuccess } = useQuery(['roles'], () =>
-    service.getRoles()
-  );
+  const { data, isSuccess } = useQuery(['roles'], () => service.getRoles());
   const roleIds = roles.map(singleRole => singleRole.role.id);
   const { value, getCheckboxProps } = useCheckboxGroup({
     defaultValue: roleIds,
@@ -39,7 +37,7 @@ function UserModal({ isOpen, onClose, name, roles }: UserModalProps) {
       {isSuccess && (
         <>
           <Stack spacing={3} paddingBottom="15px">
-            {data.data?.map((role: any) => {
+            {data?.data?.map((role: any) => {
               const { id, name } = role;
               return (
                 <Checkbox key={id} {...getCheckboxProps({ value: id })}>

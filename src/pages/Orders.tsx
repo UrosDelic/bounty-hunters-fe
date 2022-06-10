@@ -1,21 +1,19 @@
 import { Box } from '@chakra-ui/react';
-import { Order } from '../components/index';
-import OrdersService from '../services/orders';
-import { useQuery } from 'react-query';
-import { SpinnerLoader, FetchingError } from '../components/index';
+import { Order, SpinnerLoader } from '../components/index';
+import OrdersStore from '../stores/orders';
+import { useEffect } from 'react';
+import { observer } from 'mobx-react';
 
 function Orders() {
-  const service = new OrdersService();
-  const { data, isLoading, isError, isSuccess } = useQuery(['orders'], () =>
-    service.getOrders()
-  );
+  const { loading, success, orders } = OrdersStore;
 
-  if (isLoading) {
+  useEffect(() => {
+    OrdersStore.getOrders();
+    console.log(orders);
+  }, []);
+
+  if (loading) {
     return <SpinnerLoader />;
-  }
-
-  if (isError) {
-    return <FetchingError />;
   }
 
   return (
@@ -25,8 +23,8 @@ function Orders() {
       marginTop="50px"
       padding="0px 25px 25px 25px"
     >
-      {isSuccess &&
-        data?.data?.map(order => {
+      {success &&
+        orders.map(order => {
           const { id } = order;
           return <Order key={id} {...order} />;
         })}
@@ -34,4 +32,4 @@ function Orders() {
   );
 }
 
-export default Orders;
+export default observer(Orders);
