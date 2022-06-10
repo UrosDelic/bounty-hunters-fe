@@ -9,7 +9,6 @@ function Orders() {
 
   useEffect(() => {
     OrdersStore.getOrders();
-    console.log(orders);
   }, []);
 
   if (loading) {
