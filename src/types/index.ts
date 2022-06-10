@@ -4,3 +4,4 @@ export * from './product';
 export * from './users';
 export * from './orders';
 export * from './feed';
+export * from './roles';

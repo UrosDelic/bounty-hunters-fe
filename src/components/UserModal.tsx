@@ -8,9 +8,10 @@ import {
   Box,
 } from '@chakra-ui/react';
 import { ModalLayout } from './index';
-import { useQuery } from 'react-query';
-import RolesService from '../services/roles';
 import { UserRoles } from 'types';
+import { observer } from 'mobx-react';
+import RolesStore from '../stores/roles';
+import { useEffect } from 'react';
 
 export type UserModalProps = {
   isOpen: boolean;
@@ -20,12 +21,15 @@ export type UserModalProps = {
 };
 
 function UserModal({ isOpen, onClose, name, roles }: UserModalProps) {
-  const service = new RolesService();
-  const { data, isSuccess } = useQuery(['roles'], () => service.getRoles());
+  const { success, rolesData } = RolesStore;
   const roleIds = roles.map(singleRole => singleRole.role.id);
   const { value, getCheckboxProps } = useCheckboxGroup({
     defaultValue: roleIds,
   });
+
+  useEffect(() => {
+    RolesStore.getRoles();
+  }, []);
 
   function updateRole() {
     console.log(value);
@@ -34,10 +38,10 @@ function UserModal({ isOpen, onClose, name, roles }: UserModalProps) {
   return (
     <ModalLayout isOpen={isOpen} onClose={onClose} name={name}>
       <Text marginBottom="10px">Manage the list of roles</Text>
-      {isSuccess && (
+      {success && (
         <>
           <Stack spacing={3} paddingBottom="15px">
-            {data?.data?.map((role: any) => {
+            {rolesData.map((role: any) => {
               const { id, name } = role;
               return (
                 <Checkbox key={id} {...getCheckboxProps({ value: id })}>
@@ -50,7 +54,7 @@ function UserModal({ isOpen, onClose, name, roles }: UserModalProps) {
             {value.length ? (
               <Text>&nbsp;</Text>
             ) : (
-              'Must pick at least one role.'
+              <Text>Must pick at least one role.</Text>
             )}
           </Box>
           <ButtonGroup marginTop="10px">
@@ -63,4 +67,4 @@ function UserModal({ isOpen, onClose, name, roles }: UserModalProps) {
   );
 }
 
-export default UserModal;
+export default observer(UserModal);
