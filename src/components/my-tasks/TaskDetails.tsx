@@ -49,9 +49,9 @@ const TaskDetails = ({
             colorScheme="purple"
             variant="ghost"
             onClick={onAddDescription}
+            rightIcon={<EditIcon />}
           >
             Add description
-            <EditIcon marginLeft={1} />
           </Button>
         </Box>
       </Flex>
