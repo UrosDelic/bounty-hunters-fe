@@ -20,9 +20,10 @@ const TaskDetails = ({
   };
   return (
     <Flex
+      borderRadius="lg"
       direction="column"
       className="test-details"
-      bg="task.lightGray"
+      bg="gray.300"
       w="50rem"
       h="30rem"
       p="5"
@@ -32,32 +33,35 @@ const TaskDetails = ({
       <Text textAlign="center" marginTop="3">
         {title}
       </Text>
-      <Flex>
+      <Flex my={2}>
         <Text>{dayjs(createdAt).format('DD-MM-YYYY')}</Text>
         <Spacer />
         <Text>{deadline}</Text>
       </Flex>
       <Text align="center"> {description}</Text>
-      <Flex justify="space-between">
-        <Box my={2}>
+      <Flex my={2} justify="space-between">
+        <Box alignSelf="center">
           <Badge px="5" bg="purple.300" color="black" borderRadius="10px">
             {points}
           </Badge>
         </Box>
-        <Box>
-          <Button
-            colorScheme="purple"
-            variant="ghost"
-            onClick={onAddDescription}
-            rightIcon={<EditIcon />}
-          >
-            Add description
-          </Button>
-        </Box>
+        {!showEditor ? (
+          <Box>
+            <Button
+              variant="outline"
+              color="purple.600"
+              borderColor="purple.300"
+              onClick={onAddDescription}
+              rightIcon={<EditIcon />}
+            >
+              Add description
+            </Button>
+          </Box>
+        ) : null}
       </Flex>
 
       {showEditor ? (
-        <Box p={5}>
+        <Box my={2} alignSelf="end">
           <BhEditor />
         </Box>
       ) : null}
