@@ -5,6 +5,7 @@ import { Product } from 'types';
 interface ProductsStoreProps {
   loading: boolean;
   success: boolean;
+  isStatusChanged: boolean;
   data: Product[];
 }
 
@@ -16,6 +17,7 @@ class ProductsStore {
   _products: ProductsStoreProps = {
     loading: false,
     success: false,
+    isStatusChanged: false,
     data: [],
   };
 
@@ -29,6 +31,10 @@ class ProductsStore {
 
   get success() {
     return this._products.success;
+  }
+
+  get isStatusChanged() {
+    return this._products.isStatusChanged;
   }
 
   get products() {
@@ -45,6 +51,30 @@ class ProductsStore {
         this._products.success = true;
         this._products.data = data?.products;
         console.log('products data iz stora', data?.products);
+      }
+    });
+  };
+
+  setActiveStatus = async (id: string) => {
+    const res = await this.http.patch(`/products/${id}`, {
+      status: 'ACTIVE',
+    });
+    runInAction(() => {
+      // this._products.isStatusChanged = !this._products.isStatusChanged;
+      if (res) {
+        console.log('status updated - active');
+      }
+    });
+  };
+
+  setInactiveStatus = async (id: string) => {
+    const res = await this.http.patch(`/products/${id}`, {
+      status: 'INACTIVE',
+    });
+    runInAction(() => {
+      // this._products.isStatusChanged = !this._products.isStatusChanged;
+      if (res) {
+        console.log('status updated - inactive');
       }
     });
   };

@@ -1,15 +1,15 @@
 import { Box } from '@chakra-ui/react';
 // import { ordersList } from '../testData/TestData';
 import { SpinnerLoader, SingleOrder } from '../components/index';
-import OrdersStore from '../stores/orders';
+import MyOrdersStore from '../stores/myOrders';
 import { useEffect } from 'react';
 import { observer } from 'mobx-react';
 
 function MyOrders() {
-  const { loading, success, orders } = OrdersStore;
+  const { loading, success, myOrders } = MyOrdersStore;
 
   useEffect(() => {
-    OrdersStore.getOrders();
+    MyOrdersStore.getMyOrders();
   }, []);
 
   if (loading) {
@@ -19,30 +19,25 @@ function MyOrders() {
   return (
     <Box margin="auto" maxW="1200px" marginTop="50px" padding="0px 25px 25px">
       {success &&
-        orders.map(order => {
-          const { id } = order;
-          return <SingleOrder key={id} {...order} />;
+        myOrders.map(order => {
+          const {
+            id,
+            createdAt,
+            shippingAddress,
+            status,
+            productAttributesOrder,
+          } = order;
+          const product = productAttributesOrder[0].product;
+          const { name, price } = product;
+          const singleOrderValues = {
+            createdAt,
+            shippingAddress,
+            status,
+            name,
+            price,
+          };
+          return <SingleOrder key={id} {...singleOrderValues} />;
         })}
-      {/* <Grid
-        templateColumns={[
-          'repeat(1, 1fr)',
-          'repeat(2, 1fr)',
-          'repeat(3, 1fr)',
-          'repeat(4, 1fr)',
-        ]}
-        gap={4}
-        columnGap={4}
-        rowGap={6}
-      >
-        {ordersList.map(order => {
-          const { id } = order;
-          return (
-            <GridItem key={id}>
-              <SingleOrder {...order} />
-            </GridItem>
-          );
-        })}
-      </Grid> */}
     </Box>
   );
 }

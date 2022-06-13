@@ -1,16 +1,21 @@
 import { Flex, Box, Text } from '@chakra-ui/react';
 import dayjs from 'dayjs';
-import { Orders } from 'types';
-import axios from 'axios';
-import { useEffect } from 'react';
+
+interface SingleOrderProps {
+  createdAt: string;
+  shippingAddress: string;
+  status: string;
+  name: string;
+  price: number;
+}
 
 function SingleOrder({
   createdAt,
-  updatedAt,
   shippingAddress,
   status,
-  userId,
-}: Orders) {
+  name,
+  price,
+}: SingleOrderProps) {
   return (
     <Flex
       justifyContent="space-between"
@@ -21,6 +26,9 @@ function SingleOrder({
       <Box>
         <Text>{dayjs(createdAt).format('DD/MM/YYYY')}</Text>
         <Text>{shippingAddress}</Text>
+        <Text>{status}</Text>
+        <Text>{name}</Text>
+        <Text>{price} points</Text>
       </Box>
     </Flex>
   );
