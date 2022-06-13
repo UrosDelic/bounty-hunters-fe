@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import ReactQuill, { Quill } from 'react-quill';
+import ReactQuill from 'react-quill';
 import { Button, Flex } from '@chakra-ui/react';
 import 'react-quill/dist/quill.snow.css';
 import ModalLayout from 'components/ModalLayout';
@@ -7,10 +7,14 @@ import ModalLayout from 'components/ModalLayout';
 interface Props {
   isOpen: boolean;
   isClosed: () => void;
+  submit: () => void;
 }
 
-const BhEditor = ({ isOpen, isClosed }: Props) => {
-  const [editorState, setEditorState] = useState('');
+const BhEditor = ({ isOpen, isClosed, submit }: Props) => {
+  const [
+    editorState,
+    //   setEditorState
+  ] = useState('');
   const handleChange = () => {
     //console.log('editor test');
   };
@@ -32,7 +36,6 @@ const BhEditor = ({ isOpen, isClosed }: Props) => {
               //image: this.imageHandler
             },
           },
-          //table: true,
         }}
         style={{
           color: 'black',
@@ -46,8 +49,8 @@ const BhEditor = ({ isOpen, isClosed }: Props) => {
         onChange={handleChange}
       ></ReactQuill>
       <Flex justifyContent="end" className="submit-editor-btn">
-        <Button variant="solid" bg="purple.300" my={2}>
-          Submit text
+        <Button variant="solid" bg="purple.300" my={2} onClick={submit}>
+          Submit
         </Button>
       </Flex>
     </ModalLayout>

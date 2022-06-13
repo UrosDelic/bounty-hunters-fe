@@ -22,6 +22,10 @@ const TaskDetails = ({
   const closeEditor = () => {
     setShowEditor(false);
   };
+
+  const onSubmit = () => {
+    //
+  };
   return (
     <Flex
       borderRadius="lg"
@@ -63,7 +67,7 @@ const TaskDetails = ({
         </Box>
       </Flex>
 
-      <BhEditor isOpen={showEditor} isClosed={closeEditor} />
+      <BhEditor isOpen={showEditor} isClosed={closeEditor} submit={onSubmit} />
     </Flex>
   );
 };

@@ -7,7 +7,7 @@ export interface Task {
   points: number;
   rejectedMessage?: string | null;
   solution?: string | null;
-  status: string;
+  status?: string;
   title: string;
   updatedAt: string;
   userId?: string | null;
