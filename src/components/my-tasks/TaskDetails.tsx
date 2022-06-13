@@ -18,6 +18,10 @@ const TaskDetails = ({
   const onAddDescription = () => {
     setShowEditor(true);
   };
+
+  const closeEditor = () => {
+    setShowEditor(false);
+  };
   return (
     <Flex
       borderRadius="lg"
@@ -45,26 +49,21 @@ const TaskDetails = ({
             {points}
           </Badge>
         </Box>
-        {!showEditor ? (
-          <Box>
-            <Button
-              variant="outline"
-              color="purple.600"
-              borderColor="purple.300"
-              onClick={onAddDescription}
-              rightIcon={<EditIcon />}
-            >
-              Add description
-            </Button>
-          </Box>
-        ) : null}
+
+        <Box>
+          <Button
+            variant="outline"
+            color="purple.600"
+            borderColor="purple.300"
+            onClick={onAddDescription}
+            rightIcon={<EditIcon />}
+          >
+            Add description
+          </Button>
+        </Box>
       </Flex>
 
-      {showEditor ? (
-        <Box my={2} alignSelf="end">
-          <BhEditor />
-        </Box>
-      ) : null}
+      <BhEditor isOpen={showEditor} isClosed={closeEditor} />
     </Flex>
   );
 };

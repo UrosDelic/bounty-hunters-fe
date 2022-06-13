@@ -12,7 +12,7 @@ import { ReactNode } from 'react';
 export type ModalLayoutProps = {
   isOpen: boolean;
   onClose: () => void;
-  name: string;
+  name?: string;
   children: ReactNode;
 };
 
