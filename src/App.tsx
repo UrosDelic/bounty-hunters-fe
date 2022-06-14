@@ -22,13 +22,13 @@ import MyTasksPage from './pages/my-tasks/MyTask';
 import TaskDetailsPage from './pages/my-tasks/TaskDetails';
 import { UserTypes } from './context/userTypes';
 import './theme/styles.css';
-
+import Login from 'components/login/Login';
 function App() {
   return (
     <ChakraProvider theme={theme}>
       <BrowserRouter>
         <Routes>
-          <Route path="/login" element={<div>Login</div>} />
+          <Route path="/login" element={<Login></Login>} />
 
           <Route element={<Layout />}>
             <Route
