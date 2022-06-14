@@ -20,9 +20,9 @@ const MyTask = ({
 }: MyTaskProps) => {
   const switchStatusColor = (status: string) => {
     if (status === 'PENDING') {
-      return '';
+      return 'purple';
     }
-    if (status === 'SUCCESS') {
+    if (status === 'APPROVED') {
       return 'green';
     } else return 'red';
   };
@@ -31,34 +31,32 @@ const MyTask = ({
     <Box
       borderWidth="1px"
       borderRadius="lg"
-      color="black"
-      bg="gray.300"
+      borderColor="gray.300"
       margin="1rem"
       w={['15rem', '25rem', '25rem', '30rem']}
-      //minW="10rem"
-      // maxW="50rem"
-      p={2}
+      boxShadow={`10px 10px 8px ${switchStatusColor(status)}`}
     >
-      <Box textAlign="center">{title}</Box>
-      <Box my={2} px={2}>
-        <Badge
-          px="5"
-          color="black"
-          borderRadius="full"
-          colorScheme={switchStatusColor(status)}
-        >
-          {status}
-        </Badge>
+      <Box padding="2rem">
+        <Box textAlign="center">{title}</Box>
+        <Box my={2} px={2}>
+          <Badge
+            px="5"
+            borderRadius="full"
+            colorScheme={switchStatusColor(status)}
+          >
+            {status}
+          </Badge>
+        </Box>
+        <Box px={2} my={2} textAlign="center">
+          {description}
+        </Box>
+        <Flex px={2} my={2} justify="space-between">
+          <Box textAlign="center">{createdAt}</Box>
+          {/* <Divider></Divider> */}
+          <Box textAlign="center">{updatedAt}</Box>
+        </Flex>
+        <Box textAlign="center">{points}</Box>
       </Box>
-      <Box px={2} my={2} textAlign="center">
-        {description}
-      </Box>
-      <Flex px={2} my={2} justify="space-between">
-        <Box textAlign="center">{createdAt}</Box>
-        {/* <Divider></Divider> */}
-        <Box textAlign="center">{updatedAt}</Box>
-      </Flex>
-      <Box textAlign="center">{points}</Box>
     </Box>
   );
 };
