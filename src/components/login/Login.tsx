@@ -16,8 +16,24 @@ import {
 } from '@chakra-ui/react';
 import React from 'react';
 import { PasswordField } from './PasswordField';
+import { useForm } from 'react-hook-form';
+
+type FormValues = {
+  email: string;
+  password: string;
+};
 
 export default function Login() {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    setValue,
+    formState: { errors },
+  } = useForm<FormValues>({
+    defaultValues: { email: '', password: '' },
+  });
+  const onSubmit = handleSubmit(data => console.log(data));
   return (
     <Container
       maxW="lg"
@@ -39,26 +55,38 @@ export default function Login() {
           boxShadow={{ base: 'none', sm: useColorModeValue('md', 'md-dark') }}
           borderRadius={{ base: 'none', sm: 'xl' }}
         >
-          <Stack spacing="6">
-            <Stack spacing="5">
-              <FormControl>
-                <FormLabel htmlFor="email">Email</FormLabel>
-                <Input id="email" type="email" />
-              </FormControl>
-              <PasswordField />
-            </Stack>
-            <HStack justify="space-between">
-              <Checkbox defaultChecked>Remember me</Checkbox>
-              <Button variant="link" colorScheme="blue" size="sm">
-                Forgot password?
-              </Button>
-            </HStack>
+          <form onSubmit={onSubmit}>
             <Stack spacing="6">
-              <Button variant="primary" type="submit">
-                Sign in
-              </Button>
+              <Stack spacing="5">
+                <FormControl>
+                  <FormLabel htmlFor="email">Email</FormLabel>
+                  <Input
+                    {...register('email', {
+                      required: 'This is required',
+                      minLength: {
+                        value: 4,
+                        message: 'Minimum length should be 4',
+                      },
+                    })}
+                    id="email"
+                    type="email"
+                  />
+                </FormControl>
+                <PasswordField {...register('password')} />
+              </Stack>
+              <HStack justify="space-between">
+                <Checkbox defaultChecked>Remember me</Checkbox>
+                <Button variant="link" colorScheme="blue" size="sm">
+                  Forgot password?
+                </Button>
+              </HStack>
+              <Stack spacing="6">
+                <Button variant="primary" type="submit">
+                  Sign in
+                </Button>
+              </Stack>
             </Stack>
-          </Stack>
+          </form>
         </Box>
       </Stack>
     </Container>

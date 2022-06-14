@@ -24,7 +24,8 @@ const MyTask = ({
     }
     if (status === 'APPROVED') {
       return 'green';
-    } else return 'red';
+    }
+    return 'red';
   };
 
   return (
