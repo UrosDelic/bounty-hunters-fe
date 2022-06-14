@@ -1,5 +1,6 @@
 import { Box, Text, Flex, Select, Heading } from '@chakra-ui/react';
 import { ChangeEvent, useState } from 'react';
+import OrdersStore from '../stores/orders';
 import dayjs from 'dayjs';
 
 type OrderProps = {
@@ -11,14 +12,19 @@ type OrderProps = {
 function Order({ id, createdAt, status }: OrderProps) {
   const [statusValue, setStatusValue] = useState(status);
   const statusColors: any = {
-    pending: 'orders.purple',
-    inProgress: 'orders.oliveGreen',
-    fulfilled: 'orders.lightGreen',
+    PENDING: 'orders.purple',
+    IN_PROGRESS: 'orders.oliveGreen',
+    FULFILLED: 'orders.lightGreen',
   };
   const selectColor = statusColors[statusValue];
 
   function changeStatus(e: ChangeEvent<HTMLSelectElement>) {
     setStatusValue(e.target.value);
+    if (e.target.value === 'IN_PROGRESS') {
+      OrdersStore.changeToInProgress(id);
+    } else if (e.target.value === 'FULFILLED') {
+      OrdersStore.changeToFulfilled(id);
+    }
   }
 
   return (
@@ -41,13 +47,13 @@ function Order({ id, createdAt, status }: OrderProps) {
         textTransform="capitalize"
         _focus={{ outline: 0 }}
       >
-        <option style={{ backgroundColor: 'inherit' }} value="pending">
+        <option style={{ backgroundColor: 'inherit' }} value="PENDING">
           pending
         </option>
-        <option style={{ backgroundColor: 'inherit' }} value="in progress">
+        <option style={{ backgroundColor: 'inherit' }} value="IN_PROGRESS">
           in progress
         </option>
-        <option style={{ backgroundColor: 'inherit' }} value="fulfilled">
+        <option style={{ backgroundColor: 'inherit' }} value="FULFILLED">
           fulfilled
         </option>
       </Select>

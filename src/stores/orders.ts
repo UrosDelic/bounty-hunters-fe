@@ -44,6 +44,24 @@ class OrdersStore {
       }
     });
   };
+
+  changeToInProgress = async (id: string) => {
+    const res = await this.http.patch(`/orders/${id}/orderInProgress`);
+    runInAction(() => {
+      if (res) {
+        console.log(`status updated - in progress`, res);
+      }
+    });
+  };
+
+  changeToFulfilled = async (id: string) => {
+    const res = await this.http.patch(`/orders/${id}/fulfilledOrder`);
+    runInAction(() => {
+      if (res) {
+        console.log(`status updated - fulfilled`, res);
+      }
+    });
+  };
 }
 
 export default new OrdersStore();

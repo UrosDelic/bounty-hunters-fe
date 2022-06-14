@@ -5,11 +5,11 @@ import { observer } from 'mobx-react';
 import { useEffect } from 'react';
 
 function Products() {
-  const { loading, success, isStatusChanged, products } = ProductsStore;
+  const { loading, success, products } = ProductsStore;
 
   useEffect(() => {
     ProductsStore.getProducts();
-  }, [isStatusChanged]);
+  }, []);
 
   if (loading) {
     return <SpinnerLoader />;
