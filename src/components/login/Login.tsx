@@ -1,41 +1,14 @@
 import {
   Container,
   Heading,
-  HStack,
   Stack,
   useBreakpointValue,
-  Text,
   Button,
   Box,
   useColorModeValue,
-  FormControl,
-  FormLabel,
-  Input,
-  Checkbox,
-  Divider,
-  FormErrorMessage,
 } from '@chakra-ui/react';
-// import { PasswordField } from './PasswordField';
-import { observer } from 'mobx-react';
-import { useForm } from 'react-hook-form';
-import LoginStore from '../../stores/Login';
-
-type FormValues = {
-  email: string;
-  // password: string;
-};
 
 const Login = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormValues>({
-    defaultValues: {
-      email: '',
-    },
-  });
-  const onSubmit = handleSubmit(data => LoginStore.login(data));
   return (
     <Container
       maxW="lg"
@@ -57,18 +30,16 @@ const Login = () => {
           boxShadow={{ base: 'none', sm: useColorModeValue('md', 'md-dark') }}
           borderRadius={{ base: 'none', sm: 'xl' }}
         >
-          <form onSubmit={onSubmit}>
+          <Stack spacing="6">
             <Stack spacing="6">
-              <Stack spacing="6">
-                <Button variant="primary" type="submit">
-                  Sign in
-                </Button>
-              </Stack>
+              <Button variant="primary" type="submit">
+                Sign in
+              </Button>
             </Stack>
-          </form>
+          </Stack>
         </Box>
       </Stack>
     </Container>
   );
 };
-export default observer(Login);
+export default Login;
