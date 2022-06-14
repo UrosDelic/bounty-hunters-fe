@@ -45,6 +45,15 @@ class OrdersStore {
     });
   };
 
+  changeToPending = async (id: string) => {
+    const res = await this.http.patch(`/orders/${id}/orderPending`);
+    runInAction(() => {
+      if (res) {
+        console.log(`status updated - pending`, res);
+      }
+    });
+  };
+
   changeToInProgress = async (id: string) => {
     const res = await this.http.patch(`/orders/${id}/orderInProgress`);
     runInAction(() => {

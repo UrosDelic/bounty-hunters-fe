@@ -22,6 +22,8 @@ function Order({ id, createdAt, status }: OrderProps) {
     setStatusValue(e.target.value);
     if (e.target.value === 'IN_PROGRESS') {
       OrdersStore.changeToInProgress(id);
+    } else if (e.target.value === 'PENDING') {
+      OrdersStore.changeToPending(id);
     } else if (e.target.value === 'FULFILLED') {
       OrdersStore.changeToFulfilled(id);
     }
@@ -46,6 +48,8 @@ function Order({ id, createdAt, status }: OrderProps) {
         width="fit-content"
         textTransform="capitalize"
         _focus={{ outline: 0 }}
+        isDisabled={statusValue === 'FULFILLED'}
+        _disabled={{ opacity: 1 }}
       >
         <option style={{ backgroundColor: 'inherit' }} value="PENDING">
           pending

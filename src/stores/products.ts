@@ -5,8 +5,8 @@ import { Product } from 'types';
 interface ProductsStoreProps {
   loading: boolean;
   success: boolean;
-  isStatusChanged: boolean;
   data: Product[];
+  productById: Product | undefined;
 }
 
 interface ProductsDataProps {
@@ -17,8 +17,8 @@ class ProductsStore {
   _products: ProductsStoreProps = {
     loading: false,
     success: false,
-    isStatusChanged: false,
     data: [],
+    productById: undefined,
   };
 
   constructor(private http = initHttp()) {
@@ -33,12 +33,12 @@ class ProductsStore {
     return this._products.success;
   }
 
-  get isStatusChanged() {
-    return this._products.isStatusChanged;
-  }
-
   get products() {
     return this._products.data;
+  }
+
+  get productById() {
+    return this._products.productById;
   }
 
   getProducts = async () => {
@@ -55,12 +55,25 @@ class ProductsStore {
     });
   };
 
+  getProductById = async (id: string | undefined) => {
+    this._products.loading = true;
+    this._products.success = false;
+    const { data } = await this.http.get<Product>(`/products/${id}`);
+    runInAction(() => {
+      this._products.loading = false;
+      if (data) {
+        this._products.success = true;
+        this._products.productById = data;
+        console.log('single product iz stora', data);
+      }
+    });
+  };
+
   setActiveStatus = async (id: string) => {
     const res = await this.http.patch(`/products/${id}`, {
       status: 'ACTIVE',
     });
     runInAction(() => {
-      // this._products.isStatusChanged = !this._products.isStatusChanged;
       if (res) {
         console.log('status updated - active');
       }
@@ -72,7 +85,6 @@ class ProductsStore {
       status: 'INACTIVE',
     });
     runInAction(() => {
-      // this._products.isStatusChanged = !this._products.isStatusChanged;
       if (res) {
         console.log('status updated - inactive');
       }
