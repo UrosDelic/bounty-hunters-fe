@@ -13,27 +13,29 @@ import {
   Input,
   Checkbox,
   Divider,
+  FormErrorMessage,
 } from '@chakra-ui/react';
-import React from 'react';
-import { PasswordField } from './PasswordField';
+// import { PasswordField } from './PasswordField';
+import { observer } from 'mobx-react';
 import { useForm } from 'react-hook-form';
+import LoginStore from '../../stores/Login';
 
 type FormValues = {
   email: string;
-  password: string;
+  // password: string;
 };
 
-export default function Login() {
+const Login = () => {
   const {
     register,
     handleSubmit,
-    watch,
-    setValue,
     formState: { errors },
   } = useForm<FormValues>({
-    defaultValues: { email: '', password: '' },
+    defaultValues: {
+      email: '',
+    },
   });
-  const onSubmit = handleSubmit(data => console.log(data));
+  const onSubmit = handleSubmit(data => LoginStore.login(data));
   return (
     <Container
       maxW="lg"
@@ -44,7 +46,7 @@ export default function Login() {
         <Stack spacing="6">
           <Stack spacing={{ base: '2', md: '3' }} textAlign="center">
             <Heading size={useBreakpointValue({ base: 'xs', md: 'sm' })}>
-              Log in to your account
+              Log in to your Bounty Hunters account
             </Heading>
           </Stack>
         </Stack>
@@ -57,29 +59,6 @@ export default function Login() {
         >
           <form onSubmit={onSubmit}>
             <Stack spacing="6">
-              <Stack spacing="5">
-                <FormControl>
-                  <FormLabel htmlFor="email">Email</FormLabel>
-                  <Input
-                    {...register('email', {
-                      required: 'This is required',
-                      minLength: {
-                        value: 4,
-                        message: 'Minimum length should be 4',
-                      },
-                    })}
-                    id="email"
-                    type="email"
-                  />
-                </FormControl>
-                <PasswordField {...register('password')} />
-              </Stack>
-              <HStack justify="space-between">
-                <Checkbox defaultChecked>Remember me</Checkbox>
-                <Button variant="link" colorScheme="blue" size="sm">
-                  Forgot password?
-                </Button>
-              </HStack>
               <Stack spacing="6">
                 <Button variant="primary" type="submit">
                   Sign in
@@ -91,4 +70,5 @@ export default function Login() {
       </Stack>
     </Container>
   );
-}
+};
+export default observer(Login);
