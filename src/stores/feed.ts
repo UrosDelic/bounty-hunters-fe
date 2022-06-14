@@ -7,18 +7,18 @@ interface FeedStoreProps {
   limit: number;
   offset: number;
   completed: CompletedTasks[];
-  new : NewTasks[];
+  new: NewTasks[];
 }
 
 class FeedStore {
   feed: FeedStoreProps = {
     loading: false,
     completed: [],
-    new:[],
+    new: [],
     limit: 3,
     offset: 1,
   };
- 
+
   constructor() {
     makeAutoObservable(this);
   }
@@ -42,16 +42,11 @@ class FeedStore {
 
     if (data) {
       runInAction(() => {
-        
-          this.feed.loading = false;
-          this.feed.new = [...this.feed.new, ...data, ];
-   
- 
+        this.feed.new = [...this.feed.new, ...data];
       });
     }
   };
 
-  
   getCompletedTasks = async () => {
     this.feed.loading = true;
     const { data } = await axios.get<CompletedTasks[]>(
@@ -61,30 +56,34 @@ class FeedStore {
     if (data) {
       runInAction(() => {
         this.feed.loading = false;
-        this.feed.completed = [...this.feed.completed, ...data, ];
+        this.feed.completed = [...this.feed.completed, ...data];
       });
     }
   };
-
-  loadNewTasks(){
-    setTimeout(()=>{
-    this.feed.offset ++;
-    this.getNewTasks()
-     },3000);
-
+  clearFeedState() {
+    this.feed.completed = [];
+    this.feed.new = [];
   }
-  
-  loadCompletedTasks(){
-    setTimeout(()=>{
-    this.feed.offset ++;
-    this.getCompletedTasks()
-  },3000);
+  loadNewTasks() {
+    setTimeout(() => {
+      this.feed.offset++;
+      this.getNewTasks();
+      this.feed.loading = false;
+    }, 3000);
   }
 
-  initialLoad(){
+  loadCompletedTasks() {
+    setTimeout(() => {
+      this.feed.offset++;
+      this.feed.loading = true;
+      this.getCompletedTasks();
+    }, 3000);
+  }
+
+  initialLoad(limit: number) {
     this.feed.offset = 1;
-    this.feed.limit = 3;
-
+    this.feed.limit = limit;
+    this.clearFeedState();
   }
 }
 

@@ -1,39 +1,112 @@
 import { useEffect } from 'react';
-import { Box, Skeleton } from '@chakra-ui/react';
+import {
+    Box,
+    Skeleton,
+    Text,
+    Flex,
+    Grid,
+    Badge,
+    Avatar,
+    GridItem,
+
+} from '@chakra-ui/react';
 import FeedStore from '../../stores/feed';
 import { observer } from 'mobx-react';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
-import {
-    HorizontalCard,
-    InfiniteScroll,
-} from 'components/index';
+import { HorizontalCard } from 'components/index';
 const TaskCompletedFeed = () => {
     const { completedTasks } = FeedStore;
 
     useEffect(() => {
-        FeedStore.initialLoad();
+        FeedStore.initialLoad(8);
         FeedStore.getCompletedTasks();
     }, []);
 
     return (
-        <>
+        <Box >
+            <InfiniteScroll
+                dataLength={completedTasks.length}
+                next={() => FeedStore.loadCompletedTasks()}
+                hasMore={true}
+                loader={
+                    <>
+                        <Grid templateColumns={{ base: '1fr', md: 'repeat(2,1fr)', lg: "repeat(4, 1fr)" }}>
+                            <Skeleton minH={200} rounded="md" m={8} />
+                            <Skeleton minH={200} rounded="md" m={8} />
+                            <Skeleton minH={200} rounded="md" m={8} />
+                            <Skeleton minH={200} rounded="md" m={8} />
+                        </Grid>
+                    </>
+                }
+                height={'70vh'}
+                endMessage={
+                    <p style={{ textAlign: 'center' }}>
+                        <b>Yay! You have seen it all</b>
+                    </p>
+                }
+            >
+                <Grid templateColumns={{ base: '1fr', md: 'repeat(2,1fr)', lg: "repeat(4, 1fr)" }}>
+                    {completedTasks.map((task, key: any) => (
+                        <Box key={key} mx="auto" p={2} minW={350} maxW={400} >
+                            <HorizontalCard>
+                                <Flex flexDirection="column" my="auto" minW="100%" p={10}>
+                                    <Flex mb={6} justifyContent="start" alignItems="start" flexDirection={{ base: 'column', md: 'row' }}>
+                                        <Text
+                                            fontWeight="bold"
+                                            fontSize={{ base: 'lg', lg: 'xl' }}
 
-            <Box w={'90%'} mx='auto'>
-                <Box h={600} >
-                    <InfiniteScroll loadMoreData={() => FeedStore.loadCompletedTasks()}>
-                        {completedTasks &&
-                            completedTasks.map((p, key: any) => (
-                                <Box key={key} w={'100%'} mx='auto' p={8} >
-                                    <HorizontalCard>
-                                        <p>{p.id}</p> <p>{p.title}</p> <p>{p.body}</p>
-                                    </HorizontalCard>
-                                </Box>
-                            ))}
-                        <Skeleton minH={60} maxW={'100%'} mx={8} />
-                    </InfiniteScroll>
-                </Box>
-            </Box>
-        </>
+                                        >
+                                            Create Article about Topic XYZ
+                                        </Text>
+                                        <Badge
+                                            fontSize="xs"
+                                            ml={4}
+                                            color="white"
+                                            variant="solid"
+                                            colorScheme="green"
+                                            mt={{ base: 2, md: 0 }}
+
+                                        >
+                                            Completed
+                                        </Badge>
+                                    </Flex>
+
+                                    <Flex
+                                        alignItems="start"
+                                        flexDirection={{ base: 'column', lg: 'row' }}
+                                        my={2}
+                                    >
+                                        <Avatar size="lg" src="https://bit.ly/dan-abramov" />
+                                        <Flex
+                                            ml={2}
+                                            flexDirection="column"
+                                            alignItems={{ base: 'center', lg: 'start' }}
+                                        >
+                                            <Text>Milan Miletic earned 50 points!</Text>
+
+                                        </Flex>
+                                    </Flex>
+                                    <Flex
+                                        justifyContent="space-between"
+                                        alignItems="center"
+                                        flexDirection={{ base: 'column', lg: 'row' }}
+                                    >
+                                        <Box minW={{ base: '100%', lg: '100%' }} my={3}>
+                                            <Text
+                                                fontSize={{ base: 'sm', md: 'md' }}
+                                                textAlign={{ base: 'center', lg: 'start' }}
+                                            ></Text>
+                                        </Box>
+                                    </Flex>
+                                </Flex>
+                            </HorizontalCard>
+                        </Box>
+                    ))}
+
+                </Grid>
+            </InfiniteScroll>
+        </Box >
     );
 };
 

@@ -6,7 +6,8 @@ const theme = extendTheme({
       body: {
         maxWidth: '100%',
         overflowX: 'hidden',
-       
+        background:'gray.700',
+        color:'white'
       },
     
  
