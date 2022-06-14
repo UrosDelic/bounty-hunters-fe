@@ -25,6 +25,10 @@ import TaskCompletedFeed from './feed/TaskCompletedFeed';
 import HorizontalCard from './core/HorizontalCard';
 import NestedNavigation from './core/NestedNavigation';
 import InfiniteScroll from './core/InfiniteScroll';
+ 
+import StyledCard from './core/StyledCard';
+import NotificationWidget from './feed/NotificationWidget'
+import LatestOrdersFeed from './feed/LatestOrdersFeed'
 
 export {
   Layout,
@@ -51,7 +55,11 @@ export {
   ColorGroup,
   NewTasksFeed,
   TaskCompletedFeed,
+  LatestOrdersFeed,
+  NotificationWidget,
   HorizontalCard,
   NestedNavigation,
   InfiniteScroll,
+  StyledCard
+
 };

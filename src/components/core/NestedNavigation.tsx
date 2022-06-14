@@ -1,17 +1,24 @@
-import { TabList, Tab, Tabs } from '@chakra-ui/react';
+import { TabList, Tab, Tabs, Flex } from '@chakra-ui/react';
 import { NavLink as RouterLink } from 'react-router-dom';
-function NestedNav({ data }: any) {
+
+function NestedNav({ data, index }: any) {
+
+
+
     return (
         <>
-            <Tabs my={5} mx={8} p={4} variant="soft-rounded" colorScheme="purple">
-                <TabList>
-                    {data &&
-                        data.map((d: any, key: any) => (
-                            <Tab key={key} as={RouterLink} to={d.to}>
-                                {d.title}
-                            </Tab>
-                        ))}
-                </TabList>
+            <Tabs variant='soft-rounded' colorScheme="purple" defaultIndex={index} my={8}>
+                <Flex>
+                    <TabList>
+                        {data &&
+                            data.map((d: any, key: any) => (
+                                <Tab key={key} as={RouterLink} to={d.to} color='white'>
+                                    {d.title}
+                                </Tab>
+                            ))}
+                    </TabList>
+
+                </Flex>
             </Tabs>
         </>
     );

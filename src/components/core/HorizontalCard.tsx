@@ -20,17 +20,17 @@ const HorizontalCard = ({ children }: HorizontalCardProps) => {
             <Flex
                 flexDirection={{ base: 'column', md: 'row' }}
                 justifyContent='space-between'
-                minH={60}
                 mx='auto'
                 w={'100%'}
                 h={'100%'}
-                ref={elementRef}
-                className={elementRef.current}
                 rounded="md"
                 boxShadow="dark-lg"
                 color='white'
                 overflow='auto'
-                alignItems='center'>
+                alignItems='center'
+                ref={elementRef}
+                className={elementRef.current}
+            >
                 {children}
             </Flex>
 
