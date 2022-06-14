@@ -7,8 +7,19 @@ import {
   Box,
   useColorModeValue,
 } from '@chakra-ui/react';
+import {
+  GoogleLogin,
+  GoogleLoginResponse,
+  GoogleLoginResponseOffline,
+} from 'react-google-login';
 
 const Login = () => {
+  const responseGoogle = (
+    response: GoogleLoginResponse | GoogleLoginResponseOffline
+  ) => {
+    console.log(response);
+  };
+
   return (
     <Container
       maxW="lg"
@@ -32,9 +43,13 @@ const Login = () => {
         >
           <Stack spacing="6">
             <Stack spacing="6">
-              <Button variant="primary" type="submit">
-                Sign in
-              </Button>
+              <GoogleLogin
+                clientId="267868351623-8an5obdlb5j0s2n0dopo0ntp7g7ip3sv.apps.googleusercontent.com"
+                buttonText="Login"
+                onSuccess={responseGoogle}
+                onFailure={responseGoogle}
+                cookiePolicy={'single_host_origin'}
+              />
             </Stack>
           </Stack>
         </Box>
