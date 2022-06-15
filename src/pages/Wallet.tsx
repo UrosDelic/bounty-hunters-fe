@@ -18,6 +18,7 @@ function Wallet() {
     (acc, current) => acc + current.points,
     0
   );
+
   const dateObj = useUniqueDates(gainedPoints, spentPoints);
 
   return (

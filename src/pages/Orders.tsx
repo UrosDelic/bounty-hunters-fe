@@ -1,5 +1,5 @@
 import { Box } from '@chakra-ui/react';
-import { Order, SpinnerLoader } from '../components/index';
+import { Order, SpinnerLoader, HorizontalCard } from '../components/index';
 import OrdersStore from '../stores/orders';
 import { useEffect } from 'react';
 import { observer } from 'mobx-react';
@@ -25,7 +25,13 @@ function Orders() {
       {success &&
         orders.map(order => {
           const { id } = order;
-          return <Order key={id} {...order} />;
+          return (
+            <Box key={id} marginBottom="20px">
+              <HorizontalCard>
+                <Order {...order} />
+              </HorizontalCard>
+            </Box>
+          );
         })}
     </Box>
   );

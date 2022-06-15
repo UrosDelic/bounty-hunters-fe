@@ -1,42 +1,39 @@
-
 import { Flex } from '@chakra-ui/react';
 import { useRef, useEffect } from 'react';
-import { backgroundGenerator } from '../../custom-hooks/backgroundGenerator'
+import { backgroundGenerator } from '../../custom-hooks/backgroundGenerator';
 type HorizontalCardProps = {
-    children: any,
-}
+  children: any;
+};
 
 const HorizontalCard = ({ children }: HorizontalCardProps) => {
-    const background = backgroundGenerator();
-    const elementRef = useRef<HTMLDivElement | any>(background);
+  const background = backgroundGenerator();
+  const elementRef = useRef<HTMLDivElement | any>(background);
 
-    useEffect(() => {
-        elementRef.current = background;
-    }, [])
+  useEffect(() => {
+    elementRef.current = background;
+  }, []);
 
-    return (
-        <>
+  return (
+    <>
+      <Flex
+        flexDirection={['column', 'row']}
+        justifyContent={['center', 'space-between']}
+        minH={60}
+        mx="auto"
+        w={'100%'}
+        h={'100%'}
+        ref={elementRef}
+        className={elementRef.current}
+        rounded="md"
+        boxShadow="dark-lg"
+        color="white"
+        overflow="auto"
+        alignItems="center"
+      >
+        {children}
+      </Flex>
+    </>
+  );
+};
 
-            <Flex
-                flexDirection={{ base: 'column', md: 'row' }}
-                justifyContent='space-between'
-                minH={60}
-                mx='auto'
-                w={'100%'}
-                h={'100%'}
-                ref={elementRef}
-                className={elementRef.current}
-                rounded="md"
-                boxShadow="dark-lg"
-                color='white'
-                overflow='auto'
-                alignItems='center'>
-                {children}
-            </Flex>
-
-
-        </>
-    )
-}
-
-export default HorizontalCard
+export default HorizontalCard;

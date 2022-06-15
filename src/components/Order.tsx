@@ -7,16 +7,17 @@ type OrderProps = {
   id: string;
   createdAt: string;
   status: string;
+  shippingAddress: string;
 };
 
-function Order({ id, createdAt, status }: OrderProps) {
+function Order({ id, createdAt, status, shippingAddress }: OrderProps) {
   const [statusValue, setStatusValue] = useState(status);
-  const statusColors: any = {
-    PENDING: 'orders.purple',
-    IN_PROGRESS: 'orders.oliveGreen',
-    FULFILLED: 'orders.lightGreen',
-  };
-  const selectColor = statusColors[statusValue];
+  // const statusColors: any = {
+  //   PENDING: 'orders.purple',
+  //   IN_PROGRESS: 'orders.oliveGreen',
+  //   FULFILLED: 'orders.lightGreen',
+  // };
+  // const selectColor = statusColors[statusValue];
 
   function changeStatus(e: ChangeEvent<HTMLSelectElement>) {
     setStatusValue(e.target.value);
@@ -33,19 +34,19 @@ function Order({ id, createdAt, status }: OrderProps) {
     <Flex
       justifyContent="space-between"
       alignItems="center"
-      borderBottom="2px solid"
-      borderColor="main.gray"
+      direction={['column', 'row']}
+      width="100%"
       padding="20px 24px"
     >
-      <Box>
-        <Heading fontSize="18px">{id}</Heading>
-        <Text fontSize="14px">{dayjs(createdAt).format('DD-MM-YYYY')}</Text>
+      <Box marginBottom={[3, 0]}>
+        <Heading fontSize="18px">{shippingAddress}</Heading>
+        <Text fontSize="14px">{dayjs(createdAt).format('DD/MM/YYYY')}</Text>
       </Box>
       <Select
         value={statusValue}
         onChange={changeStatus}
-        backgroundColor={selectColor}
-        width="fit-content"
+        backgroundColor="orders.purple"
+        width={['65%', 'fit-content']}
         textTransform="capitalize"
         _focus={{ outline: 0 }}
         isDisabled={statusValue === 'FULFILLED'}

@@ -9,9 +9,9 @@ export interface Users {
   roles: UserRoles[];
 }
 
-export type UserRoles = {
+export interface UserRoles {
   role: {
     id: string;
     name: string;
   };
-};
+}
