@@ -15,10 +15,11 @@ const MyTasksPage = () => {
 
   return (
     <Box
+      marginTop="1rem"
       className="my-tasks-page"
       display="flex"
       alignItems={['center', 'center']}
-      flexDirection={['column', 'column', 'column', 'row']}
+      flexDirection="column"
     >
       <>
         {loading ? (

@@ -12,7 +12,7 @@ function Header({ onOpen }: headerProps) {
     <Flex
       minH="6vh"
       alignItems="center"
-      bg="main.gray"
+      bg="gray.500"
       color="white"
       padding="10px 15px"
       justifyContent="space-between"
@@ -22,9 +22,7 @@ function Header({ onOpen }: headerProps) {
     >
       <HamburgerIcon cursor="pointer" w={8} h={8} onClick={onOpen} />
 
-      <Box>
-        <ColorModeSwitcher marginRight={2} />
-      </Box>
+
     </Flex>
   );
 }
