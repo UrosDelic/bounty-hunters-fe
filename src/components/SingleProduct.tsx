@@ -8,14 +8,16 @@ import {
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { ProductStatus } from '../types';
+import ProductsStore from '../stores/products';
 
 type SingleCardProps = {
+  id: string;
   name: string;
   price: number;
   status: ProductStatus;
 };
 
-function SingleProduct({ name, price, status }: SingleCardProps) {
+function SingleProduct({ id, name, price, status }: SingleCardProps) {
   const [productStatus, setProductStatus] = useState(status);
   const borderColor =
     productStatus === ProductStatus.INACTIVE ? 'main.gray' : '';
@@ -24,8 +26,10 @@ function SingleProduct({ name, price, status }: SingleCardProps) {
 
   function changeStatus() {
     if (productStatus === ProductStatus.ACTIVE) {
+      ProductsStore.setInactiveStatus(id);
       setProductStatus(ProductStatus.INACTIVE);
     } else {
+      ProductsStore.setActiveStatus(id);
       setProductStatus(ProductStatus.ACTIVE);
     }
   }

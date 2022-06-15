@@ -2,13 +2,15 @@ import { Box, Flex, Image, Text, Link } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
 
 type StoreItemProps = {
-  id: number;
+  id: string;
   name: string;
-  image: string;
-  points: number;
+  price: number;
 };
 
-function StoreItem({ id, name, image, points }: StoreItemProps) {
+function StoreItem({ id, name, price }: StoreItemProps) {
+  const image =
+    'https://cdn.shopify.com/s/files/1/0665/2889/products/Image-1-The-Weekend-Boot-Allegra-Alice_Whittles-2000x2000_1280x.jpg?v=1632758527';
+
   return (
     <Link as={RouterLink} to={`/store/${id}`} _focus={{ outline: 0 }}>
       <Flex direction="column" height="100%">
@@ -24,7 +26,7 @@ function StoreItem({ id, name, image, points }: StoreItemProps) {
         </Flex>
         <Box width="100%" textAlign="left" padding="10px 0px">
           <Text fontSize="20px">{name}</Text>
-          <Text fontSize="17px">Points needed: {points}</Text>
+          <Text fontSize="17px">Points needed: {price}</Text>
         </Box>
       </Flex>
     </Link>

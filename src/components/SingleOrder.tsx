@@ -1,61 +1,61 @@
-import { Flex, Box, Text, Image, Avatar } from '@chakra-ui/react';
+import { Flex, Box, Text, Heading, Grid, GridItem } from '@chakra-ui/react';
+import dayjs from 'dayjs';
 
-type SingleOrderProps = {
-  id: number;
-  name: string;
-  image?: React.ReactNode | any;
-  points: number;
+interface SingleOrderProps {
+  createdAt: string;
+  shippingAddress: string;
   status: string;
-  date?: string;
-  shippingAdress?: string;
-};
+  name: string;
+  price: number;
+}
 
 function SingleOrder({
-  id,
-  name,
-  image,
-  points,
+  createdAt,
+  shippingAddress,
   status,
-  date,
-  shippingAdress,
+  name,
+  price,
 }: SingleOrderProps) {
   return (
-    <Flex margin="auto" width="fit-content" direction="column" height="100%">
-      <Flex justifyContent="space-between" alignItems="center">
-        <Box>
-          <Text fontSize="20px">`Order #{id}`</Text>
-          <Text color="myOrders.lightGray">{date}</Text>
-        </Box>
-        <Avatar name="Vuk" backgroundColor="myOrders.lightGray" />
-      </Flex>
-      <Flex marginBottom="8px" marginTop="8px">
-        <Image
-          src={image}
-          alt={image}
-          width="80px"
-          height="80px"
-          padding="5px"
-        />
-        <Box>
-          <Text fontSize="20px">{name}</Text>
-          <Text color="myOrders.lightGray">{shippingAdress}</Text>
-          <Text>Points: {points}</Text>
-        </Box>
-      </Flex>
-      <Box
-        color={status}
-        borderColor={status}
-        border="1px solid"
-        borderRadius="5px"
-        padding="8px"
-        textTransform="uppercase"
-        width="100%"
-        textAlign="center"
-        marginTop="auto"
-      >
-        {status}
-      </Box>
-    </Flex>
+    <Box padding="15px" width="100%">
+      <Heading size="lg" marginBottom="20px">
+        {name}
+      </Heading>
+      <Grid templateColumns={['repeat(1, 1fr)', 'repeat(2, 1fr)']}>
+        <GridItem>
+          <Text>
+            <Text as="span" fontWeight="bold">
+              Date:
+            </Text>{' '}
+            {dayjs(createdAt).format('DD/MM/YYYY')}
+          </Text>
+        </GridItem>
+        <GridItem>
+          <Text>
+            <Text as="span" fontWeight="bold">
+              Address:
+            </Text>{' '}
+            {shippingAddress}
+          </Text>
+        </GridItem>
+        <GridItem>
+          <Text>
+            <Text as="span" fontWeight="bold">
+              Status:
+            </Text>{' '}
+            {status.replace('_', ' ')}
+          </Text>
+        </GridItem>
+        <GridItem>
+          <Text>
+            <Text as="span" fontWeight="bold">
+              Price:
+            </Text>{' '}
+            {price} points
+          </Text>
+        </GridItem>
+      </Grid>
+    </Box>
   );
 }
 
