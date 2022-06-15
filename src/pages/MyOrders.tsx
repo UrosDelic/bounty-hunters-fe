@@ -1,6 +1,9 @@
 import { Box } from '@chakra-ui/react';
-// import { ordersList } from '../testData/TestData';
-import { SpinnerLoader, SingleOrder } from '../components/index';
+import {
+  SpinnerLoader,
+  SingleOrder,
+  HorizontalCard,
+} from '../components/index';
 import MyOrdersStore from '../stores/myOrders';
 import { useEffect } from 'react';
 import { observer } from 'mobx-react';
@@ -36,7 +39,13 @@ function MyOrders() {
             name,
             price,
           };
-          return <SingleOrder key={id} {...singleOrderValues} />;
+          return (
+            <Box marginBottom="15px">
+              <HorizontalCard>
+                <SingleOrder key={id} {...singleOrderValues} />
+              </HorizontalCard>
+            </Box>
+          );
         })}
     </Box>
   );

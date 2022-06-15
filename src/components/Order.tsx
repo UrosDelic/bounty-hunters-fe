@@ -12,12 +12,6 @@ type OrderProps = {
 
 function Order({ id, createdAt, status, shippingAddress }: OrderProps) {
   const [statusValue, setStatusValue] = useState(status);
-  // const statusColors: any = {
-  //   PENDING: 'orders.purple',
-  //   IN_PROGRESS: 'orders.oliveGreen',
-  //   FULFILLED: 'orders.lightGreen',
-  // };
-  // const selectColor = statusColors[statusValue];
 
   function changeStatus(e: ChangeEvent<HTMLSelectElement>) {
     setStatusValue(e.target.value);
@@ -31,14 +25,8 @@ function Order({ id, createdAt, status, shippingAddress }: OrderProps) {
   }
 
   return (
-    <Flex
-      justifyContent="space-between"
-      alignItems="center"
-      direction={['column', 'row']}
-      width="100%"
-      padding="20px 24px"
-    >
-      <Box marginBottom={[3, 0]}>
+    <Box width="100%" padding="20px 24px">
+      <Box marginBottom="20px">
         <Heading fontSize="18px">{shippingAddress}</Heading>
         <Text fontSize="14px">{dayjs(createdAt).format('DD/MM/YYYY')}</Text>
       </Box>
@@ -62,7 +50,7 @@ function Order({ id, createdAt, status, shippingAddress }: OrderProps) {
           fulfilled
         </option>
       </Select>
-    </Flex>
+    </Box>
   );
 }
 
