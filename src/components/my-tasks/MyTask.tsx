@@ -19,12 +19,16 @@ const MyTask = ({
   points,
 }: MyTaskProps) => {
   const switchStatusColor = (status: string) => {
+    if (status === 'APPROVED') {
+      return 'green';
+    }
     if (status === 'PENDING') {
       return 'purple';
     }
-    if (status === 'APPROVED') {
-      return 'green';
-    } else return 'red';
+    if (status === 'REJECTED') {
+      return 'red';
+    }
+    return 'default';
   };
 
   return (
@@ -34,7 +38,7 @@ const MyTask = ({
       borderColor="gray.300"
       margin="1rem"
       w={['15rem', '25rem', '25rem', '30rem']}
-      boxShadow={`10px 10px 8px ${switchStatusColor(status)}`}
+      boxShadow={`5px 5px 10px ${switchStatusColor(status)}`}
     >
       <Box padding="2rem">
         <Box textAlign="center">{title}</Box>
