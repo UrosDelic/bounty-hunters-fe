@@ -22,7 +22,7 @@ import MyTasksPage from './pages/my-tasks/MyTask';
 import TaskDetailsPage from './pages/my-tasks/TaskDetails';
 import { UserTypes } from './context/userTypes';
 import './theme/styles.css';
-import Login from 'components/login/Login';
+import Login from 'components/Login';
 function App() {
   return (
     <ChakraProvider theme={theme}>
