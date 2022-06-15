@@ -4,12 +4,19 @@ import {
   GoogleLoginResponse,
   GoogleLoginResponseOffline,
 } from 'react-google-login';
+import LoginStore from 'stores/Login';
+import { observer } from 'mobx-react';
+// import  {loginProps}  from 'stores/Login'
+
+const client_id = process.env.REACT_APP_GOOGLE_CLIENT_ID || '';
 
 const Login = () => {
-  const responseGoogle = (
+  const { login } = LoginStore;
+
+  const loginGoogle = (
     response: GoogleLoginResponse | GoogleLoginResponseOffline
   ) => {
-    console.log(response);
+    login(response);
   };
 
   return (
@@ -24,10 +31,10 @@ const Login = () => {
       <Box py={{ base: '0', sm: '8' }} px={{ base: '4', sm: '10' }}>
         <Stack>
           <GoogleLogin
-            clientId="267868351623-8an5obdlb5j0s2n0dopo0ntp7g7ip3sv.apps.googleusercontent.com"
+            clientId={client_id}
             buttonText="Login"
-            onSuccess={responseGoogle}
-            onFailure={responseGoogle}
+            onSuccess={loginGoogle}
+            onFailure={loginGoogle}
             cookiePolicy={'single_host_origin'}
           />
         </Stack>
@@ -35,4 +42,4 @@ const Login = () => {
     </Container>
   );
 };
-export default Login;
+export default observer(Login);
