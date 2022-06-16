@@ -18,7 +18,7 @@ interface UserToken {
 
 class LoginStore {
   _googleUserData: GoogleLoginResponse | null = null;
-  _isAuthenticated = null;
+
   _user: UserToken = {
     exp: null,
     roles: [],

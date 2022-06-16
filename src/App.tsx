@@ -1,7 +1,7 @@
 import { ChakraProvider } from '@chakra-ui/react';
 import { Routes, Route } from 'react-router-dom';
 import { BrowserRouter } from 'react-router-dom';
-import { Layout } from './components';
+import { Layout, SpinnerLoader } from './components';
 import { observer } from 'mobx-react';
 
 import {
@@ -35,7 +35,7 @@ function App() {
   return (
     <ChakraProvider theme={theme}>
       <BrowserRouter>
-        {isAuth ? (
+        {isAuth === true ? (
           <Routes>
             <Route element={<Layout />}>
               <Route
