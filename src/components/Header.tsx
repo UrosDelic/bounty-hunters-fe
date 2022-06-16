@@ -24,7 +24,9 @@ function Header({ onOpen }: headerProps) {
       w="100%"
     >
       <HamburgerIcon cursor="pointer" w={8} h={8} onClick={onOpen} />
-      <Button onClick={logout}>Log Out</Button>
+      <Button variant="ghost" onClick={logout}>
+        Log Out
+      </Button>
     </Flex>
   );
 }
