@@ -7,14 +7,11 @@ import {
     Avatar,
     Badge,
     Grid,
-    Show,
-    Hide,
 } from '@chakra-ui/react';
 import FeedStore from '../../stores/feed';
 import { observer } from 'mobx-react';
 import InfiniteScroll from 'react-infinite-scroll-component';
-
-import { HorizontalCard, NotificationWidget } from 'components/index';
+import { StyledCard, ProfileWidget } from 'components/index';
 const NewTasksFeed = () => {
     const { newTasks } = FeedStore;
 
@@ -26,16 +23,15 @@ const NewTasksFeed = () => {
     return (
         <>
             <Grid
-                gridTemplateColumns={{ base: '100%', xl: '60% 35%' }}
-                gap="5%"
-                mx="auto"
-            >
-                <Show below="md">
-                    <Box>
-                        Mobile menu
-                    </Box>
-                </Show>
+                gridTemplateColumns={{
+                    base: '100%',
+                    xl: '60% 35%'
+                }}
+                gap={{ base: 0, md: "5%" }}
 
+
+
+            >
                 <InfiniteScroll
                     dataLength={newTasks.length}
                     next={() => FeedStore.loadNewTasks()}
@@ -45,7 +41,7 @@ const NewTasksFeed = () => {
                             <Skeleton minH={200} rounded="md" m={2} />
                         </h4>
                     }
-                    height={'70vh'}
+                    height={'80vh'}
                     endMessage={
                         <p style={{ textAlign: 'center' }}>
                             <b>Yay! You have seen it all</b>
@@ -55,7 +51,7 @@ const NewTasksFeed = () => {
                     {newTasks &&
                         newTasks.map((p, key: any) => (
                             <Box key={key} mx="auto" p={2}>
-                                <HorizontalCard>
+                                <StyledCard>
                                     <Flex
                                         flexDirection="column"
                                         my="auto"
@@ -76,29 +72,27 @@ const NewTasksFeed = () => {
                                                     my={{ base: 4, md: 0 }}
                                                 >
                                                     Create Article about Topic XYZ
+                                                    <Badge
+                                                        fontSize="xs"
+                                                        ml={4}
+                                                        color="white"
+                                                        bg="pink.500"
+                                                        variant="solid"
+                                                    >
+                                                        New
+                                                    </Badge>
+                                                    <Badge
+                                                        fontSize="xs"
+                                                        ml={2}
+                                                        color="white"
+                                                        bg="purple.400"
+                                                        variant="solid"
+                                                    >
+                                                        30 pts
+                                                    </Badge>
                                                 </Text>
-                                                <Badge
-                                                    fontSize="xs"
-                                                    ml={4}
-                                                    color="white"
-                                                    bg="pink.500"
-                                                    variant="solid"
-                                                >
-                                                    New
-                                                </Badge>
                                             </Flex>
-                                            <Flex
-                                                flexDirection="column"
-                                                alignItems={{ base: 'center', md: 'start' }}
-                                            >
-                                                <Text fontSize="sm" as="sup" my={1}>
-                                                    Deadline: 10/13/2022
-                                                </Text>
 
-                                                <Text fontSize="sm" my={1} as="sub">
-                                                    Points: 30
-                                                </Text>
-                                            </Flex>
                                         </Flex>
 
                                         <Flex
@@ -106,14 +100,20 @@ const NewTasksFeed = () => {
                                             flexDirection={{ base: 'column', lg: 'row' }}
                                             my={2}
                                         >
-                                            <Avatar size="lg" src="https://bit.ly/dan-abramov" />
+                                            <Avatar size={'lg'} src="https://bit.ly/dan-abramov" />
                                             <Flex
                                                 ml={2}
                                                 flexDirection="column"
                                                 alignItems={{ base: 'center', lg: 'start' }}
                                             >
                                                 <Text fontSize="lg">Milan Miletic</Text>
-                                                <Text fontSize="xs" mt={1} as="sub">
+                                                <Text
+                                                    fontSize="xs"
+                                                    mt={1}
+                                                    fontWeight={'thin'}
+                                                    as="sub"
+                                                    color="gray.200"
+                                                >
                                                     10/03/2022 : 20:00
                                                 </Text>
                                             </Flex>
@@ -125,6 +125,7 @@ const NewTasksFeed = () => {
                                         >
                                             <Box my={3}>
                                                 <Text
+                                                    fontWeight={'thin'}
                                                     overflow="hidden"
                                                     fontSize={{ base: 'sm', md: 'md' }}
                                                     textAlign={{ base: 'center', lg: 'start' }}
@@ -132,15 +133,14 @@ const NewTasksFeed = () => {
                                                     {p.body}
                                                 </Text>
                                             </Box>
+
                                         </Flex>
                                     </Flex>
-                                </HorizontalCard>
+                                </StyledCard>
                             </Box>
                         ))}
                 </InfiniteScroll>
-                <Hide below="lg">
-                    <NotificationWidget />
-                </Hide>
+                <ProfileWidget />
             </Grid>
         </>
     );

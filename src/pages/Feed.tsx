@@ -4,6 +4,7 @@ import {
     NewTasksFeed,
     TaskCompletedFeed,
     LatestOrdersFeed,
+    ProfileWidget
 } from 'components/index';
 import { Routes, Route, useLocation } from 'react-router-dom';
 
@@ -17,7 +18,7 @@ const NewFeed = () => {
     const location = useLocation();
 
     return (
-        <Box px={{ base: 1, md: 8 }}>
+        <Box px={{ base: 0, md: 8 }}>
             <Tabs>
                 <NestedNavigation
                     data={data}

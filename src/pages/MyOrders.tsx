@@ -2,7 +2,7 @@ import { Box } from '@chakra-ui/react';
 import {
   SpinnerLoader,
   SingleOrder,
-  HorizontalCard,
+  StyledCard,
 } from '../components/index';
 import MyOrdersStore from '../stores/myOrders';
 import { useEffect } from 'react';
@@ -41,9 +41,9 @@ function MyOrders() {
           };
           return (
             <Box marginBottom="15px">
-              <HorizontalCard>
+              <StyledCard>
                 <SingleOrder key={id} {...singleOrderValues} />
-              </HorizontalCard>
+              </StyledCard>
             </Box>
           );
         })}
