@@ -25,12 +25,9 @@ import { UserTypes } from './context/userTypes';
 import './theme/styles.css';
 import Login from 'components/Login';
 import LoginStore from 'stores/Login';
-import { useEffect } from 'react';
+
 function App() {
-  const { isAuth } = LoginStore;
-  useEffect(() => {
-    LoginStore.checkUserFromStorage();
-  }, [isAuth]);
+  const isAuth = LoginStore.isAuth;
 
   return (
     <ChakraProvider theme={theme}>

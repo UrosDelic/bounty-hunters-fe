@@ -16,14 +16,17 @@ interface UserToken {
   userId: string;
 }
 
+const token = localStorage.getItem('token');
+const userDefault: UserToken = {
+  exp: null,
+  roles: [],
+  userId: '',
+};
+
 class LoginStore {
   _googleUserData: GoogleLoginResponse | null = null;
 
-  _user: UserToken = {
-    exp: null,
-    roles: [],
-    userId: '',
-  };
+  _user: UserToken = token ? jwtDecode(token) : userDefault;
 
   _signInData: SingInData = {
     accessToken: '',
@@ -31,6 +34,7 @@ class LoginStore {
   };
 
   get isAuth() {
+    console.log(this._user.exp ? this._user.exp < Date.now() : false);
     return this._user.exp ? this._user.exp < Date.now() : false;
   }
 
@@ -42,6 +46,12 @@ class LoginStore {
     return this._user.roles.map(role => {
       return role;
     });
+    /**
+     * roles = {
+     *  Super_Admin: boolean,
+     * ...
+     * }
+     */
   }
   constructor(private http = initHttp()) {
     makeAutoObservable(this);
@@ -58,7 +68,7 @@ class LoginStore {
 
   logout = () => {
     localStorage.removeItem('token');
-    this.checkUserFromStorage();
+    this._user = userDefault;
   };
 
   signIn = async () => {
@@ -74,12 +84,12 @@ class LoginStore {
     });
   };
 
-  checkUserFromStorage = () => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      this._user = jwtDecode(token);
-    } else this._user.exp = null;
-  };
+  // checkUserFromStorage = () => {
+  //   const token = localStorage.getItem('token');
+  //   if (token) {
+  //     this._user = jwtDecode(token);
+  //   } else this._user.exp = null;
+  // };
 }
 
 export default new LoginStore();
