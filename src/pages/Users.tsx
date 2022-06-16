@@ -1,6 +1,5 @@
 import { Grid, GridItem } from '@chakra-ui/react';
 import { SingleUser, SpinnerLoader } from '../components/index';
-// import { usersList } from '../testData/TestData';
 import UsersStore from '../stores/users';
 import { observer } from 'mobx-react';
 import { useEffect } from 'react';
