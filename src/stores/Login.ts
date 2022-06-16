@@ -30,6 +30,10 @@ class LoginStore {
     refreshToken: '',
   };
 
+  get isAuth() {
+    return this._user.exp ? this._user.exp < Date.now() : false;
+  }
+
   get idToken() {
     return this._googleUserData?.tokenId;
   }
@@ -52,6 +56,10 @@ class LoginStore {
     } else this._googleUserData = null;
   };
 
+  logout = () => {
+    localStorage.removeItem('token');
+  };
+
   signIn = async () => {
     const { data } = await this.http.post<SingInData>('/auth/login/google', {
       tokenId: this.idToken,
@@ -59,9 +67,19 @@ class LoginStore {
     runInAction(() => {
       if (data) {
         this._signInData.accessToken = data.accessToken;
+        localStorage.setItem('token', data.accessToken);
         this._user = jwtDecode(this._signInData.accessToken);
       }
     });
+  };
+
+  checkUserFromStorage = () => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      this._user = jwtDecode(token);
+    }
+    console.log(this.isAuth, 'is auth');
+    console.log(this.userRoles, 'user roles');
   };
 }
 

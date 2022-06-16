@@ -1,13 +1,16 @@
-import { Flex } from '@chakra-ui/react';
+import { Button, Flex } from '@chakra-ui/react';
 import { HamburgerIcon } from '@chakra-ui/icons';
 import { ColorModeSwitcher } from '../ColorModeSwitcher';
 import { Box } from '@chakra-ui/react';
+import LoginStore from '../stores/Login';
+import { observer } from 'mobx-react';
 
 type headerProps = {
   onOpen: any;
 };
 
 function Header({ onOpen }: headerProps) {
+  const { logout } = LoginStore;
   return (
     <Flex
       minH="6vh"
@@ -21,10 +24,9 @@ function Header({ onOpen }: headerProps) {
       w="100%"
     >
       <HamburgerIcon cursor="pointer" w={8} h={8} onClick={onOpen} />
-
-
+      <Button onClick={logout}>Log Out</Button>
     </Flex>
   );
 }
 
-export default Header;
+export default observer(Header);

@@ -2,7 +2,9 @@ import axios from 'axios';
 import config from '../config';
 
 class HttpCommunicator {
-  constructor(private http = axios.create(config)) {}
+  constructor(private http = axios.create(config)) {
+    this.http.defaults.headers.post['Content-Type'] = 'multipart/form-data';
+  }
 
   get<T = unknown>(url: string): Promise<{ data?: T; error?: any }> {
     return this.http

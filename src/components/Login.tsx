@@ -6,11 +6,15 @@ import {
 } from 'react-google-login';
 import LoginStore from 'stores/Login';
 import { observer } from 'mobx-react';
+import { useEffect } from 'react';
 // import  {loginProps}  from 'stores/Login'
 
 const client_id = process.env.REACT_APP_GOOGLE_CLIENT_ID || '';
 
 const Login = () => {
+  useEffect(() => {
+    console.log(localStorage);
+  });
   const { login, userRoles } = LoginStore;
   const loginGoogle = (
     response: GoogleLoginResponse | GoogleLoginResponseOffline

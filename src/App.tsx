@@ -2,6 +2,7 @@ import { ChakraProvider } from '@chakra-ui/react';
 import { Routes, Route } from 'react-router-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { Layout } from './components';
+import { observer } from 'mobx-react';
 
 import {
   DefaultPage,
@@ -23,7 +24,18 @@ import TaskDetailsPage from './pages/my-tasks/TaskDetails';
 import { UserTypes } from './context/userTypes';
 import './theme/styles.css';
 import Login from 'components/Login';
+import LoginStore from 'stores/Login';
+import { useEffect } from 'react';
 function App() {
+  const { isAuth } = LoginStore;
+  useEffect(() => {
+    LoginStore.checkUserFromStorage();
+  });
+
+  if (!isAuth) {
+    return <Login></Login>;
+  }
+
   return (
     <ChakraProvider theme={theme}>
       <BrowserRouter>
@@ -82,4 +94,4 @@ function App() {
   );
 }
 
-export default App;
+export default observer(App);
