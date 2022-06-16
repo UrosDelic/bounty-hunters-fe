@@ -32,63 +32,61 @@ function App() {
     LoginStore.checkUserFromStorage();
   });
 
-  if (!isAuth) {
-    return <Login></Login>;
-  }
-
   return (
     <ChakraProvider theme={theme}>
       <BrowserRouter>
-        <Routes>
-          <Route path="/login" element={<Login></Login>} />
+        {isAuth ? (
+          <Routes>
+            <Route element={<Layout />}>
+              <Route
+                element={
+                  <ProtectedRoute
+                    allowedRoles={[
+                      UserTypes.EMPLOYEE,
+                      UserTypes.ADMIN,
+                      UserTypes.SUPER_ADMIN,
+                    ]}
+                  />
+                }
+              >
+                <Route path="/" element={<DefaultPage />} />
+              </Route>
+              <Route
+                element={<ProtectedRoute allowedRoles={[UserTypes.EMPLOYEE]} />}
+              >
+                <Route path="/feed/*" element={<Feed />} />
+                <Route path="/new-tasks" element={<NewTasks />} />
+                <Route path="/my-tasks" element={<MyTasksPage />} />
+                <Route path="/task-details/:id" element={<TaskDetailsPage />} />
+                <Route path="/wallet" element={<Wallet />} />
+                <Route path="/store" element={<Store />} />
+                <Route path="/store/:id" element={<ProductDetails />} />
+                <Route path="/my-orders" element={<MyOrders />} />
+              </Route>
 
-          <Route element={<Layout />}>
-            <Route
-              element={
-                <ProtectedRoute
-                  allowedRoles={[
-                    UserTypes.EMPLOYEE,
-                    UserTypes.ADMIN,
-                    UserTypes.SUPER_ADMIN,
-                  ]}
-                />
-              }
-            >
-              <Route path="/" element={<DefaultPage />} />
-            </Route>
-            <Route
-              element={<ProtectedRoute allowedRoles={[UserTypes.EMPLOYEE]} />}
-            >
-              <Route path="/feed/*" element={<Feed />} />
-              <Route path="/new-tasks" element={<NewTasks />} />
-              <Route path="/my-tasks" element={<MyTasksPage />} />
-              <Route path="/task-details/:id" element={<TaskDetailsPage />} />
-              <Route path="/wallet" element={<Wallet />} />
-              <Route path="/store" element={<Store />} />
-              <Route path="/store/:id" element={<ProductDetails />} />
-              <Route path="/my-orders" element={<MyOrders />} />
+              <Route
+                element={<ProtectedRoute allowedRoles={[UserTypes.ADMIN]} />}
+              >
+                <Route path="/all-tasks" element={<div>tasks</div>} />
+                <Route path="/all-tasks/:id" element={<div>some task</div>} />
+              </Route>
+
+              <Route
+                element={
+                  <ProtectedRoute allowedRoles={[UserTypes.SUPER_ADMIN]} />
+                }
+              >
+                <Route path="/users" element={<Users />} />
+                <Route path="/products" element={<Products />} />
+                <Route path="/all-orders" element={<Orders />} />
+              </Route>
             </Route>
 
-            <Route
-              element={<ProtectedRoute allowedRoles={[UserTypes.ADMIN]} />}
-            >
-              <Route path="/all-tasks" element={<div>tasks</div>} />
-              <Route path="/all-tasks/:id" element={<div>some task</div>} />
-            </Route>
-
-            <Route
-              element={
-                <ProtectedRoute allowedRoles={[UserTypes.SUPER_ADMIN]} />
-              }
-            >
-              <Route path="/users" element={<Users />} />
-              <Route path="/products" element={<Products />} />
-              <Route path="/all-orders" element={<Orders />} />
-            </Route>
-          </Route>
-
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        ) : (
+          <Login />
+        )}
       </BrowserRouter>
     </ChakraProvider>
   );
