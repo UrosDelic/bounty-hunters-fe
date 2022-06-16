@@ -1,5 +1,5 @@
-import { Box, Grid, GridItem } from '@chakra-ui/react';
-import { Order, SpinnerLoader, StyledCard } from '../components/index';
+import { Grid, GridItem } from '@chakra-ui/react';
+import { Order, SpinnerLoader } from '../components/index';
 import OrdersStore from '../stores/orders';
 import { useEffect } from 'react';
 import { observer } from 'mobx-react';
@@ -22,21 +22,20 @@ function Orders() {
       marginTop="50px"
       padding="0px 25px 25px 25px"
       templateColumns={[
-        'repeat(1, 1fr)',
-        'repeat(2, 1fr)',
-        'repeat(3, 1fr)',
-        'repeat(3, 1fr)',
+        'repeat(1, minmax(240px, 400px))',
+        'repeat(1, minmax(240px, 400px))',
+        'repeat(2, minmax(240px, 360px))',
+        'repeat(3, minmax(240px, 360px))',
       ]}
       gap={6}
+      width="fit-content"
     >
       {success &&
         orders.map(order => {
           const { id } = order;
           return (
             <GridItem key={id}>
-              <StyledCard>
-                <Order {...order} />
-              </StyledCard>
+              <Order {...order} />
             </GridItem>
           );
         })}

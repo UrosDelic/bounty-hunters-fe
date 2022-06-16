@@ -24,14 +24,14 @@ function Users() {
           marginTop="50px"
           templateColumns={[
             'repeat(1, 1fr)',
-            'repeat(2, 1fr)',
-            'repeat(3, 1fr)',
-            'repeat(4, 1fr)',
+            'repeat(2, minmax(220px, 240px))',
+            'repeat(3, minmax(220px, 240px))',
+            'repeat(4, minmax(220px, 240px))',
           ]}
           gap={6}
           maxWidth="1200px"
           padding="0px 25px 25px"
-          // width="fit-content"
+          width="fit-content"
         >
           {users.map(user => {
             const { id } = user;

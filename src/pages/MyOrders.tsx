@@ -1,9 +1,5 @@
 import { Box } from '@chakra-ui/react';
-import {
-  SpinnerLoader,
-  SingleOrder,
-  StyledCard,
-} from '../components/index';
+import { SpinnerLoader, SingleOrder } from '../components/index';
 import MyOrdersStore from '../stores/myOrders';
 import { useEffect } from 'react';
 import { observer } from 'mobx-react';
@@ -39,13 +35,7 @@ function MyOrders() {
             name,
             price,
           };
-          return (
-            <Box marginBottom="15px">
-              <StyledCard>
-                <SingleOrder key={id} {...singleOrderValues} />
-              </StyledCard>
-            </Box>
-          );
+          return <SingleOrder key={id} {...singleOrderValues} />;
         })}
     </Box>
   );
