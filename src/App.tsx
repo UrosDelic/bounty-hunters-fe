@@ -30,7 +30,7 @@ function App() {
   const { isAuth } = LoginStore;
   useEffect(() => {
     LoginStore.checkUserFromStorage();
-  });
+  }, [isAuth]);
 
   return (
     <ChakraProvider theme={theme}>

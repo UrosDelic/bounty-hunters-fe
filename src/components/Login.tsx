@@ -40,7 +40,6 @@ const Login = () => {
             onFailure={loginGoogle}
             cookiePolicy={'single_host_origin'}
           />
-          <div>{userRoles}</div>
         </Stack>
       </Box>
     </Container>

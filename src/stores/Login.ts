@@ -18,7 +18,7 @@ interface UserToken {
 
 class LoginStore {
   _googleUserData: GoogleLoginResponse | null = null;
-
+  _isAuthenticated = null;
   _user: UserToken = {
     exp: null,
     roles: [],
@@ -58,6 +58,7 @@ class LoginStore {
 
   logout = () => {
     localStorage.removeItem('token');
+    this.checkUserFromStorage();
   };
 
   signIn = async () => {
@@ -77,9 +78,7 @@ class LoginStore {
     const token = localStorage.getItem('token');
     if (token) {
       this._user = jwtDecode(token);
-    }
-    console.log(this.isAuth, 'is auth');
-    console.log(this.userRoles, 'user roles');
+    } else this._user.exp = null;
   };
 }
 
