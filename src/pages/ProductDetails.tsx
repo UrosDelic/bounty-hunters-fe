@@ -13,24 +13,34 @@ import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { observer } from 'mobx-react';
 import ProductsStore from '../stores/products';
+import AttributeValuesStore from '../stores/attributeValues';
 
 function ProductDetails() {
-  // const sizes = ['S', 'M', 'L', 'XL', 'XXL'];
-  // const colors = ['productDetails.black', 'productDetails.white'];
   const { id } = useParams();
-  const { loading, success, productById } = ProductsStore;
+  const {
+    loading: productLoading,
+    success: productSuccess,
+    productById,
+  } = ProductsStore;
+  const {
+    loading: attributeLoading,
+    success: attributeSuccess,
+    sizeData,
+    colorData,
+  } = AttributeValuesStore;
 
   useEffect(() => {
     ProductsStore.getProductById(id);
+    AttributeValuesStore.getAttributeValues();
   }, []);
 
-  if (loading) {
+  if (productLoading || attributeLoading) {
     return <SpinnerLoader />;
   }
 
   return (
     <>
-      {success && (
+      {productSuccess && attributeSuccess && (
         <Grid
           templateColumns={['none', 'none', 'none', 'repeat(2, 1fr)']}
           gap={5}
@@ -51,8 +61,8 @@ function ProductDetails() {
             </Heading>
             <Text marginBottom={4}>{productById?.description}</Text>
             <Flex flexDirection="column">
-              <SizeGroup />
-              <ColorGroup />
+              <SizeGroup sizeArr={sizeData} />
+              <ColorGroup colorArr={colorData} />
               <Button marginTop="20px" width="100px">
                 Checkout
               </Button>

@@ -6,3 +6,4 @@ export * from './orders';
 export * from './feed';
 export * from './roles';
 export * from './myOrders';
+export * from './attributeValue';

@@ -25,9 +25,10 @@ import TaskCompletedFeed from './feed/TaskCompletedFeed';
 import StyledCard from './core/StyledCard';
 import NestedNavigation from './core/NestedNavigation';
 import InfiniteScroll from './core/InfiniteScroll-test';
-import NotificationWidget from './feed/NotificationWidget'
-import ProfileWidget from './feed/ProfileWidget'
-import LatestOrdersFeed from './feed/LatestOrdersFeed'
+import NotificationWidget from './feed/NotificationWidget';
+import ProfileWidget from './feed/ProfileWidget';
+import LatestOrdersFeed from './feed/LatestOrdersFeed';
+import SearchByInput from './SearchByInput';
 
 export {
   Layout,
@@ -59,6 +60,6 @@ export {
   StyledCard,
   NestedNavigation,
   InfiniteScroll,
-  NotificationWidget
-
+  NotificationWidget,
+  SearchByInput,
 };
