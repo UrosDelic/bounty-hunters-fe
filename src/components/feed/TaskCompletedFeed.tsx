@@ -7,14 +7,14 @@ import {
     Grid,
     Badge,
     Avatar,
-    GridItem,
+
 
 } from '@chakra-ui/react';
 import FeedStore from '../../stores/feed';
 import { observer } from 'mobx-react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
-import { HorizontalCard } from 'components/index';
+import { StyledCard } from 'components/index';
 const TaskCompletedFeed = () => {
     const { completedTasks } = FeedStore;
 
@@ -32,10 +32,10 @@ const TaskCompletedFeed = () => {
                 loader={
                     <>
                         <Grid templateColumns={{ base: '1fr', md: 'repeat(2,1fr)', lg: "repeat(4, 1fr)" }}>
-                            <Skeleton minH={200} rounded="md" m={8} />
-                            <Skeleton minH={200} rounded="md" m={8} />
-                            <Skeleton minH={200} rounded="md" m={8} />
-                            <Skeleton minH={200} rounded="md" m={8} />
+                            <Skeleton minH={200} minW={400} rounded="md" m={4} />
+                            <Skeleton minH={200} minW={400} rounded="md" m={4} />
+                            <Skeleton minH={200} minW={400} rounded="md" m={4} />
+                            <Skeleton minH={200} minW={400} rounded="md" m={4} />
                         </Grid>
                     </>
                 }
@@ -47,61 +47,68 @@ const TaskCompletedFeed = () => {
                 }
             >
                 <Grid templateColumns={{ base: '1fr', md: 'repeat(2,1fr)', lg: "repeat(4, 1fr)" }}>
+
                     {completedTasks.map((task, key: any) => (
-                        <Box key={key} mx="auto" p={2} minW={350} maxW={400} >
-                            <HorizontalCard>
-                                <Flex flexDirection="column" my="auto" minW="100%" p={10}>
-                                    <Flex mb={6} justifyContent="start" alignItems="start" flexDirection={{ base: 'column', md: 'row' }}>
-                                        <Text
-                                            fontWeight="bold"
-                                            fontSize={{ base: 'lg', lg: 'xl' }}
+                        <>
 
-                                        >
-                                            Create Article about Topic XYZ
-                                        </Text>
-                                        <Badge
-                                            fontSize="xs"
-                                            ml={4}
-                                            color="white"
-                                            variant="solid"
-                                            colorScheme="green"
-                                            mt={{ base: 2, md: 0 }}
+                            <Box key={key} mx="auto" p={2} minW={400} maxW={450} >
+                                <StyledCard>
+                                    <Flex flexDirection="column" my="auto" minW="100%" p={10}>
+                                        <Flex mb={6} justifyContent="start" alignItems="start" flexDirection={{ base: 'column', md: 'row' }}>
+                                            <Text
+                                                fontWeight="bold"
+                                                fontSize={{ base: 'lg', lg: 'xl' }}
 
-                                        >
-                                            Completed
-                                        </Badge>
-                                    </Flex>
+                                            >
+                                                Create Article about Topic XYZ
+                                            </Text>
+                                            <Badge
+                                                fontSize="xs"
+                                                ml={4}
+                                                color="white"
+                                                variant="solid"
+                                                colorScheme="green"
+                                                mt={{ base: 2, md: 0 }}
 
-                                    <Flex
-                                        alignItems="start"
-                                        flexDirection={{ base: 'column', lg: 'row' }}
-                                        my={2}
-                                    >
-                                        <Avatar size="lg" src="https://bit.ly/dan-abramov" />
+                                            >
+                                                Completed
+                                            </Badge>
+                                        </Flex>
+
                                         <Flex
-                                            ml={2}
-                                            flexDirection="column"
-                                            alignItems={{ base: 'center', lg: 'start' }}
+                                            alignItems="start"
+                                            flexDirection={{ base: 'column', lg: 'row' }}
+                                            my={2}
                                         >
-                                            <Text>Milan Miletic earned 50 points!</Text>
+                                            <Avatar size="lg" src="https://bit.ly/dan-abramov" />
+                                            <Flex
+                                                ml={2}
+                                                flexDirection="column"
+                                                alignItems={{ base: 'center', lg: 'start' }}
+                                            >
+                                                <Text>Milan Miletic earned 50 points!</Text>
+                                                <Text fontSize="xs" mt={1} as="sub">
+                                                    10/03/2022 : 20:00
+                                                </Text>
 
+                                            </Flex>
+                                        </Flex>
+                                        <Flex
+                                            justifyContent="space-between"
+                                            alignItems="center"
+                                            flexDirection={{ base: 'column', lg: 'row' }}
+                                        >
+                                            <Box minW={{ base: '100%', lg: '100%' }} my={3}>
+                                                <Text
+                                                    fontSize={{ base: 'sm', md: 'md' }}
+                                                    textAlign={{ base: 'center', lg: 'start' }}
+                                                ></Text>
+                                            </Box>
                                         </Flex>
                                     </Flex>
-                                    <Flex
-                                        justifyContent="space-between"
-                                        alignItems="center"
-                                        flexDirection={{ base: 'column', lg: 'row' }}
-                                    >
-                                        <Box minW={{ base: '100%', lg: '100%' }} my={3}>
-                                            <Text
-                                                fontSize={{ base: 'sm', md: 'md' }}
-                                                textAlign={{ base: 'center', lg: 'start' }}
-                                            ></Text>
-                                        </Box>
-                                    </Flex>
-                                </Flex>
-                            </HorizontalCard>
-                        </Box>
+                                </StyledCard>
+                            </Box>
+                        </>
                     ))}
 
                 </Grid>

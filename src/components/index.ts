@@ -22,12 +22,11 @@ import ColorRadioButton from './ColorRadioButton';
 import ColorGroup from './ColorGroup';
 import NewTasksFeed from './feed/NewTasksFeed';
 import TaskCompletedFeed from './feed/TaskCompletedFeed';
-import HorizontalCard from './core/HorizontalCard';
-import NestedNavigation from './core/NestedNavigation';
-import InfiniteScroll from './core/InfiniteScroll';
- 
 import StyledCard from './core/StyledCard';
+import NestedNavigation from './core/NestedNavigation';
+import InfiniteScroll from './core/InfiniteScroll-test';
 import NotificationWidget from './feed/NotificationWidget'
+import ProfileWidget from './feed/ProfileWidget'
 import LatestOrdersFeed from './feed/LatestOrdersFeed'
 
 export {
@@ -56,10 +55,10 @@ export {
   NewTasksFeed,
   TaskCompletedFeed,
   LatestOrdersFeed,
-  NotificationWidget,
-  HorizontalCard,
+  ProfileWidget,
+  StyledCard,
   NestedNavigation,
   InfiniteScroll,
-  StyledCard
+  NotificationWidget
 
 };

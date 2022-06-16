@@ -14,7 +14,7 @@ import { observer } from 'mobx-react';
 
 import mug from '../../img/mug.jpg';
 
-import { HorizontalCard } from 'components/index';
+import { StyledCard } from 'components/index';
 import InfiniteScroll from 'react-infinite-scroll-component';
 const LatestOrdersFeed = () => {
     const { completedTasks } = FeedStore;
@@ -53,7 +53,7 @@ const LatestOrdersFeed = () => {
                 >
                     {completedTasks.map((task, key: any) => (
                         <Box key={key}>
-                            <HorizontalCard>
+                            <StyledCard>
                                 <Flex
                                     alignItems="center"
                                     flexDirection={{ base: 'column', xl: 'column' }}
@@ -67,7 +67,7 @@ const LatestOrdersFeed = () => {
                                     </Text>
                                     <Image src={mug} objectFit="cover" maxW={200} />
                                 </Flex>
-                            </HorizontalCard>
+                            </StyledCard>
                         </Box>
                     ))}
                 </Grid>
