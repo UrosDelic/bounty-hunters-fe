@@ -1,4 +1,5 @@
 export interface Users {
+  accessToken: string;
   adress: string;
   createdAt: string;
   email: string;

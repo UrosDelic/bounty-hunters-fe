@@ -11,8 +11,7 @@ import { observer } from 'mobx-react';
 const client_id = process.env.REACT_APP_GOOGLE_CLIENT_ID || '';
 
 const Login = () => {
-  const { login } = LoginStore;
-
+  const { login, userRoles } = LoginStore;
   const loginGoogle = (
     response: GoogleLoginResponse | GoogleLoginResponseOffline
   ) => {
@@ -23,12 +22,12 @@ const Login = () => {
     <Container
       maxW="lg"
       py={{ base: '12', md: '24' }}
-      px={{ base: '0', sm: '8' }}
+      px={{ base: '5', sm: '8' }}
     >
       <Stack textAlign="center">
         <Heading size="md">Log in to your Bounty Hunters account</Heading>
       </Stack>
-      <Box py={{ base: '0', sm: '8' }} px={{ base: '4', sm: '10' }}>
+      <Box py={{ base: '5', sm: '8' }} px={{ base: '4', sm: '10' }}>
         <Stack>
           <GoogleLogin
             clientId={client_id}
@@ -37,6 +36,7 @@ const Login = () => {
             onFailure={loginGoogle}
             cookiePolicy={'single_host_origin'}
           />
+          <div>{userRoles}</div>
         </Stack>
       </Box>
     </Container>
