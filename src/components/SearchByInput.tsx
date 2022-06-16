@@ -22,10 +22,7 @@ function SearchByInput() {
   return (
     <form onSubmit={handleSearchParams}>
       <InputGroup maxWidth="400px">
-        <InputLeftElement
-          children={<SearchIcon />}
-          onClick={handleSearchParams}
-        />
+        <InputLeftElement children={<SearchIcon />} />
         <Input
           variant="flushed"
           value={inputValue}

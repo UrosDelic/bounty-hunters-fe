@@ -1,5 +1,5 @@
 import { SingleProduct, SpinnerLoader } from '../components/index';
-import { Box } from '@chakra-ui/react';
+import { Box, Grid, GridItem } from '@chakra-ui/react';
 import ProductsStore from '../stores/products';
 import { observer } from 'mobx-react';
 import { useEffect } from 'react';
@@ -24,18 +24,32 @@ function Products() {
           marginTop="50px"
           padding="0px 25px 25px"
         >
-          {products.map(product => {
-            const { id, name, price, status } = product;
-            return (
-              <SingleProduct
-                key={id}
-                id={id}
-                name={name}
-                price={price}
-                status={status}
-              />
-            );
-          })}
+          <Grid
+            templateColumns={[
+              'repeat(1, minmax(240px, 360px))',
+              'repeat(1, minmax(240px, 360px))',
+              'repeat(2, minmax(240px, 360px))',
+              'repeat(3, minmax(240px, 360px))',
+            ]}
+            gap={6}
+            width="fit-content"
+            margin="auto"
+          >
+            {products.map(product => {
+              const { id, name, price, status } = product;
+              return (
+                <GridItem>
+                  <SingleProduct
+                    key={id}
+                    id={id}
+                    name={name}
+                    price={price}
+                    status={status}
+                  />
+                </GridItem>
+              );
+            })}
+          </Grid>
         </Box>
       )}
     </>
