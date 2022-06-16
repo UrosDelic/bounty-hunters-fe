@@ -9,7 +9,7 @@ interface UsersStoreProps {
 }
 
 interface UsersDataProps {
-  users: Users[];
+  data: Users[];
 }
 
 class UsersStore {
@@ -43,8 +43,8 @@ class UsersStore {
       this._users.loading = false;
       if (data) {
         this._users.success = true;
-        this._users.data = data?.users;
-        console.log('users data iz stora', data.users);
+        this._users.data = data?.data;
+        console.log('users data iz stora', data.data);
       }
     });
   };

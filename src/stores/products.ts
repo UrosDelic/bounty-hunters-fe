@@ -10,7 +10,7 @@ interface ProductsStoreProps {
 }
 
 interface ProductsDataProps {
-  products: Product[];
+  data: Product[];
 }
 
 class ProductsStore {
@@ -49,8 +49,8 @@ class ProductsStore {
       this._products.loading = false;
       if (data) {
         this._products.success = true;
-        this._products.data = data?.products;
-        console.log('products data iz stora', data?.products);
+        this._products.data = data?.data;
+        console.log('products data iz stora', data?.data);
       }
     });
   };
