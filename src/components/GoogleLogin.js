@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import LoginStore from 'stores/Login';
 
-const LoginTest = () => {
+const GoogleLogin = () => {
   const handleResponse = response => {
     console.log(response.credential, 'iz login test');
     LoginStore.login(response);
@@ -28,4 +28,4 @@ const LoginTest = () => {
   );
 };
 
-export default observer(LoginTest);
+export default observer(GoogleLogin);

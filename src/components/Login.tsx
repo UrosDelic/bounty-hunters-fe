@@ -1,6 +1,6 @@
 import { Container, Heading, Stack, Box } from '@chakra-ui/react';
 import { observer } from 'mobx-react';
-import LoginTest from './LoginTest';
+import GoogleLogin from './GoogleLogin';
 
 const Login = () => {
   return (
@@ -13,7 +13,7 @@ const Login = () => {
         <Heading size="md">Log in to your Bounty Hunters account</Heading>
       </Stack>
       <Box py={{ base: '5', sm: '8' }} px={{ base: '4', sm: '10' }}>
-        <LoginTest></LoginTest>
+        <GoogleLogin></GoogleLogin>
       </Box>
     </Container>
   );
