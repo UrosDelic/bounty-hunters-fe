@@ -6,15 +6,14 @@ const theme = extendTheme({
       body: {
         maxWidth: '100%',
         overflowX: 'hidden',
-        background:'gray.700',
-        color:'white'
+        background: 'gray.700',
+        color: 'white',
       },
-    
- 
     },
   },
 
   colors: {
+    purple: '#805AD5',
     main: {
       gray: '#2F3747',
       purple: '#A14EBF',
@@ -58,7 +57,7 @@ const theme = extendTheme({
       lightGreen: '#38A169',
     },
   },
-  
+
   // fonts: {
   //   heading: 'Montserrat',
   //   body: 'Inter',

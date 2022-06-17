@@ -29,6 +29,8 @@ function ProductDetails() {
     colorData,
   } = AttributeValuesStore;
 
+  function makeAnOrder() {}
+
   useEffect(() => {
     ProductsStore.getProductById(id);
     AttributeValuesStore.getAttributeValues();
@@ -63,7 +65,12 @@ function ProductDetails() {
             <Flex flexDirection="column">
               <SizeGroup sizeArr={sizeData} />
               <ColorGroup colorArr={colorData} />
-              <Button marginTop="20px" width="100px">
+              <Button
+                marginTop="20px"
+                width="100px"
+                backgroundColor="purple"
+                minW="180px"
+              >
                 Checkout
               </Button>
             </Flex>

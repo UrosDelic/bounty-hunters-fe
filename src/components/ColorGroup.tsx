@@ -1,8 +1,6 @@
 import { HStack, Box, Text, useRadioGroup } from '@chakra-ui/react';
 import { ColorRadioButton } from './index';
 import shirt from '../img/shirt.jpg';
-// import mug from '../img/mug.jpg';
-// import sticker from '../img/sticker.jpg';
 import { observer } from 'mobx-react';
 import { AttributeValue } from '../types/index';
 
