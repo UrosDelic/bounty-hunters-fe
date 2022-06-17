@@ -25,9 +25,19 @@ import { UserTypes } from './context/userTypes';
 import './theme/styles.css';
 import Login from 'components/Login';
 import LoginStore from 'stores/Login';
+import { useEffect } from 'react';
+import LoginTest from 'components/LoginTest';
 
 function App() {
-  const isAuth = LoginStore.isAuth;
+  useEffect(() => {
+    console.log('test');
+    LoginStore.checkUserFromStorage();
+  }, []);
+  const { isAuth, authResolved } = LoginStore;
+
+  if (!authResolved) {
+    return null;
+  }
 
   return (
     <ChakraProvider theme={theme}>
@@ -82,7 +92,8 @@ function App() {
             <Route path="*" element={<NotFound />} />
           </Routes>
         ) : (
-          <Login />
+          // <LoginTest />
+          <Login></Login>
         )}
       </BrowserRouter>
     </ChakraProvider>
