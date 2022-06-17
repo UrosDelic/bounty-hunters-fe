@@ -26,11 +26,9 @@ import './theme/styles.css';
 import Login from 'components/Login';
 import LoginStore from 'stores/Login';
 import { useEffect } from 'react';
-import GoogleLogin from 'components/GoogleLogin';
 
 function App() {
   useEffect(() => {
-    console.log('test');
     LoginStore.checkUserFromStorage();
   }, []);
   const { isAuth, authResolved } = LoginStore;
@@ -92,7 +90,6 @@ function App() {
             <Route path="*" element={<NotFound />} />
           </Routes>
         ) : (
-          // <GoogleLogin />
           <Login />
         )}
       </BrowserRouter>
