@@ -2,6 +2,7 @@ import { HStack, Box, Text, useRadioGroup } from '@chakra-ui/react';
 import { SizeRadioButton } from './index';
 import { observer } from 'mobx-react';
 import { AttributeValue } from '../types/index';
+import AttributeValuesStore from '../stores/attributeValues';
 
 interface SizeGroupProps {
   sizeArr: AttributeValue[];
@@ -11,7 +12,10 @@ function SizeGroup({ sizeArr }: SizeGroupProps) {
   const { getRootProps, getRadioProps } = useRadioGroup({
     name: 'size',
     defaultValue: sizeArr[0]?.id,
-    onChange: value => console.log(value),
+    onChange: value => {
+      console.log(value);
+      AttributeValuesStore.changeSize(value);
+    },
   });
 
   const group = getRootProps();

@@ -8,15 +8,19 @@ interface AttributeValuesStoreProps {
   sizeData: AttributeValue[];
   loading: boolean;
   success: boolean;
+  selectedSize: string;
+  selectedColor: string;
 }
 
 class AttributeValuesStore {
-  _roles: AttributeValuesStoreProps = {
+  _attributeValues: AttributeValuesStoreProps = {
     data: [],
     colorData: [],
     sizeData: [],
     loading: false,
     success: false,
+    selectedSize: '',
+    selectedColor: '',
   };
 
   constructor(private http = initHttp()) {
@@ -24,41 +28,59 @@ class AttributeValuesStore {
   }
 
   get loading() {
-    return this._roles.loading;
+    return this._attributeValues.loading;
   }
 
   get success() {
-    return this._roles.success;
+    return this._attributeValues.success;
   }
 
   get attributeValues() {
-    return this._roles.data;
+    return this._attributeValues.data;
   }
 
   get sizeData() {
-    return this._roles.sizeData;
+    return this._attributeValues.sizeData;
+  }
+
+  get selectedSize() {
+    return this._attributeValues.selectedSize;
   }
 
   get colorData() {
-    return this._roles.colorData;
+    return this._attributeValues.colorData;
+  }
+
+  get selectedColor() {
+    return this._attributeValues.selectedColor;
+  }
+
+  changeSize(value: string) {
+    this._attributeValues.selectedSize = value;
+  }
+
+  changeColor(value: string) {
+    this._attributeValues.selectedColor = value;
   }
 
   getAttributeValues = async () => {
-    this._roles.loading = true;
+    this._attributeValues.loading = true;
     const { data } = await this.http.get<AttributeValue[]>('/attributeValues');
     runInAction(() => {
-      this._roles.loading = false;
+      this._attributeValues.loading = false;
       if (data) {
-        this._roles.success = true;
-        this._roles.data = data;
+        this._attributeValues.success = true;
+        this._attributeValues.data = data;
         const colors = data.filter(
           av => av.productAttribute.name.toLowerCase() === 'colors'
         );
         const sizes = data.filter(
           av => av.productAttribute.name.toLowerCase() === 'size'
         );
-        this._roles.colorData = colors;
-        this._roles.sizeData = sizes;
+        this._attributeValues.colorData = colors;
+        this._attributeValues.selectedColor = colors[0]?.id;
+        this._attributeValues.sizeData = sizes;
+        this._attributeValues.selectedSize = sizes[0]?.id;
         console.log('roles data iz stora', sizes);
       }
     });

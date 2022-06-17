@@ -10,7 +10,7 @@ interface MyOrderStoreProps {
 }
 
 interface MyOrderDataProps {
-  orders: MyOrders[];
+  data: MyOrders[];
 }
 
 class MyOrdersStore {
@@ -42,14 +42,14 @@ class MyOrdersStore {
     // const accessToken = localStorage.get('accessToken');
     // const decoded = jwtDecode(accessToken).id
 
-    const { data } = await this.http.get<MyOrderDataProps[]>(
+    const { data } = await this.http.get<MyOrderDataProps>(
       '/users/a0d6132d-9c7d-46fa-a3b8-1e20d918d605/orders'
     );
     runInAction(() => {
       this._MyOrders.loading = false;
       if (data) {
         this._MyOrders.success = true;
-        this._MyOrders.data = data[0].orders;
+        this._MyOrders.data = data.data;
         console.log('my orders iz stora', data);
       }
     });

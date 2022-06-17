@@ -3,6 +3,7 @@ import { ColorRadioButton } from './index';
 import shirt from '../img/shirt.jpg';
 import { observer } from 'mobx-react';
 import { AttributeValue } from '../types/index';
+import AttributeValuesStore from '../stores/attributeValues';
 
 interface ColorGroupProps {
   colorArr: AttributeValue[];
@@ -12,7 +13,10 @@ function ColorGroup({ colorArr }: ColorGroupProps) {
   const { getRootProps, getRadioProps } = useRadioGroup({
     name: 'size',
     defaultValue: colorArr[0]?.id,
-    onChange: value => console.log(value),
+    onChange: value => {
+      console.log(value);
+      AttributeValuesStore.changeColor(value);
+    },
   });
 
   const group = getRootProps();

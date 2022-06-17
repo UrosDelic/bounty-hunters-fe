@@ -8,6 +8,10 @@ interface OrderStoreProps {
   data: Orders[];
 }
 
+interface OrdersDataProps {
+  data: Orders[];
+}
+
 class OrdersStore {
   _orders: OrderStoreProps = {
     loading: false,
@@ -34,13 +38,22 @@ class OrdersStore {
   getOrders = async () => {
     this._orders.loading = true;
     this._orders.success = false;
-    const { data } = await this.http.get<Orders[]>('/orders');
+    const { data } = await this.http.get<OrdersDataProps>('/orders');
     runInAction(() => {
       this._orders.loading = false;
       if (data) {
         this._orders.success = true;
-        this._orders.data = data;
+        this._orders.data = data?.data;
         console.log('orders data iz stora', data);
+      }
+    });
+  };
+
+  makeAnOrder = async (order: any) => {
+    const { data } = await this.http.post('/orders', order);
+    runInAction(() => {
+      if (data) {
+        console.log('order sent (iz stora)', data);
       }
     });
   };
