@@ -16,10 +16,10 @@ const GoogleLogin = () => {
     });
     google.accounts.id.renderButton(document.getElementById('google-btn'), {
       shape: 'pill',
-      // theme: 'filled_blue',
       size: 'large',
       text: 'Signin with google',
       ux_mode: 'popup',
+      width: '250px',
     });
   }, []);
 
