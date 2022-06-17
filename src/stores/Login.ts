@@ -1,9 +1,5 @@
 import { initHttp } from 'http/index';
 import { makeAutoObservable, runInAction } from 'mobx';
-import {
-  GoogleLoginResponse,
-  GoogleLoginResponseOffline,
-} from 'react-google-login';
 import jwtDecode from 'jwt-decode';
 interface SingInData {
   accessToken: string;
@@ -21,7 +17,6 @@ interface googleUserData {
   credential: string;
 }
 
-const token = localStorage.getItem('token');
 const userDefault: UserToken = {
   exp: null,
   roles: [],
@@ -29,7 +24,6 @@ const userDefault: UserToken = {
 };
 
 class LoginStore {
-  _googleUserData: GoogleLoginResponse | null = null;
   _googleUserDataTest: googleUserData = {
     clientId: '',
     credential: '',
@@ -56,11 +50,8 @@ class LoginStore {
     return this._authResoved;
   }
 
-  get idTokenTest() {
-    return this._googleUserDataTest?.credential;
-  }
   get idToken() {
-    return this._googleUserData?.tokenId;
+    return this._googleUserDataTest?.credential;
   }
 
   get userRoles() {
@@ -77,16 +68,7 @@ class LoginStore {
   constructor(private http = initHttp()) {
     makeAutoObservable(this);
   }
-  login = async (
-    response: GoogleLoginResponse | GoogleLoginResponseOffline
-  ) => {
-    if (!response.code) {
-      this._googleUserData = response as GoogleLoginResponse;
-      this.signIn();
-    } else this._googleUserData = null;
-  };
-
-  loginTest = async (response: googleUserData) => {
+  login = async (response: googleUserData) => {
     if (response) {
       this._googleUserDataTest.credential = response.credential;
       this.signIn();

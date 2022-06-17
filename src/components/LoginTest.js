@@ -7,7 +7,7 @@ import LoginStore from 'stores/Login';
 const LoginTest = () => {
   const handleResponse = response => {
     console.log(response.credential, 'iz login test');
-    LoginStore.loginTest(response);
+    LoginStore.login(response);
   };
 
   useEffect(() => {
