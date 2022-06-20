@@ -26,6 +26,7 @@ import NestedNavigation from './core/NestedNavigation';
 import NotificationList from './NotificationList';
 import ProfileWidget from './feed/ProfileWidget';
 import SearchByInput from './SearchByInput';
+import OrderModal from './OrderModal';
 
 export {
   Layout,
@@ -56,4 +57,5 @@ export {
   NestedNavigation,
   NotificationList,
   SearchByInput,
+  OrderModal,
 };

@@ -27,7 +27,7 @@ class HttpCommunicator {
   }
   post<T = unknown>(url: string, data: {}): Promise<{ data?: T; error?: any }> {
     return this.http
-      .post(url, { data })
+      .post(url, data)
       .then((res: any) => {
         return res.data;
       })

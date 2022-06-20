@@ -1,6 +1,7 @@
 import { Grid, GridItem } from '@chakra-ui/react';
 import { SingleUser, SpinnerLoader } from '../components/index';
 import UsersStore from '../stores/users';
+import RolesStore from '../stores/roles';
 import { observer } from 'mobx-react';
 import { useEffect } from 'react';
 
@@ -9,6 +10,7 @@ function Users() {
 
   useEffect(() => {
     UsersStore.getUsers();
+    RolesStore.getRoles();
   }, []);
 
   if (loading) {

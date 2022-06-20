@@ -11,7 +11,6 @@ import { ModalLayout } from './index';
 import { UserRoles } from 'types';
 import { observer } from 'mobx-react';
 import RolesStore from '../stores/roles';
-import { useEffect } from 'react';
 
 export type UserModalProps = {
   isOpen: boolean;
@@ -26,10 +25,6 @@ function UserModal({ isOpen, onClose, name, roles }: UserModalProps) {
   const { value, getCheckboxProps } = useCheckboxGroup({
     defaultValue: roleIds,
   });
-
-  useEffect(() => {
-    RolesStore.getRoles();
-  }, []);
 
   function updateRole() {
     console.log(value);
