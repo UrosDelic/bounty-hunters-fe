@@ -2,7 +2,7 @@ import axios, { Axios } from 'axios';
 import config from '../config';
 
 function axiosRequestInterceptor(conf: any) {
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem('bh-token');
   if (token) {
     conf.headers.Authorization = `Bearer ${token}`;
   }
