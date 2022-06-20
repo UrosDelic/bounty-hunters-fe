@@ -43,17 +43,20 @@ function Header({ onOpen }: headerProps) {
 
       <Box>
         <Menu>
-          <MenuButton mx={4} onClick={() => setOpenNotifications(true)}>
-            <Box as={BellIcon} fontSize={['3xl']} color="primary" mt={1}></Box>
+          <MenuButton mx={4} onClick={() => setOpenNotifications(true)} position='relative'>
+            <Box as={BellIcon} fontSize={['2xl']} color="primary" mt={1}></Box>
             <Circle
-              right="6%"
-              top={3}
-              px={'2px'}
+
+              px={'1px'}
               mx={1}
               fontSize="xs"
               color="white"
               bg="purple.400"
-              position="absolute"
+              position='absolute'
+              top={0}
+              right={-2}
+
+
             >
               {notificationsCount[0]?.totalCount}
             </Circle>

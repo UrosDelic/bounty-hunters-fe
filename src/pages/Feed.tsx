@@ -5,7 +5,7 @@ const NewFeed = () => {
     return (
         <Grid
             px={{ base: 0, md: 8 }}
-            gridTemplateColumns={{ base: '1fr', lg: '1.5fr 0.5fr' }}
+            gridTemplateColumns={{ base: '1fr', lg: '1.5fr' }}
         >
             <FeedList />
             <ProfileWidget />

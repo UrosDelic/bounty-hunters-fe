@@ -1,66 +1,56 @@
 import { useEffect } from 'react';
-import {
-    Box,
-    Skeleton,
-    Text,
-    Flex,
-    Avatar,
-    Tag,
+import { Box, Skeleton, Text, Flex, Avatar } from '@chakra-ui/react';
 
-} from '@chakra-ui/react';
-import FeedStore from '../../stores/feed';
-//import Tasks from '../../stores/tasks';
+
 import { observer } from 'mobx-react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { StyledCard } from 'components/index';
+import Notifications from 'stores/notifications';
+import dayjs from 'dayjs';
 const FeedList = () => {
-    const { newTasks } = FeedStore;
-    //const { tasks } = Tasks;
+    const { allNotifications, checkForMore } = Notifications;
 
     useEffect(() => {
-        FeedStore.getNewTasks()
-        //Tasks.getTasks()
-
+        Notifications.getAllNotifications();
     }, []);
 
     return (
         <>
-
-            <Flex flexDirection='column' my={2}>
-                <Box w={{ base: '100%', lg: '90%' }} p={6} >
-
-                    <Text fontSize='3xl' mb={4} >Check the Latest News! </Text>
-
-
+            <Flex flexDirection="column" my={2}>
+                <Box w={{ base: '100%', lg: '80%' }} p={6} mx="auto">
+                    <Text fontWeight="thin" fontSize={{ base: '2xl', md: '3xl' }} mb={4}>
+                        Check the <b>Latest News!</b>{' '}
+                    </Text>
 
                     <InfiniteScroll
-                        dataLength={newTasks.length}
-                        next={() => FeedStore.loadNewTasks()}
-                        hasMore={true}
+                        dataLength={allNotifications.length}
+                        next={() => Notifications.loadMoreNotifications()}
+                        hasMore={checkForMore}
                         loader={
                             <h4>
                                 <Skeleton minH={200} mx={2} rounded="md" />
                             </h4>
                         }
-
                         endMessage={
                             <p style={{ textAlign: 'center' }}>
                                 <b>Yay! You have seen it all</b>
                             </p>
                         }
                     >
-                        {newTasks &&
-                            newTasks.map((p, key: any) => (
-                                <Box key={key}
-
-                                    mx="auto" p={2} _hover={{
+                        {allNotifications &&
+                            allNotifications.map((p, key: any) => (
+                                <Box
+                                    key={key}
+                                    mx="auto"
+                                    p={2}
+                                    _hover={{
                                         cursor: 'pointer',
                                         transform: 'translateY(-5px)',
-                                        transition: '0.4s ease-out'
-                                    }}>
+                                        transition: '0.4s ease-out',
+                                    }}
+                                >
                                     <StyledCard>
                                         <Flex
-
                                             flexDirection="column"
                                             my="auto"
                                             minW="100%"
@@ -70,38 +60,19 @@ const FeedList = () => {
                                                 mb={6}
                                                 flexDirection={{ base: 'column', lg: 'row' }}
                                                 justifyContent="space-between"
-
                                             >
                                                 <Flex alignItems="center">
                                                     <Text
-                                                        fontWeight='bold'
+                                                        fontWeight="bold"
                                                         fontSize={{ base: 'xl', lg: '2xl' }}
                                                         textAlign={{ base: 'center', lg: 'start' }}
                                                         my={{ base: 4, md: 0 }}
                                                     >
-                                                        {p.title}
-                                                        <Tag
-                                                            fontSize="xs"
-                                                            ml={4}
-                                                            color="white"
-                                                            bg="pink.500"
-                                                            variant="subtle"
-                                                        >
-                                                            NEW
-                                                        </Tag>
-                                                        <Tag
-                                                            fontSize="xs"
-                                                            ml={2}
-                                                            color="white"
-                                                            bg="purple.400"
-                                                            variant="subtle"
-                                                        >
+                                                        {p.message}
 
-                                                            pts
-                                                        </Tag>
+
                                                     </Text>
                                                 </Flex>
-
                                             </Flex>
 
                                             <Flex
@@ -123,7 +94,7 @@ const FeedList = () => {
                                                         as="sub"
                                                         color="gray.200"
                                                     >
-
+                                                        {dayjs(p.createdAt).format('DD/MM/YYYY')}
                                                     </Text>
                                                 </Flex>
                                             </Flex>
@@ -138,21 +109,16 @@ const FeedList = () => {
                                                         overflow="hidden"
                                                         fontSize={{ base: 'sm', md: 'lg' }}
                                                         textAlign={{ base: 'center', lg: 'start' }}
-                                                    >
-                                                        {p.body}
-                                                    </Text>
+                                                    ></Text>
                                                 </Box>
-
                                             </Flex>
                                         </Flex>
                                     </StyledCard>
                                 </Box>
                             ))}
                     </InfiniteScroll>
-
                 </Box>
-
-            </Flex >
+            </Flex>
         </>
     );
 };

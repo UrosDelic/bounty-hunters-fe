@@ -7,14 +7,14 @@ import {
     SkeletonText,
     SkeletonCircle,
     Circle,
-    Divider
+    Divider,
 } from '@chakra-ui/react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Notifications from 'stores/notifications';
 import { observer } from 'mobx-react';
-import dayjs from 'dayjs';
 
+import { useRelativeTime } from 'custom-hooks/useRelativeTime';
 const NotificationList = () => {
     const { allNotifications, loading, checkForMore } = Notifications;
 
@@ -22,10 +22,12 @@ const NotificationList = () => {
         Notifications.getAllNotifications();
     }, []);
 
+    const relativeTime = useRelativeTime();
+
     return (
-        <Flex flexDirection="column" bg='gray.700'>
+        <Flex flexDirection="column" bg="gray.700">
             {loading ? (
-                [...Array(4).keys()].map(() => (
+                [...Array(3).keys()].map(() => (
                     <>
                         <Box bg="gray.700">
                             <SkeletonCircle m="2" size="10" />
@@ -68,19 +70,13 @@ const NotificationList = () => {
                             <>
                                 <Box
                                     display="flex"
-                                    justifyContent='space-between'
+                                    justifyContent="space-between"
                                     alignItems="center"
                                     my="auto"
                                     bg={n.readStatus === 'UNREAD' ? 'gray.600' : ''}
                                     _hover={{ background: 'purple.700', cursor: 'pointer' }}
                                 >
-
-                                    <Flex
-                                        key={key}
-                                        p={4}
-                                        rounded="sm"
-                                        minH={50}
-                                    >
+                                    <Flex key={key} p={4} rounded="sm" minH={50}>
                                         <Flex alignItems="start">
                                             <Avatar
                                                 size={'md'}
@@ -95,21 +91,21 @@ const NotificationList = () => {
                                                     color="gray.200"
                                                     mt={1}
                                                 >
-                                                    {dayjs(n.createdAt).format('YYYY-MM-DD HH:mm')}
+                                                    {relativeTime(n.createdAt)}
                                                 </Text>
                                             </Flex>
                                         </Flex>
-
                                     </Flex>
                                     <Box px={4}>
                                         {n.readStatus === 'UNREAD' ? (
                                             <Circle size="6px" bg="purple.400" ml={4}></Circle>
-                                        ) : ''}
+                                        ) : (
+                                            ''
+                                        )}
                                     </Box>
                                 </Box>
                                 <Divider />
                             </>
-
                         ))}
                     </InfiniteScroll>
                 </>
