@@ -22,7 +22,7 @@ function ModalLayout({ isOpen, onClose, name, children }: ModalLayoutProps) {
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>{name}</ModalHeader>
-        <ModalCloseButton />
+        <ModalCloseButton color="black" />
         <ModalBody>{children}</ModalBody>
         <ModalFooter></ModalFooter>
       </ModalContent>
