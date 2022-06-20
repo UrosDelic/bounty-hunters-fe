@@ -1,11 +1,17 @@
-import { SingleProduct, SpinnerLoader } from '../components/index';
+import {
+  SingleProduct,
+  SpinnerLoader,
+  SearchByInput,
+} from '../components/index';
 import { Box, Grid, GridItem } from '@chakra-ui/react';
 import ProductsStore from '../stores/products';
 import { observer } from 'mobx-react';
 import { useEffect } from 'react';
+import { useFilterBySearch } from '../custom-hooks/useFilterBySearch';
 
 function Products() {
   const { loading, success, products } = ProductsStore;
+  const filteredProducts = useFilterBySearch(products, ['name']);
 
   useEffect(() => {
     ProductsStore.getProducts();
@@ -24,6 +30,9 @@ function Products() {
           marginTop="50px"
           padding="0px 25px 25px"
         >
+          <Box marginBottom="50px">
+            <SearchByInput />
+          </Box>
           <Grid
             templateColumns={[
               'repeat(1, minmax(240px, 360px))',
@@ -35,7 +44,7 @@ function Products() {
             width="fit-content"
             margin="auto"
           >
-            {products.map(product => {
+            {filteredProducts.map(product => {
               const { id, name, price, status } = product;
               return (
                 <GridItem>
