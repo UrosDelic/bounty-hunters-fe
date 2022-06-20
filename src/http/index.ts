@@ -17,7 +17,7 @@ class HttpCommunicator {
 
   patch<T = unknown>(
     url: string,
-    data: any
+    data?: any
   ): Promise<{ data?: T; error?: any }> {
     return this.http
       .patch(url, data)

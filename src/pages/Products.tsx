@@ -29,6 +29,7 @@ function Products() {
             return (
               <SingleProduct
                 key={id}
+                id={id}
                 name={name}
                 price={price}
                 status={status}

@@ -19,7 +19,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { Search2Icon } from '@chakra-ui/icons'
 import StyledTable from '../components/core/StyledTable'
-import TableRow from '../components/core/HorizontalCard'
+
 
 
 const data = [

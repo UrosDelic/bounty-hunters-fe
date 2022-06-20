@@ -5,3 +5,4 @@ export * from './users';
 export * from './orders';
 export * from './feed';
 export * from './roles';
+export * from './myOrders';
