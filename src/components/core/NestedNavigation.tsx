@@ -7,7 +7,7 @@ function NestedNav({ data, index }: any) {
 
     return (
         <>
-            <Tabs variant='line' colorScheme="purple" defaultIndex={index} my={8} >
+            <Tabs variant='line' colorScheme="purple" defaultIndex={index} pt={5} >
                 <Flex>
                     <TabList>
                         {data &&

@@ -1,11 +1,23 @@
-import { Box, Text, Grid, Avatar, Hide, Show, Circle } from '@chakra-ui/react';
+import {
+    Box,
+    Flex,
+    Text,
+    Grid,
+    Avatar,
+    Hide,
+    Show,
+    Divider,
+    Image,
+} from '@chakra-ui/react';
 import { observer } from 'mobx-react';
-import { StyledCard, NotificationWidget } from 'components/index';
+import { StyledCard } from 'components/index';
+
+
 const ProfileWidget = () => {
     return (
         <>
             <Show below="lg">
-                <Grid
+                {/* <Grid
                     gridColumn={{ base: 0, lg: 2 }}
                     gridRow={{ base: 1, lg: 1 }}
                     mx={'auto'}
@@ -156,117 +168,201 @@ const ProfileWidget = () => {
                             </Text>
                         </Box>
                     </Box>
-                </Grid>
+                </Grid> */}
             </Show>
-            <Hide below="lg">
-                <Box display="flex" flexDirection="column" alignItems="end" h={'10vh'}>
-                    <Box rounded="lg" w="80%" mx="auto" mb={4} >
-                        <Box>
-                            <StyledCard>
-                                <Avatar
-                                    size="xl"
-                                    src="https://bit.ly/prosper-baba"
-                                    boxShadow="lg"
-                                    mx="auto"
-                                />
-                            </StyledCard>
-                        </Box>
-                        <Box display="flex" justifyContent="space-between" mt={2}>
-                            <Box display="flex" flexDirection="column" alignItems="center">
-                                <Circle
-                                    mt={-12}
-                                    boxShadow="lg"
-                                    size="70px"
-                                    bg="purple.500"
-                                    color="white"
-                                    border="1px"
-                                    borderColor="white"
-                                >
-                                    350
-                                </Circle>
-                                <Text
-                                    fontSize="xs"
-                                    textTransform="uppercase"
-                                    fontWeight="thin"
-                                    textAlign="center"
-                                    mt={1}
-                                >
-                                    Available Points
+            <Show below="xl">
+                <Box bg="tomato"></Box>
+            </Show>
+
+            <Hide below="xl">
+                <Box
+                    minH={'100vh'}
+                    boxShadow="dark-lg"
+                    pt={2}
+                    pl={5}
+                    w={'30vw'}
+                    position="fixed"
+                    right={1}
+
+
+                >
+                    {/* <Flex justifyContent="start" alignItems="start" py={5}>
+                        <Avatar
+                            size="xl"
+                            src="https://bit.ly/prosper-baba"
+                            boxShadow="lg"
+                        />
+                        <Flex flexDirection="column" alignItems="start" ml={5}>
+                            <Text fontWeight="thin" fontSize="2xl">
+                                Milos Miletic
+                            </Text>
+                            <Text fontWeight="thin" fontSize="xl">
+                                Belgrade, Serbia - Frontend Developer
+                            </Text>
+                        </Flex>
+                    </Flex> */}
+
+
+
+                    {/* <Grid justifyContent="center" gridTemplateColumns="1fr 1fr" gap={1}>
+                            <Flex
+                                alignItems="start"
+                                justifyContent="space-evenly"
+                                flexDirection="column"
+                                rounded="md"
+                                minH={100}
+                                mx={2}
+                            >
+                                <Text fontSize="xl" fontWeight="thin">
+                                    Available points:
                                 </Text>
-                            </Box>
-                            <Box display="flex" flexDirection="column" alignItems="center">
-                                <Circle
-                                    mt={-12}
-                                    boxShadow="lg"
-                                    size="70px"
-                                    bg="purple.300"
-                                    color="white"
-                                    border="1px"
-                                    borderColor="white"
-                                >
-                                    2
-                                </Circle>
+
                                 <Text
-                                    fontSize="xs"
-                                    textTransform="uppercase"
-                                    fontWeight="thin"
-                                    textAlign="center"
-                                    mt={1}
+                                    borderLeft="2px"
+                                    borderColor="pink.500"
+                                    fontSize="3xl"
+                                    lineHeight="35px"
+                                    px={2}
                                 >
-                                    Assigned Tasks
+                                    488
                                 </Text>
-                            </Box>
-                            <Box display="flex" flexDirection="column" alignItems="center">
-                                <Circle
-                                    mt={-12}
-                                    boxShadow="lg"
-                                    size="70px"
-                                    bg="purple.500"
-                                    color="white"
-                                    border="1px"
-                                    borderColor="white"
+                            </Flex>
+                            <Flex
+                                alignItems="start"
+                                justifyContent="space-evenly"
+                                flexDirection="column"
+                                rounded="md"
+                                minH={100}
+                                mx={2}
+                            >
+                                <Text fontSize="xl" fontWeight="thin">
+                                    Pending Bounties:
+                                </Text>
+
+                                <Text
+                                    borderLeft="2px"
+                                    borderColor="pink.300"
+                                    fontSize="3xl"
+                                    lineHeight="35px"
+                                    px={2}
+                                >
+                                    8
+                                </Text>
+                            </Flex>
+                            <Flex
+                                alignItems="start"
+                                justifyContent="space-evenly"
+                                flexDirection="column"
+                                rounded="md"
+                                minH={100}
+                                mx={2}
+                            >
+                                <Text fontSize="xl" fontWeight="thin">
+                                    Completed Tasks:
+                                </Text>
+
+                                <Text
+                                    borderLeft="2px"
+                                    borderColor="purple.200"
+                                    fontSize="3xl"
+                                    lineHeight="35px"
+                                    px={2}
+                                >
+                                    4
+                                </Text>
+                            </Flex>
+                            <Flex
+                                alignItems="start"
+                                justifyContent="space-evenly"
+                                flexDirection="column"
+                                rounded="md"
+                                minH={100}
+                                mx={2}
+                            >
+                                <Text fontSize="xl" fontWeight="thin">
+                                    Assigned Tasks:
+                                </Text>
+
+                                <Text
+                                    borderLeft="2px"
+                                    borderColor="purple.600"
+                                    fontSize="3xl"
+                                    lineHeight="35px"
+                                    px={2}
                                 >
                                     3
-                                </Circle>
-                                <Text
-                                    fontSize="xs"
-                                    textTransform="uppercase"
-                                    fontWeight="thin"
-                                    textAlign="center"
-                                    mt={1}
-                                >
-                                    Pending Bounties
                                 </Text>
-                            </Box>
-                            <Box display="flex" flexDirection="column" alignItems="center">
-                                <Circle
-                                    mt={-12}
-                                    boxShadow="lg"
-                                    size="70px"
-                                    bg="purple.300"
-                                    color="white"
-                                    border="1px"
-                                    borderColor="white"
-                                >
-                                    50
-                                </Circle>
-                                <Text
-                                    fontSize="xs"
-                                    textTransform="uppercase"
-                                    fontWeight="thin"
-                                    textAlign="center"
-                                    mt={1}
-                                >
-                                    Completed Tasks
-                                </Text>
-                            </Box>
-                        </Box>
-                    </Box>
+                            </Flex>
+                        </Grid> */}
 
-                    <Box w={'80%'} mt={2} mx="auto">
-                        <NotificationWidget />
-                    </Box>
                 </Box>
+
+                {/* Prikaz wide buttons 
+                     <Flex
+                            alignItems="center"
+                            justifyContent="space-between"
+                            my={2}
+                            minW={400}
+                            rounded="md"
+                            border="1px"
+                            borderColor="purple.400"
+                        >
+                            <Text fontSize="xl" fontWeight="thin" p={2} minW='70%' maxW='80%'>
+                                Available points
+                            </Text>
+                            <Text textAlign='center' minW='20%' maxW='30%' bg="purple.400" p={2} fontSize="xl">
+                                488
+                            </Text>
+                        </Flex>
+
+                        <Flex
+                            alignItems="center"
+                            justifyContent="space-between"
+                            my={2}
+                            minW={400}
+                            rounded="md"
+                            border="1px"
+                            borderColor="purple.400"
+                        >
+                            <Text fontSize="xl" fontWeight="thin" p={2} minW='70%' maxW='80%'>
+                                Completed Tasks
+                            </Text>
+                            <Text textAlign='center' minW='20%' maxW='30%' bg="purple.400" p={2} fontSize="xl">
+                                24
+                            </Text>
+                        </Flex>
+                        <Flex
+                            alignItems="center"
+                            justifyContent="space-between"
+                            my={2}
+                            minW={400}
+                            rounded="md"
+                            border="1px"
+                            borderColor="purple.400"
+                        >
+                            <Text fontSize="xl" fontWeight="thin" p={2} minW='70%' maxW='80%'>
+                                Pending Bounties
+                            </Text>
+                            <Text textAlign='center' minW='20%' maxW='30%' bg="purple.400" p={2} fontSize="xl">
+                                2
+                            </Text>
+                        </Flex>
+                        <Flex
+                            alignItems="center"
+                            justifyContent="space-between"
+                            my={2}
+                            minW={400}
+                            rounded="md"
+                            border="1px"
+                            borderColor="purple.400"
+                        >
+                            <Text fontSize="xl" fontWeight="thin" p={2} minW='70%' maxW='80%'>
+                                Assigned Tasks
+                            </Text>
+                            <Text textAlign='center' minW='20%' maxW='30%' bg="purple.400" p={2} fontSize="xl">
+                                7
+                            </Text>
+                        </Flex> */}
             </Hide>
         </>
     );

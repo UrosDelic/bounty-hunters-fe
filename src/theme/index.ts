@@ -7,13 +7,16 @@ const theme = extendTheme({
         maxWidth: '100%',
         overflowX: 'hidden',
         background:'gray.700',
-        color:'white'
+        color:'white',
+ 
+      
       },
     
  
     },
   },
 
+  
   colors: {
     main: {
       gray: '#2F3747',

@@ -1,17 +1,14 @@
 import { Flex } from '@chakra-ui/react';
-import { useRef, useEffect } from 'react';
+import { useState } from 'react';
 import { useBackgroundGenerator } from '../../custom-hooks/useBackgroundGenerator';
 type HorizontalCardProps = {
   children: any;
 };
 
-const HorizontalCard = ({ children }: HorizontalCardProps) => {
-  const background = useBackgroundGenerator();
-  const elementRef = useRef<HTMLDivElement | any>(background);
+const StyledCard = ({ children }: HorizontalCardProps) => {
 
-  useEffect(() => {
-    elementRef.current = background;
-  }, []);
+  const [background] = useState(useBackgroundGenerator())
+
 
   return (
     <>
@@ -22,8 +19,7 @@ const HorizontalCard = ({ children }: HorizontalCardProps) => {
         mx="auto"
         w={'100%'}
         h={'100%'}
-        ref={elementRef}
-        className={elementRef.current}
+        className={background}
         rounded="md"
         boxShadow="dark-lg"
         color="white"
@@ -36,4 +32,4 @@ const HorizontalCard = ({ children }: HorizontalCardProps) => {
   );
 };
 
-export default HorizontalCard;
+export default StyledCard;
