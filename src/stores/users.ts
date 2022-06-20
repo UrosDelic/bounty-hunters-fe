@@ -38,7 +38,7 @@ class UsersStore {
   getUsers = async () => {
     this._users.loading = true;
     this._users.success = false;
-    const { data } = await this.http.get<UsersDataProps>('/users');
+    const { data } = await this.http.get<UsersDataProps>('/users?limit=15');
     runInAction(() => {
       this._users.loading = false;
       if (data) {

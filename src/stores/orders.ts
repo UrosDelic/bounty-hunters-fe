@@ -38,7 +38,7 @@ class OrdersStore {
   getOrders = async () => {
     this._orders.loading = true;
     this._orders.success = false;
-    const { data } = await this.http.get<OrdersDataProps>('/orders');
+    const { data } = await this.http.get<OrdersDataProps>('/orders?limit=15');
     runInAction(() => {
       this._orders.loading = false;
       if (data) {

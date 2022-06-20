@@ -43,7 +43,7 @@ class MyOrdersStore {
     // const decoded = jwtDecode(accessToken).id
 
     const { data } = await this.http.get<MyOrderDataProps>(
-      '/users/a0d6132d-9c7d-46fa-a3b8-1e20d918d605/orders'
+      '/users/a0d6132d-9c7d-46fa-a3b8-1e20d918d605/orders?limit=15'
     );
     runInAction(() => {
       this._MyOrders.loading = false;

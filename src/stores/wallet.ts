@@ -42,7 +42,7 @@ class WalletStore {
     this._wallet.loading = true;
     this._wallet.success = false;
     const { data } = await this.http.get<WalletOrderData>(
-      '/users/a0d6132d-9c7d-46fa-a3b8-1e20d918d605/transactions/order'
+      '/users/a0d6132d-9c7d-46fa-a3b8-1e20d918d605/transactions/order?sortBy=createdAt&sortMode=asc'
     );
     runInAction(() => {
       this._wallet.loading = false;
@@ -68,7 +68,7 @@ class WalletStore {
     this._wallet.loading = true;
     this._wallet.success = false;
     const { data } = await this.http.get<WalletTaskData>(
-      '/users/a0d6132d-9c7d-46fa-a3b8-1e20d918d605/transactions/task'
+      '/users/a0d6132d-9c7d-46fa-a3b8-1e20d918d605/transactions/task?sortBy=createdAt&sortMode=asc'
     );
     runInAction(() => {
       this._wallet.loading = false;

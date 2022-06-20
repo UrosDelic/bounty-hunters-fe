@@ -36,20 +36,6 @@ class HttpCommunicator {
       });
   }
 
-  post<T = unknown>(
-    url: string,
-    data?: any
-  ): Promise<{ data?: T; error?: any }> {
-    return this.http
-      .post(url, data)
-      .then((res: any) => {
-        return res.data;
-      })
-      .catch((error: any) => {
-        return { error };
-      });
-  }
-
   patch<T = unknown>(
     url: string,
     data?: any

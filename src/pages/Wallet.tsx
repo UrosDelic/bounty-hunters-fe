@@ -1,5 +1,4 @@
 import { Box, Flex, Grid, GridItem } from '@chakra-ui/react';
-// import { gainedPoints, spentPoints } from '../testData/TestData';
 import { ArrowUpIcon, ArrowDownIcon } from '@chakra-ui/icons';
 import {
   DoughnutChart,
