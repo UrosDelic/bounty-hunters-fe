@@ -11,7 +11,6 @@ export interface NotificationsType {
 }
   
 export interface NotificationsPagination { 
-  totalPages: number;
-  totalCount:number;
+  unreadCount: number;
 }
  

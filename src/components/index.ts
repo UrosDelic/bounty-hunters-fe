@@ -23,7 +23,7 @@ import ColorGroup from './ColorGroup';
 import FeedList from './feed/FeedList';
 import StyledCard from './core/StyledCard';
 import NestedNavigation from './core/NestedNavigation';
-import NotificationList from './NotificationList';
+import UserNotifications from './UserNotifications';
 import ProfileWidget from './feed/ProfileWidget';
 
 export {
@@ -53,5 +53,5 @@ export {
   ProfileWidget,
   StyledCard,
   NestedNavigation,
-  NotificationList,
+  UserNotifications,
 };

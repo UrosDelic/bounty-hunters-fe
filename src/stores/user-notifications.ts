@@ -1,7 +1,7 @@
 import { NotificationsType, NotificationsPagination } from 'types';
 import { makeAutoObservable, runInAction } from 'mobx';
 import { initHttp } from 'http/index';
-
+import login from './Login';
 interface NotificationsStoreProps {
   loading: boolean;
   limit: number;
@@ -16,7 +16,7 @@ interface NotificationDetails {
   info: NotificationsPagination;
 }
 
-class Notifications {
+class UserNotificationsStore {
   notifications: NotificationsStoreProps = {
     loading: false,
     hasMore: true,
@@ -24,7 +24,6 @@ class Notifications {
     info: [],
     limit: 5,
     offset: 1,
-
   };
 
   constructor(private http = initHttp()) {
@@ -39,18 +38,19 @@ class Notifications {
   get checkForMore() {
     return this.notifications.hasMore;
   }
-get notificationsCount(){
-  return this.notifications.info
-}
-  getAllNotifications = async () => {
+  get notificationsCount() {
+    return this.notifications.info[0];
+  }
+  getUserNotifications = async () => {
     this.notifications.loading = true;
     const { data } = await this.http.get<NotificationDetails>(
-      `/notifications?page=${this.notifications.offset}&limit=${this.notifications.limit}`
+      `/users/${login.userId}/notifications?page=${this.notifications.offset}&limit=${this.notifications.limit}`
     );
 
     if (data) {
       runInAction(() => {
         if (!data?.data.length) {
+          console.log(!data?.data.length, 'duzina niza');
           this.notifications.hasMore = false;
         }
         this.notifications.data = [...this.notifications.data, ...data?.data];
@@ -59,23 +59,45 @@ get notificationsCount(){
     }
   };
 
-  getNotificationsCount = async ()=>{
+  getNotificationCount = async () => {
     const { data } = await this.http.get<NotificationDetails>(
-      `/notifications`
+      `/users/${login.userId}/notifications`
     );
     if (data) {
       runInAction(() => {
         this.notifications.info = [data?.info];
+      });
+    }
+  };
+  markAllAsRead = async () => {
+    const { error } = await this.http.patch(`/users/${login.userId}/notifications/markAllAsRead`);
+    this.notifications.info[0].unreadCount = 0
+   
+    if (!error) {
+      runInAction(() => {
+        this.notifications.data.map(data => data.readStatus = 'READ')
       })
     }
 
-  }
+  };
+
+  readNotification = async (id: string) => {
+    const { error } = await this.http.patch(`/notifications/${id}/markAsRead`);
+
+    if (!error) {
+      runInAction(() => {
+        this.notifications.data.find(
+          someobject => someobject.id === id
+        )!.readStatus = 'READ';
+      });
+    }
+  };
 
   loadMoreNotifications() {
     this.notifications.offset++;
-    this.getAllNotifications();
+    this.getUserNotifications();
     this.notifications.loading = false;
   }
 }
 
-export default new Notifications();
+export default new UserNotificationsStore();

@@ -1,17 +1,15 @@
 import { useEffect } from 'react';
 import { Box, Skeleton, Text, Flex, Avatar } from '@chakra-ui/react';
-
-
 import { observer } from 'mobx-react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { StyledCard } from 'components/index';
-import Notifications from 'stores/notifications';
+import userFeeds from 'stores/user-feed';
 import dayjs from 'dayjs';
 const FeedList = () => {
-    const { allNotifications, checkForMore } = Notifications;
+    const { allFeeds, checkForMore } = userFeeds;
 
     useEffect(() => {
-        Notifications.getAllNotifications();
+        userFeeds.collectFeeds();
     }, []);
 
     return (
@@ -23,8 +21,8 @@ const FeedList = () => {
                     </Text>
 
                     <InfiniteScroll
-                        dataLength={allNotifications.length}
-                        next={() => Notifications.loadMoreNotifications()}
+                        dataLength={allFeeds.length}
+                        next={() => userFeeds.loadMoreFeeds()}
                         hasMore={checkForMore}
                         loader={
                             <h4>
@@ -37,8 +35,8 @@ const FeedList = () => {
                             </p>
                         }
                     >
-                        {allNotifications &&
-                            allNotifications.map((p, key: any) => (
+                        {allFeeds &&
+                            allFeeds.map((p, key: any) => (
                                 <Box
                                     key={key}
                                     mx="auto"
