@@ -3,7 +3,7 @@ import { observer } from 'mobx-react';
 interface MyTaskProps {
   title: string;
   description: string | null;
-  status: string;
+  status?: string;
   createdAt: string;
   updatedAt: string;
   solution?: string | null;
@@ -18,7 +18,7 @@ const MyTask = ({
   updatedAt,
   points,
 }: MyTaskProps) => {
-  const switchStatusColor = (status: string) => {
+  const switchStatusColor = (status: string | undefined) => {
     if (status === 'APPROVED') {
       return 'green';
     }

@@ -12,7 +12,7 @@ import { ReactNode } from 'react';
 export type ModalLayoutProps = {
   isOpen: boolean;
   onClose: () => void;
-  name: string;
+  name?: string;
   children: ReactNode;
 };
 
@@ -22,7 +22,7 @@ function ModalLayout({ isOpen, onClose, name, children }: ModalLayoutProps) {
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>{name}</ModalHeader>
-        <ModalCloseButton />
+        <ModalCloseButton color="black" />
         <ModalBody>{children}</ModalBody>
         <ModalFooter></ModalFooter>
       </ModalContent>

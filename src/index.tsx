@@ -1,3 +1,5 @@
+/* global google */
+
 import * as ReactDOM from 'react-dom/client';
 import App from './App';
 import { ColorModeScript } from '@chakra-ui/react';

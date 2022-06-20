@@ -20,14 +20,11 @@ import SizeRadioButton from './SizeRadioButton';
 import SizeGroup from './SizeGroup';
 import ColorRadioButton from './ColorRadioButton';
 import ColorGroup from './ColorGroup';
-import NewTasksFeed from './feed/NewTasksFeed';
-import TaskCompletedFeed from './feed/TaskCompletedFeed';
+import FeedList from './feed/FeedList';
 import StyledCard from './core/StyledCard';
 import NestedNavigation from './core/NestedNavigation';
-import InfiniteScroll from './core/InfiniteScroll-test';
-import NotificationWidget from './feed/NotificationWidget';
+import NotificationList from './NotificationList';
 import ProfileWidget from './feed/ProfileWidget';
-import LatestOrdersFeed from './feed/LatestOrdersFeed';
 import SearchByInput from './SearchByInput';
 
 export {
@@ -53,13 +50,10 @@ export {
   SizeGroup,
   ColorRadioButton,
   ColorGroup,
-  NewTasksFeed,
-  TaskCompletedFeed,
-  LatestOrdersFeed,
+  FeedList,
   ProfileWidget,
   StyledCard,
   NestedNavigation,
-  InfiniteScroll,
-  NotificationWidget,
+  NotificationList,
   SearchByInput,
 };
