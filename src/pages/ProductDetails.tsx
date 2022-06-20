@@ -17,9 +17,11 @@ import {
 import shirt from '../img/shirt.jpg';
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
+import { useFeedbackText } from '../custom-hooks/useFeedbackText';
 import { observer } from 'mobx-react';
 import ProductsStore from '../stores/products';
 import AttributeValuesStore from '../stores/attributeValues';
+import OrdersStore from '../stores/orders';
 
 function ProductDetails() {
   const { id } = useParams();
@@ -35,6 +37,8 @@ function ProductDetails() {
     sizeData,
     colorData,
   } = AttributeValuesStore;
+  const { isOrderSent } = OrdersStore;
+  const { feedbackTranslate, feedbackOpacity } = useFeedbackText(isOrderSent);
 
   useEffect(() => {
     ProductsStore.getProductById(id);
@@ -74,6 +78,7 @@ function ProductDetails() {
             <Box marginTop="auto">
               <Button
                 marginTop="20px"
+                marginBottom="30px"
                 width="100px"
                 backgroundColor="purple"
                 minW="180px"
@@ -83,16 +88,19 @@ function ProductDetails() {
               >
                 Checkout
               </Button>
+              <Text
+                padding="0 5px"
+                transform={feedbackTranslate}
+                opacity={feedbackOpacity}
+                transition="all 0.5s ease-out"
+              >
+                Order sent
+              </Text>
             </Box>
           </GridItem>
         </Grid>
       )}
-      <OrderModal
-        isOpen={isOpen}
-        onClose={onClose}
-        name={`Your order`}
-        price={productById?.price}
-      />
+      <OrderModal isOpen={isOpen} onClose={onClose} name={`Your order`} />
     </>
   );
 }

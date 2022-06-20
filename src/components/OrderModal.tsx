@@ -1,24 +1,22 @@
-import { Text, Button, Box, Flex, Input, Image } from '@chakra-ui/react';
+import { Button, Input } from '@chakra-ui/react';
 import { ModalLayout } from './index';
 import { observer } from 'mobx-react';
 import OrdersStore from '../stores/orders';
 import AttributeValuesStore from '../stores/attributeValues';
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import shirt from '../img/shirt.jpg';
 
 export type OrderModalProps = {
   isOpen: boolean;
   onClose: () => void;
   name: string;
-  price: number | undefined;
 };
 
-function OrderModal({ isOpen, onClose, name, price }: OrderModalProps) {
+function OrderModal({ isOpen, onClose, name }: OrderModalProps) {
   const [address, setAddress] = useState('');
   const { id } = useParams();
   const { selectedColor, selectedSize } = AttributeValuesStore;
-  const { orderSent } = OrdersStore;
+  const { isOrderSent } = OrdersStore;
 
   function handleOrder(e: FormEvent) {
     e.preventDefault();
@@ -31,11 +29,13 @@ function OrderModal({ isOpen, onClose, name, price }: OrderModalProps) {
       };
       console.log(orderObject);
       OrdersStore.makeAnOrder(orderObject);
-      if (orderSent) {
-        onClose();
-      }
+      setAddress('');
     }
   }
+
+  useEffect(() => {
+    if (isOrderSent) onClose();
+  }, [isOrderSent]);
 
   return (
     <ModalLayout isOpen={isOpen} onClose={onClose} name={name}>
