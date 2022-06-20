@@ -1,6 +1,5 @@
 import {
   Heading,
-  Flex,
   Box,
   Grid,
   GridItem,
@@ -71,7 +70,6 @@ function ProductDetails() {
             <Image src={shirt} margin="auto" width="100%" />
           </GridItem>
           <GridItem padding="10px" borderRadius="5px">
-            {/* <Flex flexDirection="column" height="100%"> */}
             <Heading as="h1" size="xl" marginBottom={4}>
               {productById?.name}
             </Heading>
@@ -102,7 +100,6 @@ function ProductDetails() {
                 Checkout
               </Button>
             </Box>
-            {/* </Flex> */}
           </GridItem>
         </Grid>
       )}

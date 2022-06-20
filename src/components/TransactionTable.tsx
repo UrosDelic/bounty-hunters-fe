@@ -29,15 +29,15 @@ function TransactionTable({ data, transaction }: TransactionTableProps) {
           </Tr>
         </Thead>
         <Tbody>
-          {data.map((item: any) => {
-            const { id, name, points, date } = item;
+          {data.map((item: any, index: number) => {
+            const { createdAt, name, price } = item;
             return (
-              <Tr key={id}>
+              <Tr key={index}>
                 <Td maxWidth="150px" color="#FFFFFF" wordBreak="break-all">
                   {name}
                 </Td>
                 <Td maxWidth="150px" color="#B3C5CD" wordBreak="break-all">
-                  {date}
+                  {createdAt}
                 </Td>
                 <Td
                   maxWidth="150px"
@@ -45,7 +45,7 @@ function TransactionTable({ data, transaction }: TransactionTableProps) {
                   wordBreak="break-all"
                   textAlign="right"
                 >
-                  {points}
+                  {price}
                 </Td>
               </Tr>
             );

@@ -1,21 +1,21 @@
 export function useUniqueDates(firstArr: any, secondArr: any) {
   const myObj: any = {};
   firstArr.forEach((gp: any) => {
-    const { date, points } = gp;
-    if (!myObj[date]) {
-      myObj[date] = { gained: points };
+    const { createdAt, price } = gp;
+    if (!myObj[createdAt]) {
+      myObj[createdAt] = { gained: price };
     } else {
-      myObj[date].gained = myObj[date].gained + points;
+      myObj[createdAt].gained = myObj[createdAt].gained + price;
     }
   });
   secondArr.forEach((sp: any) => {
-    const { date, points } = sp;
-    if (!myObj[date]) {
-      myObj[date] = { spent: points };
-    } else if (!myObj[date].spent) {
-      myObj[date].spent = points;
+    const { createdAt, price } = sp;
+    if (!myObj[createdAt]) {
+      myObj[createdAt] = { spent: price };
+    } else if (!myObj[createdAt].spent) {
+      myObj[createdAt].spent = price;
     } else {
-      myObj[date].spent = myObj[date].spent + points;
+      myObj[createdAt].spent = myObj[createdAt].spent + price;
     }
   });
   return myObj;
