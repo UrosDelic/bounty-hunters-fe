@@ -34,7 +34,7 @@ const UserNotifications = () => {
     };
 
     return (
-        <Flex flexDirection="column" bg="purple.700">
+        <Flex flexDirection="column" bg="gray.700">
             {loading ? (
                 [...Array(3).keys()].map(() => (
                     <>
@@ -51,6 +51,7 @@ const UserNotifications = () => {
                         dataLength={allNotifications.length}
                         next={() => UserNotificationsStore.loadMoreNotifications()}
                         hasMore={checkForMore}
+                        className='notification-scroll'
                         loader={
                             <Box bg="gray.700" minH={50} my={2} p={2}>
                                 <SkeletonCircle m="2" size="10" />
@@ -71,9 +72,9 @@ const UserNotifications = () => {
                             <Button
                                 mx={4}
                                 my={2}
-                                variant="link"
-                                size="sm"
-                                color="purple.400"
+                                variant="solid"
+                                size="xs"
+                                bg="purple.400"
                                 onClick={() => markAllAsRead()}
                             >
                                 Mark all as read
