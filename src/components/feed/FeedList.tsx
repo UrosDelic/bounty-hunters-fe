@@ -1,26 +1,48 @@
 import { useEffect } from 'react';
-import { Box, Skeleton, Text, Flex, Avatar } from '@chakra-ui/react';
-
+import {
+    Box,
+    Skeleton,
+    Text,
+    Flex,
+    Avatar,
+    Hide,
+    Show,
+    Link,
+    Grid,
+    Image
+} from '@chakra-ui/react';
 
 import { observer } from 'mobx-react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { StyledCard } from 'components/index';
 import Notifications from 'stores/notifications';
 import dayjs from 'dayjs';
+import { Link as RouterLink } from 'react-router-dom';
+
 const FeedList = () => {
     const { allNotifications, checkForMore } = Notifications;
 
     useEffect(() => {
         Notifications.getAllNotifications();
     }, []);
+    const img: string = require("../../img/avatar.svg").default;
 
     return (
         <>
             <Flex flexDirection="column" my={2}>
-                <Box w={{ base: '100%', lg: '80%' }} p={6} mx="auto">
-                    <Text fontWeight="thin" fontSize={{ base: '2xl', md: '3xl' }} mb={4}>
-                        Check the <b>Latest News!</b>{' '}
-                    </Text>
+                <Box w='100%' >
+                    <Flex alignItems={'center'} my={4}>
+
+                        <Text
+                            fontWeight="thin"
+                            fontSize={{ base: 'xl', md: '2xl' }}
+                            mb={4}
+                            textAlign={{ base: 'center', md: 'start' }}
+                        >
+                            Check the <b>Latest News!</b>{' '}
+                        </Text>
+                        <Image src={img} alt="logo" width={100} />
+                    </Flex>
 
                     <InfiniteScroll
                         dataLength={allNotifications.length}
@@ -37,85 +59,70 @@ const FeedList = () => {
                             </p>
                         }
                     >
-                        {allNotifications &&
-                            allNotifications.map((p, key: any) => (
-                                <Box
-                                    key={key}
-                                    mx="auto"
-                                    p={2}
-                                    _hover={{
-                                        cursor: 'pointer',
-                                        transform: 'translateY(-5px)',
-                                        transition: '0.4s ease-out',
-                                    }}
-                                >
-                                    <StyledCard>
-                                        <Flex
-                                            flexDirection="column"
-                                            my="auto"
-                                            minW="100%"
-                                            p={{ base: 2, lg: 8 }}
-                                        >
-                                            <Flex
-                                                mb={6}
-                                                flexDirection={{ base: 'column', lg: 'row' }}
-                                                justifyContent="space-between"
-                                            >
-                                                <Flex alignItems="center">
-                                                    <Text
-                                                        fontWeight="bold"
-                                                        fontSize={{ base: 'xl', lg: '2xl' }}
-                                                        textAlign={{ base: 'center', lg: 'start' }}
-                                                        my={{ base: 4, md: 0 }}
-                                                    >
-                                                        {p.message}
+                        <Grid gridTemplateColumns={{ base: '1fr', lg: '1fr 1fr 1fr' }} gap={5}>
+                            {allNotifications &&
+                                allNotifications.map((p, key: any) => (
+                                    <Box
+                                        key={key}
+                                        mx="auto"
+                                        p={2}
+                                        w={{ base: '90%', md: '100%' }}
+                                        _hover={{
+                                            cursor: 'pointer',
+                                            transform: 'translateY(-5px)',
+                                            transition: '0.4s ease-out',
+                                        }}
+                                    >
 
-
-                                                    </Text>
-                                                </Flex>
-                                            </Flex>
-
-                                            <Flex
-                                                alignItems={{ base: 'center', lg: 'start' }}
-                                                flexDirection={{ base: 'column', lg: 'row' }}
-                                                my={2}
-                                            >
-                                                <Avatar size={'lg'} src="https://bit.ly/dan-abramov" />
-                                                <Flex
-                                                    ml={2}
-                                                    flexDirection="column"
-                                                    alignItems={{ base: 'center', lg: 'start' }}
+                                        <StyledCard>
+                                            <Show below="md">
+                                                <Link
+                                                    as={RouterLink}
+                                                    to={`/${p.type.toLowerCase()}/${p.id}`}
+                                                    _focus={{ outline: 0 }}
                                                 >
-                                                    <Text fontSize="lg">Milan Miletic</Text>
-                                                    <Text
-                                                        fontSize="xs"
-                                                        mt={1}
-                                                        fontWeight={'thin'}
-                                                        as="sub"
-                                                        color="gray.200"
-                                                    >
-                                                        {dayjs(p.createdAt).format('DD/MM/YYYY')}
-                                                    </Text>
-                                                </Flex>
+
+                                                    <Flex flexDirection="column" alignItems="center">
+                                                        <Avatar
+                                                            size={'lg'}
+                                                            src="https://bit.ly/dan-abramov"
+                                                        />
+                                                        <Text fontSize="lg">Milan Miletic</Text>
+                                                        <Text
+                                                            fontSize="xs"
+                                                            mt={1}
+                                                            fontWeight={'thin'}
+                                                            as="sub"
+                                                            color="gray.200"
+                                                        >
+                                                            {dayjs(p.createdAt).format('DD/MM/YYYY')}
+                                                        </Text>
+                                                        <Text
+                                                            fontWeight="bold"
+                                                            fontSize={{ base: 'md', lg: '2xl' }}
+                                                            textAlign={{ base: 'center', lg: 'start' }}
+                                                            my={{ base: 8, md: 0 }}
+                                                            mx="auto"
+                                                        >
+                                                            {p.message}
+                                                        </Text>
+                                                    </Flex>
+
+                                                </Link>
+                                            </Show>
+                                            {/* <Hide below="xl">
+
+                                            <Flex minW='45vw' minH={40}>
+                                                <StyledCard>
+
+                                                </StyledCard>
                                             </Flex>
-                                            <Flex
-                                                justifyContent="space-between"
-                                                alignItems="center"
-                                                flexDirection={{ base: 'column', lg: 'row' }}
-                                            >
-                                                <Box my={3}>
-                                                    <Text
-                                                        fontWeight={'thin'}
-                                                        overflow="hidden"
-                                                        fontSize={{ base: 'sm', md: 'lg' }}
-                                                        textAlign={{ base: 'center', lg: 'start' }}
-                                                    ></Text>
-                                                </Box>
-                                            </Flex>
-                                        </Flex>
-                                    </StyledCard>
-                                </Box>
-                            ))}
+
+                                        </Hide> */}
+                                        </StyledCard>
+                                    </Box>
+                                ))}
+                        </Grid>
                     </InfiniteScroll>
                 </Box>
             </Flex>

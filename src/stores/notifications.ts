@@ -22,7 +22,7 @@ class Notifications {
     hasMore: true,
     data: [],
     info: [],
-    limit: 5,
+    limit: 6,
     offset: 1,
 
   };
