@@ -12,3 +12,8 @@ export interface Task {
   updatedAt: string;
   userId?: string | null;
 }
+
+export interface Tasks {
+  data: Task[];
+  info: { totalCount: number; totalPages: number };
+}

@@ -2,6 +2,7 @@ import { initHttp } from 'http/index';
 import { makeAutoObservable, runInAction } from 'mobx';
 import dayjs from 'dayjs';
 import { Task } from 'types';
+import { Tasks } from 'types';
 
 interface TaskStoreProps {
   loading: boolean;
@@ -57,11 +58,11 @@ class TasksStore {
 
   getTasks = async () => {
     this._tasks.loading = true;
-    const { data } = await this.http.get<Task[]>('/tasks');
+    const { data } = await this.http.get<Tasks>('/tasks');
     runInAction(() => {
       this._tasks.loading = false;
       if (data) {
-        this._tasks.data = data.map(data => {
+        this._tasks.data = data.data.map(data => {
           const createdAtDate = dayjs(data.createdAt).format('DD-MM-YYYY');
           const updatedAtDate = dayjs(data.updatedAt).format('DD-MM-YYYY');
           return { task: data, createdAtDate, updatedAtDate };
