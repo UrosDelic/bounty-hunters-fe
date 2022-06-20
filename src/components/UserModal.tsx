@@ -11,24 +11,32 @@ import { ModalLayout } from './index';
 import { UserRoles } from 'types';
 import { observer } from 'mobx-react';
 import RolesStore from '../stores/roles';
+import UsersStore from '../stores/users';
+import { useEffect } from 'react';
 
 export type UserModalProps = {
   isOpen: boolean;
   onClose: () => void;
   name: string;
   roles: UserRoles[];
+  userId: string;
 };
 
-function UserModal({ isOpen, onClose, name, roles }: UserModalProps) {
+function UserModal({ isOpen, onClose, name, roles, userId }: UserModalProps) {
   const { success, rolesData } = RolesStore;
+  const { isUserUpdated } = UsersStore;
   const roleIds = roles.map(singleRole => singleRole.role.id);
   const { value, getCheckboxProps } = useCheckboxGroup({
     defaultValue: roleIds,
   });
 
   function updateRole() {
-    console.log(value);
+    if (value.length) UsersStore.updateRoles(userId, value);
   }
+
+  useEffect(() => {
+    if (isUserUpdated) onClose();
+  }, [isUserUpdated]);
 
   return (
     <ModalLayout isOpen={isOpen} onClose={onClose} name={name}>
@@ -54,7 +62,6 @@ function UserModal({ isOpen, onClose, name, roles }: UserModalProps) {
           </Box>
           <ButtonGroup marginTop="10px">
             <Button onClick={updateRole}>Update</Button>
-            <Button onClick={onClose}>Close modal</Button>
           </ButtonGroup>
         </>
       )}

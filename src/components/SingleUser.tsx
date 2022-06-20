@@ -3,7 +3,7 @@ import { EditIcon } from '@chakra-ui/icons';
 import { UserModal, StyledCard } from './index';
 import { UserRoles, Users } from 'types';
 
-function SingleUser({ firstName, lastName, roles }: Users) {
+function SingleUser({ id, firstName, lastName, roles }: Users) {
   const rolesJoined = roles
     .map((singleRole: UserRoles) => singleRole.role.name.toLowerCase())
     .join(', ');
@@ -63,6 +63,7 @@ function SingleUser({ firstName, lastName, roles }: Users) {
         onClose={onClose}
         name={`${firstName} ${lastName}`}
         roles={roles}
+        userId={id}
       />
     </>
   );

@@ -5,6 +5,7 @@ import { Users } from 'types';
 interface UsersStoreProps {
   loading: boolean;
   success: boolean;
+  isUserUpdated: boolean;
   data: Users[];
 }
 
@@ -16,6 +17,7 @@ class UsersStore {
   _users: UsersStoreProps = {
     loading: false,
     success: false,
+    isUserUpdated: false,
     data: [],
   };
 
@@ -35,6 +37,10 @@ class UsersStore {
     return this._users.data;
   }
 
+  get isUserUpdated() {
+    return this._users.isUserUpdated;
+  }
+
   getUsers = async () => {
     this._users.loading = true;
     this._users.success = false;
@@ -45,6 +51,19 @@ class UsersStore {
         this._users.success = true;
         this._users.data = data?.data;
         console.log('users data iz stora', data.data);
+      }
+    });
+  };
+
+  updateRoles = async (userId: string, roleIds: any) => {
+    this._users.isUserUpdated = false;
+    const { data } = await this.http.patch(`/users/${userId}/updateRoles`, {
+      roleIds,
+    });
+    runInAction(() => {
+      if (data) {
+        this._users.isUserUpdated = true;
+        console.log('updated users roles from store', data);
       }
     });
   };

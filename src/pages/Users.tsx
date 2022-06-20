@@ -6,12 +6,18 @@ import { observer } from 'mobx-react';
 import { useEffect } from 'react';
 
 function Users() {
-  const { loading, success, users } = UsersStore;
+  const { loading, success, users, isUserUpdated } = UsersStore;
 
   useEffect(() => {
     UsersStore.getUsers();
     RolesStore.getRoles();
   }, []);
+
+  useEffect(() => {
+    if (isUserUpdated) {
+      UsersStore.getUsers();
+    }
+  }, [isUserUpdated]);
 
   if (loading) {
     return <SpinnerLoader />;
