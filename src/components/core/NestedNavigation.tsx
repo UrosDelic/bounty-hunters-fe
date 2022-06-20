@@ -7,12 +7,12 @@ function NestedNav({ data, index }: any) {
 
     return (
         <>
-            <Tabs variant='soft-rounded' colorScheme="purple" defaultIndex={index} my={8}>
+            <Tabs variant='line' colorScheme="purple" defaultIndex={index} pt={5} >
                 <Flex>
                     <TabList>
                         {data &&
                             data.map((d: any, key: any) => (
-                                <Tab key={key} as={RouterLink} to={d.to} color='white'>
+                                <Tab key={key} as={RouterLink} to={d.to} color='white' fontSize={{ base: 'sm', md: 'lg' }} >
                                     {d.title}
                                 </Tab>
                             ))}

@@ -1,17 +1,35 @@
-import { Box } from '@chakra-ui/react';
-const StyledCard = ({ children, direction }: any) => {
-  return (
-    <Box
-      mx={'auto'}
-      boxShadow="dark-lg"
-      rounded="md"
-      color='white'
-      overflow='hidden'
-    >
-      {children}
+import { Flex } from '@chakra-ui/react';
+import { useState } from 'react';
+import { useBackgroundGenerator } from '../../custom-hooks/useBackgroundGenerator';
+type HorizontalCardProps = {
+  children: any;
+};
 
-    </Box>
+const StyledCard = ({ children }: HorizontalCardProps) => {
+
+  const [background] = useState(useBackgroundGenerator())
+
+
+  return (
+    <>
+      <Flex
+        flexDirection={['column', 'row']}
+        justifyContent={['center', 'space-between']}
+        minH={60}
+        mx="auto"
+        w={'100%'}
+        h={'100%'}
+        className={background}
+        rounded="md"
+        boxShadow="dark-lg"
+        color="white"
+        overflow="auto"
+        alignItems="center"
+      >
+        {children}
+      </Flex>
+    </>
   );
-}
+};
 
 export default StyledCard;

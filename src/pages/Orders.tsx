@@ -1,5 +1,5 @@
 import { Box, Grid, GridItem } from '@chakra-ui/react';
-import { Order, SpinnerLoader, HorizontalCard } from '../components/index';
+import { Order, SpinnerLoader, StyledCard } from '../components/index';
 import OrdersStore from '../stores/orders';
 import { useEffect } from 'react';
 import { observer } from 'mobx-react';
@@ -34,9 +34,9 @@ function Orders() {
           const { id } = order;
           return (
             <GridItem key={id}>
-              <HorizontalCard>
+              <StyledCard>
                 <Order {...order} />
-              </HorizontalCard>
+              </StyledCard>
             </GridItem>
           );
         })}
