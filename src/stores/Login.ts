@@ -24,7 +24,7 @@ const userDefault: UserToken = {
 };
 
 class LoginStore {
-  _googleUserDataTest: googleUserData = {
+  _googleUserData: googleUserData = {
     clientId: '',
     credential: '',
   };
@@ -51,7 +51,7 @@ class LoginStore {
   }
 
   get idToken() {
-    return this._googleUserDataTest?.credential;
+    return this._googleUserData?.credential;
   }
 
   get userRoles() {
@@ -70,13 +70,15 @@ class LoginStore {
   }
   login = async (response: googleUserData) => {
     if (response) {
-      this._googleUserDataTest.credential = response.credential;
+      this._googleUserData = response;
+      this._googleUserData.credential = response.credential;
+      console.log(jwtDecode(this._googleUserData.credential), 'google data');
       this.signIn();
     }
   };
 
   logout = () => {
-    localStorage.removeItem('token');
+    localStorage.removeItem('bh-token');
     this._user = userDefault;
   };
 
@@ -87,7 +89,7 @@ class LoginStore {
     runInAction(() => {
       if (data) {
         this._signInData.accessToken = data.accessToken;
-        localStorage.setItem('token', data.accessToken);
+        localStorage.setItem('bh-token', data.accessToken);
         this._user = jwtDecode(this._signInData.accessToken);
       }
     });
@@ -96,7 +98,7 @@ class LoginStore {
   checkUserFromStorage = () => {
     if (!this._authResoved) {
       this._authResoved = true;
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem('bh-token');
       if (token) {
         this._user = jwtDecode(token);
       }
