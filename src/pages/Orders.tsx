@@ -3,15 +3,10 @@ import { Order, SpinnerLoader, SearchByInput } from '../components/index';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import OrdersStore from '../stores/orders';
 import { useEffect } from 'react';
-import { useFilterBySearch } from '../custom-hooks/useFilterBySearch';
 import { observer } from 'mobx-react';
 
 function Orders() {
   const { loading, success, orders, hasMore } = OrdersStore;
-  const filteredOrders = useFilterBySearch(orders, [
-    'shippingAddress',
-    'createdAt',
-  ]);
 
   useEffect(() => {
     OrdersStore.getOrders();

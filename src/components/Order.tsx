@@ -1,4 +1,5 @@
 import { Box, Text, Select, Heading } from '@chakra-ui/react';
+import { CheckIcon, ChevronDownIcon } from '@chakra-ui/icons';
 import { StyledCard } from './index';
 import { ChangeEvent, useState } from 'react';
 import OrdersStore from '../stores/orders';
@@ -35,14 +36,17 @@ function Order({ id, createdAt, status, shippingAddress }: OrderProps) {
         <Select
           value={statusValue}
           onChange={changeStatus}
-          backgroundColor="orders.purple"
+          backgroundColor={
+            statusValue === 'FULFILLED' ? 'orders.lightGreen' : 'orders.purple'
+          }
           width={['100%', '100%', 'fit-content']}
           textTransform="capitalize"
           _focus={{ outline: 0 }}
           isDisabled={statusValue === 'FULFILLED'}
           _disabled={{ opacity: 1 }}
-          iconColor={statusValue === 'FULFILLED' ? 'orders.purple' : 'white'}
-          // textAlign="center"
+          icon={
+            statusValue === 'FULFILLED' ? <CheckIcon /> : <ChevronDownIcon />
+          }
         >
           <option style={{ backgroundColor: 'inherit' }} value="PENDING">
             pending
