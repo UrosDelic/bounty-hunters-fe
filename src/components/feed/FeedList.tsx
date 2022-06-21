@@ -81,6 +81,7 @@ const FeedList = () => {
                                                 as={RouterLink}
                                                 to={`/${p.type.toLowerCase()}/${p.id}`}
                                                 _focus={{ outline: 0 }}
+                                                style={{ textDecoration: 'none' }}
                                             >
 
                                                 <Flex flexDirection='column' px={10}>
@@ -88,7 +89,7 @@ const FeedList = () => {
 
                                                     <Text
                                                         fontWeight="thin"
-                                                        fontSize={{ base: 'md', lg: '2xl' }}
+                                                        fontSize={{ base: 'md', lg: 'xl' }}
                                                         textAlign={{ base: 'center', lg: 'start' }}
                                                         my={{ base: 8, md: 0 }}
                                                         mx="auto"

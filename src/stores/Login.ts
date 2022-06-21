@@ -11,20 +11,26 @@ interface UserToken {
   roles: [];
   userId: string;
 }
-
+interface Test{
+  name:string;
+  picture: string;
+}
 interface googleUserData {
   clientId: string;
   credential: string;
+  
 }
 
 const userDefault: UserToken = {
   exp: null,
   roles: [],
   userId: '',
+
 };
 
 class LoginStore {
   _googleUserData: googleUserData = {
+    
     clientId: '',
     credential: '',
   };
@@ -41,6 +47,14 @@ class LoginStore {
     accessToken: '',
     refreshToken: '',
   };
+  _test: Test={
+    name:'',
+    picture: '',
+  }
+
+  get googleProfile(){
+    return this._test;
+  }
 get userId(){
   return this._user.userId;
 }
@@ -60,6 +74,8 @@ get userId(){
     return this._user.roles.map(role => {
       return role;
     });
+
+  
     /**
      * roles = {
      *  Super_Admin: boolean,
@@ -70,10 +86,13 @@ get userId(){
   constructor(private http = initHttp()) {
     makeAutoObservable(this);
   }
+ 
   login = async (response: googleUserData) => {
     if (response) {
       this._googleUserData = response;
       this._googleUserData.credential = response.credential;
+      this._test = jwtDecode(response.credential)
+
       console.log(jwtDecode(this._googleUserData.credential), 'google data');
       this.signIn();
     }
