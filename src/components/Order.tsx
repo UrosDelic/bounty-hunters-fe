@@ -41,6 +41,8 @@ function Order({ id, createdAt, status, shippingAddress }: OrderProps) {
           _focus={{ outline: 0 }}
           isDisabled={statusValue === 'FULFILLED'}
           _disabled={{ opacity: 1 }}
+          iconColor={statusValue === 'FULFILLED' ? 'orders.purple' : 'white'}
+          // textAlign="center"
         >
           <option style={{ backgroundColor: 'inherit' }} value="PENDING">
             pending

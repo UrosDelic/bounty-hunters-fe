@@ -6,6 +6,9 @@ interface OrderStoreProps {
   loading: boolean;
   success: boolean;
   isOrderSent: boolean;
+  limit: number;
+  page: number;
+  hasMore: boolean;
   data: Orders[];
 }
 
@@ -18,6 +21,9 @@ class OrdersStore {
     loading: false,
     success: false,
     isOrderSent: false,
+    limit: 9,
+    page: 1,
+    hasMore: true,
     data: [],
   };
 
@@ -41,10 +47,18 @@ class OrdersStore {
     return this._orders.isOrderSent;
   }
 
+  get hasMore() {
+    return this._orders.hasMore;
+  }
+
   getOrders = async () => {
     this._orders.loading = true;
     this._orders.success = false;
-    const { data } = await this.http.get<OrdersDataProps>('/orders?limit=15');
+    this._orders.page = 1;
+    this._orders.hasMore = true;
+    const { data } = await this.http.get<OrdersDataProps>(
+      `/orders?page=${this._orders.page}&limit=${this._orders.limit}`
+    );
     runInAction(() => {
       this._orders.loading = false;
       if (data) {
@@ -89,6 +103,21 @@ class OrdersStore {
     runInAction(() => {
       if (res) {
         console.log(`status updated - fulfilled`, res);
+      }
+    });
+  };
+
+  loadMoreOrders = async () => {
+    this._orders.page++;
+    const { data } = await this.http.get<OrdersDataProps>(
+      `/orders?page=${this._orders.page}&limit=${this._orders.limit}`
+    );
+    runInAction(() => {
+      if (data) {
+        if (!data?.data.length) this._orders.hasMore = false;
+        this._orders.loading = false;
+        this._orders.success = true;
+        this._orders.data = [...this._orders.data, ...data?.data];
       }
     });
   };

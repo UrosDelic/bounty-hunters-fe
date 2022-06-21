@@ -51,8 +51,8 @@ function OrderModal({ isOpen, onClose, name }: OrderModalProps) {
         />
         <Button
           minW="100px"
-          backgroundColor="purple"
-          _hover={{ backgroundColor: 'lightPurple' }}
+          backgroundColor="purple.500"
+          _hover={{ backgroundColor: 'purple.400' }}
           onClick={handleOrder}
         >
           Buy
