@@ -24,7 +24,7 @@ const GoogleLogin = () => {
     google.accounts.id.prompt();
   }, []);
 
-  return <div id="google-btn" data-ux_mode="redirect"></div>;
+  return <div id="google-btn"></div>;
 };
 
 export default observer(GoogleLogin);
