@@ -29,7 +29,6 @@ const UserNotifications = () => {
     };
 
     const markAllAsRead = () => {
-
         UserNotificationsStore.markAllAsRead();
     };
 
@@ -51,7 +50,7 @@ const UserNotifications = () => {
                         dataLength={allNotifications.length}
                         next={() => UserNotificationsStore.loadMoreNotifications()}
                         hasMore={checkForMore}
-                        className='notification-scroll'
+                        className="notification-scroll"
                         loader={
                             <Box bg="gray.700" minH={50} my={2} p={2}>
                                 <SkeletonCircle m="2" size="10" />
@@ -65,7 +64,13 @@ const UserNotifications = () => {
                             </Text>
                         }
                     >
-                        <Flex justifyContent="space-between" alignItems="center" p={2} boxShadow='lg'>
+                        <Flex
+                            justifyContent="space-between"
+                            alignItems="center"
+                            p={2}
+                            borderBottom="1px"
+                            borderColor="gray.600"
+                        >
                             <Text fontSize="xl" fontWeight="thin" mx={4} my={2}>
                                 Notifications
                             </Text>
@@ -75,7 +80,7 @@ const UserNotifications = () => {
                                 variant="solid"
                                 size="xs"
                                 colorScheme="purple"
-                                color='white'
+                                color="white"
                                 onClick={() => markAllAsRead()}
                             >
                                 Mark all as read
@@ -96,7 +101,9 @@ const UserNotifications = () => {
                                         alignItems="center"
                                         my="auto"
                                         bg={n.readStatus === 'UNREAD' ? 'purple.800' : ''}
-                                        _hover={{ background: 'purple.800', cursor: 'pointer' }}
+                                        _hover={{ background: 'purple.900', cursor: 'pointer' }}
+                                        borderBottom="1px"
+                                        borderColor="gray.600"
                                     >
                                         <Flex key={key} p={4} rounded="sm" minH={50}>
                                             <Flex alignItems="start">
@@ -129,7 +136,6 @@ const UserNotifications = () => {
                                             )}
                                         </Box>
                                     </Box>
-                                    <Divider />
                                 </Link>
                             </>
                         ))}
