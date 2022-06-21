@@ -9,11 +9,12 @@ import {
   Circle,
   Box,
   Button,
-  Stack,
+  IconButton
+
 } from '@chakra-ui/react';
-import { NotificationList } from 'components/index';
+import { UserNotifications } from 'components/index';
 import { useEffect, useState } from 'react';
-import Notifications from 'stores/notifications';
+import UserNotificationsStore from 'stores/user-notifications';
 type headerProps = {
   onOpen: any;
 };
@@ -22,9 +23,9 @@ function Header({ onOpen }: headerProps) {
   const { logout } = LoginStore;
 
   const [notificationsOpen, setOpenNotifications] = useState(false);
-  const { notificationsCount } = Notifications;
+  const { notificationsCount } = UserNotificationsStore;
   useEffect(() => {
-    Notifications.getNotificationsCount();
+    UserNotificationsStore.getNotificationCount();
   }, []);
 
   return (
@@ -41,29 +42,37 @@ function Header({ onOpen }: headerProps) {
     >
       <HamburgerIcon cursor="pointer" w={8} h={8} onClick={onOpen} />
 
-      <Box>
-        <Menu>
-          <MenuButton mx={4} onClick={() => setOpenNotifications(true)} position='relative'>
-            <Box as={BellIcon} fontSize={['2xl']} color="primary" mt={1}></Box>
-            <Circle
+      <Box >
+        <Menu >
+          <MenuButton
+            mx={4}
+            onClick={() => setOpenNotifications(true)}
+            position="relative"
+          >
+            <IconButton icon={<BellIcon />}
+              variant='ghost'
+              aria-label='Notification Icon'
+              fontSize='25px'></IconButton>
 
-              px={'1px'}
-              mx={1}
-              fontSize="xs"
-              color="white"
-              bg="purple.400"
-              position='absolute'
-              top={0}
-              right={-2}
-
-
-            >
-              {notificationsCount[0]?.totalCount}
-            </Circle>
+            {notificationsCount?.unreadCount > 0 ? (
+              <Circle
+                size={'auto'}
+                px={'5px'}
+                mx={1}
+                fontSize="xs"
+                color="white"
+                bg="purple.400"
+                position="absolute"
+                top={1}
+                right={-1}
+              >
+                {notificationsCount?.unreadCount}
+              </Circle>
+            ) : ''}
           </MenuButton>
 
-          <MenuList w={{ base: '90vw', md: '70vw', lg: '30vw' }} h="40vh" p={0}>
-            {notificationsOpen && <NotificationList />}
+          <MenuList w={{ base: '90vw', md: '70vw', lg: '30vw' }} h="40vh" p={0} border={0} boxShadow='dark-lg' >
+            {notificationsOpen && <UserNotifications />}
           </MenuList>
         </Menu>
         <Button variant="ghost" onClick={logout}>

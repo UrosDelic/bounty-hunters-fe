@@ -21,9 +21,10 @@ const GoogleLogin = () => {
       text: 'Signin with google',
       width: '250px',
     });
+    google.accounts.id.prompt();
   }, []);
 
-  return <div id="google-btn"></div>;
+  return <div id="google-btn" data-ux_mode="redirect"></div>;
 };
 
 export default observer(GoogleLogin);

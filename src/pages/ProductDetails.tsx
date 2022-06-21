@@ -1,36 +1,57 @@
 import {
   Heading,
-  Flex,
+  Box,
   Grid,
   GridItem,
   Image,
   Text,
   Button,
+  useDisclosure,
 } from '@chakra-ui/react';
-import { SizeGroup, ColorGroup, SpinnerLoader } from '../components/index';
+import {
+  SizeGroup,
+  ColorGroup,
+  SpinnerLoader,
+  OrderModal,
+} from '../components/index';
 import shirt from '../img/shirt.jpg';
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
+import { useFeedbackText } from '../custom-hooks/useFeedbackText';
 import { observer } from 'mobx-react';
 import ProductsStore from '../stores/products';
+import AttributeValuesStore from '../stores/attributeValues';
+import OrdersStore from '../stores/orders';
 
 function ProductDetails() {
-  // const sizes = ['S', 'M', 'L', 'XL', 'XXL'];
-  // const colors = ['productDetails.black', 'productDetails.white'];
   const { id } = useParams();
-  const { loading, success, productById } = ProductsStore;
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const {
+    loading: productLoading,
+    success: productSuccess,
+    productById,
+  } = ProductsStore;
+  const {
+    loading: attributeLoading,
+    success: attributeSuccess,
+    sizeData,
+    colorData,
+  } = AttributeValuesStore;
+  const { isOrderSent } = OrdersStore;
+  const { feedbackTranslate, feedbackOpacity } = useFeedbackText(isOrderSent);
 
   useEffect(() => {
     ProductsStore.getProductById(id);
+    AttributeValuesStore.getAttributeValues();
   }, []);
 
-  if (loading) {
+  if (productLoading || attributeLoading) {
     return <SpinnerLoader />;
   }
 
   return (
     <>
-      {success && (
+      {productSuccess && attributeSuccess && (
         <Grid
           templateColumns={['none', 'none', 'none', 'repeat(2, 1fr)']}
           gap={5}
@@ -50,16 +71,36 @@ function ProductDetails() {
               {productById?.price} points
             </Heading>
             <Text marginBottom={4}>{productById?.description}</Text>
-            <Flex flexDirection="column">
-              <SizeGroup />
-              <ColorGroup />
-              <Button marginTop="20px" width="100px">
+            <Box marginBottom="40px">
+              <SizeGroup sizeArr={sizeData} />
+              <ColorGroup colorArr={colorData} />
+            </Box>
+            <Box marginTop="auto">
+              <Button
+                marginTop="20px"
+                marginBottom="30px"
+                width="100px"
+                backgroundColor="purple"
+                minW="180px"
+                onClick={onOpen}
+                _hover={{ backgroundColor: 'lightPurple' }}
+                _focus={{ outline: 'none' }}
+              >
                 Checkout
               </Button>
-            </Flex>
+              <Text
+                padding="0 5px"
+                transform={feedbackTranslate}
+                opacity={feedbackOpacity}
+                transition="all 0.5s ease-out"
+              >
+                Order sent
+              </Text>
+            </Box>
           </GridItem>
         </Grid>
       )}
+      <OrderModal isOpen={isOpen} onClose={onClose} name={`Your order`} />
     </>
   );
 }

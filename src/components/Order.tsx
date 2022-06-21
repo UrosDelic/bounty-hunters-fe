@@ -1,4 +1,5 @@
-import { Box, Text, Flex, Select, Heading } from '@chakra-ui/react';
+import { Box, Text, Select, Heading } from '@chakra-ui/react';
+import { StyledCard } from './index';
 import { ChangeEvent, useState } from 'react';
 import OrdersStore from '../stores/orders';
 import dayjs from 'dayjs';
@@ -25,32 +26,34 @@ function Order({ id, createdAt, status, shippingAddress }: OrderProps) {
   }
 
   return (
-    <Box width="100%" padding="20px 24px">
-      <Box marginBottom="20px">
-        <Heading fontSize="18px">{shippingAddress}</Heading>
-        <Text fontSize="14px">{dayjs(createdAt).format('DD/MM/YYYY')}</Text>
+    <StyledCard>
+      <Box width="100%" padding="20px 24px">
+        <Box marginBottom="20px">
+          <Heading fontSize="18px">{shippingAddress}</Heading>
+          <Text fontSize="14px">{dayjs(createdAt).format('DD/MM/YYYY')}</Text>
+        </Box>
+        <Select
+          value={statusValue}
+          onChange={changeStatus}
+          backgroundColor="orders.purple"
+          width={['100%', '100%', 'fit-content']}
+          textTransform="capitalize"
+          _focus={{ outline: 0 }}
+          isDisabled={statusValue === 'FULFILLED'}
+          _disabled={{ opacity: 1 }}
+        >
+          <option style={{ backgroundColor: 'inherit' }} value="PENDING">
+            pending
+          </option>
+          <option style={{ backgroundColor: 'inherit' }} value="IN_PROGRESS">
+            in progress
+          </option>
+          <option style={{ backgroundColor: 'inherit' }} value="FULFILLED">
+            fulfilled
+          </option>
+        </Select>
       </Box>
-      <Select
-        value={statusValue}
-        onChange={changeStatus}
-        backgroundColor="orders.purple"
-        width={['65%', 'fit-content']}
-        textTransform="capitalize"
-        _focus={{ outline: 0 }}
-        isDisabled={statusValue === 'FULFILLED'}
-        _disabled={{ opacity: 1 }}
-      >
-        <option style={{ backgroundColor: 'inherit' }} value="PENDING">
-          pending
-        </option>
-        <option style={{ backgroundColor: 'inherit' }} value="IN_PROGRESS">
-          in progress
-        </option>
-        <option style={{ backgroundColor: 'inherit' }} value="FULFILLED">
-          fulfilled
-        </option>
-      </Select>
-    </Box>
+    </StyledCard>
   );
 }
 

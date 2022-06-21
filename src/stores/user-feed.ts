@@ -1,28 +1,21 @@
-import { NotificationsType, NotificationsPagination } from 'types';
+import { NotificationsType } from 'types';
 import { makeAutoObservable, runInAction } from 'mobx';
 import { initHttp } from 'http/index';
 
-interface NotificationsStoreProps {
+interface UserFeedStoreProps {
   loading: boolean;
   limit: number;
   offset: number;
   data: NotificationsType[];
-  info: NotificationsPagination[];
   hasMore: boolean;
 }
 
-interface NotificationDetails {
-  data: NotificationsType[];
-  info: NotificationsPagination;
-}
-
-class Notifications {
-  notifications: NotificationsStoreProps = {
+class userFeeds {
+  notifications: UserFeedStoreProps = {
     loading: false,
     hasMore: true,
     data: [],
-    info: [],
-    limit: 6,
+    limit: 5,
     offset: 1,
 
   };
@@ -33,18 +26,16 @@ class Notifications {
   get loading() {
     return this.notifications.loading;
   }
-  get allNotifications() {
+  get allFeeds() {
     return this.notifications.data;
   }
   get checkForMore() {
     return this.notifications.hasMore;
   }
-get notificationsCount(){
-  return this.notifications.info
-}
-  getAllNotifications = async () => {
+
+  collectFeeds = async () => {
     this.notifications.loading = true;
-    const { data } = await this.http.get<NotificationDetails>(
+    const { data } = await this.http.get<UserFeedStoreProps>(
       `/notifications?page=${this.notifications.offset}&limit=${this.notifications.limit}`
     );
 
@@ -59,23 +50,13 @@ get notificationsCount(){
     }
   };
 
-  getNotificationsCount = async ()=>{
-    const { data } = await this.http.get<NotificationDetails>(
-      `/notifications`
-    );
-    if (data) {
-      runInAction(() => {
-        this.notifications.info = [data?.info];
-      })
-    }
+ 
 
-  }
-
-  loadMoreNotifications() {
+  loadMoreFeeds() {
     this.notifications.offset++;
-    this.getAllNotifications();
+    this.collectFeeds();
     this.notifications.loading = false;
   }
 }
 
-export default new Notifications();
+export default new userFeeds();

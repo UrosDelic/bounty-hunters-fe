@@ -6,6 +6,7 @@ import {
   Button,
   Heading,
 } from '@chakra-ui/react';
+import { StyledCard } from './index';
 import { useState } from 'react';
 import { ProductStatus } from '../types';
 import ProductsStore from '../stores/products';
@@ -22,7 +23,7 @@ function SingleProduct({ id, name, price, status }: SingleCardProps) {
   const borderColor =
     productStatus === ProductStatus.INACTIVE ? 'main.gray' : '';
   const backgroundColor =
-    productStatus === ProductStatus.INACTIVE ? '' : 'main.green';
+    productStatus === ProductStatus.INACTIVE ? 'main.violet' : 'main.green';
 
   function changeStatus() {
     if (productStatus === ProductStatus.ACTIVE) {
@@ -35,29 +36,25 @@ function SingleProduct({ id, name, price, status }: SingleCardProps) {
   }
 
   return (
-    <Flex
-      direction={['column', 'row', 'row', 'row']}
-      justifyContent="space-between"
-      alignItems="center"
-      borderBottom="2px solid"
-      borderColor="main.gray"
-      padding="20px 24px"
-    >
-      <Box>
-        <Heading fontSize="18px">{name}</Heading>
-        <Text fontSize="14px">{price} points</Text>
-      </Box>
-      <ButtonGroup>
-        <Button
-          borderColor={borderColor}
-          backgroundColor={backgroundColor}
-          onClick={changeStatus}
-        >
-          Set as{' '}
-          {productStatus === ProductStatus.INACTIVE ? 'active' : 'inactive'}
-        </Button>
-      </ButtonGroup>
-    </Flex>
+    <StyledCard>
+      <Flex direction="column" padding="15px 25px">
+        <Box marginBottom="25px">
+          <Heading fontSize="18px">{name}</Heading>
+          <Text fontSize="16px">{price} points</Text>
+        </Box>
+        <ButtonGroup>
+          <Button
+            borderColor={borderColor}
+            backgroundColor={backgroundColor}
+            onClick={changeStatus}
+            _focus={{ outline: 'none' }}
+          >
+            Set as{' '}
+            {productStatus === ProductStatus.INACTIVE ? 'active' : 'inactive'}
+          </Button>
+        </ButtonGroup>
+      </Flex>
+    </StyledCard>
   );
 }
 

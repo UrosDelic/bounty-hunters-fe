@@ -15,18 +15,19 @@ import {
 import { observer } from 'mobx-react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { StyledCard } from 'components/index';
-import Notifications from 'stores/notifications';
+import userFeeds from 'stores/user-feed';
 import dayjs from 'dayjs';
 import { Link as RouterLink } from 'react-router-dom';
 import { useRelativeTime } from 'custom-hooks/useRelativeTime';
+import Notifications from '../../stores/user-feed'
 const FeedList = () => {
-    const { allNotifications, checkForMore } = Notifications;
+    const { allFeeds, checkForMore } = Notifications;
     const relativeTime = useRelativeTime();
+
     useEffect(() => {
-        Notifications.getAllNotifications();
-    }, []);
-
-
+        Notifications.collectFeeds();
+    }, [])
+    console.log(allFeeds, 'feeds')
     return (
         <>
             <Flex flexDirection="column" my={2}>
@@ -45,8 +46,8 @@ const FeedList = () => {
                     </Flex>
 
                     <InfiniteScroll
-                        dataLength={allNotifications.length}
-                        next={() => Notifications.loadMoreNotifications()}
+                        dataLength={allFeeds.length}
+                        next={() => userFeeds.loadMoreFeeds()}
                         hasMore={checkForMore}
                         loader={
                             <h4>
@@ -60,8 +61,8 @@ const FeedList = () => {
                         }
                     >
                         <Grid gridTemplateColumns={{ base: '1fr', lg: '1fr 1fr' }} gap={5}>
-                            {allNotifications &&
-                                allNotifications.map((p, key: any) => (
+                            {allFeeds &&
+                                allFeeds.map((p, key: any) => (
                                     <Box
                                         key={key}
                                         mx="auto"
@@ -86,7 +87,7 @@ const FeedList = () => {
 
 
                                                     <Text
-                                                        fontWeight="bold"
+                                                        fontWeight="thin"
                                                         fontSize={{ base: 'md', lg: '2xl' }}
                                                         textAlign={{ base: 'center', lg: 'start' }}
                                                         my={{ base: 8, md: 0 }}

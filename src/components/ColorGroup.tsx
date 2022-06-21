@@ -1,16 +1,22 @@
 import { HStack, Box, Text, useRadioGroup } from '@chakra-ui/react';
 import { ColorRadioButton } from './index';
 import shirt from '../img/shirt.jpg';
-import mug from '../img/mug.jpg';
-import sticker from '../img/sticker.jpg';
+import { observer } from 'mobx-react';
+import { AttributeValue } from '../types/index';
+import AttributeValuesStore from '../stores/attributeValues';
 
-function ColorGroup() {
-  const options = [shirt, mug, sticker];
+interface ColorGroupProps {
+  colorArr: AttributeValue[];
+}
 
+function ColorGroup({ colorArr }: ColorGroupProps) {
   const { getRootProps, getRadioProps } = useRadioGroup({
     name: 'size',
-    defaultValue: options[0],
-    onChange: value => console.log(value),
+    defaultValue: colorArr[0]?.id,
+    onChange: value => {
+      console.log(value);
+      AttributeValuesStore.changeColor(value);
+    },
   });
 
   const group = getRootProps();
@@ -19,13 +25,14 @@ function ColorGroup() {
     <Box marginBottom={4}>
       <Text marginBottom={2}>Choose a color</Text>
       <HStack wrap="wrap" {...group}>
-        {options.map(value => {
-          const radio = getRadioProps({ value });
-          return <ColorRadioButton key={value} img={value} {...radio} />;
+        {colorArr.map(colorObj => {
+          const { id } = colorObj;
+          const radio = getRadioProps({ value: id });
+          return <ColorRadioButton key={id} img={shirt} {...radio} />;
         })}
       </HStack>
     </Box>
   );
 }
 
-export default ColorGroup;
+export default observer(ColorGroup);

@@ -41,7 +41,9 @@ class LoginStore {
     accessToken: '',
     refreshToken: '',
   };
-
+get userId(){
+  return this._user.userId;
+}
   get isAuth() {
     return this._user.exp ? this._user.exp < Date.now() : false;
   }
