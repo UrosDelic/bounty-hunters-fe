@@ -5,6 +5,11 @@ import { Orders } from 'types';
 interface OrderStoreProps {
   loading: boolean;
   success: boolean;
+  isOrderSent: boolean;
+  data: Orders[];
+}
+
+interface OrdersDataProps {
   data: Orders[];
 }
 
@@ -12,6 +17,7 @@ class OrdersStore {
   _orders: OrderStoreProps = {
     loading: false,
     success: false,
+    isOrderSent: false,
     data: [],
   };
 
@@ -31,16 +37,31 @@ class OrdersStore {
     return this._orders.data;
   }
 
+  get isOrderSent() {
+    return this._orders.isOrderSent;
+  }
+
   getOrders = async () => {
     this._orders.loading = true;
     this._orders.success = false;
-    const { data } = await this.http.get<Orders[]>('/orders');
+    const { data } = await this.http.get<OrdersDataProps>('/orders?limit=15');
     runInAction(() => {
       this._orders.loading = false;
       if (data) {
         this._orders.success = true;
-        this._orders.data = data;
+        this._orders.data = data?.data;
         console.log('orders data iz stora', data);
+      }
+    });
+  };
+
+  makeAnOrder = async (order: any) => {
+    this._orders.isOrderSent = false;
+    const { data } = await this.http.post('/orders', order);
+    runInAction(() => {
+      if (data) {
+        this._orders.isOrderSent = true;
+        console.log('order sent (iz stora)', data);
       }
     });
   };

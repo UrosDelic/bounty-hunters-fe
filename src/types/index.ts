@@ -6,4 +6,6 @@ export * from './orders';
 export * from './feed';
 export * from './roles';
 export * from './myOrders';
-export * from './notifications'
+export * from './attributeValue';
+export * from './wallet';
+export * from './notifications';

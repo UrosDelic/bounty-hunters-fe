@@ -25,6 +25,8 @@ import StyledCard from './core/StyledCard';
 import NestedNavigation from './core/NestedNavigation';
 import UserNotifications from './UserNotifications';
 import ProfileWidget from './feed/ProfileWidget';
+import SearchByInput from './SearchByInput';
+import OrderModal from './OrderModal';
 
 export {
   Layout,
@@ -54,4 +56,7 @@ export {
   StyledCard,
   NestedNavigation,
   UserNotifications,
+  SearchByInput,
+  OrderModal,
+  
 };
