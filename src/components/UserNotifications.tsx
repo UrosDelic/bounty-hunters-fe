@@ -74,7 +74,8 @@ const UserNotifications = () => {
                                 my={2}
                                 variant="solid"
                                 size="xs"
-                                bg="purple.400"
+                                colorScheme="purple"
+                                color='white'
                                 onClick={() => markAllAsRead()}
                             >
                                 Mark all as read
