@@ -18,14 +18,14 @@ import { StyledCard } from 'components/index';
 import Notifications from 'stores/notifications';
 import dayjs from 'dayjs';
 import { Link as RouterLink } from 'react-router-dom';
-
+import { useRelativeTime } from 'custom-hooks/useRelativeTime';
 const FeedList = () => {
     const { allNotifications, checkForMore } = Notifications;
-
+    const relativeTime = useRelativeTime();
     useEffect(() => {
         Notifications.getAllNotifications();
     }, []);
-    const img: string = require("../../img/avatar.svg").default;
+
 
     return (
         <>
@@ -37,11 +37,11 @@ const FeedList = () => {
                             fontWeight="thin"
                             fontSize={{ base: 'xl', md: '2xl' }}
                             mb={4}
-                            textAlign={{ base: 'center', md: 'start' }}
+                            textAlign={{ base: 'center', lg: 'start' }}
                         >
                             Check the <b>Latest News!</b>{' '}
                         </Text>
-                        <Image src={img} alt="logo" width={100} />
+
                     </Flex>
 
                     <InfiniteScroll
@@ -59,7 +59,7 @@ const FeedList = () => {
                             </p>
                         }
                     >
-                        <Grid gridTemplateColumns={{ base: '1fr', lg: '1fr 1fr 1fr' }} gap={5}>
+                        <Grid gridTemplateColumns={{ base: '1fr', lg: '1fr 1fr' }} gap={5}>
                             {allNotifications &&
                                 allNotifications.map((p, key: any) => (
                                     <Box
@@ -75,50 +75,39 @@ const FeedList = () => {
                                     >
 
                                         <StyledCard>
-                                            <Show below="md">
-                                                <Link
-                                                    as={RouterLink}
-                                                    to={`/${p.type.toLowerCase()}/${p.id}`}
-                                                    _focus={{ outline: 0 }}
-                                                >
 
-                                                    <Flex flexDirection="column" alignItems="center">
-                                                        <Avatar
-                                                            size={'lg'}
-                                                            src="https://bit.ly/dan-abramov"
-                                                        />
-                                                        <Text fontSize="lg">Milan Miletic</Text>
-                                                        <Text
-                                                            fontSize="xs"
-                                                            mt={1}
-                                                            fontWeight={'thin'}
-                                                            as="sub"
-                                                            color="gray.200"
-                                                        >
-                                                            {dayjs(p.createdAt).format('DD/MM/YYYY')}
-                                                        </Text>
-                                                        <Text
-                                                            fontWeight="bold"
-                                                            fontSize={{ base: 'md', lg: '2xl' }}
-                                                            textAlign={{ base: 'center', lg: 'start' }}
-                                                            my={{ base: 8, md: 0 }}
-                                                            mx="auto"
-                                                        >
-                                                            {p.message}
-                                                        </Text>
-                                                    </Flex>
+                                            <Link
+                                                as={RouterLink}
+                                                to={`/${p.type.toLowerCase()}/${p.id}`}
+                                                _focus={{ outline: 0 }}
+                                            >
 
-                                                </Link>
-                                            </Show>
-                                            {/* <Hide below="xl">
+                                                <Flex flexDirection='column' px={10}>
 
-                                            <Flex minW='45vw' minH={40}>
-                                                <StyledCard>
 
-                                                </StyledCard>
-                                            </Flex>
+                                                    <Text
+                                                        fontWeight="bold"
+                                                        fontSize={{ base: 'md', lg: '2xl' }}
+                                                        textAlign={{ base: 'center', lg: 'start' }}
+                                                        my={{ base: 8, md: 0 }}
+                                                        mx="auto"
+                                                    >
+                                                        {p.message}
+                                                    </Text>
+                                                    <Text
+                                                        fontSize="xs"
+                                                        mt={1}
+                                                        fontWeight={'thin'}
+                                                        as="sub"
+                                                        color="gray.200"
+                                                    >
+                                                        {relativeTime(p.createdAt)}
+                                                    </Text>
+                                                </Flex>
 
-                                        </Hide> */}
+                                            </Link>
+
+
                                         </StyledCard>
                                     </Box>
                                 ))}

@@ -6,13 +6,14 @@ import {
     Avatar,
     Hide,
     Show,
-
+    Image,
     Link,
 } from '@chakra-ui/react';
 import { observer } from 'mobx-react';
 import { Link as RouterLink } from 'react-router-dom';
 
 const ProfileWidget = () => {
+    const img: string = require("../../img/avatar.svg").default;
 
 
     return (
@@ -21,7 +22,7 @@ const ProfileWidget = () => {
                 <Box order={-1} p={2}>
                     <Flex
                         justifyContent="start"
-                        alignItems="start"
+                        alignItems="center"
                         rounded="md"
                         bgGradient="linear(to-l,purple.400, purple.700)"
                         p={5}
@@ -30,12 +31,7 @@ const ProfileWidget = () => {
                         mb={2}
                         mt={8}
                     >
-                        <Avatar
-                            size="xl"
-                            src="https://bit.ly/dan-abramov"
-                            boxShadow="lg"
-                            mt={-2}
-                        />
+                        <Image src={img} alt="logo" width={100} />
                         <Flex flexDirection="column" alignItems="start" ml={5} mt={-2}>
                             <Text fontSize="xl">Milan Miletic</Text>
                             <Text fontSize="sm">Belgrade, Serbia - Frontend Developer</Text>
@@ -152,113 +148,222 @@ const ProfileWidget = () => {
             </Show>
 
             <Hide below="xl">
-                <Box
-
-
-                >
-                    <Flex p={5} alignItems='center'>
-
-                        <Flex flexDirection="column" alignItems="start" >
-                            <Text fontWeight="thin" fontSize="xl">
-                                Milos Miletic
-                            </Text>
-                            <Text fontWeight="thin" fontSize="md">
-                                Belgrade, Serbia - Frontend Developer
-                            </Text>
+                <Box h='100vh' w='30vw' position='fixed' right={0} boxShadow='dark-lg'>
+                    <Grid rowGap={5}>
+                        <Flex
+                            bgGradient="linear(to-l,purple.400, purple.700)"
+                            py={8}
+                            px={5}
+                            alignItems='end'>
+                            <Image src={img} alt="logo" width={100} />
+                            <Flex flexDirection="column" mx={4}>
+                                <Text fontWeight="thin" fontSize="xl">
+                                    Milos Miletic
+                                </Text>
+                                <Text fontWeight="thin" fontSize="md">
+                                    Belgrade, Serbia - Frontend Developer
+                                </Text>
+                            </Flex>
                         </Flex>
+                        <Grid
+                            justifyContent="center"
+                            gridTemplateColumns="repeat(2, 1fr)"
+                            gap={3}
+                            p={3}
 
-
-                        <Grid justifyContent="center" gridTemplateColumns="repeat(4, 1fr)" mx={5}>
-                            <Flex
-                                alignItems="start"
-                                justifyContent="space-evenly"
-                                flexDirection="column"
-                                rounded="md"
-                                minH={100}
-                                mx={2}
-                            >
-                                <Text fontSize="md" fontWeight="thin">
-                                    Pending Bounties:
-                                </Text>
-
-                                <Text
-                                    borderLeft="2px"
-                                    borderColor="pink.300"
-                                    fontSize="2xl"
-                                    lineHeight="25px"
-                                    px={2}
+                        >
+                            <Link as={RouterLink} to={`/my-tasks`} _focus={{ outline: 0 }}>
+                                <Box
+                                    alignItems="start"
+                                    justifyContent="space-evenly"
+                                    flexDirection="column"
                                 >
-                                    8
-                                </Text>
-                            </Flex>
-                            <Flex
-                                alignItems="start"
-                                justifyContent="space-evenly"
-                                flexDirection="column"
-                                rounded="md"
-                                minH={100}
-                                mx={2}
-                            >
-                                <Text fontSize="md" fontWeight="thin">
-                                    Pending Bounties:
-                                </Text>
+                                    <Text
+                                        fontSize="md"
+                                        textAlign="center"
+                                        rounded="md"
+                                        fontWeight="thin"
+                                        bg="purple.400"
+                                        borderLeft="4px"
+                                        borderColor="white"
+                                        p={2}
+                                    >
+                                        Assigned Tasks
+                                        <Text fontWeight="medium" fontSize="xl">
+                                            35
+                                        </Text>
+                                    </Text>
+                                </Box>
+                            </Link>
 
-                                <Text
-                                    borderLeft="2px"
-                                    borderColor="pink.300"
-                                    fontSize="2xl"
-                                    lineHeight="25px"
-                                    px={2}
+                            <Link as={RouterLink} to={`/my-tasks`} _focus={{ outline: 0 }}>
+                                <Box
+                                    alignItems="start"
+                                    justifyContent="space-evenly"
+                                    flexDirection="column"
+                                    rounded="md"
                                 >
-                                    8
-                                </Text>
-                            </Flex>
-                            <Flex
-                                alignItems="start"
-                                justifyContent="space-evenly"
-                                flexDirection="column"
-                                rounded="md"
-                                minH={100}
-                                mx={2}
-                            >
-                                <Text fontSize="md" fontWeight="thin">
-                                    Pending Bounties:
-                                </Text>
-
-                                <Text
-                                    borderLeft="2px"
-                                    borderColor="pink.300"
-                                    fontSize="2xl"
-                                    lineHeight="25px"
-                                    px={2}
+                                    <Text
+                                        fontSize="md"
+                                        textAlign="center"
+                                        rounded="md"
+                                        fontWeight="thin"
+                                        borderLeft="4px"
+                                        borderColor="purple.400"
+                                        bg="gray.600"
+                                        boxShadow="md"
+                                        p={2}
+                                    >
+                                        Completed Tasks
+                                        <Text fontWeight="medium" fontSize="xl">
+                                            35
+                                        </Text>
+                                    </Text>
+                                </Box>
+                            </Link>
+                            <Link as={RouterLink} to={`/my-tasks`} _focus={{ outline: 0 }}>
+                                <Box
+                                    alignItems="start"
+                                    justifyContent="space-evenly"
+                                    flexDirection="column"
+                                    rounded="md"
                                 >
-                                    8
-                                </Text>
-                            </Flex>
-                            <Flex
-                                alignItems="start"
-                                justifyContent="space-evenly"
-                                flexDirection="column"
-                                rounded="md"
-                                minH={100}
-                                mx={2}
-                            >
-                                <Text fontSize="md" fontWeight="thin">
-                                    Pending Bounties:
-                                </Text>
-
-                                <Text
-                                    borderLeft="2px"
-                                    borderColor="pink.300"
-                                    fontSize="2xl"
-                                    lineHeight="25px"
-                                    px={2}
+                                    <Text
+                                        fontSize="md"
+                                        textAlign="center"
+                                        rounded="md"
+                                        fontWeight="thin"
+                                        borderLeft="4px"
+                                        borderColor="purple.400"
+                                        bg="gray.600"
+                                        boxShadow="md"
+                                        p={2}
+                                    >
+                                        Available Points
+                                        <Text fontWeight="medium" fontSize="xl">
+                                            356
+                                        </Text>
+                                    </Text>
+                                </Box>
+                            </Link>
+                            <Link as={RouterLink} to={`/my-tasks`} _focus={{ outline: 0 }}>
+                                <Box
+                                    alignItems="start"
+                                    justifyContent="space-evenly"
+                                    flexDirection="column"
+                                    rounded="md"
                                 >
-                                    8
-                                </Text>
-                            </Flex>
+                                    <Text
+                                        fontSize="md"
+                                        textAlign="center"
+                                        rounded="md"
+                                        fontWeight="thin"
+                                        bg="purple.400"
+                                        borderLeft="4px"
+                                        borderColor="white"
+                                        p={2}
+                                    >
+                                        Pending Orders
+                                        <Text fontWeight="medium" fontSize="xl">
+                                            3
+                                        </Text>
+                                    </Text>
+                                </Box>
+                            </Link>
                         </Grid>
-                    </Flex>
+
+                        {/* <Grid justifyContent="center" gridTemplateColumns="repeat(2, 1fr)" mx={20}>
+                            <Flex
+                                alignItems="start"
+                                justifyContent="space-evenly"
+                                flexDirection="column"
+                                rounded="md"
+                                minH={100}
+                                mx={2}
+                            >
+                                <Text fontSize="sm" fontWeight="thin">
+                                    Pending Bounties:
+                                </Text>
+
+                                <Text
+                                    borderLeft="2px"
+                                    borderColor="pink.300"
+                                    fontSize="2xl"
+                                    lineHeight="25px"
+                                    px={2}
+                                >
+                                    8
+                                </Text>
+                            </Flex>
+                            <Flex
+                                alignItems="start"
+                                justifyContent="space-evenly"
+                                flexDirection="column"
+                                rounded="md"
+                                minH={100}
+                                mx={2}
+                            >
+                                <Text fontSize="sm" fontWeight="thin">
+                                    Pending Bounties:
+                                </Text>
+
+                                <Text
+                                    borderLeft="2px"
+                                    borderColor="pink.700"
+                                    fontSize="2xl"
+                                    lineHeight="25px"
+                                    px={2}
+                                >
+                                    5
+                                </Text>
+                            </Flex>
+                            <Flex
+                                alignItems="start"
+                                justifyContent="space-evenly"
+                                flexDirection="column"
+                                rounded="md"
+                                minH={100}
+                                mx={2}
+                            >
+                                <Text fontSize="sm" fontWeight="thin">
+                                    Pending Bounties:
+                                </Text>
+
+                                <Text
+                                    borderLeft="2px"
+                                    borderColor="pink.300"
+                                    fontSize="2xl"
+                                    lineHeight="25px"
+                                    px={2}
+                                >
+                                    12
+                                </Text>
+                            </Flex>
+                            <Flex
+                                alignItems="start"
+                                justifyContent="space-evenly"
+                                flexDirection="column"
+                                rounded="md"
+                                minH={100}
+                                mx={2}
+                            >
+                                <Text fontSize="sm" fontWeight="thin">
+                                    Pending Bounties:
+                                </Text>
+
+                                <Text
+                                    borderLeft="2px"
+                                    borderColor="pink.300"
+                                    fontSize="2xl"
+                                    lineHeight="25px"
+                                    px={2}
+                                >
+                                    10
+                                </Text>
+                            </Flex>
+                        </Grid> */}
+                        <hr />
+                    </Grid>
                 </Box>
 
                 {/*  wide buttons 
