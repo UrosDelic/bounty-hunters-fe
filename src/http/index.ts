@@ -1,4 +1,4 @@
-import axios, { Axios } from 'axios';
+import axios from 'axios';
 import config from '../config';
 
 function axiosRequestInterceptor(conf: any) {
@@ -13,6 +13,16 @@ class HttpCommunicator {
   constructor(private http = axios.create(config)) {
     this.http.defaults.headers.post['Content-Type'] = 'multipart/form-data';
     this.http.interceptors.request.use(axiosRequestInterceptor);
+    this.http.interceptors.response.use(
+      res => {
+        return res;
+      },
+      err => {
+        if (err.response.status >= 401) {
+          localStorage.removeItem('bh-token');
+        }
+      }
+    );
   }
 
   get<T = unknown>(url: string): Promise<{ data?: T; error?: any }> {
