@@ -36,6 +36,20 @@ class HttpCommunicator {
       });
   }
 
+  delete<T = unknown>(
+    url: string,
+    data?: any
+  ): Promise<{ data?: T; error?: any }> {
+    return this.http
+      .delete(url, data)
+      .then((res: any) => {
+        return res.data;
+      })
+      .catch((error: any) => {
+        return { error };
+      });
+  }
+
   patch<T = unknown>(
     url: string,
     data?: any
@@ -50,6 +64,8 @@ class HttpCommunicator {
       });
   }
 }
+
+
 
 let instance: HttpCommunicator | null = null;
 export function initHttp() {
