@@ -5,6 +5,7 @@ import dayjs from 'dayjs';
 import BhEditor from 'components/core/bh-editor/BhEditor';
 import { observer } from 'mobx-react';
 import { useState } from 'react';
+import StyledCard from 'components/core/StyledCard';
 
 interface Props {
   task: Task;
@@ -27,48 +28,53 @@ const TaskDetails = ({
     //
   };
   return (
-    <Flex
-      borderRadius="lg"
-      direction="column"
-      className="test-details"
-      w="50rem"
-      h="30rem"
-      p="5"
-      m="5"
-      borderColor="gray.300"
-      borderWidth="1px"
-    >
-      <Text textAlign="center" marginTop="3">
-        {title}
-      </Text>
-      <Flex my={2}>
-        <Text>{dayjs(createdAt).format('DD-MM-YYYY')}</Text>
-        <Spacer />
-        <Text>{deadline}</Text>
-      </Flex>
-      <Text align="center"> {description}</Text>
-      <Flex my={2} justify="space-between">
-        <Box alignSelf="center">
-          <Badge px="5" bg="purple.300" borderRadius="10px">
-            {points}
-          </Badge>
-        </Box>
+    <Box mt={10}>
+      <StyledCard>
+        <Flex
+          direction="column"
+          className="test-details"
+          w="50rem"
+          h="30rem"
+          p="5"
+          m="5"
+        >
+          <Text textAlign="center" marginTop="3">
+            {title}
+          </Text>
+          <Flex my={2}>
+            <Text>{dayjs(createdAt).format('DD-MM-YYYY')}</Text>
+            <Spacer />
+            <Text>{deadline}</Text>
+          </Flex>
+          <Text align="center"> {description}</Text>
+          <Flex my={2} justify="space-between">
+            <Box alignSelf="center">
+              <Badge px="5" bg="purple.300" borderRadius="10px">
+                {points}
+              </Badge>
+            </Box>
 
-        <Box>
-          <Button
-            variant="outline"
-            color="purple.300"
-            borderColor="purple.300"
-            onClick={onAddDescription}
-            rightIcon={<EditIcon />}
-          >
-            Add description
-          </Button>
-        </Box>
-      </Flex>
+            <Box>
+              <Button
+                variant="outline"
+                color="purple.300"
+                borderColor="purple.300"
+                onClick={onAddDescription}
+                rightIcon={<EditIcon />}
+              >
+                Add description
+              </Button>
+            </Box>
+          </Flex>
 
-      <BhEditor isOpen={showEditor} isClosed={closeEditor} submit={onSubmit} />
-    </Flex>
+          <BhEditor
+            isOpen={showEditor}
+            isClosed={closeEditor}
+            submit={onSubmit}
+          />
+        </Flex>
+      </StyledCard>
+    </Box>
   );
 };
 

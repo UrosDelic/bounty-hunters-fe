@@ -33,17 +33,9 @@ const MyTask = ({
   };
 
   return (
-    <StyledCard margin={5}>
-      <Box
-        paddingY={5}
-        // borderWidth="1px"
-        // borderRadius="lg"
-        // borderColor="gray.300"
-        margin="1rem"
-        w={['15rem', '25rem', '25rem', '30rem']}
-        // boxShadow={`5px 5px 10px ${switchStatusColor(status)}`}
-      >
-        <Box padding="2rem">
+    <Box margin="1rem" w={['30rem', '25rem', '25rem', '30rem']}>
+      <StyledCard>
+        <Box textAlign="center" padding="2rem">
           <Text fontSize="18px" textAlign="center">
             {title}
           </Text>
@@ -66,8 +58,8 @@ const MyTask = ({
           </Flex>
           <Text textAlign="center">{points}</Text>
         </Box>
-      </Box>
-    </StyledCard>
+      </StyledCard>
+    </Box>
   );
 };
 

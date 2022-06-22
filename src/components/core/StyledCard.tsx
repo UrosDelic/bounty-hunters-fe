@@ -6,13 +6,12 @@ type HorizontalCardProps = {
   margin?: any;
 };
 
-const StyledCard = ({ children, margin }: HorizontalCardProps) => {
+const StyledCard = ({ children }: HorizontalCardProps) => {
   const [background] = useState(useBackgroundGenerator());
 
   return (
     <>
       <Flex
-        margin={margin}
         flexDirection={['column', 'row']}
         justifyContent={['center', 'space-between']}
         minH={60}
