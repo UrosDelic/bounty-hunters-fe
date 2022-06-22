@@ -31,6 +31,7 @@ class LoginStore {
 
   // _user: UserToken = token ? jwtDecode(token) : userDefault;
   _authResolved = false;
+
   _user: UserToken = {
     exp: null,
     roles: [],
