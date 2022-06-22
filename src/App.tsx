@@ -31,6 +31,7 @@ import { useToast } from '@chakra-ui/react';
 function App() {
   // const toast = useToast();
   const { isAuth, authResolved } = LoginStore;
+  console.log(isAuth);
   useEffect(() => {
     LoginStore.checkUserFromStorage();
   }, []);

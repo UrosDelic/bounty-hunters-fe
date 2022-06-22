@@ -1,6 +1,6 @@
 import axios from 'axios';
 import config from '../config';
-
+import LoginStore from '../stores/Login';
 function axiosRequestInterceptor(conf: any) {
   const token = localStorage.getItem('bh-token');
   if (token) {
@@ -18,8 +18,8 @@ class HttpCommunicator {
         return res;
       },
       err => {
-        if (err.response.status >= 401) {
-          localStorage.removeItem('bh-token');
+        if (err.response.status === 401 || err.response.status === 403) {
+          LoginStore.logout();
         }
       }
     );
