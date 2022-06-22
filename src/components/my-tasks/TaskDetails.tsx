@@ -31,12 +31,12 @@ const TaskDetails = ({
       borderRadius="lg"
       direction="column"
       className="test-details"
-      bg="gray.300"
       w="50rem"
       h="30rem"
       p="5"
-      color="black"
       m="5"
+      borderColor="gray.300"
+      borderWidth="1px"
     >
       <Text textAlign="center" marginTop="3">
         {title}
@@ -49,7 +49,7 @@ const TaskDetails = ({
       <Text align="center"> {description}</Text>
       <Flex my={2} justify="space-between">
         <Box alignSelf="center">
-          <Badge px="5" bg="purple" color="black" borderRadius="10px">
+          <Badge px="5" bg="purple.300" borderRadius="10px">
             {points}
           </Badge>
         </Box>
@@ -57,8 +57,8 @@ const TaskDetails = ({
         <Box>
           <Button
             variant="outline"
-            color="purple"
-            borderColor="purple"
+            color="purple.300"
+            borderColor="purple.300"
             onClick={onAddDescription}
             rightIcon={<EditIcon />}
           >

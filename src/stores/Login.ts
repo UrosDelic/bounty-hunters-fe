@@ -11,9 +11,10 @@ interface UserToken {
   roles: [];
   userId: string;
 }
-interface Test{
+interface Profile{
   name:string;
   picture: string;
+  email:string;
 }
 interface googleUserData {
   clientId: string;
@@ -36,7 +37,8 @@ class LoginStore {
   };
 
   // _user: UserToken = token ? jwtDecode(token) : userDefault;
-  _authResoved = false;
+  _authResolved = false;
+
   _user: UserToken = {
     exp: null,
     roles: [],
@@ -47,13 +49,14 @@ class LoginStore {
     accessToken: '',
     refreshToken: '',
   };
-  _test: Test={
+  _profile: Profile={
     name:'',
     picture: '',
+    email:'',
   }
 
   get googleProfile(){
-    return this._test;
+    return this._profile;
   }
 get userId(){
   return this._user.userId;
@@ -63,7 +66,7 @@ get userId(){
   }
 
   get authResolved() {
-    return this._authResoved;
+    return this._authResolved;
   }
 
   get idToken() {
@@ -91,15 +94,27 @@ get userId(){
     if (response) {
       this._googleUserData = response;
       this._googleUserData.credential = response.credential;
-      this._test = jwtDecode(response.credential)
-
+ 
+        localStorage.setItem('bh-profile', response.credential );
+      
       console.log(jwtDecode(this._googleUserData.credential), 'google data');
       this.signIn();
+     
+
     }
   };
+profileData = ()=>{
+  const profile = localStorage.getItem('bh-profile');
+    const decode = jwtDecode(profile  as any) as any;
+    this._profile.name = decode.name
+    this._profile.picture = decode.picture
+    this._profile.email = decode.email
+ 
 
+}
   logout = () => {
     localStorage.removeItem('bh-token');
+    localStorage.removeItem('bh-profile');
     this._user = userDefault;
   };
 
@@ -117,8 +132,8 @@ get userId(){
   };
 
   checkUserFromStorage = () => {
-    if (!this._authResoved) {
-      this._authResoved = true;
+    if (!this._authResolved) {
+      this._authResolved = true;
       const token = localStorage.getItem('bh-token');
       if (token) {
         this._user = jwtDecode(token);

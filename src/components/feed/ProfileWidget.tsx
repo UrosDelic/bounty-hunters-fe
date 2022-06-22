@@ -12,30 +12,39 @@ import {
 import { observer } from 'mobx-react';
 import { Link as RouterLink } from 'react-router-dom';
 import Login from '../../stores/Login';
+import { useEffect } from 'react'
 
 const ProfileWidget = () => {
     const img: string = require('../../img/avatar.svg').default;
 
+    useEffect(() => {
+
+        Login.profileData()
+    }, [])
+
     const { googleProfile } = Login;
+
+    console.log(googleProfile)
 
     return (
         <>
-
-
             <Hide below="xl">
                 <Box h="100vh" w="30vw" position="fixed" right={0} boxShadow="dark-lg">
                     <Grid rowGap={5}>
                         <Flex py={8} px={5} justifyContent="center">
                             <Avatar
-                                src={googleProfile.picture}
+                                src={googleProfile?.picture}
                                 size="xl"
-                                name={googleProfile.name}
+                                name={googleProfile?.name}
                             />
                             <Flex flexDirection="column" mx={4} alignItems="start">
                                 <Text fontWeight="thin" fontSize="2xl" mt={2}>
                                     {googleProfile.name}
                                 </Text>
-                                <Text fontSize="sm">Belgrade, Serbia - Frontend Developer</Text>
+                                <Text fontWeight="thin" fontSize="sm" mt={2}>
+                                    {googleProfile.email}
+                                </Text>
+
                             </Flex>
                         </Flex>
 
@@ -173,108 +182,24 @@ const ProfileWidget = () => {
                             justifyContent="space-around"
                             p={5}
                         >
-                            <Text>Test text</Text>
+                            <Text fontSize="xl" fontWeight="thin">
+                                Informational Data
+                            </Text>
                             <Image src={img} alt="logo" width={100} />
                         </Flex>
-
-                        {/* <Grid justifyContent="center" gridTemplateColumns="repeat(2, 1fr)" mx={20}>
-                            <Flex
-                                alignItems="start"
-                                justifyContent="space-evenly"
-                                flexDirection="column"
-                                rounded="md"
-                                minH={100}
-                                mx={2}
-                            >
-                                <Text fontSize="sm" fontWeight="thin">
-                                    Pending Bounties:
-                                </Text>
-
-                                <Text
-                                    borderLeft="2px"
-                                    borderColor="pink.300"
-                                    fontSize="2xl"
-                                    lineHeight="25px"
-                                    px={2}
-                                >
-                                    8
-                                </Text>
-                            </Flex>
-                            <Flex
-                                alignItems="start"
-                                justifyContent="space-evenly"
-                                flexDirection="column"
-                                rounded="md"
-                                minH={100}
-                                mx={2}
-                            >
-                                <Text fontSize="sm" fontWeight="thin">
-                                    Pending Bounties:
-                                </Text>
-
-                                <Text
-                                    borderLeft="2px"
-                                    borderColor="pink.700"
-                                    fontSize="2xl"
-                                    lineHeight="25px"
-                                    px={2}
-                                >
-                                    5
-                                </Text>
-                            </Flex>
-                            <Flex
-                                alignItems="start"
-                                justifyContent="space-evenly"
-                                flexDirection="column"
-                                rounded="md"
-                                minH={100}
-                                mx={2}
-                            >
-                                <Text fontSize="sm" fontWeight="thin">
-                                    Pending Bounties:
-                                </Text>
-
-                                <Text
-                                    borderLeft="2px"
-                                    borderColor="pink.300"
-                                    fontSize="2xl"
-                                    lineHeight="25px"
-                                    px={2}
-                                >
-                                    12
-                                </Text>
-                            </Flex>
-                            <Flex
-                                alignItems="start"
-                                justifyContent="space-evenly"
-                                flexDirection="column"
-                                rounded="md"
-                                minH={100}
-                                mx={2}
-                            >
-                                <Text fontSize="sm" fontWeight="thin">
-                                    Pending Bounties:
-                                </Text>
-
-                                <Text
-                                    borderLeft="2px"
-                                    borderColor="pink.300"
-                                    fontSize="2xl"
-                                    lineHeight="25px"
-                                    px={2}
-                                >
-                                    10
-                                </Text>
-                            </Flex>
-                        </Grid> */}
                     </Grid>
                 </Box>
             </Hide>
             <Show below="xl">
-                <Hide below='lg'>
-
-                    <Box h="100vh" w="30vw" position="fixed" right={0} boxShadow="dark-lg">
-                        <Flex my={10} px={5} justifyContent="center">
+                <Hide below="lg">
+                    <Box
+                        h="100vh"
+                        w="30vw"
+                        position="fixed"
+                        right={0}
+                        boxShadow="dark-lg"
+                    >
+                        <Flex mt={8} px={5} justifyContent="center">
                             <Avatar
                                 src={googleProfile.picture}
                                 size="lg"
@@ -284,7 +209,9 @@ const ProfileWidget = () => {
                                 <Text fontWeight="thin" fontSize="xl" mt={2}>
                                     {googleProfile.name}
                                 </Text>
-                                <Text fontSize="xs">Belgrade, Serbia - Frontend Developer</Text>
+                                <Text fontWeight="thin" fontSize="xs" >
+                                    {googleProfile.email}
+                                </Text>
                             </Flex>
                         </Flex>
 
@@ -293,7 +220,7 @@ const ProfileWidget = () => {
                             gridTemplateColumns="repeat(2, 1fr)"
                             gap={3}
                             p={3}
-                            my={20}
+                            my={4}
                         >
                             <Link
                                 as={RouterLink}
@@ -314,7 +241,7 @@ const ProfileWidget = () => {
                                         bg="purple.400"
                                         borderLeft="4px"
                                         borderColor="white"
-                                        p={2}
+                                        p={1}
                                     >
                                         Assigned Tasks
                                         <Text fontWeight="medium" fontSize="md">
@@ -345,7 +272,7 @@ const ProfileWidget = () => {
                                         borderColor="purple.400"
                                         bg="gray.600"
                                         boxShadow="md"
-                                        p={2}
+                                        p={1}
                                     >
                                         Completed Tasks
                                         <Text fontWeight="medium" fontSize="md">
@@ -375,7 +302,7 @@ const ProfileWidget = () => {
                                         borderColor="purple.400"
                                         bg="gray.600"
                                         boxShadow="md"
-                                        p={2}
+                                        p={1}
                                     >
                                         Available Points
                                         <Text fontWeight="medium" fontSize="md">
@@ -404,7 +331,7 @@ const ProfileWidget = () => {
                                         bg="purple.400"
                                         borderLeft="4px"
                                         borderColor="white"
-                                        p={2}
+                                        p={1}
                                     >
                                         Pending Orders
                                         <Text fontWeight="medium" fontSize="md">
@@ -414,8 +341,20 @@ const ProfileWidget = () => {
                                 </Box>
                             </Link>
                         </Grid>
-
-
+                        <Flex
+                            h={130}
+                            w="90%"
+                            mx="auto"
+                            my={2}
+                            bgGradient="linear(to-l,purple.400, purple.700)"
+                            justifyContent="space-around"
+                            p={5}
+                        >
+                            <Text fontSize="sm" fontWeight="thin">
+                                Informational Data
+                            </Text>
+                            <Image src={img} alt="logo" width={100} />
+                        </Flex>
                     </Box>
                 </Hide>
             </Show>
@@ -439,7 +378,9 @@ const ProfileWidget = () => {
                         />
                         <Flex flexDirection="column" alignItems="start" ml={5} mt={-2}>
                             <Text fontSize="xl">{googleProfile.name}</Text>
-                            <Text fontSize="sm">Belgrade, Serbia - Frontend Developer</Text>
+                            <Text fontWeight="thin" fontSize="sm" mt={2}>
+                                {googleProfile.email}
+                            </Text>
                         </Flex>
                     </Flex>
 
@@ -574,72 +515,5 @@ const ProfileWidget = () => {
     );
 };
 
-{
-    /*  wide buttons 
-       <Flex
-              alignItems="center"
-              justifyContent="space-between"
-              my={2}
-              minW={400}
-              rounded="md"
-              border="1px"
-              borderColor="purple.400"
-          >
-              <Text fontSize="xl" fontWeight="thin" p={2} minW='70%' maxW='80%'>
-                  Available points
-              </Text>
-              <Text textAlign='center' minW='20%' maxW='30%' bg="purple.400" p={2} fontSize="xl">
-                  488
-              </Text>
-          </Flex>
-  
-          <Flex
-              alignItems="center"
-              justifyContent="space-between"
-              my={2}
-              minW={400}
-              rounded="md"
-              border="1px"
-              borderColor="purple.400"
-          >
-              <Text fontSize="xl" fontWeight="thin" p={2} minW='70%' maxW='80%'>
-                  Completed Tasks
-              </Text>
-              <Text textAlign='center' minW='20%' maxW='30%' bg="purple.400" p={2} fontSize="xl">
-                  24
-              </Text>
-          </Flex>
-          <Flex
-              alignItems="center"
-              justifyContent="space-between"
-              my={2}
-              minW={400}
-              rounded="md"
-              border="1px"
-              borderColor="purple.400"
-          >
-              <Text fontSize="xl" fontWeight="thin" p={2} minW='70%' maxW='80%'>
-                  Pending Bounties
-              </Text>
-              <Text textAlign='center' minW='20%' maxW='30%' bg="purple.400" p={2} fontSize="xl">
-                  2
-              </Text>
-          </Flex>
-          <Flex
-              alignItems="center"
-              justifyContent="space-between"
-              my={2}
-              minW={400}
-              rounded="md"
-              border="1px"
-              borderColor="purple.400"
-          >
-              <Text fontSize="xl" fontWeight="thin" p={2} minW='70%' maxW='80%'>
-                  Assigned Tasks
-              </Text>
-              <Text textAlign='center' minW='20%' maxW='30%' bg="purple.400" p={2} fontSize="xl">
-                  7
-              </Text>
-          </Flex> */
-}
+
 export default observer(ProfileWidget);

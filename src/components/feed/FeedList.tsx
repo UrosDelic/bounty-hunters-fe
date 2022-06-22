@@ -16,7 +16,7 @@ import { observer } from 'mobx-react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { StyledCard } from 'components/index';
 import userFeeds from 'stores/user-feed';
-import dayjs from 'dayjs';
+
 import { Link as RouterLink } from 'react-router-dom';
 import { useRelativeTime } from 'custom-hooks/useRelativeTime';
 import Notifications from '../../stores/user-feed'
@@ -27,7 +27,7 @@ const FeedList = () => {
     useEffect(() => {
         Notifications.collectFeeds();
     }, [])
-    console.log(allFeeds, 'feeds')
+
     return (
         <>
             <Flex flexDirection="column" my={2}>
@@ -38,6 +38,7 @@ const FeedList = () => {
                             fontWeight="thin"
                             fontSize={{ base: 'xl', md: '2xl' }}
                             mb={4}
+                            mx={5}
                             textAlign={{ base: 'center', lg: 'start' }}
                         >
                             Check the <b>Latest News!</b>{' '}
@@ -89,7 +90,7 @@ const FeedList = () => {
 
                                                     <Text
                                                         fontWeight="thin"
-                                                        fontSize={{ base: 'md', lg: 'xl' }}
+                                                        fontSize={{ base: 'lg', xl: 'xl' }}
                                                         textAlign={{ base: 'center', lg: 'start' }}
                                                         my={{ base: 8, md: 0 }}
                                                         mx="auto"
