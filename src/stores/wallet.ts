@@ -1,13 +1,19 @@
-import dayjs from 'dayjs';
 import { initHttp } from 'http/index';
 import { makeAutoObservable, runInAction } from 'mobx';
-import { WalletElement, WalletOrderData, WalletTaskData } from 'types';
+import {
+  WalletOrder,
+  WalletTask,
+  WalletOrderData,
+  WalletTaskData,
+} from 'types';
 
 interface WalletStoreProps {
   loading: boolean;
   success: boolean;
-  orders: WalletElement[];
-  tasks: WalletElement[];
+  orders: WalletOrder[];
+  tasks: WalletTask[];
+  totalPrice: number;
+  totalPoints: number;
 }
 
 class WalletStore {
@@ -16,6 +22,8 @@ class WalletStore {
     success: false,
     orders: [],
     tasks: [],
+    totalPrice: 0,
+    totalPoints: 0,
   };
 
   constructor(private http = initHttp()) {
@@ -38,6 +46,14 @@ class WalletStore {
     return this._wallet.tasks;
   }
 
+  get totalPrice() {
+    return this._wallet.totalPrice;
+  }
+
+  get totalPoints() {
+    return this._wallet.totalPoints;
+  }
+
   getOrders = async () => {
     this._wallet.loading = true;
     this._wallet.success = false;
@@ -48,18 +64,9 @@ class WalletStore {
       this._wallet.loading = false;
       if (data) {
         this._wallet.success = true;
-        this._wallet.orders = data?.data.map(singleOrder => {
-          const { createdAt, order } = singleOrder;
-          const { productAttributesOrder } = order;
-          const name = productAttributesOrder[0]?.product?.name;
-          const price = productAttributesOrder[0]?.product?.price || 0;
-          return {
-            createdAt: dayjs(createdAt).format('DD/MM/YYYY'),
-            name,
-            price,
-          };
-        });
-        console.log('wallet orders data iz stora', data.data);
+        this._wallet.totalPrice = data?.info.totalPrice;
+        this._wallet.orders = data?.data;
+        console.log('wallet orders data iz stora', data?.data);
       }
     });
   };
@@ -74,15 +81,8 @@ class WalletStore {
       this._wallet.loading = false;
       if (data) {
         this._wallet.success = true;
-        this._wallet.tasks = data?.data.map(singleTask => {
-          const { task, createdAt } = singleTask;
-          const { title, points } = task;
-          return {
-            createdAt: dayjs(createdAt).format('DD/MM/YYYY'),
-            name: title,
-            price: points,
-          };
-        });
+        this._wallet.totalPoints = data?.info.totalPoints;
+        this._wallet.tasks = data?.data;
         console.log('wallet tasks data iz stora', data.data);
       }
     });

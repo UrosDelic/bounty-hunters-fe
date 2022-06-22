@@ -1,12 +1,13 @@
-import { Heading, Box, Grid, GridItem } from '@chakra-ui/react';
+import { Heading, Box, Grid, GridItem, Text } from '@chakra-ui/react';
 import { StoreItem, SpinnerLoader, SearchByInput } from '../components/index';
+import InfiniteScroll from 'react-infinite-scroll-component';
 import ProductsStore from '../stores/products';
 import { observer } from 'mobx-react';
 import { useEffect } from 'react';
 import { useFilterBySearch } from '../custom-hooks/useFilterBySearch';
 
 function Store() {
-  const { loading, success, products } = ProductsStore;
+  const { loading, success, products, hasMore } = ProductsStore;
   const filteredProducts = useFilterBySearch(products, ['name']);
 
   useEffect(() => {
@@ -37,25 +38,31 @@ function Store() {
           <Box marginBottom="50px">
             <SearchByInput />
           </Box>
-          <Grid
-            templateColumns={[
-              'repeat(1, 1fr)',
-              'repeat(2, 1fr)',
-              'repeat(3, 1fr)',
-              'repeat(4, 1fr)',
-            ]}
-            gap={4}
-            marginTop="50px"
+          <InfiniteScroll
+            dataLength={products.length}
+            next={() => ProductsStore.loadMoreProducts()}
+            hasMore={hasMore}
+            loader={<Text marginTop={1}>loading...</Text>}
           >
-            {filteredProducts.map(product => {
-              const { id } = product;
-              return (
-                <GridItem key={id}>
-                  <StoreItem {...product} />
-                </GridItem>
-              );
-            })}
-          </Grid>
+            <Grid
+              templateColumns={[
+                'repeat(1, 1fr)',
+                'repeat(2, 1fr)',
+                'repeat(3, 1fr)',
+                'repeat(4, 1fr)',
+              ]}
+              gap={4}
+            >
+              {filteredProducts.map(product => {
+                const { id } = product;
+                return (
+                  <GridItem key={id}>
+                    <StoreItem {...product} />
+                  </GridItem>
+                );
+              })}
+            </Grid>
+          </InfiniteScroll>
         </Box>
       )}
     </>

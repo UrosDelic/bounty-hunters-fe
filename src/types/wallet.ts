@@ -1,39 +1,27 @@
-interface Product {
-  product: {
-    name: string;
-    price: number;
-  };
-}
-
-interface ProductAttributesOrder {
-  productAttributesOrder: Product[];
-}
-
 export interface WalletOrder {
   createdAt: string;
-  order: ProductAttributesOrder;
+  orderId: string;
+  name: string;
+  price: number;
 }
 
 export interface WalletOrderData {
+  info: {
+    totalPrice: number;
+  };
   data: WalletOrder[];
-}
-
-interface Task {
-  title: string;
-  points: number;
 }
 
 export interface WalletTask {
   createdAt: string;
-  task: Task;
+  title: string;
+  points: number;
+  id: string;
 }
 
 export interface WalletTaskData {
+  info: {
+    totalPoints: number;
+  };
   data: WalletTask[];
-}
-
-export interface WalletElement {
-  createdAt: string;
-  name: string;
-  price: number;
 }

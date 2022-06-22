@@ -1,19 +1,14 @@
-import { Box, Text, Select, Heading } from '@chakra-ui/react';
+import { Box, Text, Select, Heading, Flex } from '@chakra-ui/react';
 import { CheckIcon, ChevronDownIcon } from '@chakra-ui/icons';
 import { StyledCard } from './index';
 import { ChangeEvent, useState } from 'react';
 import OrdersStore from '../stores/orders';
+import { Orders } from '../types/orders';
 import dayjs from 'dayjs';
 
-type OrderProps = {
-  id: string;
-  createdAt: string;
-  status: string;
-  shippingAddress: string;
-};
-
-function Order({ id, createdAt, status, shippingAddress }: OrderProps) {
+function Order({ id, createdAt, status, shippingAddress, user }: Orders) {
   const [statusValue, setStatusValue] = useState(status);
+  const { firstName, lastName } = user;
 
   function changeStatus(e: ChangeEvent<HTMLSelectElement>) {
     setStatusValue(e.target.value);
@@ -30,8 +25,16 @@ function Order({ id, createdAt, status, shippingAddress }: OrderProps) {
     <StyledCard>
       <Box width="100%" padding="20px 24px">
         <Box marginBottom="20px">
-          <Heading fontSize="18px">{shippingAddress}</Heading>
-          <Text fontSize="14px">{dayjs(createdAt).format('DD/MM/YYYY')}</Text>
+          <Heading fontSize="18px">{`${firstName} ${lastName}`}</Heading>
+          <Flex
+            justifyContent={['space-between']}
+            direction={['column', 'row', 'column', 'column']}
+          >
+            <Text fontSize="14px">{`Address: ${shippingAddress}`}</Text>
+            <Text fontSize="14px">{`Date: ${dayjs(createdAt).format(
+              'DD/MM/YYYY'
+            )}`}</Text>
+          </Flex>
         </Box>
         <Select
           value={statusValue}
@@ -47,6 +50,7 @@ function Order({ id, createdAt, status, shippingAddress }: OrderProps) {
           icon={
             statusValue === 'FULFILLED' ? <CheckIcon /> : <ChevronDownIcon />
           }
+          cursor={statusValue === 'FULFILLED' ? 'arrow' : 'pointer'}
         >
           <option style={{ backgroundColor: 'inherit' }} value="PENDING">
             pending

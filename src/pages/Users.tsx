@@ -48,7 +48,7 @@ function Users() {
             margin="auto"
             templateColumns={[
               'repeat(1, minmax(220px, 350px))',
-              'repeat(2, minmax(220px, 240px))',
+              'repeat(2, minmax(200px, 240px))',
               'repeat(3, minmax(220px, 240px))',
               'repeat(4, minmax(220px, 240px))',
             ]}

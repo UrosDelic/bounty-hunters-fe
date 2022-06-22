@@ -7,6 +7,7 @@ import {
   Td,
   TableContainer,
 } from '@chakra-ui/react';
+import dayjs from 'dayjs';
 
 type TransactionTableProps = {
   data: any;
@@ -29,15 +30,15 @@ function TransactionTable({ data, transaction }: TransactionTableProps) {
           </Tr>
         </Thead>
         <Tbody>
-          {data.map((item: any, index: number) => {
-            const { createdAt, name, price } = item;
+          {data.map((item: any) => {
+            const { createdAt, name, title, price, points, id, orderId } = item;
             return (
-              <Tr key={index}>
+              <Tr key={id || orderId}>
                 <Td maxWidth="150px" color="#FFFFFF" wordBreak="break-all">
-                  {name}
+                  {name || title}
                 </Td>
                 <Td maxWidth="150px" color="#B3C5CD" wordBreak="break-all">
-                  {createdAt}
+                  {dayjs(createdAt).format('DD/MM/YYYY')}
                 </Td>
                 <Td
                   maxWidth="150px"
@@ -45,7 +46,7 @@ function TransactionTable({ data, transaction }: TransactionTableProps) {
                   wordBreak="break-all"
                   textAlign="right"
                 >
-                  {price}
+                  {price || points}
                 </Td>
               </Tr>
             );

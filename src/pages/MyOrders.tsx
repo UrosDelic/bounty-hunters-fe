@@ -1,4 +1,4 @@
-import { Box } from '@chakra-ui/react';
+import { Box, Text } from '@chakra-ui/react';
 import { SpinnerLoader, SingleOrder, SearchByInput } from '../components/index';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import MyOrdersStore from '../stores/myOrders';
@@ -25,28 +25,30 @@ function MyOrders() {
         dataLength={myOrders.length}
         next={() => MyOrdersStore.loadMoreOrders()}
         hasMore={hasMore}
-        loader={<h3>loading...</h3>}
+        loader={<Text marginTop={1}>loading...</Text>}
       >
-        {success &&
-          myOrders.map(order => {
-            const {
-              id,
-              createdAt,
-              shippingAddress,
-              status,
-              productAttributesOrder,
-            } = order;
-            const product = productAttributesOrder[0].product;
-            const { name, price } = product;
-            const singleOrderValues = {
-              createdAt,
-              shippingAddress,
-              status,
-              name,
-              price,
-            };
-            return <SingleOrder key={id} {...singleOrderValues} />;
-          })}
+        <Box p={2}>
+          {success &&
+            myOrders.map(order => {
+              const {
+                id,
+                createdAt,
+                shippingAddress,
+                status,
+                productAttributesOrder,
+              } = order;
+              const product = productAttributesOrder[0].product;
+              const { name, price } = product;
+              const singleOrderValues = {
+                createdAt,
+                shippingAddress,
+                status,
+                name,
+                price,
+              };
+              return <SingleOrder key={id} {...singleOrderValues} />;
+            })}
+        </Box>
       </InfiniteScroll>
     </Box>
   );

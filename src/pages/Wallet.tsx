@@ -11,23 +11,18 @@ import { useUniqueDates } from '../custom-hooks/useUniqueDates';
 import WalletStore from '../stores/wallet';
 import { useEffect } from 'react';
 import { observer } from 'mobx-react';
+import dayjs from 'dayjs';
 
 function Wallet() {
-  const { loading, success, orders, tasks } = WalletStore;
-  const sumOfGainedPoints = tasks.reduce(
-    (acc, current) => acc + current.price,
-    0
-  );
-  const sumOfSpentPoints = orders.reduce(
-    (acc, current) => acc + current.price,
-    0
-  );
+  const { loading, success, orders, tasks, totalPoints, totalPrice } =
+    WalletStore;
 
   const dateObj = useUniqueDates(tasks, orders);
 
   useEffect(() => {
     WalletStore.getOrders();
     WalletStore.getTasks();
+    console.log(Object.keys(dateObj));
   }, []);
 
   if (loading) {
@@ -51,12 +46,12 @@ function Wallet() {
             rowGap={4}
           >
             <GridItem>
-              <PointBreakdown name="Gained points" number={sumOfGainedPoints}>
+              <PointBreakdown name="Gained points" number={totalPoints}>
                 <DoughnutChart iconName={ArrowUpIcon} primaryColor="#38A169" />
               </PointBreakdown>
             </GridItem>
             <GridItem>
-              <PointBreakdown name="Spent points" number={sumOfSpentPoints}>
+              <PointBreakdown name="Spent points" number={totalPrice}>
                 <DoughnutChart
                   iconName={ArrowDownIcon}
                   primaryColor="#B794F4"
@@ -66,7 +61,7 @@ function Wallet() {
             <GridItem>
               <PointBreakdown
                 name="Balance"
-                number={sumOfGainedPoints - sumOfSpentPoints}
+                number={totalPoints - totalPrice}
               />
             </GridItem>
           </Grid>
