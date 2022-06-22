@@ -1,4 +1,5 @@
-import { Box, Badge, Flex } from '@chakra-ui/react';
+import { Box, Badge, Flex, Text } from '@chakra-ui/react';
+import StyledCard from 'components/core/StyledCard';
 import { observer } from 'mobx-react';
 interface MyTaskProps {
   title: string;
@@ -32,36 +33,41 @@ const MyTask = ({
   };
 
   return (
-    <Box
-      borderWidth="1px"
-      borderRadius="lg"
-      borderColor="gray.300"
-      margin="1rem"
-      w={['15rem', '25rem', '25rem', '30rem']}
-      boxShadow={`5px 5px 10px ${switchStatusColor(status)}`}
-    >
-      <Box padding="2rem">
-        <Box textAlign="center">{title}</Box>
-        <Box my={2} px={2}>
-          <Badge
-            px="5"
-            borderRadius="full"
-            colorScheme={switchStatusColor(status)}
-          >
-            {status}
-          </Badge>
+    <StyledCard margin={5}>
+      <Box
+        paddingY={5}
+        // borderWidth="1px"
+        // borderRadius="lg"
+        // borderColor="gray.300"
+        margin="1rem"
+        w={['15rem', '25rem', '25rem', '30rem']}
+        // boxShadow={`5px 5px 10px ${switchStatusColor(status)}`}
+      >
+        <Box padding="2rem">
+          <Text fontSize="18px" textAlign="center">
+            {title}
+          </Text>
+          <Box my={2} px={2}>
+            <Badge
+              px="5"
+              borderRadius="full"
+              colorScheme={switchStatusColor(status)}
+            >
+              {status}
+            </Badge>
+          </Box>
+          <Box px={2} my={2} textAlign="center">
+            {description}
+          </Box>
+          <Flex px={2} my={2} justify="space-between">
+            <Text textAlign="center">{createdAt}</Text>
+            {/* <Divider></Divider> */}
+            <Text textAlign="center">{updatedAt}</Text>
+          </Flex>
+          <Text textAlign="center">{points}</Text>
         </Box>
-        <Box px={2} my={2} textAlign="center">
-          {description}
-        </Box>
-        <Flex px={2} my={2} justify="space-between">
-          <Box textAlign="center">{createdAt}</Box>
-          {/* <Divider></Divider> */}
-          <Box textAlign="center">{updatedAt}</Box>
-        </Flex>
-        <Box textAlign="center">{points}</Box>
       </Box>
-    </Box>
+    </StyledCard>
   );
 };
 

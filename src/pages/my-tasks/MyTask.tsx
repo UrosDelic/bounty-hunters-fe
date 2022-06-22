@@ -10,7 +10,7 @@ const MyTasksPage = () => {
   const { loading, tasks } = TasksStore;
 
   useEffect(() => {
-    TasksStore.getTasks();
+    TasksStore.getMyTasks();
   }, []);
 
   return (
