@@ -30,7 +30,8 @@ class LoginStore {
   };
 
   // _user: UserToken = token ? jwtDecode(token) : userDefault;
-  _authResoved = false;
+  _authResolved = false;
+
   _user: UserToken = {
     exp: null,
     roles: [],
@@ -41,15 +42,15 @@ class LoginStore {
     accessToken: '',
     refreshToken: '',
   };
-get userId(){
-  return this._user.userId;
-}
+  get userId() {
+    return this._user.userId;
+  }
   get isAuth() {
     return this._user.exp ? this._user.exp < Date.now() : false;
   }
 
   get authResolved() {
-    return this._authResoved;
+    return this._authResolved;
   }
 
   get idToken() {
@@ -98,8 +99,8 @@ get userId(){
   };
 
   checkUserFromStorage = () => {
-    if (!this._authResoved) {
-      this._authResoved = true;
+    if (!this._authResolved) {
+      this._authResolved = true;
       const token = localStorage.getItem('bh-token');
       if (token) {
         this._user = jwtDecode(token);
