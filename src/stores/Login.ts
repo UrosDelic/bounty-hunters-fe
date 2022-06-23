@@ -105,7 +105,7 @@ get userId(){
   };
 profileData = ()=>{
   const profile = localStorage.getItem('bh-profile');
-    const decode = jwtDecode(profile  as any) as any;
+    const decode = jwtDecode(profile as string) as any ;
     this._profile.name = decode.name
     this._profile.picture = decode.picture
     this._profile.email = decode.email
