@@ -9,8 +9,7 @@ import {
   Circle,
   Box,
   Button,
-  IconButton
-
+  IconButton,
 } from '@chakra-ui/react';
 import { UserNotifications } from 'components/index';
 import { useEffect, useState } from 'react';
@@ -42,17 +41,19 @@ function Header({ onOpen }: headerProps) {
     >
       <HamburgerIcon cursor="pointer" w={8} h={8} onClick={onOpen} />
 
-      <Box >
-        <Menu >
+      <Box>
+        <Menu>
           <MenuButton
             mx={4}
             onClick={() => setOpenNotifications(true)}
             position="relative"
           >
-            <IconButton icon={<BellIcon />}
-              variant='ghost'
-              aria-label='Notification Icon'
-              fontSize='25px'></IconButton>
+            <IconButton
+              icon={<BellIcon />}
+              variant="ghost"
+              aria-label="Notification Icon"
+              fontSize="25px"
+            ></IconButton>
 
             {notificationsCount?.unreadCount > 0 ? (
               <Circle
@@ -68,14 +69,22 @@ function Header({ onOpen }: headerProps) {
               >
                 {notificationsCount?.unreadCount}
               </Circle>
-            ) : ''}
+            ) : (
+              ''
+            )}
           </MenuButton>
 
-          <MenuList w={{ base: '90vw', md: '70vw', lg: '30vw' }} h="40vh" p={0} border={0} boxShadow='dark-lg' >
+          <MenuList
+            w={{ base: '90vw', md: '70vw', lg: '30vw' }}
+            h="40vh"
+            p={0}
+            border={0}
+            boxShadow="dark-lg"
+          >
             {notificationsOpen && <UserNotifications />}
           </MenuList>
         </Menu>
-        <Button variant="ghost" onClick={logout}>
+        <Button colorScheme="grey" variant="solid" onClick={logout}>
           Log Out
         </Button>
       </Box>
