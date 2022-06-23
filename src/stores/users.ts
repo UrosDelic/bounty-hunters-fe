@@ -77,6 +77,7 @@ class UsersStore {
     runInAction(() => {
       if (data) {
         this._users.isUserUpdated = true;
+        this.getUsers();
         console.log('updated users roles from store', data);
       }
     });

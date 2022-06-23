@@ -8,11 +8,9 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import ProductsStore from '../stores/products';
 import { observer } from 'mobx-react';
 import { useEffect } from 'react';
-import { useFilterBySearch } from '../custom-hooks/useFilterBySearch';
 
 function Products() {
   const { loading, success, products, hasMore } = ProductsStore;
-  const filteredProducts = useFilterBySearch(products, ['name']);
 
   useEffect(() => {
     ProductsStore.getProducts();
@@ -53,7 +51,7 @@ function Products() {
               width="fit-content"
               margin="auto"
             >
-              {filteredProducts.map(product => {
+              {products.map(product => {
                 const { id, name, price, status } = product;
                 return (
                   <GridItem>

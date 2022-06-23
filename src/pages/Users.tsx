@@ -8,19 +8,13 @@ import { useEffect } from 'react';
 import { useFilterBySearch } from '../custom-hooks/useFilterBySearch';
 
 function Users() {
-  const { loading, success, users, isUserUpdated, hasMore } = UsersStore;
+  const { loading, success, users, hasMore } = UsersStore;
   const filteredUsers = useFilterBySearch(users, ['firstName', 'lastName']);
 
   useEffect(() => {
     UsersStore.getUsers();
     RolesStore.getRoles();
   }, []);
-
-  useEffect(() => {
-    if (isUserUpdated) {
-      UsersStore.getUsers();
-    }
-  }, [isUserUpdated]);
 
   if (loading) {
     return <SpinnerLoader />;
