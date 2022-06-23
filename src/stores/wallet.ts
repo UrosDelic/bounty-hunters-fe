@@ -20,8 +20,6 @@ interface WalletStoreProps {
   taskPage: number;
   totalOrdersPages: number;
   totalTasksPages: number;
-  ordersHasMore: boolean;
-  tasksHasMore: boolean;
 }
 
 class WalletStore {
@@ -37,8 +35,6 @@ class WalletStore {
     taskPage: 1,
     totalOrdersPages: 1,
     totalTasksPages: 1,
-    ordersHasMore: true,
-    tasksHasMore: true,
   };
 
   constructor(private http = initHttp()) {
@@ -69,19 +65,25 @@ class WalletStore {
     return this._wallet.totalPoints;
   }
 
-  get ordersHasMore() {
-    return this._wallet.ordersHasMore;
+  get orderPage() {
+    return this._wallet.orderPage;
   }
 
-  get tasksHasMore() {
-    return this._wallet.tasksHasMore;
+  get taskPage() {
+    return this._wallet.taskPage;
+  }
+
+  get totalOrderPages() {
+    return this._wallet.totalOrdersPages;
+  }
+
+  get totalTaskPages() {
+    return this._wallet.totalTasksPages;
   }
 
   getOrders = async () => {
     this._wallet.loading = true;
     this._wallet.success = false;
-    this._wallet.orderPage = 1;
-    this._wallet.ordersHasMore = true;
     const userId = this.getUserId();
     const { data } = await this.http.get<WalletOrderData>(
       `/users/${userId}/transactions/order?sortBy=createdAt&sortMode=asc&page=${this._wallet.orderPage}&limit=${this._wallet.limit}`
@@ -101,11 +103,9 @@ class WalletStore {
   getTasks = async () => {
     this._wallet.loading = true;
     this._wallet.success = false;
-    this._wallet.taskPage = 1;
-    this._wallet.tasksHasMore = true;
     const userId = this.getUserId();
     const { data } = await this.http.get<WalletTaskData>(
-      `/users/${userId}/transactions/task?sortBy=createdAt&sortMode=asc&page=${this._wallet.taskPage}&limit=1`
+      `/users/${userId}/transactions/task?sortBy=createdAt&sortMode=asc&page=${this._wallet.taskPage}&limit=${this._wallet.limit}`
     );
     runInAction(() => {
       this._wallet.loading = false;
@@ -119,46 +119,44 @@ class WalletStore {
     });
   };
 
-  loadMoreOrders = async () => {
-    this._wallet.orderPage++;
-    const userId = this.getUserId();
-    const { data } = await this.http.get<WalletOrderData>(
-      `/users/${userId}/transactions/order?sortBy=createdAt&sortMode=asc&page=${this._wallet.orderPage}&limit=${this._wallet.limit}`
-    );
-    runInAction(() => {
-      if (data) {
-        if (!data?.data.length) this._wallet.ordersHasMore = false;
-        this._wallet.loading = false;
-        this._wallet.success = true;
-        this._wallet.orders = [...this._wallet.orders, ...data?.data];
-        console.log('novi orders data', this._wallet.orders);
-      }
-    });
-  };
-
-  loadMoreTasks = async () => {
-    this._wallet.taskPage++;
-    const userId = this.getUserId();
-    const { data } = await this.http.get<WalletTaskData>(
-      `/users/${userId}/transactions/task?sortBy=createdAt&sortMode=asc&page=${this._wallet.taskPage}&limit=1`
-    );
-    runInAction(() => {
-      if (data) {
-        if (!data?.data.length) this._wallet.tasksHasMore = false;
-        this._wallet.loading = false;
-        this._wallet.success = true;
-        this._wallet.tasks = [...this._wallet.tasks, ...data?.data];
-        console.log('novi tasks data', this._wallet.tasks);
-      }
-    });
-  };
-
   getUserId = () => {
     const bhToken = localStorage.getItem('bh-token') as string;
     const decoded = jwtDecode<{ userId: string }>(bhToken);
     const userId = decoded.userId;
     return userId;
   };
+
+  increaseOrderPage() {
+    if (this._wallet.orderPage < this._wallet.totalOrdersPages) {
+      this._wallet.orderPage++;
+      this._wallet.loading = false;
+      this.getOrders();
+    }
+  }
+
+  increaseTaskPage() {
+    if (this._wallet.taskPage < this._wallet.totalTasksPages) {
+      this._wallet.taskPage++;
+      this._wallet.loading = false;
+      this.getTasks();
+    }
+  }
+
+  decreaseOrderPage() {
+    if (this._wallet.orderPage > 1) {
+      this._wallet.orderPage--;
+      this._wallet.loading = false;
+      this.getOrders();
+    }
+  }
+
+  decreaseTaskPage() {
+    if (this._wallet.taskPage > 1) {
+      this._wallet.taskPage--;
+      this._wallet.loading = false;
+      this.getTasks();
+    }
+  }
 }
 
 export default new WalletStore();

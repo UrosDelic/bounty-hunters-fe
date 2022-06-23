@@ -5,6 +5,7 @@ import OrdersStore from '../stores/orders';
 import AttributeValuesStore from '../stores/attributeValues';
 import { FormEvent, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import jwtDecode from 'jwt-decode';
 
 export type OrderModalProps = {
   isOpen: boolean;
@@ -16,13 +17,16 @@ function OrderModal({ isOpen, onClose, name }: OrderModalProps) {
   const [address, setAddress] = useState('');
   const { id } = useParams();
   const { selectedColor, selectedSize } = AttributeValuesStore;
+  const bhToken = localStorage.getItem('bh-token') as string;
+  const decoded = jwtDecode<{ userId: string }>(bhToken);
+  const userId = decoded.userId;
   const { isOrderSent } = OrdersStore;
 
   function handleOrder(e: FormEvent) {
     e.preventDefault();
     if (address.trim()) {
       const orderObject = {
-        userId: 'a0d6132d-9c7d-46fa-a3b8-1e20d918d605',
+        userId,
         shippingAddress: address,
         productId: id,
         attributeValueIds: [selectedSize, selectedColor],

@@ -20,7 +20,7 @@ function ModalLayout({ isOpen, onClose, name, children }: ModalLayoutProps) {
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
-      <ModalContent backgroundColor="#2f3747">
+      <ModalContent backgroundColor="gray.700">
         <ModalHeader>{name}</ModalHeader>
         <ModalCloseButton color="black" />
         <ModalBody>{children}</ModalBody>

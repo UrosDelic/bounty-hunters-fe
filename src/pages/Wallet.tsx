@@ -3,27 +3,19 @@ import { ArrowUpIcon, ArrowDownIcon } from '@chakra-ui/icons';
 import {
   DoughnutChart,
   PointBreakdown,
-  TransactionTable,
+  OrdersTable,
+  TasksTable,
   BarChart,
   SpinnerLoader,
 } from '../components/index';
-import InfiniteScroll from 'react-infinite-scroll-component';
 import { useUniqueDates } from '../custom-hooks/useUniqueDates';
 import WalletStore from '../stores/wallet';
 import { useEffect } from 'react';
 import { observer } from 'mobx-react';
 
 function Wallet() {
-  const {
-    loading,
-    success,
-    orders,
-    tasks,
-    totalPoints,
-    totalPrice,
-    ordersHasMore,
-    tasksHasMore,
-  } = WalletStore;
+  const { loading, success, orders, tasks, totalPoints, totalPrice } =
+    WalletStore;
 
   const dateObj = useUniqueDates(tasks, orders);
 
@@ -76,24 +68,10 @@ function Wallet() {
           <Flex
             justifyContent="center"
             direction={['column', 'column', 'row']}
-            marginTop="100px"
+            marginTop="30px"
           >
-            <InfiniteScroll
-              dataLength={orders.length}
-              next={() => WalletStore.loadMoreOrders()}
-              hasMore={ordersHasMore}
-              loader={<h3>loading...</h3>}
-            >
-              <TransactionTable transaction="orders" data={orders} />
-            </InfiniteScroll>
-            <InfiniteScroll
-              dataLength={tasks.length}
-              next={() => WalletStore.loadMoreTasks()}
-              hasMore={tasksHasMore}
-              loader={<h3>loading...</h3>}
-            >
-              <TransactionTable transaction="tasks" data={tasks} />
-            </InfiniteScroll>
+            <OrdersTable data={orders} />
+            <TasksTable data={tasks} />
           </Flex>
         </Box>
       )}

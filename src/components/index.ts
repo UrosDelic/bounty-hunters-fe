@@ -27,6 +27,9 @@ import UserNotifications from './UserNotifications';
 import ProfileWidget from './feed/ProfileWidget';
 import SearchByInput from './SearchByInput';
 import OrderModal from './OrderModal';
+import Pagination from './Pagination';
+import OrdersTable from './OrdersTable';
+import TasksTable from './TasksTable';
 
 export {
   Layout,
@@ -58,5 +61,7 @@ export {
   UserNotifications,
   SearchByInput,
   OrderModal,
-  
+  Pagination,
+  OrdersTable,
+  TasksTable,
 };
