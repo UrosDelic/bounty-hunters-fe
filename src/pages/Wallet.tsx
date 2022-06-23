@@ -7,22 +7,29 @@ import {
   BarChart,
   SpinnerLoader,
 } from '../components/index';
+import InfiniteScroll from 'react-infinite-scroll-component';
 import { useUniqueDates } from '../custom-hooks/useUniqueDates';
 import WalletStore from '../stores/wallet';
 import { useEffect } from 'react';
 import { observer } from 'mobx-react';
-import dayjs from 'dayjs';
 
 function Wallet() {
-  const { loading, success, orders, tasks, totalPoints, totalPrice } =
-    WalletStore;
+  const {
+    loading,
+    success,
+    orders,
+    tasks,
+    totalPoints,
+    totalPrice,
+    ordersHasMore,
+    tasksHasMore,
+  } = WalletStore;
 
   const dateObj = useUniqueDates(tasks, orders);
 
   useEffect(() => {
     WalletStore.getOrders();
     WalletStore.getTasks();
-    console.log(Object.keys(dateObj));
   }, []);
 
   if (loading) {
@@ -66,9 +73,27 @@ function Wallet() {
             </GridItem>
           </Grid>
           <BarChart dateObj={dateObj} />
-          <Flex justifyContent="center" direction={['column', 'column', 'row']}>
-            <TransactionTable transaction="tasks" data={tasks} />
-            <TransactionTable transaction="orders" data={orders} />
+          <Flex
+            justifyContent="center"
+            direction={['column', 'column', 'row']}
+            marginTop="100px"
+          >
+            <InfiniteScroll
+              dataLength={orders.length}
+              next={() => WalletStore.loadMoreOrders()}
+              hasMore={ordersHasMore}
+              loader={<h3>loading...</h3>}
+            >
+              <TransactionTable transaction="orders" data={orders} />
+            </InfiniteScroll>
+            <InfiniteScroll
+              dataLength={tasks.length}
+              next={() => WalletStore.loadMoreTasks()}
+              hasMore={tasksHasMore}
+              loader={<h3>loading...</h3>}
+            >
+              <TransactionTable transaction="tasks" data={tasks} />
+            </InfiniteScroll>
           </Flex>
         </Box>
       )}

@@ -8,6 +8,7 @@ export interface WalletOrder {
 export interface WalletOrderData {
   info: {
     totalPrice: number;
+    totalPages: number;
   };
   data: WalletOrder[];
 }
@@ -22,6 +23,7 @@ export interface WalletTask {
 export interface WalletTaskData {
   info: {
     totalPoints: number;
+    totalPages: number;
   };
   data: WalletTask[];
 }

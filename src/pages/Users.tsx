@@ -1,4 +1,4 @@
-import { Grid, GridItem, Box, Skeleton, Spinner } from '@chakra-ui/react';
+import { Grid, GridItem, Box } from '@chakra-ui/react';
 import { SingleUser, SpinnerLoader, SearchByInput } from '../components/index';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import UsersStore from '../stores/users';

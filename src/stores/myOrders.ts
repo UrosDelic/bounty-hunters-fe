@@ -1,5 +1,5 @@
 import { initHttp } from 'http/index';
-// import jwtDecode from 'jwt-decode';
+import jwtDecode from 'jwt-decode';
 import { makeAutoObservable, runInAction } from 'mobx';
 import { MyOrders } from 'types';
 
@@ -10,6 +10,7 @@ interface MyOrderStoreProps {
   page: number;
   hasMore: boolean;
   data: MyOrders[];
+  userId: string;
 }
 
 interface MyOrderDataProps {
@@ -24,6 +25,7 @@ class MyOrdersStore {
     page: 1,
     hasMore: true,
     data: [],
+    userId: '',
   };
 
   constructor(private http = initHttp()) {
@@ -49,12 +51,11 @@ class MyOrdersStore {
   getMyOrders = async () => {
     this._MyOrders.loading = true;
     this._MyOrders.success = false;
-    // const accessToken = localStorage.get('accessToken');
-    // const decoded = jwtDecode(accessToken).id
     this._MyOrders.page = 1;
     this._MyOrders.hasMore = true;
+    const userId = this.getUserId();
     const { data } = await this.http.get<MyOrderDataProps>(
-      `/users/a0d6132d-9c7d-46fa-a3b8-1e20d918d605/orders?page=${this._MyOrders.page}&limit=${this._MyOrders.limit}`
+      `/users/${userId}/orders?page=${this._MyOrders.page}&limit=${this._MyOrders.limit}`
     );
     runInAction(() => {
       this._MyOrders.loading = false;
@@ -68,8 +69,9 @@ class MyOrdersStore {
 
   loadMoreOrders = async () => {
     this._MyOrders.page++;
+    const userId = this.getUserId();
     const { data } = await this.http.get<MyOrderDataProps>(
-      `/users/a0d6132d-9c7d-46fa-a3b8-1e20d918d605/orders?page=${this._MyOrders.page}&limit=${this._MyOrders.limit}`
+      `/users/${userId}/orders?page=${this._MyOrders.page}&limit=${this._MyOrders.limit}`
     );
     runInAction(() => {
       if (data) {
@@ -79,6 +81,13 @@ class MyOrdersStore {
         this._MyOrders.data = [...this._MyOrders.data, ...data?.data];
       }
     });
+  };
+
+  getUserId = () => {
+    const bhToken = localStorage.getItem('bh-token') as string;
+    const decoded = jwtDecode<{ userId: string }>(bhToken);
+    const userId = decoded.userId;
+    return userId;
   };
 }
 
