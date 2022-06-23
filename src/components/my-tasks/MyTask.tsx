@@ -1,4 +1,12 @@
-import { Box, Badge, Flex, Text } from '@chakra-ui/react';
+import {
+  Box,
+  Badge,
+  Flex,
+  Text,
+  Heading,
+  VStack,
+  HStack,
+} from '@chakra-ui/react';
 import StyledCard from 'components/core/StyledCard';
 import { observer } from 'mobx-react';
 interface MyTaskProps {
@@ -33,31 +41,34 @@ const MyTask = ({
   };
 
   return (
-    <Box margin="1rem" w={['30rem', '25rem', '25rem', '30rem']}>
+    <Box margin="1rem" w={['20rem', '25rem', '25rem', '30rem']}>
       <StyledCard>
-        <Box textAlign="center" padding="2rem">
-          <Text fontSize="18px" textAlign="center">
+        <VStack spacing="24px">
+          <Heading fontSize="18px" textAlign="center">
             {title}
-          </Text>
-          <Box my={2} px={2}>
-            <Badge
-              px="5"
-              borderRadius="full"
-              colorScheme={switchStatusColor(status)}
-            >
-              {status}
-            </Badge>
-          </Box>
-          <Box px={2} my={2} textAlign="center">
+          </Heading>
+
+          <Badge
+            px="5"
+            borderRadius="full"
+            colorScheme={switchStatusColor(status)}
+          >
+            {status}
+          </Badge>
+
+          <Text px={2} my={2} textAlign="center">
             {description}
-          </Box>
-          <Flex px={2} my={2} justify="space-between">
+          </Text>
+
+          <HStack>
             <Text textAlign="center">{createdAt}</Text>
-            {/* <Divider></Divider> */}
             <Text textAlign="center">{updatedAt}</Text>
-          </Flex>
-          <Text textAlign="center">{points}</Text>
-        </Box>
+          </HStack>
+
+          <Badge px="5" bg="purple.300" borderRadius="10px">
+            {points}
+          </Badge>
+        </VStack>
       </StyledCard>
     </Box>
   );

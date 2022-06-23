@@ -16,7 +16,7 @@ const StyledCard = ({ children }: HorizontalCardProps) => {
         justifyContent={['center', 'space-between']}
         minH={60}
         mx="auto"
-        // w={'100%'}
+        w={'100%'}
         h={'100%'}
         className={background}
         rounded="md"
