@@ -1,4 +1,4 @@
-import { Box, Text } from '@chakra-ui/react';
+import { Box, Text, Heading } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import TasksStore from '../../stores/tasks';
 import { Link } from 'react-router-dom';
@@ -21,6 +21,9 @@ const MyTasksPage = () => {
       alignItems={['center', 'center']}
       flexDirection="column"
     >
+      <Heading as="h1" textAlign="center" marginTop="50px" marginBottom="50px">
+        My Tasks
+      </Heading>
       <>
         {loading ? (
           <SpinnerLoader />
