@@ -11,20 +11,27 @@ interface UserToken {
   roles: [];
   userId: string;
 }
-
+interface Profile{
+  name:string;
+  picture: string;
+  email:string;
+}
 interface googleUserData {
   clientId: string;
   credential: string;
+  
 }
 
 const userDefault: UserToken = {
   exp: null,
   roles: [],
   userId: '',
+
 };
 
 class LoginStore {
   _googleUserData: googleUserData = {
+    
     clientId: '',
     credential: '',
   };
@@ -42,9 +49,18 @@ class LoginStore {
     accessToken: '',
     refreshToken: '',
   };
-  get userId() {
-    return this._user.userId;
+  _profile: Profile={
+    name:'',
+    picture: '',
+    email:'',
   }
+
+  get googleProfile(){
+    return this._profile;
+  }
+get userId(){
+  return this._user.userId;
+}
   get isAuth() {
     return this._user.exp ? this._user.exp < Date.now() : false;
   }
@@ -61,6 +77,8 @@ class LoginStore {
     return this._user.roles.map(role => {
       return role;
     });
+
+  
     /**
      * roles = {
      *  Super_Admin: boolean,
@@ -71,17 +89,34 @@ class LoginStore {
   constructor(private http = initHttp()) {
     makeAutoObservable(this);
   }
+ 
   login = async (response: googleUserData) => {
     if (response) {
       this._googleUserData = response;
       this._googleUserData.credential = response.credential;
+ 
+        localStorage.setItem('bh-profile', response.credential );
+      
       console.log(jwtDecode(this._googleUserData.credential), 'google data');
       this.signIn();
+     
+
     }
   };
+profileData = ()=>{
+  const profile = localStorage.getItem('bh-profile') as string;
+  if(profile){ 
+    const decode = jwtDecode<Profile>(profile, { header: true });
+    this._profile.name = decode.name
+    this._profile.picture = decode.picture
+    this._profile.email = decode.email
+  }
+ 
 
+}
   logout = () => {
     localStorage.removeItem('bh-token');
+    localStorage.removeItem('bh-profile');
     this._user = userDefault;
   };
 
