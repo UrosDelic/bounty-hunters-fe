@@ -1,16 +1,5 @@
 import { useEffect } from 'react';
-import {
-    Box,
-    Skeleton,
-    Text,
-    Flex,
-    Avatar,
-    Hide,
-    Show,
-    Link,
-    Grid,
-    Image
-} from '@chakra-ui/react';
+import { Box, Skeleton, Text, Flex, Link, Grid } from '@chakra-ui/react';
 
 import { observer } from 'mobx-react';
 import InfiniteScroll from 'react-infinite-scroll-component';
@@ -19,21 +8,20 @@ import userFeeds from 'stores/user-feed';
 
 import { Link as RouterLink } from 'react-router-dom';
 import { useRelativeTime } from 'custom-hooks/useRelativeTime';
-import Notifications from '../../stores/user-feed'
+import Notifications from '../../stores/user-feed';
 const FeedList = () => {
     const { allFeeds, checkForMore } = Notifications;
     const relativeTime = useRelativeTime();
 
     useEffect(() => {
         Notifications.collectFeeds();
-    }, [])
+    }, []);
 
     return (
         <>
             <Flex flexDirection="column" my={2}>
-                <Box w='100%' >
+                <Box w="100%">
                     <Flex alignItems={'center'} my={4}>
-
                         <Text
                             fontWeight="thin"
                             fontSize={{ base: 'xl', md: '2xl' }}
@@ -43,7 +31,6 @@ const FeedList = () => {
                         >
                             Check the <b>Latest News!</b>{' '}
                         </Text>
-
                     </Flex>
 
                     <InfiniteScroll
@@ -75,19 +62,14 @@ const FeedList = () => {
                                             transition: '0.4s ease-out',
                                         }}
                                     >
-
                                         <StyledCard>
-
                                             <Link
                                                 as={RouterLink}
                                                 to={`/${p.type.toLowerCase()}/${p.id}`}
                                                 _focus={{ outline: 0 }}
                                                 style={{ textDecoration: 'none' }}
                                             >
-
-                                                <Flex flexDirection='column' px={10}>
-
-
+                                                <Flex flexDirection="column" px={10}>
                                                     <Text
                                                         fontWeight="thin"
                                                         fontSize={{ base: 'lg', xl: 'xl' }}
@@ -107,10 +89,7 @@ const FeedList = () => {
                                                         {relativeTime(p.createdAt)}
                                                     </Text>
                                                 </Flex>
-
                                             </Link>
-
-
                                         </StyledCard>
                                     </Box>
                                 ))}

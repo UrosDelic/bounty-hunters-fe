@@ -12,19 +12,16 @@ import {
 import { observer } from 'mobx-react';
 import { Link as RouterLink } from 'react-router-dom';
 import Login from '../../stores/Login';
-import { useEffect } from 'react'
+import { useEffect } from 'react';
 
 const ProfileWidget = () => {
     const img: string = require('../../img/avatar.svg').default;
 
     useEffect(() => {
-
-        Login.profileData()
-    }, [])
+        Login.profileData();
+    }, []);
 
     const { googleProfile } = Login;
-
-    console.log(googleProfile)
 
     return (
         <>
@@ -44,7 +41,6 @@ const ProfileWidget = () => {
                                 <Text fontWeight="thin" fontSize="sm" mt={2}>
                                     {googleProfile.email}
                                 </Text>
-
                             </Flex>
                         </Flex>
 
@@ -209,7 +205,7 @@ const ProfileWidget = () => {
                                 <Text fontWeight="thin" fontSize="xl" mt={2}>
                                     {googleProfile.name}
                                 </Text>
-                                <Text fontWeight="thin" fontSize="xs" >
+                                <Text fontWeight="thin" fontSize="xs">
                                     {googleProfile.email}
                                 </Text>
                             </Flex>
@@ -514,6 +510,5 @@ const ProfileWidget = () => {
         </>
     );
 };
-
 
 export default observer(ProfileWidget);
