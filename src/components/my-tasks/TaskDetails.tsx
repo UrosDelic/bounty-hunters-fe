@@ -56,8 +56,9 @@ const TaskDetails = ({
           <Text align="center"> {description}</Text>
 
           <Button
+            colorScheme="purple"
+            variant="solid"
             alignSelf="center"
-            variant="outline"
             onClick={onAddDescription}
             rightIcon={<EditIcon />}
           >
