@@ -1,4 +1,13 @@
-import { Flex, Spacer, Text, Box, Badge, Button } from '@chakra-ui/react';
+import {
+  Flex,
+  Spacer,
+  Text,
+  Box,
+  Badge,
+  Button,
+  Stack,
+  Heading,
+} from '@chakra-ui/react';
 import { EditIcon } from '@chakra-ui/icons';
 import { Task } from 'types';
 import dayjs from 'dayjs';
@@ -28,51 +37,39 @@ const TaskDetails = ({
     //
   };
   return (
-    <Box mt={10}>
+    <Box mt={10} w={['50rem']}>
       <StyledCard>
-        <Flex
-          direction="column"
-          className="test-details"
-          w="50rem"
-          h="30rem"
-          p="5"
-          m="5"
-        >
-          <Text textAlign="center" marginTop="3">
+        <Stack minW="100%" p="50px" spacing="30px">
+          <Heading textAlign="center" marginTop="3">
             {title}
-          </Text>
-          <Flex my={2}>
-            <Text>{dayjs(createdAt).format('DD-MM-YYYY')}</Text>
-            <Spacer />
-            <Text>{deadline}</Text>
-          </Flex>
-          <Text align="center"> {description}</Text>
-          <Flex my={2} justify="space-between">
-            <Box alignSelf="center">
-              <Badge px="5" bg="purple.300" borderRadius="10px">
-                {points}
-              </Badge>
-            </Box>
+          </Heading>
+          <Box>
+            <Badge px="5" bg="purple.300" borderRadius="10px">
+              {points}
+            </Badge>
+          </Box>
 
-            <Box>
-              <Button
-                variant="outline"
-                color="purple.300"
-                borderColor="purple.300"
-                onClick={onAddDescription}
-                rightIcon={<EditIcon />}
-              >
-                Add description
-              </Button>
-            </Box>
-          </Flex>
+          <Text>{dayjs(createdAt).format('DD-MM-YYYY')}</Text>
+
+          <Text>{deadline}</Text>
+
+          <Text align="center"> {description}</Text>
+
+          <Button
+            alignSelf="center"
+            variant="outline"
+            onClick={onAddDescription}
+            rightIcon={<EditIcon />}
+          >
+            Add description
+          </Button>
 
           <BhEditor
             isOpen={showEditor}
             isClosed={closeEditor}
             submit={onSubmit}
           />
-        </Flex>
+        </Stack>
       </StyledCard>
     </Box>
   );
