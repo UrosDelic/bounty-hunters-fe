@@ -1,24 +1,37 @@
 import { useEffect } from 'react';
-import { Box, Skeleton, Text, Flex, Avatar } from '@chakra-ui/react';
+import { Box, Skeleton, Text, Flex, Link, Grid } from '@chakra-ui/react';
+
 import { observer } from 'mobx-react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { StyledCard } from 'components/index';
 import userFeeds from 'stores/user-feed';
-import dayjs from 'dayjs';
+
+import { Link as RouterLink } from 'react-router-dom';
+import { useRelativeTime } from 'custom-hooks/useRelativeTime';
+import Notifications from '../../stores/user-feed';
 const FeedList = () => {
-    const { allFeeds, checkForMore } = userFeeds;
+    const { allFeeds, checkForMore } = Notifications;
+    const relativeTime = useRelativeTime();
 
     useEffect(() => {
-        userFeeds.collectFeeds();
+        Notifications.collectFeeds();
     }, []);
 
     return (
         <>
             <Flex flexDirection="column" my={2}>
-                <Box w={{ base: '100%', lg: '80%' }} p={6} mx="auto">
-                    <Text fontWeight="thin" fontSize={{ base: '2xl', md: '3xl' }} mb={4}>
-                        Check the <b>Latest News!</b>{' '}
-                    </Text>
+                <Box w="100%">
+                    <Flex alignItems={'center'} my={4}>
+                        <Text
+                            fontWeight="thin"
+                            fontSize={{ base: 'xl', md: '2xl' }}
+                            mb={4}
+                            mx={5}
+                            textAlign={{ base: 'center', lg: 'start' }}
+                        >
+                            Check the <b>Latest News!</b>{' '}
+                        </Text>
+                    </Flex>
 
                     <InfiniteScroll
                         dataLength={allFeeds.length}
@@ -35,56 +48,37 @@ const FeedList = () => {
                             </p>
                         }
                     >
-                        {allFeeds &&
-                            allFeeds.map((p, key: any) => (
-                                <Box
-                                    key={key}
-                                    mx="auto"
-                                    p={2}
-                                    _hover={{
-                                        cursor: 'pointer',
-                                        transform: 'translateY(-5px)',
-                                        transition: '0.4s ease-out',
-                                    }}
-                                >
-                                    <StyledCard>
-                                        <Flex
-                                            flexDirection="column"
-                                            my="auto"
-                                            minW="100%"
-                                            p={{ base: 2, lg: 8 }}
-                                        >
-                                            <Flex
-                                                mb={6}
-                                                flexDirection={{ base: 'column', lg: 'row' }}
-                                                justifyContent="space-between"
+                        <Grid gridTemplateColumns={{ base: '1fr', lg: '1fr 1fr' }} gap={5}>
+                            {allFeeds &&
+                                allFeeds.map((p, key: any) => (
+                                    <Box
+                                        key={key}
+                                        mx="auto"
+                                        p={2}
+                                        w={{ base: '90%', md: '100%' }}
+                                        _hover={{
+                                            cursor: 'pointer',
+                                            transform: 'translateY(-5px)',
+                                            transition: '0.4s ease-out',
+                                        }}
+                                    >
+                                        <StyledCard>
+                                            <Link
+                                                as={RouterLink}
+                                                to={`/${p.type.toLowerCase()}/${p.id}`}
+                                                _focus={{ outline: 0 }}
+                                                style={{ textDecoration: 'none' }}
                                             >
-                                                <Flex alignItems="center">
+                                                <Flex flexDirection="column" px={10}>
                                                     <Text
-                                                        fontWeight="bold"
-                                                        fontSize={{ base: 'xl', lg: '2xl' }}
+                                                        fontWeight="thin"
+                                                        fontSize={{ base: 'lg', xl: 'xl' }}
                                                         textAlign={{ base: 'center', lg: 'start' }}
-                                                        my={{ base: 4, md: 0 }}
+                                                        my={{ base: 8, md: 0 }}
+                                                        mx="auto"
                                                     >
                                                         {p.message}
-
-
                                                     </Text>
-                                                </Flex>
-                                            </Flex>
-
-                                            <Flex
-                                                alignItems={{ base: 'center', lg: 'start' }}
-                                                flexDirection={{ base: 'column', lg: 'row' }}
-                                                my={2}
-                                            >
-                                                <Avatar size={'lg'} src="https://bit.ly/dan-abramov" />
-                                                <Flex
-                                                    ml={2}
-                                                    flexDirection="column"
-                                                    alignItems={{ base: 'center', lg: 'start' }}
-                                                >
-                                                    <Text fontSize="lg">Milan Miletic</Text>
                                                     <Text
                                                         fontSize="xs"
                                                         mt={1}
@@ -92,28 +86,14 @@ const FeedList = () => {
                                                         as="sub"
                                                         color="gray.200"
                                                     >
-                                                        {dayjs(p.createdAt).format('DD/MM/YYYY')}
+                                                        {relativeTime(p.createdAt)}
                                                     </Text>
                                                 </Flex>
-                                            </Flex>
-                                            <Flex
-                                                justifyContent="space-between"
-                                                alignItems="center"
-                                                flexDirection={{ base: 'column', lg: 'row' }}
-                                            >
-                                                <Box my={3}>
-                                                    <Text
-                                                        fontWeight={'thin'}
-                                                        overflow="hidden"
-                                                        fontSize={{ base: 'sm', md: 'lg' }}
-                                                        textAlign={{ base: 'center', lg: 'start' }}
-                                                    ></Text>
-                                                </Box>
-                                            </Flex>
-                                        </Flex>
-                                    </StyledCard>
-                                </Box>
-                            ))}
+                                            </Link>
+                                        </StyledCard>
+                                    </Box>
+                                ))}
+                        </Grid>
                     </InfiniteScroll>
                 </Box>
             </Flex>

@@ -15,7 +15,7 @@ class userFeeds {
     loading: false,
     hasMore: true,
     data: [],
-    limit: 5,
+    limit: 6,
     offset: 1,
   };
 
