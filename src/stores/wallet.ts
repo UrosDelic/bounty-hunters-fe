@@ -30,7 +30,7 @@ class WalletStore {
     tasks: [],
     totalPrice: 0,
     totalPoints: 0,
-    limit: 4,
+    limit: 2,
     orderPage: 1,
     taskPage: 1,
     totalOrdersPages: 1,
@@ -178,11 +178,11 @@ class WalletStore {
     }
   }
 
-  setTaskPage(pageNum: string) {
+  setTaskPage(pageNum: string | null) {
     this._wallet.taskPage = Number(pageNum);
   }
 
-  setOrderPage(pageNum: string) {
+  setOrderPage(pageNum: string | null) {
     this._wallet.orderPage = Number(pageNum);
   }
 }

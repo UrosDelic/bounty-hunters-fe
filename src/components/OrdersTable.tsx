@@ -11,12 +11,13 @@ import dayjs from 'dayjs';
 import WalletStore from '../stores/wallet';
 import Pagination from './Pagination';
 import { observer } from 'mobx-react';
+import { WalletOrder } from '../types/wallet';
 
-type TransactionTableProps = {
-  data: any;
+type OrdersTableProps = {
+  data: WalletOrder[];
 };
 
-function OrdersTable({ data }: TransactionTableProps) {
+function OrdersTable({ data }: OrdersTableProps) {
   const { orderPage, totalOrderPages } = WalletStore;
 
   return (
