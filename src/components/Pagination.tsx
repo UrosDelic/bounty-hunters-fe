@@ -15,6 +15,9 @@ function Pagination({
   onNext,
   onPrev,
 }: PaginationProps) {
+  const isNextDisabled = currentPage === totalPages;
+  const isPrevDisabled = currentPage === 1;
+
   return (
     <Flex alignItems="center" padding="10px 22px">
       <IconButton
@@ -26,6 +29,7 @@ function Pagination({
         border="1px solid white"
         _focus={{ outline: 'none' }}
         onClick={onPrev}
+        isDisabled={isPrevDisabled}
       />
       <Text margin="0px 15px">{`${currentPage} of ${totalPages}`}</Text>
       <IconButton
@@ -37,6 +41,7 @@ function Pagination({
         border="1px solid white"
         _focus={{ outline: 'none' }}
         onClick={onNext}
+        isDisabled={isNextDisabled}
       />
     </Flex>
   );

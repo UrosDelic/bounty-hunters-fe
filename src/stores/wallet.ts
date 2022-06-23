@@ -126,36 +126,64 @@ class WalletStore {
     return userId;
   };
 
-  increaseOrderPage() {
+  refetchOrders = async () => {
+    const userId = this.getUserId();
+    const { data } = await this.http.get<WalletOrderData>(
+      `/users/${userId}/transactions/order?sortBy=createdAt&sortMode=asc&page=${this._wallet.orderPage}&limit=${this._wallet.limit}`
+    );
+    runInAction(() => {
+      if (data) {
+        this._wallet.orders = data?.data;
+      }
+    });
+  };
+
+  refetchTasks = async () => {
+    const userId = this.getUserId();
+    const { data } = await this.http.get<WalletTaskData>(
+      `/users/${userId}/transactions/task?sortBy=createdAt&sortMode=asc&page=${this._wallet.taskPage}&limit=${this._wallet.limit}`
+    );
+    runInAction(() => {
+      if (data) {
+        this._wallet.tasks = data?.data;
+      }
+    });
+  };
+
+  increaseOrderPage = async () => {
     if (this._wallet.orderPage < this._wallet.totalOrdersPages) {
       this._wallet.orderPage++;
-      this._wallet.loading = false;
-      this.getOrders();
+      this.refetchOrders();
     }
-  }
+  };
 
   increaseTaskPage() {
     if (this._wallet.taskPage < this._wallet.totalTasksPages) {
       this._wallet.taskPage++;
-      this._wallet.loading = false;
-      this.getTasks();
+      this.refetchTasks();
     }
   }
 
   decreaseOrderPage() {
     if (this._wallet.orderPage > 1) {
       this._wallet.orderPage--;
-      this._wallet.loading = false;
-      this.getOrders();
+      this.refetchOrders();
     }
   }
 
   decreaseTaskPage() {
     if (this._wallet.taskPage > 1) {
       this._wallet.taskPage--;
-      this._wallet.loading = false;
-      this.getTasks();
+      this.refetchTasks();
     }
+  }
+
+  setTaskPage(pageNum: string) {
+    this._wallet.taskPage = Number(pageNum);
+  }
+
+  setOrderPage(pageNum: string) {
+    this._wallet.orderPage = Number(pageNum);
   }
 }
 
