@@ -33,7 +33,7 @@ class TasksStore {
     return this._tasks.loading;
   }
 
-  getTasks = async () => {
+  getMyTasks = async () => {
     this._tasks.loading = true;
     const { data } = await this.http.get<Tasks>('/tasks');
     runInAction(() => {
