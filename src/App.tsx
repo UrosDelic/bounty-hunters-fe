@@ -21,17 +21,17 @@ import theme from './theme/index';
 import ProtectedRoute from './routes/ProtectedRoute';
 import MyTasksPage from './pages/my-tasks/MyTask';
 import TaskDetailsPage from './pages/my-tasks/TaskDetails';
-import { UserTypes } from './context/userTypes';
+//import { Roles } from './context/Roles';
 import './theme/styles.css';
 import Login from 'components/Login';
 import LoginStore from 'stores/Login';
 import { useEffect } from 'react';
 import { useToast } from '@chakra-ui/react';
+import { Roles } from 'types';
 
 function App() {
   // const toast = useToast();
-  const { isAuth, authResolved, isEmployee, isAdmin, isSuperAdmin } =
-    LoginStore;
+  const { isAuth, authResolved } = LoginStore;
   useEffect(() => {
     LoginStore.checkUserFromStorage();
   }, []);
@@ -40,13 +40,15 @@ function App() {
     return null;
   }
 
+  console.log('isAuth', isAuth, authResolved);
+
   return (
     <ChakraProvider theme={theme}>
       <BrowserRouter>
         {isAuth === true ? (
           <Routes>
             <Route element={<Layout />}>
-              {isEmployee ? (
+              {/* {isEmployee ? (
                 <>
                   <Route path="/feed/*" element={<Feed />} />
                   <Route path="/new-tasks" element={<NewTasks />} />
@@ -80,24 +82,11 @@ function App() {
                   <Route path="/products" element={<Products />} />
                   <Route path="/all-orders" element={<Orders />} />
                 </>
-              ) : null}
-              {/* <Route
-                element={
-                  <ProtectedRoute
-                    allowedRoles={[
-                      UserTypes.EMPLOYEE,
-                      UserTypes.ADMIN,
-                      UserTypes.SUPER_ADMIN,
-                    ]}
-                  />
-                }
-              >
-                <Route path="/" element={<DefaultPage />} />
-              </Route>
+              ) : null} */}
+              <Route path="/" element={<DefaultPage />}></Route>
               <Route
-                element={<ProtectedRoute allowedRoles={[UserTypes.EMPLOYEE]} />}
+                element={<ProtectedRoute allowedRoles={[Roles.EMPLOYEE]} />}
               >
-                
                 <Route path="/feed/*" element={<Feed />} />
                 <Route path="/new-tasks" element={<NewTasks />} />
                 <Route path="/my-tasks" element={<MyTasksPage />} />
@@ -108,25 +97,21 @@ function App() {
                 <Route path="/my-orders" element={<MyOrders />} />
               </Route>
 
-              <Route
-                element={<ProtectedRoute allowedRoles={[UserTypes.ADMIN]} />}
-              >
+              <Route element={<ProtectedRoute allowedRoles={[Roles.ADMIN]} />}>
                 <Route path="/all-tasks" element={<div>tasks</div>} />
                 <Route path="/all-tasks/:id" element={<div>some task</div>} />
               </Route>
 
               <Route
-                element={
-                  <ProtectedRoute allowedRoles={[UserTypes.SUPER_ADMIN]} />
-                }
+                element={<ProtectedRoute allowedRoles={[Roles.SUPER_ADMIN]} />}
               >
                 <Route path="/users" element={<Users />} />
                 <Route path="/products" element={<Products />} />
                 <Route path="/all-orders" element={<Orders />} />
-              </Route> */}
-            </Route>
+              </Route>
 
-            <Route path="*" element={<NotFound />} />
+              <Route path="*" element={<NotFound />} />
+            </Route>
           </Routes>
         ) : (
           <Login />

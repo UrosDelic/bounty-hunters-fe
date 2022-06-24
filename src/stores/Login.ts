@@ -2,6 +2,7 @@ import { initHttp } from 'http/index';
 import { makeAutoObservable, runInAction } from 'mobx';
 import jwtDecode from 'jwt-decode';
 import { ThirtyFpsOutlined } from '@mui/icons-material';
+import { Roles } from 'types';
 interface SingInData {
   accessToken: string;
   refreshToken: string;
@@ -9,7 +10,7 @@ interface SingInData {
 
 interface UserToken {
   exp: number | null;
-  roles: [];
+  roles: Roles[];
   userId: string;
 }
 interface Profile {
@@ -22,11 +23,11 @@ interface googleUserData {
   credential: string;
 }
 
-interface Roles {
-  employee: string;
-  admin: string;
-  super_admin: string;
-}
+// interface Roles {
+//   employee: string;
+//   admin: string;
+//   super_admin: string;
+// }
 
 const userDefault: UserToken = {
   exp: null,
@@ -39,11 +40,13 @@ class LoginStore {
     credential: '',
   };
 
-  userRoles: Roles = {
-    employee: '',
-    admin: '',
-    super_admin: '',
-  };
+  private readonly defaultUserRoles: Record<Roles, boolean> = Object.values(
+    Roles
+  ).reduce((acc, one) => {
+    acc[one] = false;
+    return acc;
+  }, {} as Record<Roles, boolean>);
+  userRoles = this.defaultUserRoles;
 
   // _user: UserToken = token ? jwtDecode(token) : userDefault;
   _authResolved = false;
@@ -85,21 +88,21 @@ class LoginStore {
     return this._googleUserData?.credential;
   }
 
-  get roles() {
-    return this.userRoles;
-  }
+  // get roles() {
+  //   return this.userRoles;
+  // }
 
-  get isEmployee() {
-    return this.userRoles.employee;
-  }
+  // get isEmployee() {
+  //   return this.userRoles.employee;
+  // }
 
-  get isAdmin() {
-    return this.userRoles.admin;
-  }
+  // get isAdmin() {
+  //   return this.userRoles.admin;
+  // }
 
-  get isSuperAdmin() {
-    return this.userRoles.super_admin;
-  }
+  // get isSuperAdmin() {
+  //   return this.userRoles.super_admin;
+  // }
 
   // get userRoles() {
   //   return this._user.roles.map(role => {
@@ -109,6 +112,10 @@ class LoginStore {
 
   constructor(private http = initHttp()) {
     makeAutoObservable(this);
+  }
+
+  hasRole(role: Roles) {
+    return this.userRoles[role];
   }
 
   login = async (response: googleUserData) => {
@@ -164,16 +171,8 @@ class LoginStore {
   };
 
   filterRolesOnLogin = () => {
-    this._user.roles.filter(role => {
-      if (role === 'EMPLOYEE') {
-        this.userRoles.employee = role;
-      }
-      if (role === 'ADMIN') {
-        this.userRoles.admin = role;
-      }
-      if (role === 'SUPER_ADMIN') {
-        this.userRoles.super_admin = role;
-      }
+    this._user.roles.forEach(role => {
+      this.userRoles[role] = true;
     });
   };
 }

@@ -1,23 +1,28 @@
+import { observer } from 'mobx-react';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
-import { useAppContext } from '../context/appContext';
-import { UserTypes } from '../context/userTypes';
+import Login from 'stores/Login';
+import { Roles } from 'types';
+//import { useAppContext } from '../context/appContext';
+//import { UserTypes } from '../context/userTypes';
 
 type AllowedRolesProp = {
-  allowedRoles: Array<UserTypes>;
+  allowedRoles: Array<Roles>;
+  children?: any;
 };
 
-function ProtectedRoute({ allowedRoles }: AllowedRolesProp) {
-  const { userRoles } = useAppContext();
+function ProtectedRoute({ allowedRoles, children }: AllowedRolesProp) {
+  //const { userRoles } = useAppContext();
   const location = useLocation();
 
-  if (!userRoles) {
-    return <Navigate to="/login" state={{ from: location }} replace />;
-  }
+  // if (!isAuth) {
+  //   return <Navigate to="/login" state={{ from: location }} replace />;
+  // }
 
-  if (userRoles.some(role => allowedRoles.includes(role))) {
+  if (allowedRoles.some(role => Login.hasRole(role))) {
     return <Outlet />;
   }
+
   return <Navigate to="/" state={{ from: location }} replace />;
 }
 
-export default ProtectedRoute;
+export default observer(ProtectedRoute);
