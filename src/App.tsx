@@ -30,8 +30,8 @@ import { useToast } from '@chakra-ui/react';
 
 function App() {
   // const toast = useToast();
-  const { isAuth, authResolved } = LoginStore;
-  console.log(isAuth);
+  const { isAuth, authResolved, isEmployee, isAdmin, isSuperAdmin } =
+    LoginStore;
   useEffect(() => {
     LoginStore.checkUserFromStorage();
   }, []);
@@ -46,7 +46,42 @@ function App() {
         {isAuth === true ? (
           <Routes>
             <Route element={<Layout />}>
-              <Route
+              {isEmployee ? (
+                <>
+                  <Route path="/feed/*" element={<Feed />} />
+                  <Route path="/new-tasks" element={<NewTasks />} />
+                  <Route path="/my-tasks" element={<MyTasksPage />} />
+                  <Route
+                    path="/task-details/:id"
+                    element={<TaskDetailsPage />}
+                  />
+                  <Route path="/wallet" element={<Wallet />} />
+                  <Route path="/store" element={<Store />} />
+                  <Route path="/store/:id" element={<ProductDetails />} />
+                  <Route path="/my-orders" element={<MyOrders />} />
+                </>
+              ) : null}
+              {isEmployee || isAdmin || isSuperAdmin ? (
+                <Route path="/" element={<DefaultPage />} />
+              ) : null}
+              {isAdmin ? (
+                <>
+                  <Route path="/all-tasks" element={<div>tasks</div>} />
+                  <Route
+                    path="/all-tasks/:id"
+                    element={<div>some task</div>}
+                  />{' '}
+                </>
+              ) : null}
+              {isSuperAdmin ? (
+                <>
+                  {' '}
+                  <Route path="/users" element={<Users />} />
+                  <Route path="/products" element={<Products />} />
+                  <Route path="/all-orders" element={<Orders />} />
+                </>
+              ) : null}
+              {/* <Route
                 element={
                   <ProtectedRoute
                     allowedRoles={[
@@ -62,6 +97,7 @@ function App() {
               <Route
                 element={<ProtectedRoute allowedRoles={[UserTypes.EMPLOYEE]} />}
               >
+                
                 <Route path="/feed/*" element={<Feed />} />
                 <Route path="/new-tasks" element={<NewTasks />} />
                 <Route path="/my-tasks" element={<MyTasksPage />} />
@@ -87,7 +123,7 @@ function App() {
                 <Route path="/users" element={<Users />} />
                 <Route path="/products" element={<Products />} />
                 <Route path="/all-orders" element={<Orders />} />
-              </Route>
+              </Route> */}
             </Route>
 
             <Route path="*" element={<NotFound />} />

@@ -1,6 +1,7 @@
 import { initHttp } from 'http/index';
 import { makeAutoObservable, runInAction } from 'mobx';
 import jwtDecode from 'jwt-decode';
+import { ThirtyFpsOutlined } from '@mui/icons-material';
 interface SingInData {
   accessToken: string;
   refreshToken: string;
@@ -21,16 +22,27 @@ interface googleUserData {
   credential: string;
 }
 
+interface Roles {
+  employee: string;
+  admin: string;
+  super_admin: string;
+}
+
 const userDefault: UserToken = {
   exp: null,
   roles: [],
   userId: '',
 };
-
 class LoginStore {
   _googleUserData: googleUserData = {
     clientId: '',
     credential: '',
+  };
+
+  userRoles: Roles = {
+    employee: '',
+    admin: '',
+    super_admin: '',
   };
 
   // _user: UserToken = token ? jwtDecode(token) : userDefault;
@@ -46,6 +58,7 @@ class LoginStore {
     accessToken: '',
     refreshToken: '',
   };
+
   _profile: Profile = {
     name: '',
     picture: '',
@@ -55,9 +68,11 @@ class LoginStore {
   get googleProfile() {
     return this._profile;
   }
+
   get userId() {
     return this._user.userId;
   }
+
   get isAuth() {
     return this._user.exp ? this._user.exp < Date.now() : false;
   }
@@ -70,18 +85,28 @@ class LoginStore {
     return this._googleUserData?.credential;
   }
 
-  get userRoles() {
-    return this._user.roles.map(role => {
-      return role;
-    });
-
-    /**
-     * roles = {
-     *  Super_Admin: boolean,
-     * ...
-     * }
-     */
+  get roles() {
+    return this.userRoles;
   }
+
+  get isEmployee() {
+    return this.userRoles.employee;
+  }
+
+  get isAdmin() {
+    return this.userRoles.admin;
+  }
+
+  get isSuperAdmin() {
+    return this.userRoles.super_admin;
+  }
+
+  // get userRoles() {
+  //   return this._user.roles.map(role => {
+  //     return role;
+  //   });
+  // }
+
   constructor(private http = initHttp()) {
     makeAutoObservable(this);
   }
@@ -90,13 +115,11 @@ class LoginStore {
     if (response) {
       this._googleUserData = response;
       this._googleUserData.credential = response.credential;
-
       localStorage.setItem('bh-profile', response.credential);
-
-      console.log(jwtDecode(this._googleUserData.credential), 'google data');
       this.signIn();
     }
   };
+
   profileData = () => {
     const profile = localStorage.getItem('bh-profile') as string;
     if (profile) {
@@ -106,6 +129,7 @@ class LoginStore {
       this._profile.email = decode.email;
     }
   };
+
   logout = () => {
     localStorage.removeItem('bh-token');
     localStorage.removeItem('bh-profile');
@@ -121,6 +145,9 @@ class LoginStore {
         this._signInData.accessToken = data.accessToken;
         localStorage.setItem('bh-token', data.accessToken);
         this._user = jwtDecode(this._signInData.accessToken);
+        if (this._user.roles.length !== 0) {
+          this.filterRolesOnLogin();
+        }
       }
     });
   };
@@ -131,8 +158,23 @@ class LoginStore {
       const token = localStorage.getItem('bh-token');
       if (token) {
         this._user = jwtDecode(token);
+        this.filterRolesOnLogin();
       }
     }
+  };
+
+  filterRolesOnLogin = () => {
+    this._user.roles.filter(role => {
+      if (role === 'EMPLOYEE') {
+        this.userRoles.employee = role;
+      }
+      if (role === 'ADMIN') {
+        this.userRoles.admin = role;
+      }
+      if (role === 'SUPER_ADMIN') {
+        this.userRoles.super_admin = role;
+      }
+    });
   };
 }
 
