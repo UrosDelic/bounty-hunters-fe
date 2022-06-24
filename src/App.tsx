@@ -3,7 +3,6 @@ import { Routes, Route } from 'react-router-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { Layout, SpinnerLoader } from './components';
 import { observer } from 'mobx-react';
-
 import {
   DefaultPage,
   NotFound,
@@ -21,7 +20,6 @@ import theme from './theme/index';
 import ProtectedRoute from './routes/ProtectedRoute';
 import MyTasksPage from './pages/my-tasks/MyTask';
 import TaskDetailsPage from './pages/my-tasks/TaskDetails';
-//import { Roles } from './context/Roles';
 import './theme/styles.css';
 import Login from 'components/Login';
 import LoginStore from 'stores/Login';
@@ -30,7 +28,6 @@ import { useToast } from '@chakra-ui/react';
 import { Roles } from 'types';
 
 function App() {
-  // const toast = useToast();
   const { isAuth, authResolved } = LoginStore;
   useEffect(() => {
     LoginStore.checkUserFromStorage();
@@ -48,41 +45,6 @@ function App() {
         {isAuth === true ? (
           <Routes>
             <Route element={<Layout />}>
-              {/* {isEmployee ? (
-                <>
-                  <Route path="/feed/*" element={<Feed />} />
-                  <Route path="/new-tasks" element={<NewTasks />} />
-                  <Route path="/my-tasks" element={<MyTasksPage />} />
-                  <Route
-                    path="/task-details/:id"
-                    element={<TaskDetailsPage />}
-                  />
-                  <Route path="/wallet" element={<Wallet />} />
-                  <Route path="/store" element={<Store />} />
-                  <Route path="/store/:id" element={<ProductDetails />} />
-                  <Route path="/my-orders" element={<MyOrders />} />
-                </>
-              ) : null}
-              {isEmployee || isAdmin || isSuperAdmin ? (
-                <Route path="/" element={<DefaultPage />} />
-              ) : null}
-              {isAdmin ? (
-                <>
-                  <Route path="/all-tasks" element={<div>tasks</div>} />
-                  <Route
-                    path="/all-tasks/:id"
-                    element={<div>some task</div>}
-                  />{' '}
-                </>
-              ) : null}
-              {isSuperAdmin ? (
-                <>
-                  {' '}
-                  <Route path="/users" element={<Users />} />
-                  <Route path="/products" element={<Products />} />
-                  <Route path="/all-orders" element={<Orders />} />
-                </>
-              ) : null} */}
               <Route path="/" element={<DefaultPage />}></Route>
               <Route
                 element={<ProtectedRoute allowedRoles={[Roles.EMPLOYEE]} />}

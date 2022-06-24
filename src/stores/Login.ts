@@ -1,7 +1,6 @@
 import { initHttp } from 'http/index';
 import { makeAutoObservable, runInAction } from 'mobx';
 import jwtDecode from 'jwt-decode';
-import { ThirtyFpsOutlined } from '@mui/icons-material';
 import { Roles } from 'types';
 interface SingInData {
   accessToken: string;
@@ -23,12 +22,6 @@ interface googleUserData {
   credential: string;
 }
 
-// interface Roles {
-//   employee: string;
-//   admin: string;
-//   super_admin: string;
-// }
-
 const userDefault: UserToken = {
   exp: null,
   roles: [],
@@ -48,7 +41,6 @@ class LoginStore {
   }, {} as Record<Roles, boolean>);
   userRoles = this.defaultUserRoles;
 
-  // _user: UserToken = token ? jwtDecode(token) : userDefault;
   _authResolved = false;
 
   _user: UserToken = {
@@ -87,28 +79,6 @@ class LoginStore {
   get idToken() {
     return this._googleUserData?.credential;
   }
-
-  // get roles() {
-  //   return this.userRoles;
-  // }
-
-  // get isEmployee() {
-  //   return this.userRoles.employee;
-  // }
-
-  // get isAdmin() {
-  //   return this.userRoles.admin;
-  // }
-
-  // get isSuperAdmin() {
-  //   return this.userRoles.super_admin;
-  // }
-
-  // get userRoles() {
-  //   return this._user.roles.map(role => {
-  //     return role;
-  //   });
-  // }
 
   constructor(private http = initHttp()) {
     makeAutoObservable(this);

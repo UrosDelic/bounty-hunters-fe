@@ -1,11 +1,8 @@
 import { Navigate, useLocation } from 'react-router-dom';
-// import { useAppContext } from '../context/appContext';
-// import { UserTypes } from '../context/userTypes';
 import Login from 'stores/Login';
 import { Roles } from 'types';
 
 function DefaultPage() {
-  //const { userRoles } = useAppContext();
   const location = useLocation();
 
   if (Login.hasRole(Roles.EMPLOYEE)) {
