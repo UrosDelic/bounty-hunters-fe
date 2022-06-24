@@ -30,6 +30,8 @@ import OrderModal from './OrderModal';
 import Pagination from './Pagination';
 import OrdersTable from './OrdersTable';
 import TasksTable from './TasksTable';
+import SingleAttribute from './SingleAttribute';
+import AttributeModal from './AttributeModal';
 
 export {
   Layout,
@@ -64,4 +66,6 @@ export {
   Pagination,
   OrdersTable,
   TasksTable,
+  SingleAttribute,
+  AttributeModal,
 };
