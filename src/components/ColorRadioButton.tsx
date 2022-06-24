@@ -4,7 +4,6 @@ function ColorRadioButton(props: any) {
   const { getInputProps, getCheckboxProps } = useRadio(props);
   const input = getInputProps();
   const checkbox = getCheckboxProps();
-
   return (
     <Box as="label">
       <input {...input} />
@@ -13,15 +12,15 @@ function ColorRadioButton(props: any) {
         src={props.img}
         borderRadius={3}
         border="1px solid"
-        borderColor="#000000"
+        borderColor="black"
         width="85px"
         height="85px"
         cursor="pointer"
         _checked={{
-          borderColor: '#B3C5CD',
+          borderColor: 'gray.300',
         }}
         _hover={{
-          borderColor: '#B3C5CD',
+          borderColor: 'gray.300',
         }}
         _focus={{
           outline: 0,

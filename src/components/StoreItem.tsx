@@ -21,7 +21,7 @@ function StoreItem({ id, name, price }: StoreItemProps) {
             margin="auto"
             width="100%"
             cursor="pointer"
-            _hover={{ transform: 'scale(1.05)' }}
+            _hover={{ transform: 'scaleY(1.05)' }}
           />
         </Flex>
         <Box width="100%" textAlign="left" padding="10px 0px">

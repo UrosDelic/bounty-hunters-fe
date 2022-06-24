@@ -7,6 +7,9 @@ interface ProductsStoreProps {
   success: boolean;
   data: Product[];
   productById: Product | undefined;
+  limit: number;
+  page: number;
+  hasMore: boolean;
 }
 
 interface ProductsDataProps {
@@ -19,6 +22,9 @@ class ProductsStore {
     success: false,
     data: [],
     productById: undefined,
+    limit: 10,
+    page: 1,
+    hasMore: true,
   };
 
   constructor(private http = initHttp()) {
@@ -41,10 +47,16 @@ class ProductsStore {
     return this._products.productById;
   }
 
+  get hasMore() {
+    return this._products.hasMore;
+  }
+
   getProducts = async () => {
     this._products.loading = true;
     this._products.success = false;
-    const { data } = await this.http.get<ProductsDataProps>('/products');
+    const { data } = await this.http.get<ProductsDataProps>(
+      `/products?page=1&limit=${this._products.limit}`
+    );
     runInAction(() => {
       this._products.loading = false;
       if (data) {
@@ -87,6 +99,21 @@ class ProductsStore {
     runInAction(() => {
       if (res) {
         console.log('status updated - inactive');
+      }
+    });
+  };
+
+  loadMoreProducts = async () => {
+    this._products.page++;
+    const { data } = await this.http.get<ProductsDataProps>(
+      `/products?page=${this._products.page}&limit=${this._products.limit}`
+    );
+    runInAction(() => {
+      if (data) {
+        if (!data?.data.length) this._products.hasMore = false;
+        this._products.loading = false;
+        this._products.success = true;
+        this._products.data = [...this._products.data, ...data?.data];
       }
     });
   };

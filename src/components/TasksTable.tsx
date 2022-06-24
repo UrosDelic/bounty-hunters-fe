@@ -8,21 +8,25 @@ import {
   TableContainer,
 } from '@chakra-ui/react';
 import dayjs from 'dayjs';
+import WalletStore from '../stores/wallet';
 import Pagination from './Pagination';
+import { observer } from 'mobx-react';
+import { WalletTask } from '../types/wallet';
 
-type TransactionTableProps = {
-  data: any;
-  transaction: string;
+type TaskTableProps = {
+  data: WalletTask[];
 };
 
-function TransactionTable({ data, transaction }: TransactionTableProps) {
+function TasksTable({ data }: TaskTableProps) {
+  const { taskPage, totalTaskPages } = WalletStore;
+
   return (
     <TableContainer flex="1">
       <Table variant="unstyled" wordBreak="break-word">
         <Thead>
           <Tr color="#B3C5CD">
             <Th wordBreak="break-word" textTransform="uppercase">
-              {transaction}
+              Orders
             </Th>
             <Th textTransform="uppercase">Date</Th>
             <Th textAlign="right" textTransform="uppercase">
@@ -32,11 +36,11 @@ function TransactionTable({ data, transaction }: TransactionTableProps) {
         </Thead>
         <Tbody>
           {data.map((item: any) => {
-            const { createdAt, name, title, price, points, id, orderId } = item;
+            const { createdAt, title, points, id } = item;
             return (
-              <Tr key={id || orderId}>
+              <Tr key={id}>
                 <Td maxWidth="150px" color="#FFFFFF" wordBreak="break-all">
-                  {name || title}
+                  {title}
                 </Td>
                 <Td maxWidth="150px" color="#B3C5CD" wordBreak="break-all">
                   {dayjs(createdAt).format('DD/MM/YYYY')}
@@ -47,15 +51,21 @@ function TransactionTable({ data, transaction }: TransactionTableProps) {
                   wordBreak="break-all"
                   textAlign="right"
                 >
-                  {price || points}
+                  {points}
                 </Td>
               </Tr>
             );
           })}
         </Tbody>
       </Table>
+      <Pagination
+        totalPages={totalTaskPages}
+        currentPage={taskPage}
+        onNext={() => WalletStore.increaseTaskPage()}
+        onPrev={() => WalletStore.decreaseTaskPage()}
+      />
     </TableContainer>
   );
 }
 
-export default TransactionTable;
+export default observer(TasksTable);

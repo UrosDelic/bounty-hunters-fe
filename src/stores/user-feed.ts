@@ -17,7 +17,6 @@ class userFeeds {
     data: [],
     limit: 6,
     offset: 1,
-
   };
 
   constructor(private http = initHttp()) {
@@ -49,8 +48,6 @@ class userFeeds {
       });
     }
   };
-
- 
 
   loadMoreFeeds() {
     this.notifications.offset++;

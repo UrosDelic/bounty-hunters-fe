@@ -80,10 +80,10 @@ function ProductDetails() {
                 marginTop="20px"
                 marginBottom="30px"
                 width="100px"
-                backgroundColor="purple"
+                backgroundColor="purple.500"
                 minW="180px"
                 onClick={onOpen}
-                _hover={{ backgroundColor: 'lightPurple' }}
+                _hover={{ backgroundColor: 'purple.400' }}
                 _focus={{ outline: 'none' }}
               >
                 Checkout

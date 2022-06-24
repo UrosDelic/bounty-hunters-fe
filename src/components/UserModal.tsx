@@ -26,7 +26,7 @@ function UserModal({ isOpen, onClose, name, roles, userId }: UserModalProps) {
   const { success, rolesData } = RolesStore;
   const { isUserUpdated } = UsersStore;
   const roleIds = roles.map(singleRole => singleRole.role.id);
-  const { value, getCheckboxProps } = useCheckboxGroup({
+  const { value, setValue, getCheckboxProps } = useCheckboxGroup({
     defaultValue: roleIds,
   });
 
@@ -37,6 +37,10 @@ function UserModal({ isOpen, onClose, name, roles, userId }: UserModalProps) {
   useEffect(() => {
     if (isUserUpdated) onClose();
   }, [isUserUpdated]);
+
+  useEffect(() => {
+    if (!isOpen) setValue(roleIds);
+  }, [isOpen]);
 
   return (
     <ModalLayout isOpen={isOpen} onClose={onClose} name={name}>
