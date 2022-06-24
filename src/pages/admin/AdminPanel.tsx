@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import {
     Box,
-    Text,
     Grid,
+    Text,
     Flex,
     Button,
     Menu,
@@ -11,95 +11,134 @@ import {
     MenuButton,
     Icon,
     useDisclosure,
-    Tag,
     Input,
     NumberInput,
     NumberInputField,
     useToast,
+    Circle,
+    Textarea,
+    Skeleton,
+    FormControl,
+    FormLabel,
+    Tag,
+    TagLabel,
+    TagCloseButton
 } from '@chakra-ui/react';
 import { ModalLayout } from 'components';
 import { observer } from 'mobx-react';
+import { useForm } from 'react-hook-form';
 import { SmallAddIcon } from '@chakra-ui/icons';
 import AdminTasksStore from 'stores/admin/tasks';
+import UsersStore from 'stores/users';
 import InfiniteScroll from 'react-infinite-scroll-component';
-const filter = [
-    { name: 'In Progress', value: 'IN_PROGRESS' },
-    { name: 'Pending', value: 'PENDING' },
-    { name: 'Fullfiled', value: 'FULLFILED' },
-];
+import Task from './Task';
+
+// const statuses = [
+//     { name: 'In Progress', value: 'IN_PROGRESS' },
+//     { name: 'Pending', value: 'PENDING' },
+//     { name: 'Fullfiled', value: 'FULLFILED' },
+// ];
 const AdminPanel = () => {
+    const { tasks, checkForMore } = AdminTasksStore;
+    const { users } = UsersStore;
+    const { register, handleSubmit } = useForm();
+
+    const toast = useToast();
+    const { isOpen, onOpen, onClose } = useDisclosure();
+    const [userId, setUserId] = useState({ id: '', name: '' });
+
     useEffect(() => {
         AdminTasksStore.getTasks();
     }, []);
 
-    const toast = useToast();
-    const { tasks, checkForMore } = AdminTasksStore;
-    let { isOpen, onOpen, onClose } = useDisclosure();
-    const [points, setPoints] = useState(0);
-    const [title, setTitle] = useState('');
+    console.log(tasks, 'tasks')
 
-    const createTask = async () => {
-        const { data, error } = await AdminTasksStore.createTask({
-            title: title,
-            points: points,
+    // if (tasks.length <= 6) {
+    //     console.log(tasks.length, 'duzina')
+    //     // AdminTasksStore.loadMoreTasks();
+
+    // }
+
+    const createTask = async (input: any) => {
+
+
+
+        await AdminTasksStore.createTask({
+            title: input.title,
+            points: parseInt(input.points),
+            description: input.description,
+            // userId: userId?.id || ''
         });
-        if (error) {
-            toast({
-                title: error?.message,
-                status: 'error',
-                duration: 2000,
-                position: 'top-right',
-                isClosable: true,
-            });
-        }
-        if (data) {
-            toast({
-                title: 'Created Task',
-                status: 'success',
-                duration: 2000,
-                position: 'top-right',
-                isClosable: true,
-            });
-        }
-        setPoints(0);
-        setTitle('');
+        // if (error) {
+        //     toast({
+        //         title: error?.message,
+        //         status: 'error',
+        //         duration: 2000,
+        //         position: 'top-right',
+        //         isClosable: true,
+        //     });
+        // }
+        // if (data) {
+        //     toast({
+        //         title: 'Created Task',
+        //         status: 'success',
+        //         duration: 2000,
+        //         position: 'top-right',
+        //         isClosable: true,
+        //     });
+        // }
+
         onClose();
-    };
-    const deleteTask = async (id: any) => {
-        await AdminTasksStore.deleteTask(id);
     };
 
     return (
-        <Box>
-            <Flex flexDirection="column" p={5} my={5}>
-                <Text fontWeight="thin" fontSize={{ base: '2xl', md: '2xl' }}>
-                    Admin <b>Dashboard</b>
-                </Text>
+        <>
+            <Flex flexDirection="column" px={20} my={10}>
+
                 <Flex
                     my={4}
-                    px={10}
                     flexDirection={{ base: 'column', md: 'row' }}
                     alignItems="end"
                     justifyContent="space-between"
                 >
                     <Flex
+                        bg="purple.400"
                         borderLeft="4px"
-                        borderColor="purple.200"
+                        borderColor='purple.100'
+                        bgGradient='linear(to-l, purple.600, purple.400)'
                         rounded="md"
                         boxShadow={'dark-lg'}
-                        bg="purple.400"
                         alignItems="center"
                         justifyContent="start"
                         flexDirection="column"
+                        py={8}
+
+                        minH={{ base: 120, lg: 50 }}
                         w={{ base: 200, lg: 200 }}
                         cursor="pointer"
                         onClick={onOpen}
-                        minH={{ base: 120, lg: 120 }}
                     >
-                        <Text fontWeight="thin" fontSize="xl" my={3}>
+                        <Text fontWeight="thin" fontSize="xl">
                             Create New Task
                         </Text>
-                        <Icon as={SmallAddIcon} w={6} h={6} />
+                        <Circle
+                            size="25px"
+                            border="1px"
+                            borderColor="white"
+                            color="white"
+                            m={2}
+                        >
+                            <Icon as={SmallAddIcon} w={4} h={4} />
+                        </Circle>
+
+                        <Text
+                            fontWeight="thin"
+                            fontSize="sm"
+                            color="purple.100"
+                            textAlign="center"
+                        >
+                            Add a new task (ex: Create Article about the topic...)
+                        </Text>
                     </Flex>
                     {/* <Box>
                         <Menu>
@@ -128,84 +167,111 @@ const AdminPanel = () => {
                 </Flex>
                 <Flex
                     flexDirection="column"
-                    w={{ base: '100%', lg: '80%' }}
+                    w={'100%'}
                     mx="auto"
-                    px={2}
-                    my={10}
+                    my={5}
                 >
+
+
                     <InfiniteScroll
                         dataLength={tasks.length}
                         next={() => AdminTasksStore.loadMoreTasks()}
                         hasMore={checkForMore}
                         loader={<p>loading</p>}
-                        height={'40vh'}
+                        className='styled-scroll'
+                        height={300}
                         endMessage={
                             <Text m={8} textAlign="center" fontSize="sm">
                                 Yay! You scrolled to bottom
                             </Text>
                         }
                     >
-                        {tasks.map((t, key) => (
-                            <Grid
-                                bg="gray.600"
-                                boxShadow="lg"
-                                my={2}
-                                mx={4}
-                                px={5}
-                                minH={50}
-                                rounded="md"
-                                gridTemplateColumns="repeat(5, 1fr)"
-                                gap={10}
-                                key={key}
-                            >
-                                <Text fontWeight="thin">{t.title}</Text>
-
-                                <Text fontWeight="thin">{t.status}</Text>
-                                <Text fontWeight="thin">{t.createdAt}</Text>
-                                <Text fontWeight="thin" my="auto">
-                                    <Tag colorScheme="purple" h={5} p={1} mr={2}>
-                                        {t.points}
-                                    </Tag>
-                                    points
-                                </Text>
-                                <Button
-                                    w={20}
-                                    size="xs"
-                                    variant='outline'
-                                    onClick={() => deleteTask(t.id)}
-                                >
-                                    Delete
-                                </Button>
-                            </Grid>
+                        {tasks.map(task => (
+                            <Task details={task} key={task.id} />
                         ))}
                     </InfiniteScroll>
                 </Flex>
             </Flex>
             <ModalLayout isOpen={isOpen} onClose={onClose} name={'Create Task'}>
-                <Flex>
-                    <Input
-                        placeholder="Task Title"
-                        size="sm"
-                        onChange={e => setTitle(e.target.value)}
-                    />
-                    <NumberInput size="sm" maxW={40}>
-                        <NumberInputField
-                            placeholder="points"
-                            onChange={e => setPoints(parseInt(e.target.value))}
+                <Flex flexDirection="column" p={2} fontSize="sm">
+                    <form onSubmit={handleSubmit(createTask)}>
+
+                        <Flex alignItems='center'>
+
+                            {/* <Menu >
+                                    <MenuButton
+                                        as={Box}
+                                        size="xs"
+
+                                        onClick={() => UsersStore.getUsers()}
+                                    >
+                                        Assign to User
+                                    </MenuButton>
+                                    <MenuList bg="gray.700">
+                                        {users.map(n => (
+                                            <MenuItem
+                                                key={n.id}
+                                                value={n.id}
+                                                onClick={() => setUserId({ id: n.id, name: n.firstName })}
+                                                _hover={{ background: 'purple.900', cursor: 'pointer' }}
+                                                _focus={{ boxShadow: 'outline' }}
+                                            >
+                                                {n.firstName}
+                                            </MenuItem>
+                                        ))}
+                                    </MenuList>
+                                </Menu> */}
+
+                            {/* {userId.id && (<Tag colorScheme="purple" h={5} p={1} mx={2}>
+                                    <TagLabel> {userId.name}</TagLabel>
+                                    <TagCloseButton onClick={() => setUserId({ id: '', name: '' })} />
+
+                                </Tag>)} */}
+                        </Flex>
+                        <FormLabel fontWeight="thin">Task Title</FormLabel>
+                        <Input
+                            {...register('title')}
+                            placeholder="Write Article about XYZ"
+                            size="sm"
                         />
-                    </NumberInput>
-                    <Button
-                        size="sm"
-                        mx={2}
-                        colorScheme="purple"
-                        fontSize="xs"
-                        onClick={createTask}
-                    >
-                        Submit
-                    </Button>
+                        <FormLabel fontWeight="thin">Task Description</FormLabel>
+                        <Textarea
+                            {...register('description')}
+                            placeholder="Task Description"
+                        />
+                        <FormLabel fontWeight="thin">Deadline</FormLabel>
+                        <Input
+                            disabled
+                            {...register('deadline')}
+                            type="date"
+                            placeholder="Deadline"
+                            size="sm"
+                        />
+                        <FormLabel fontWeight="thin">Points</FormLabel>
+                        <NumberInput size="sm">
+                            <NumberInputField
+                                {...register('points')}
+                                type="number"
+                                placeholder="Points"
+                            />
+                        </NumberInput>
+
+                        <Flex justifyContent='end'>
+                            <Button
+                                size="sm"
+                                type="submit"
+                                mt={2}
+                                colorScheme="purple"
+                                fontSize="xs"
+
+                            >
+                                Submit
+                            </Button>
+                        </Flex>
+                    </form>
                 </Flex>
             </ModalLayout>
-        </Box>
+        </>
     );
 };
 
