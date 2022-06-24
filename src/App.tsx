@@ -15,6 +15,7 @@ import {
   Orders,
   NewTasks,
   Feed,
+  EditProduct,
 } from './pages';
 import theme from './theme/index';
 import ProtectedRoute from './routes/ProtectedRoute';
@@ -69,6 +70,7 @@ function App() {
               >
                 <Route path="/users" element={<Users />} />
                 <Route path="/products" element={<Products />} />
+                <Route path="/products/:id" element={<EditProduct />} />
                 <Route path="/all-orders" element={<Orders />} />
               </Route>
 
