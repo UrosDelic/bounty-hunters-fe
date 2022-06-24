@@ -1,21 +1,24 @@
+import dayjs from 'dayjs';
+
 export function useUniqueDates(firstArr: any, secondArr: any) {
   const myObj: any = {};
-  firstArr.forEach((gp: any) => {
-    const { createdAt, price } = gp;
-    if (!myObj[createdAt]) {
-      myObj[createdAt] = { gained: price };
+  const transactions = [...firstArr, ...secondArr];
+
+  transactions.forEach((item: any) => {
+    const { createdAt, points, price } = item;
+    const formattedDate = dayjs(createdAt).format('MM/DD/YYYY');
+    if (!myObj[formattedDate]) {
+      if (points) {
+        myObj[formattedDate] = { gained: points };
+      } else {
+        myObj[formattedDate] = { spent: price };
+      }
     } else {
-      myObj[createdAt].gained = myObj[createdAt].gained + price;
-    }
-  });
-  secondArr.forEach((sp: any) => {
-    const { createdAt, price } = sp;
-    if (!myObj[createdAt]) {
-      myObj[createdAt] = { spent: price };
-    } else if (!myObj[createdAt].spent) {
-      myObj[createdAt].spent = price;
-    } else {
-      myObj[createdAt].spent = myObj[createdAt].spent + price;
+      if (points) {
+        myObj[formattedDate].gained = myObj[formattedDate].gained + points;
+      } else {
+        myObj[formattedDate].spent = myObj[formattedDate].spent + price;
+      }
     }
   });
   return myObj;

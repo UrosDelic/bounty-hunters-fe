@@ -6,6 +6,9 @@ interface UsersStoreProps {
   loading: boolean;
   success: boolean;
   isUserUpdated: boolean;
+  limit: number;
+  page: number;
+  hasMore: boolean;
   data: Users[];
 }
 
@@ -18,6 +21,9 @@ class UsersStore {
     loading: false,
     success: false,
     isUserUpdated: false,
+    limit: 10,
+    page: 1,
+    hasMore: true,
     data: [],
   };
 
@@ -41,10 +47,18 @@ class UsersStore {
     return this._users.isUserUpdated;
   }
 
+  get hasMore() {
+    return this._users.hasMore;
+  }
+
   getUsers = async () => {
     this._users.loading = true;
     this._users.success = false;
-    const { data } = await this.http.get<UsersDataProps>('/users?limit=15');
+    this._users.page = 1;
+    this._users.hasMore = true;
+    const { data } = await this.http.get<UsersDataProps>(
+      `/users?page=1&limit=${this._users.limit}`
+    );
     runInAction(() => {
       this._users.loading = false;
       if (data) {
@@ -63,7 +77,23 @@ class UsersStore {
     runInAction(() => {
       if (data) {
         this._users.isUserUpdated = true;
+        this.getUsers();
         console.log('updated users roles from store', data);
+      }
+    });
+  };
+
+  loadMoreUsers = async () => {
+    this._users.page++;
+    const { data } = await this.http.get<UsersDataProps>(
+      `/users?page=${this._users.page}&limit=${this._users.limit}`
+    );
+    runInAction(() => {
+      if (data) {
+        if (!data?.data.length) this._users.hasMore = false;
+        this._users.loading = false;
+        this._users.success = true;
+        this._users.data = [...this._users.data, ...data?.data];
       }
     });
   };

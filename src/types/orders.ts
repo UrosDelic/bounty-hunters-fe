@@ -5,4 +5,9 @@ export interface Orders {
   shippingAddress: string;
   status: string;
   userId: string;
+  user: {
+    firstName: string;
+    lastName: string;
+    email: string | null;
+  };
 }

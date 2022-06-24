@@ -6,6 +6,7 @@ import {
   CategoryScale,
   LinearScale,
 } from 'chart.js';
+import dayjs from 'dayjs';
 ChartJS.register(CategoryScale, LinearScale, BarElement);
 
 type BarChartProps = {
@@ -13,16 +14,21 @@ type BarChartProps = {
 };
 
 function BarChart({ dateObj }: BarChartProps) {
+  const sortedKeys = Object.keys(dateObj).sort((a, b) => {
+    const dateA = new Date(a);
+    const dateB = new Date(b);
+    return dateA < dateB ? -1 : 1;
+  });
   const data = {
-    labels: Object.keys(dateObj),
+    labels: sortedKeys.map(key => dayjs(key).format('DD/MM/YYYY')),
     datasets: [
       {
-        data: Object.values(dateObj).map((value: any) => value.gained),
+        data: sortedKeys.map((key: any) => dateObj[key].gained || 0),
         backgroundColor: ['#38A169'],
         borderWidth: 1,
       },
       {
-        data: Object.values(dateObj).map((value: any) => value.spent),
+        data: sortedKeys.map((key: any) => dateObj[key].spent || 0),
         backgroundColor: ['#B794F4'],
         borderWidth: 1,
       },

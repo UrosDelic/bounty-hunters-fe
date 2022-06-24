@@ -60,7 +60,7 @@ const UserNotifications = () => {
                         }
                         height={'40vh'}
                         endMessage={
-                            <Text m={2} fontWeight="thin" textAlign="center" fontSize="sm">
+                            <Text m={2} fontWeight="thin" textAlign="center" fontSize="xs">
                                 There are no more notifications
                             </Text>
                         }

@@ -3,7 +3,7 @@ import { EditIcon } from '@chakra-ui/icons';
 import { UserModal, StyledCard } from './index';
 import { UserRoles, Users } from 'types';
 
-function SingleUser({ id, firstName, lastName, roles }: Users) {
+function SingleUser({ id, firstName, lastName, roles, photo_url }: Users) {
   const rolesJoined = roles
     .map((singleRole: UserRoles) => singleRole.role.name.toLowerCase())
     .join(', ');
@@ -21,6 +21,7 @@ function SingleUser({ id, firstName, lastName, roles }: Users) {
           >
             <Avatar
               name={`${firstName} ${lastName}`}
+              src={photo_url || ''}
               size="xl"
               marginBottom="10px"
               bg="users.lightGray"

@@ -3,12 +3,11 @@ import { useState } from 'react';
 import { useBackgroundGenerator } from '../../custom-hooks/useBackgroundGenerator';
 type HorizontalCardProps = {
   children: any;
+  margin?: any;
 };
 
 const StyledCard = ({ children }: HorizontalCardProps) => {
-
-  const [background] = useState(useBackgroundGenerator())
-
+  const [background] = useState(useBackgroundGenerator());
 
   return (
     <>

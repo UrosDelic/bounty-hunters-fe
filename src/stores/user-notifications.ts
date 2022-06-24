@@ -22,7 +22,7 @@ class UserNotificationsStore {
     hasMore: true,
     data: [],
     info: [],
-    limit: 5,
+    limit: 6,
     offset: 1,
   };
 
@@ -42,7 +42,6 @@ class UserNotificationsStore {
     return this.notifications.info[0];
   }
   getUserNotifications = async () => {
-  
     this.notifications.loading = true;
     const { data } = await this.http.get<NotificationDetails>(
       `/users/${login.userId}/notifications?page=${this.notifications.offset}&limit=${this.notifications.limit}`
@@ -51,7 +50,6 @@ class UserNotificationsStore {
     if (data) {
       runInAction(() => {
         if (!data?.data.length) {
-      
           this.notifications.hasMore = false;
         }
         this.notifications.data = [...this.notifications.data, ...data?.data];

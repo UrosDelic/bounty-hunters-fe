@@ -3,7 +3,8 @@ import { ArrowUpIcon, ArrowDownIcon } from '@chakra-ui/icons';
 import {
   DoughnutChart,
   PointBreakdown,
-  TransactionTable,
+  OrdersTable,
+  TasksTable,
   BarChart,
   SpinnerLoader,
 } from '../components/index';
@@ -13,15 +14,8 @@ import { useEffect } from 'react';
 import { observer } from 'mobx-react';
 
 function Wallet() {
-  const { loading, success, orders, tasks } = WalletStore;
-  const sumOfGainedPoints = tasks.reduce(
-    (acc, current) => acc + current.price,
-    0
-  );
-  const sumOfSpentPoints = orders.reduce(
-    (acc, current) => acc + current.price,
-    0
-  );
+  const { loading, success, orders, tasks, totalPoints, totalPrice } =
+    WalletStore;
 
   const dateObj = useUniqueDates(tasks, orders);
 
@@ -51,12 +45,12 @@ function Wallet() {
             rowGap={4}
           >
             <GridItem>
-              <PointBreakdown name="Gained points" number={sumOfGainedPoints}>
+              <PointBreakdown name="Gained points" number={totalPoints}>
                 <DoughnutChart iconName={ArrowUpIcon} primaryColor="#38A169" />
               </PointBreakdown>
             </GridItem>
             <GridItem>
-              <PointBreakdown name="Spent points" number={sumOfSpentPoints}>
+              <PointBreakdown name="Spent points" number={totalPrice}>
                 <DoughnutChart
                   iconName={ArrowDownIcon}
                   primaryColor="#B794F4"
@@ -66,14 +60,18 @@ function Wallet() {
             <GridItem>
               <PointBreakdown
                 name="Balance"
-                number={sumOfGainedPoints - sumOfSpentPoints}
+                number={totalPoints - totalPrice}
               />
             </GridItem>
           </Grid>
           <BarChart dateObj={dateObj} />
-          <Flex justifyContent="center" direction={['column', 'column', 'row']}>
-            <TransactionTable transaction="tasks" data={tasks} />
-            <TransactionTable transaction="orders" data={orders} />
+          <Flex
+            justifyContent="center"
+            direction={['column', 'column', 'row']}
+            marginTop="30px"
+          >
+            <OrdersTable data={orders} />
+            <TasksTable data={tasks} />
           </Flex>
         </Box>
       )}
