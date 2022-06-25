@@ -10,10 +10,12 @@ import {
 } from '@chakra-ui/react';
 import { SingleAttribute } from '../components/index';
 import shirt from '../img/shirt.jpg';
-// import mug from '../img/mug.jpg';
-// import sticker from '../img/sticker.jpg';
+import mug from '../img/mug.jpg';
+import sticker from '../img/sticker.jpg';
 
 function EditProduct() {
+  const image =
+    'https://cdn.shopify.com/s/files/1/0665/2889/products/Image-1-The-Weekend-Boot-Allegra-Alice_Whittles-2000x2000_1280x.jpg?v=1632758527';
   return (
     <Box
       width="fit-content"
@@ -35,7 +37,7 @@ function EditProduct() {
             </Heading>
             <Text
               flex="1"
-              minH="300px"
+              minH="200px"
               padding="10px"
               border="1px solid green"
               borderRadius="8px"
@@ -47,7 +49,7 @@ function EditProduct() {
           </Flex>
         </GridItem>
         <GridItem border="1px solid green">
-          <Image src={shirt} alt="shirt" margin="auto" />
+          <Image src={image} alt="shirt" margin="auto" />
         </GridItem>
         <GridItem colSpan={[1, 1, 2]}>
           <Box width="100%">
