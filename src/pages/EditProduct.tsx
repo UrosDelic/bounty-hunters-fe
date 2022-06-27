@@ -7,19 +7,14 @@ import {
   GridItem,
   Image,
   Button,
-  Input,
 } from '@chakra-ui/react';
 import { EditIcon } from '@chakra-ui/icons';
 import { SingleAttribute } from '../components/index';
 import shirt from '../img/shirt.jpg';
 import mug from '../img/mug.jpg';
 import sticker from '../img/sticker.jpg';
-import { useForm } from 'react-hook-form';
 
 function EditProduct() {
-
-  const {register, handleSubmit, {formState: errors} } = useForm<any>({});
-
   const image =
     'https://cdn.shopify.com/s/files/1/0665/2889/products/Image-1-The-Weekend-Boot-Allegra-Alice_Whittles-2000x2000_1280x.jpg?v=1632758527';
   return (

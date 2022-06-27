@@ -16,6 +16,7 @@ import {
   NewTasks,
   Feed,
   EditProduct,
+  Attributes,
 } from './pages';
 import theme from './theme/index';
 import ProtectedRoute from './routes/ProtectedRoute';
@@ -72,6 +73,7 @@ function App() {
                 <Route path="/products" element={<Products />} />
                 <Route path="/products/:id" element={<EditProduct />} />
                 <Route path="/all-orders" element={<Orders />} />
+                <Route path="/attributes" element={<Attributes />} />
               </Route>
 
               <Route path="*" element={<NotFound />} />
