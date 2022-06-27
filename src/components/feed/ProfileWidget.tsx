@@ -12,16 +12,19 @@ import {
 import { observer } from 'mobx-react';
 import { Link as RouterLink } from 'react-router-dom';
 import Login from '../../stores/Login';
+import UserNotificationsStore from 'stores/user-notifications';
 import { useEffect } from 'react';
-
 const ProfileWidget = () => {
     const img: string = require('../../img/avatar.svg').default;
 
     useEffect(() => {
         Login.profileData();
+        UserNotificationsStore.getLatest();
     }, []);
 
     const { googleProfile } = Login;
+
+    const { latestNotfiication } = UserNotificationsStore;
 
     return (
         <>
@@ -178,8 +181,10 @@ const ProfileWidget = () => {
                             justifyContent="space-around"
                             p={5}
                         >
-                            <Text fontSize="xl" fontWeight="thin">
-                                Informational Data
+                            <Text fontSize="md" fontWeight="thin" m='auto'>
+                                {latestNotfiication.map((t: any, key: any) => (
+                                    <Text>{t.message}</Text>
+                                ))}
                             </Text>
                             <Image src={img} alt="logo" width={100} />
                         </Flex>
