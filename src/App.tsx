@@ -58,14 +58,14 @@ function App() {
                 <Route path="/my-tasks" element={<MyTasksPage />} />
                 <Route path="/task-details/:id" element={<TaskDetailsPage />} />
                 <Route path="/wallet" element={<Wallet />} />
-                <Route path="/store" element={<Store />} />
                 <Route path="/store/:id" element={<ProductDetails />} />
+                <Route path="/store" element={<Store />} />
                 <Route path="/my-orders" element={<MyOrders />} />
               </Route>
 
               <Route element={<ProtectedRoute allowedRoles={[Roles.ADMIN]} />}>
-                <Route path="/all-tasks" element={<div>tasks</div>} />
                 <Route path="/all-tasks/:id" element={<div>some task</div>} />
+                <Route path="/all-tasks" element={<div>tasks</div>} />
                 <Route path="/admin-panel" element={<AdminPanel />} />
               </Route>
 

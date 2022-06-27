@@ -6,6 +6,7 @@ interface NotificationsStoreProps {
   loading: boolean;
   limit: number;
   offset: number;
+  latest: NotificationsType[];
   data: NotificationsType[];
   info: NotificationsPagination[];
   hasMore: boolean;
@@ -22,6 +23,7 @@ class UserNotificationsStore {
     hasMore: true,
     data: [],
     info: [],
+    latest: [],
     limit: 6,
     offset: 1,
   };
@@ -41,6 +43,9 @@ class UserNotificationsStore {
   get notificationsCount() {
     return this.notifications.info[0];
   }
+  get latestNotfiication (){
+    return this.notifications.latest;
+  }
   getUserNotifications = async () => {
     this.notifications.loading = true;
     const { data } = await this.http.get<NotificationDetails>(
@@ -57,6 +62,17 @@ class UserNotificationsStore {
       });
     }
   };
+  getLatest = async () => {
+    const { data } = await this.http.get<NotificationDetails>(
+      `/users/${login.userId}/notifications?page=1&limit=1`
+    );
+    if (data) {
+      runInAction(() => {
+        this.notifications.latest = data?.data;
+      });
+    }
+  };
+
 
   getNotificationCount = async () => {
     const { data } = await this.http.get<NotificationDetails>(

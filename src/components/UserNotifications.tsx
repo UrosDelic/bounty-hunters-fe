@@ -14,17 +14,21 @@ import {
 import { useEffect } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import UserNotificationsStore from 'stores/user-notifications';
+import Login from 'stores/Login';
 import { observer } from 'mobx-react';
 import { useRelativeTime } from 'custom-hooks/useRelativeTime';
 import { Link as RouterLink } from 'react-router-dom';
 const UserNotifications = () => {
     const { allNotifications, loading, checkForMore } = UserNotificationsStore;
+    const { googleProfile } = Login;
 
     useEffect(() => {
         UserNotificationsStore.getUserNotifications();
+        Login.profileData();
     }, []);
 
     const relativeTime = useRelativeTime();
+
     const readNotification = (id: any) => {
         UserNotificationsStore.readNotification(id);
     };
@@ -110,7 +114,7 @@ const UserNotifications = () => {
                                             <Flex alignItems="start">
                                                 <Avatar
                                                     size={'md'}
-                                                    src="https://bit.ly/dan-abramov"
+                                                    src={googleProfile?.picture}
                                                     mr={2}
                                                 />
                                                 <Flex flexDirection="column">
