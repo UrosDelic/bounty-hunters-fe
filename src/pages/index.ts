@@ -8,7 +8,7 @@ import Users from './Users';
 import Products from './Products';
 import Orders from './Orders';
 import NewTasks from './NewTasks';
-import Feed from './Feed'
+import Feed from './Feed';
 import AdminPanel from './admin/AdminPanel';
 
 export {
@@ -23,7 +23,5 @@ export {
   Products,
   Orders,
   Feed,
-  AdminPanel
-
-  
+  AdminPanel,
 };

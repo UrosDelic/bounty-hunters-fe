@@ -3,7 +3,6 @@
 import * as ReactDOM from 'react-dom/client';
 import App from './App';
 import { ColorModeScript } from '@chakra-ui/react';
-import { AppProvider } from './context/appContext';
 import { ErrorBoundary } from './components/index';
 
 const root = ReactDOM.createRoot(
@@ -12,9 +11,7 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <ErrorBoundary>
-    <AppProvider>
-      <ColorModeScript />
-      <App />
-    </AppProvider>
+    <ColorModeScript />
+    <App />
   </ErrorBoundary>
 );

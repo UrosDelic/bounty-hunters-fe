@@ -10,7 +10,7 @@ function DefaultPage() {
   }
 
   if (Login.hasRole(Roles.ADMIN)) {
-    return <Navigate to="/tasks" state={{ from: location }} replace />;
+    return <Navigate to="/all-tasks" state={{ from: location }} replace />;
   }
 
   if (Login.hasRole(Roles.SUPER_ADMIN)) {
