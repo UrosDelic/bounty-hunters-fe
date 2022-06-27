@@ -1,6 +1,7 @@
 import { initHttp } from 'http/index';
 import { makeAutoObservable, runInAction } from 'mobx';
 import jwtDecode from 'jwt-decode';
+import { Roles } from 'types';
 interface SingInData {
   accessToken: string;
   refreshToken: string;
@@ -8,7 +9,7 @@ interface SingInData {
 
 interface UserToken {
   exp: number | null;
-  roles: [];
+  roles: Roles[];
   userId: string;
 }
 interface Profile {
@@ -26,14 +27,20 @@ const userDefault: UserToken = {
   roles: [],
   userId: '',
 };
-
 class LoginStore {
   _googleUserData: googleUserData = {
     clientId: '',
     credential: '',
   };
 
-  // _user: UserToken = token ? jwtDecode(token) : userDefault;
+  private readonly defaultUserRoles: Record<Roles, boolean> = Object.values(
+    Roles
+  ).reduce((acc, one) => {
+    acc[one] = false;
+    return acc;
+  }, {} as Record<Roles, boolean>);
+  userRoles = this.defaultUserRoles;
+
   _authResolved = false;
 
   _user: UserToken = {
@@ -46,6 +53,7 @@ class LoginStore {
     accessToken: '',
     refreshToken: '',
   };
+
   _profile: Profile = {
     name: '',
     picture: '',
@@ -55,9 +63,11 @@ class LoginStore {
   get googleProfile() {
     return this._profile;
   }
+
   get userId() {
     return this._user.userId;
   }
+
   get isAuth() {
     return this._user.exp ? this._user.exp < Date.now() : false;
   }
@@ -70,33 +80,23 @@ class LoginStore {
     return this._googleUserData?.credential;
   }
 
-  get userRoles() {
-    return this._user.roles.map(role => {
-      return role;
-    });
-
-    /**
-     * roles = {
-     *  Super_Admin: boolean,
-     * ...
-     * }
-     */
-  }
   constructor(private http = initHttp()) {
     makeAutoObservable(this);
+  }
+
+  hasRole(role: Roles) {
+    return this.userRoles[role];
   }
 
   login = async (response: googleUserData) => {
     if (response) {
       this._googleUserData = response;
       this._googleUserData.credential = response.credential;
-
       localStorage.setItem('bh-profile', response.credential);
-
-      console.log(jwtDecode(this._googleUserData.credential), 'google data');
       this.signIn();
     }
   };
+
   profileData = () => {
     const profile = localStorage.getItem('bh-profile') as string;
     if (profile) {
@@ -106,6 +106,7 @@ class LoginStore {
       this._profile.email = decode.email;
     }
   };
+
   logout = () => {
     localStorage.removeItem('bh-token');
     localStorage.removeItem('bh-profile');
@@ -121,6 +122,9 @@ class LoginStore {
         this._signInData.accessToken = data.accessToken;
         localStorage.setItem('bh-token', data.accessToken);
         this._user = jwtDecode(this._signInData.accessToken);
+        if (this._user.roles.length !== 0) {
+          this.filterRolesOnLogin();
+        }
       }
     });
   };
@@ -131,8 +135,15 @@ class LoginStore {
       const token = localStorage.getItem('bh-token');
       if (token) {
         this._user = jwtDecode(token);
+        this.filterRolesOnLogin();
       }
     }
+  };
+
+  filterRolesOnLogin = () => {
+    this._user.roles.forEach(role => {
+      this.userRoles[role] = true;
+    });
   };
 }
 

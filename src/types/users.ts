@@ -10,9 +10,15 @@ export interface Users {
   roles: UserRoles[];
 }
 
+export enum Roles {
+  EMPLOYEE = 'EMPLOYEE',
+  ADMIN = 'ADMIN',
+  SUPER_ADMIN = 'SUPER_ADMIN',
+}
+
 export interface UserRoles {
   role: {
     id: string;
-    name: string;
+    name: Roles;
   };
 }
