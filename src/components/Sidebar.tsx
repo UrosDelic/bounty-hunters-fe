@@ -3,8 +3,8 @@ import { NavLink } from 'react-router-dom';
 import sidebarData from '../ui-data/SidebarData';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import LoginStore from '../stores/Login';
+import { observer } from 'mobx-react';
 function Sidebar() {
-  const { hasRole } = LoginStore;
   return (
     <Flex flexDirection="column" w={['100%']} backgroundColor="main.gray">
       <Text mx={4} fontSize="3xl" color="white" fontWeight={'bold'}>
@@ -19,7 +19,7 @@ function Sidebar() {
 
       {sidebarData.map(link => {
         const { text, route, icon, role } = link;
-        const isLinkDisplayed = hasRole(role) ? 'block' : 'none';
+        const isLinkDisplayed = LoginStore.hasRole(role) ? 'block' : 'none';
         return (
           <Link
             key={text}
@@ -45,4 +45,4 @@ function Sidebar() {
   );
 }
 
-export default Sidebar;
+export default observer(Sidebar);
