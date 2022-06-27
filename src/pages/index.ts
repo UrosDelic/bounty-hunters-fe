@@ -11,6 +11,7 @@ import NewTasks from './NewTasks';
 import Feed from './Feed';
 import EditProduct from './EditProduct';
 import Attributes from './Attributes';
+import AdminPanel from './admin/AdminPanel';
 
 export {
   DefaultPage,
@@ -26,4 +27,5 @@ export {
   Feed,
   EditProduct,
   Attributes,
+  AdminPanel,
 };
