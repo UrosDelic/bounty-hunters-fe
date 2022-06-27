@@ -15,6 +15,7 @@ import {
   Orders,
   NewTasks,
   Feed,
+  AdminPanel
 } from './pages';
 import theme from './theme/index';
 import ProtectedRoute from './routes/ProtectedRoute';
@@ -62,6 +63,7 @@ function App() {
               <Route element={<ProtectedRoute allowedRoles={[Roles.ADMIN]} />}>
                 <Route path="/all-tasks" element={<div>tasks</div>} />
                 <Route path="/all-tasks/:id" element={<div>some task</div>} />
+                <Route path="/admin-panel" element={<AdminPanel />} />
               </Route>
 
               <Route
@@ -70,6 +72,7 @@ function App() {
                 <Route path="/users" element={<Users />} />
                 <Route path="/products" element={<Products />} />
                 <Route path="/all-orders" element={<Orders />} />
+
               </Route>
 
               <Route path="*" element={<NotFound />} />

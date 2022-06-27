@@ -9,7 +9,7 @@ import Products from './Products';
 import Orders from './Orders';
 import NewTasks from './NewTasks';
 import Feed from './Feed'
-
+import AdminPanel from './admin/AdminPanel';
 
 export {
   DefaultPage,
@@ -23,6 +23,7 @@ export {
   Products,
   Orders,
   Feed,
+  AdminPanel
 
   
 };

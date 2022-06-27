@@ -56,10 +56,12 @@ const FeedList = () => {
                                         mx="auto"
                                         p={2}
                                         w={{ base: '90%', md: '100%' }}
+
                                         _hover={{
                                             cursor: 'pointer',
-                                            transform: 'translateY(-5px)',
+                                            transform: 'scale(1.1)',
                                             transition: '0.4s ease-out',
+
                                         }}
                                     >
                                         <StyledCard>

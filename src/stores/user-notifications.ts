@@ -47,7 +47,6 @@ class UserNotificationsStore {
     return this.notifications.latest;
   }
   getUserNotifications = async () => {
-
     this.notifications.loading = true;
     const { data } = await this.http.get<NotificationDetails>(
       `/users/${login.userId}/notifications?page=${this.notifications.offset}&limit=${this.notifications.limit}`

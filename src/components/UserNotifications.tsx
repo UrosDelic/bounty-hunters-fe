@@ -8,6 +8,7 @@ import {
     SkeletonCircle,
     Circle,
     Divider,
+
     Link,
 } from '@chakra-ui/react';
 import { useEffect } from 'react';
@@ -54,7 +55,7 @@ const UserNotifications = () => {
                         dataLength={allNotifications.length}
                         next={() => UserNotificationsStore.loadMoreNotifications()}
                         hasMore={checkForMore}
-                        className="notification-scroll"
+                        className="styled-scroll"
                         loader={
                             <Box bg="gray.700" minH={50} my={2} p={2}>
                                 <SkeletonCircle m="2" size="10" />
