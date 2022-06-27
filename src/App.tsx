@@ -26,6 +26,7 @@ import Login from 'components/Login';
 import LoginStore from 'stores/Login';
 import { useEffect } from 'react';
 import { useToast } from '@chakra-ui/react';
+import AllTasks from 'pages/AllTasks';
 import { Roles } from 'types';
 
 function App() {
@@ -62,7 +63,7 @@ function App() {
 
               <Route element={<ProtectedRoute allowedRoles={[Roles.ADMIN]} />}>
                 <Route path="/all-tasks/:id" element={<div>some task</div>} />
-                <Route path="/all-tasks" element={<div>tasks</div>} />
+                <Route path="/all-tasks" element={<AllTasks />} />
                 <Route path="/admin-panel" element={<AdminPanel />} />
               </Route>
 

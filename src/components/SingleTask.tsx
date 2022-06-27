@@ -9,7 +9,7 @@ import {
 } from '@chakra-ui/react';
 import StyledCard from 'components/core/StyledCard';
 import { observer } from 'mobx-react';
-interface MyTaskProps {
+interface SingleTaskProps {
   title: string;
   description: string | null;
   status?: string;
@@ -19,14 +19,14 @@ interface MyTaskProps {
   points: number;
 }
 
-const MyTask = ({
+const SingleTask = ({
   title,
   description,
   status,
   createdAt,
   updatedAt,
   points,
-}: MyTaskProps) => {
+}: SingleTaskProps) => {
   const switchStatusColor = (status: string | undefined) => {
     if (status === 'APPROVED') {
       return 'green';
@@ -72,4 +72,4 @@ const MyTask = ({
   );
 };
 
-export default observer(MyTask);
+export default observer(SingleTask);
