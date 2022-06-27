@@ -31,10 +31,10 @@ function SingleAttribute({ name }: SingleAttributeProps) {
           {name}
         </Box>
         <ButtonGroup>
-          <Button marginLeft="10px" onClick={onOpen}>
+          <Button marginLeft="10px" onClick={onOpen} backgroundColor="gray.500">
             Edit Values <EditIcon marginLeft="5px" />
           </Button>
-          <Button>
+          <Button backgroundColor="gray.500">
             Delete <DeleteIcon marginLeft="5px" />
           </Button>
         </ButtonGroup>

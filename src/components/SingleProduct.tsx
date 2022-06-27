@@ -50,14 +50,14 @@ function SingleProduct({ id, name, price, status }: SingleCardProps) {
         height="100%"
       >
         <Link as={RouteLink} to={`/products/${id}`}>
-          <IconButton
+          <Text
             position="absolute"
             top="10px"
             right="10px"
-            aria-label="edit-product"
-            backgroundColor="transparent"
-            icon={<EditIcon />}
-          />
+            _hover={{ fontWeight: 'bold' }}
+          >
+            Details
+          </Text>
         </Link>
         <Box marginBottom="25px">
           <Heading fontSize="18px">{name}</Heading>
