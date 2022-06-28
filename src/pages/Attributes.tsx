@@ -2,6 +2,7 @@ import { Box, Input, Flex, Text, ButtonGroup } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { SingleAttribute } from '../components/index';
 import ProductAttributesStore from '../stores/productAttributes';
+import AttributeValuesStore from '../stores/attributeValues';
 import { SpinnerLoader, PurpleButton } from '../components/index';
 import { observer } from 'mobx-react';
 import { useForm } from 'react-hook-form';
@@ -29,6 +30,7 @@ function Attributes() {
 
   useEffect(() => {
     ProductAttributesStore.getProductAttributes();
+    AttributeValuesStore.getAttributeValues();
   }, []);
 
   if (loading) {

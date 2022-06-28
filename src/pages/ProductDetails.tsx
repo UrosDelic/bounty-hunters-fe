@@ -42,7 +42,7 @@ function ProductDetails() {
 
   useEffect(() => {
     ProductsStore.getProductById(id);
-    AttributeValuesStore.getAttributeValues();
+    AttributeValuesStore.getSizeAndColorAttributeValues();
   }, []);
 
   if (productLoading || attributeLoading) {

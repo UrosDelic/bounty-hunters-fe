@@ -34,6 +34,8 @@ import TasksTable from './TasksTable';
 import SingleAttribute from './SingleAttribute';
 import AttributeModal from './AttributeModal';
 import PurpleButton from './PurpleButton';
+import PurpleIconButton from './PurpleIconButton';
+import SingleAttributeValue from './SingleAttributeValue';
 
 export {
   Layout,
@@ -72,4 +74,6 @@ export {
   SingleAttribute,
   AttributeModal,
   PurpleButton,
+  PurpleIconButton,
+  SingleAttributeValue,
 };

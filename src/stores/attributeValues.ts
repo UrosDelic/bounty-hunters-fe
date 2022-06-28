@@ -71,6 +71,19 @@ class AttributeValuesStore {
       if (data) {
         this._attributeValues.success = true;
         this._attributeValues.data = data;
+        console.log('roles data iz stora', data);
+      }
+    });
+  };
+
+  getSizeAndColorAttributeValues = async () => {
+    this._attributeValues.loading = true;
+    const { data } = await this.http.get<AttributeValue[]>('/attributeValues');
+    runInAction(() => {
+      this._attributeValues.loading = false;
+      if (data) {
+        this._attributeValues.success = true;
+        this._attributeValues.data = data;
         const colors = data.filter(
           av => av.productAttribute.name.toLowerCase() === 'colors'
         );

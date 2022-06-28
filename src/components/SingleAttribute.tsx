@@ -41,7 +41,12 @@ function SingleAttribute({ name, id }: SingleAttributeProps) {
           </PurpleButton>
         </ButtonGroup>
       </Flex>
-      <AttributeModal name={`Edit ${name}`} onClose={onClose} isOpen={isOpen} />
+      <AttributeModal
+        name={`Edit ${name}`}
+        onClose={onClose}
+        isOpen={isOpen}
+        productAttributeName={name}
+      />
     </>
   );
 }
