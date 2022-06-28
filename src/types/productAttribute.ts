@@ -4,3 +4,7 @@ export interface ProductAttribute {
   updatedAt: string;
   name: string;
 }
+
+export interface ProductAttributePost {
+  name: string;
+}

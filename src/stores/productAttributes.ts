@@ -1,6 +1,6 @@
 import { initHttp } from 'http/index';
 import { makeAutoObservable, runInAction } from 'mobx';
-import { ProductAttribute } from 'types';
+import { ProductAttribute, ProductAttributePost } from 'types';
 
 interface ProductAttributesStoreProps {
   data: ProductAttribute[];
@@ -41,7 +41,31 @@ class ProductAttributesStore {
       if (data) {
         this._productAttributes.success = true;
         this._productAttributes.data = data;
-        // console.log('roles data iz stora', sizes);
+      }
+    });
+  };
+
+  addNewProductAttribute = async (productAttribute: ProductAttributePost) => {
+    const { data } = await this.http.post(
+      '/productAttributes',
+      productAttribute
+    );
+    runInAction(() => {
+      if (data) {
+        console.log('productAttribute sent (iz stora)', data);
+        this.getProductAttributes();
+      }
+    });
+  };
+
+  deleteProductAttribute = async (productAttributeId: string) => {
+    const { data } = await this.http.delete(
+      `/productAttributes/${productAttributeId}`
+    );
+    runInAction(() => {
+      if (!data) {
+        console.log('productAttribute deleted (iz stora)', data);
+        this.getProductAttributes();
       }
     });
   };

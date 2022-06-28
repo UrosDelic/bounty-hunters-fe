@@ -58,8 +58,8 @@ function EditProduct() {
               <Heading marginBottom="15px" fontSize="17px">
                 Attributes
               </Heading>
-              <SingleAttribute name="color" />
-              <SingleAttribute name="size" />
+              {/* <SingleAttribute name="color" />
+              <SingleAttribute name="size" /> */}
               <Button backgroundColor="gray.500">Add New Attribute</Button>
             </Box>
           </Flex>

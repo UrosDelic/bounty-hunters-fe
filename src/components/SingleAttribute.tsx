@@ -1,19 +1,21 @@
-import {
-  Box,
-  Flex,
-  ButtonGroup,
-  Button,
-  useDisclosure,
-} from '@chakra-ui/react';
+import { Box, Flex, ButtonGroup, useDisclosure } from '@chakra-ui/react';
 import { DeleteIcon, EditIcon } from '@chakra-ui/icons';
-import { AttributeModal } from './index';
+import { AttributeModal, PurpleButton } from './index';
+import ProductAttributesStore from '../stores/productAttributes';
+import { observer } from 'mobx-react';
 
 interface SingleAttributeProps {
+  id: string;
   name: string;
 }
 
-function SingleAttribute({ name }: SingleAttributeProps) {
+function SingleAttribute({ name, id }: SingleAttributeProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  function deleteProductAttribute() {
+    ProductAttributesStore.deleteProductAttribute(id);
+  }
+
   return (
     <>
       <Flex
@@ -30,21 +32,13 @@ function SingleAttribute({ name }: SingleAttributeProps) {
         >
           {name}
         </Box>
-        <ButtonGroup>
-          <Button
-            marginLeft="10px"
-            onClick={onOpen}
-            backgroundColor="purple.500"
-            _hover={{ backgroundColor: 'purple.300' }}
-          >
+        <ButtonGroup marginLeft="10px">
+          <PurpleButton onClick={onOpen}>
             Edit Values <EditIcon marginLeft="5px" />
-          </Button>
-          <Button
-            backgroundColor="purple.500"
-            _hover={{ backgroundColor: 'purple.300' }}
-          >
+          </PurpleButton>
+          <PurpleButton onClick={deleteProductAttribute}>
             Delete <DeleteIcon marginLeft="5px" />
-          </Button>
+          </PurpleButton>
         </ButtonGroup>
       </Flex>
       <AttributeModal name={`Edit ${name}`} onClose={onClose} isOpen={isOpen} />
@@ -52,4 +46,4 @@ function SingleAttribute({ name }: SingleAttributeProps) {
   );
 }
 
-export default SingleAttribute;
+export default observer(SingleAttribute);

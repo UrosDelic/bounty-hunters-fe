@@ -33,6 +33,7 @@ import OrdersTable from './OrdersTable';
 import TasksTable from './TasksTable';
 import SingleAttribute from './SingleAttribute';
 import AttributeModal from './AttributeModal';
+import PurpleButton from './PurpleButton';
 
 export {
   Layout,
@@ -70,4 +71,5 @@ export {
   TasksTable,
   SingleAttribute,
   AttributeModal,
+  PurpleButton,
 };

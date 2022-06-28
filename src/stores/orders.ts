@@ -1,6 +1,6 @@
 import { initHttp } from 'http/index';
 import { makeAutoObservable, runInAction } from 'mobx';
-import { Orders } from 'types';
+import { Orders, OrderPost } from 'types';
 
 interface OrderStoreProps {
   loading: boolean;
@@ -69,7 +69,7 @@ class OrdersStore {
     });
   };
 
-  makeAnOrder = async (order: any) => {
+  makeAnOrder = async (order: OrderPost) => {
     this._orders.isOrderSent = false;
     const { data } = await this.http.post('/orders', order);
     runInAction(() => {
