@@ -1,6 +1,6 @@
 import { initHttp } from 'http/index';
 import { makeAutoObservable, runInAction } from 'mobx';
-import { AttributeValue } from 'types';
+import { AttributeValue, AttributeValuePut } from 'types';
 
 interface AttributeValuesStoreProps {
   data: AttributeValue[];
@@ -72,6 +72,28 @@ class AttributeValuesStore {
         this._attributeValues.success = true;
         this._attributeValues.data = data;
         console.log('roles data iz stora', data);
+      }
+    });
+  };
+
+  changeAttributeValue = async (id: string, value: AttributeValuePut) => {
+    this._attributeValues.loading = true;
+    const { data } = await this.http.patch(`/attributeValues/${id}`, value);
+    runInAction(() => {
+      if (!data) {
+        this._attributeValues.loading = false;
+        this.getAttributeValues();
+        console.log('attribute value updated', data);
+      }
+    });
+  };
+
+  deleteAttributeValue = async (id: string) => {
+    const { data } = await this.http.delete(`/attributeValues/${id}`);
+    runInAction(() => {
+      if (!data) {
+        this.getAttributeValues();
+        console.log('attribute value deleted', data);
       }
     });
   };

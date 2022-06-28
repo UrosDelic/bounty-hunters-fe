@@ -8,3 +8,7 @@ export interface AttributeValue {
     name: string;
   };
 }
+
+export interface AttributeValuePut {
+  value: string;
+}

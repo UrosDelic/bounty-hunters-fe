@@ -5,9 +5,10 @@ import {
   SingleAttributeValue,
 } from './index';
 import AttributeValuesStore from '../stores/attributeValues';
-import { useState } from 'react';
 import { observer } from 'mobx-react';
 import { useFilterByProductAttributeName } from '../custom-hooks/useFilterByProductAttributeName';
+import { useForm } from 'react-hook-form';
+import { useState } from 'react';
 
 interface AttributeModalProps {
   isOpen: boolean;
@@ -22,27 +23,30 @@ function AttributeModal({
   name,
   productAttributeName,
 }: AttributeModalProps) {
-  const [isEditClicked, setIsEditClicked] = useState(false);
-  const { loading, success, attributeValues } = AttributeValuesStore;
+  const { success, attributeValues } = AttributeValuesStore;
   const filteredData = useFilterByProductAttributeName(
     attributeValues,
     productAttributeName
   );
-
-  console.log(filteredData);
-
-  if (loading) {
-    return <SpinnerLoader />;
-  }
+  const [isAddNewClicked, setIsAddNewClicked] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
 
   return (
     <ModalLayout isOpen={isOpen} onClose={onClose} name={name}>
-      {success &&
+      {success ? (
         filteredData.map(av => {
           const { id, value } = av;
-          return <SingleAttributeValue key={id} value={value} />;
-        })}
-      <PurpleButton>Add New</PurpleButton>
+          return <SingleAttributeValue key={id} id={id} value={value} />;
+        })
+      ) : (
+        <SpinnerLoader />
+      )}
+      {!isAddNewClicked && <PurpleButton>Add New</PurpleButton>}
     </ModalLayout>
   );
 }

@@ -5,10 +5,8 @@ import {
   ButtonGroup,
   Button,
   Heading,
-  IconButton,
   Link,
 } from '@chakra-ui/react';
-import { EditIcon } from '@chakra-ui/icons';
 import { StyledCard } from './index';
 import { useState } from 'react';
 import { ProductStatus } from '../types';
