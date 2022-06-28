@@ -22,7 +22,7 @@ function SingleAttribute({ name }: SingleAttributeProps) {
         marginBottom="10px"
       >
         <Box
-          backgroundColor="green"
+          backgroundColor="gray.500"
           borderRadius="8px"
           padding="8px"
           flex="1"
@@ -31,10 +31,18 @@ function SingleAttribute({ name }: SingleAttributeProps) {
           {name}
         </Box>
         <ButtonGroup>
-          <Button marginLeft="10px" onClick={onOpen} backgroundColor="gray.500">
+          <Button
+            marginLeft="10px"
+            onClick={onOpen}
+            backgroundColor="purple.500"
+            _hover={{ backgroundColor: 'purple.300' }}
+          >
             Edit Values <EditIcon marginLeft="5px" />
           </Button>
-          <Button backgroundColor="gray.500">
+          <Button
+            backgroundColor="purple.500"
+            _hover={{ backgroundColor: 'purple.300' }}
+          >
             Delete <DeleteIcon marginLeft="5px" />
           </Button>
         </ButtonGroup>

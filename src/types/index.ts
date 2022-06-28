@@ -9,3 +9,4 @@ export * from './myOrders';
 export * from './attributeValue';
 export * from './wallet';
 export * from './notifications';
+export * from './productAttribute';

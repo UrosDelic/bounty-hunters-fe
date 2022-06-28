@@ -81,7 +81,7 @@ const sidebarData: Array<{
     icon: faClipboardList,
   },
   {
-    role: UserTypes.SUPER_ADMIN,
+    role: Roles.SUPER_ADMIN,
     text: 'attributes',
     route: '/attributes',
     icon: faSwatchbook,
