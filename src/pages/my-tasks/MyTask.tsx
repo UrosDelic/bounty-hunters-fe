@@ -4,13 +4,16 @@ import TasksStore from '../../stores/tasks';
 import { Link } from 'react-router-dom';
 import MyTask from '../../components/my-tasks/MyTask';
 import { observer } from 'mobx-react';
-import { SpinnerLoader } from 'components';
+import { SearchByInput, SpinnerLoader } from 'components';
+import InfiniteScroll from 'react-infinite-scroll-component';
+import dayjs from 'dayjs';
 
 const MyTasksPage = () => {
-  const { loading, tasks } = TasksStore;
+  const { loading, tasks, hasMore } = TasksStore;
 
   useEffect(() => {
     TasksStore.getMyTasks();
+    console.log(tasks, 'tasks iz komp');
   }, []);
 
   return (
@@ -24,26 +27,35 @@ const MyTasksPage = () => {
       <Heading as="h1" textAlign="center" marginTop="50px" marginBottom="50px">
         My Tasks
       </Heading>
-      <>
-        {loading ? (
-          <SpinnerLoader />
-        ) : (
-          tasks.map(({ task, createdAtDate, updatedAtDate }) => (
-            <Link key={task.id} to={`/task-details/${task.id}`}>
-              <MyTask
-                key={task.id}
-                title={task.title}
-                description={task.description}
-                status={task.status}
-                createdAt={createdAtDate}
-                updatedAt={updatedAtDate}
-                points={task.points}
-              ></MyTask>
-            </Link>
-          ))
-        )}
-        {!loading && tasks.length === 0 ? <Text>No tasks data</Text> : null}
-      </>
+      <Box marginBottom="50px">
+        <SearchByInput />
+      </Box>
+
+      {loading ? <SpinnerLoader /> : null}
+      <InfiniteScroll
+        dataLength={tasks.length}
+        next={() => TasksStore.loadMoreTasks()}
+        hasMore={hasMore}
+        loader={<h3>loading...</h3>}
+      >
+        {tasks
+          ? tasks.map(task => (
+              <Link key={task.id} to={`/task-details/${task.id}`}>
+                <MyTask
+                  key={task.id}
+                  title={task.title}
+                  description={task.description}
+                  status={task.status}
+                  createdAt={dayjs(task.createdAt).format('DD-MM-YYYY')}
+                  updatedAt={dayjs(task.updatedAt).format('DD-MM-YYYY')}
+                  points={task.points}
+                ></MyTask>
+              </Link>
+            ))
+          : null}
+      </InfiniteScroll>
+
+      {!loading && tasks.length === 0 ? <Text>No tasks data</Text> : null}
     </Box>
   );
 };
