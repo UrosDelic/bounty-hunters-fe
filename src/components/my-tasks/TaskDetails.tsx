@@ -46,9 +46,10 @@ const TaskDetails = ({
 
           <Text>{dayjs(createdAt).format('DD-MM-YYYY')}</Text>
 
-          <Text>{deadline ? dayjs(deadline).format('DD-MM-YYYY') : null}</Text>
-
-          <Text align="center"> {description}</Text>
+          {deadline ? (
+            <Text>{dayjs(deadline).format('DD-MM-YYYY')}</Text>
+          ) : null}
+          {description ? <Text align="center"> description</Text> : null}
 
           <Button
             colorScheme="purple"
