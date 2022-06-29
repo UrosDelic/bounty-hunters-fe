@@ -65,7 +65,7 @@ function AttributeModal({
       )}
       {isAddNewClicked && (
         <form onSubmit={handleSubmit(addNew)}>
-          <Flex maxW="380px" justifyContent="space-between">
+          <Flex justifyContent="space-between">
             <Box>
               <Input
                 {...register('value', { required: 'This is required' })}

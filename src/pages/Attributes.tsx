@@ -25,7 +25,7 @@ function Attributes() {
   function postNewAttribute(data: any) {
     console.log(data);
     ProductAttributesStore.addNewProductAttribute(data);
-    reset();
+    toggleInputField();
   }
 
   useEffect(() => {
@@ -57,7 +57,11 @@ function Attributes() {
           )}
           {isAddNewClicked && (
             <form onSubmit={handleSubmit(postNewAttribute)}>
-              <Flex maxW="380px" justifyContent="space-between">
+              <Flex
+                maxW="380px"
+                justifyContent="space-between"
+                direction={['column', 'row']}
+              >
                 <Box>
                   <Input
                     {...register('name', { required: 'This is required' })}
@@ -66,10 +70,12 @@ function Attributes() {
                     focusBorderColor="purple.500"
                     w="100%"
                   />
-                  {errors.name && (
+                  {errors.name ? (
                     <Text color="red.500" margin="5px 0px">
                       Required!
                     </Text>
+                  ) : (
+                    <Text margin="5px 0px">&nbsp;</Text>
                   )}
                 </Box>
                 <ButtonGroup>

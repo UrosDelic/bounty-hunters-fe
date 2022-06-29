@@ -50,6 +50,7 @@ function SingleAttributeValue({ id, value }: SingleAttributeValueProps) {
                 <Input
                   type="text"
                   placeholder="Enter value..."
+                  focusBorderColor="purple.500"
                   {...register('value', { required: 'This is required' })}
                 />
                 {errors.value && (

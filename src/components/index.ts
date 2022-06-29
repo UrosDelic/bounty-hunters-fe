@@ -36,6 +36,8 @@ import AttributeModal from './AttributeModal';
 import PurpleButton from './PurpleButton';
 import PurpleIconButton from './PurpleIconButton';
 import SingleAttributeValue from './SingleAttributeValue';
+import AddProductModal from './AddProductModal';
+import RequiredWarningText from './RequiredWarningText';
 
 export {
   Layout,
@@ -76,4 +78,6 @@ export {
   PurpleButton,
   PurpleIconButton,
   SingleAttributeValue,
+  AddProductModal,
+  RequiredWarningText,
 };

@@ -1,4 +1,4 @@
-import { Box, Flex, ButtonGroup, useDisclosure } from '@chakra-ui/react';
+import { Box, Flex, ButtonGroup, Text, useDisclosure } from '@chakra-ui/react';
 import { DeleteIcon, EditIcon } from '@chakra-ui/icons';
 import { AttributeModal, PurpleButton } from './index';
 import ProductAttributesStore from '../stores/productAttributes';
@@ -29,15 +29,18 @@ function SingleAttribute({ name, id }: SingleAttributeProps) {
           padding="8px"
           flex="1"
           textTransform="capitalize"
+          wordBreak="break-word"
         >
           {name}
         </Box>
         <ButtonGroup marginLeft="10px">
           <PurpleButton onClick={onOpen}>
-            Edit Values <EditIcon marginLeft="5px" />
+            <Text display={['none', 'inline']}>Edit Values</Text>{' '}
+            <EditIcon marginLeft="5px" />
           </PurpleButton>
           <PurpleButton onClick={deleteProductAttribute}>
-            Delete <DeleteIcon marginLeft="5px" />
+            <Text display={['none', 'inline']}>Delete</Text>{' '}
+            <DeleteIcon marginLeft="5px" />
           </PurpleButton>
         </ButtonGroup>
       </Flex>

@@ -4,6 +4,7 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import ProductsStore from '../stores/products';
 import { observer } from 'mobx-react';
 import { useEffect } from 'react';
+import { ProductStatus } from 'types/index';
 
 function Store() {
   const { loading, success, products, hasMore } = ProductsStore;
@@ -51,14 +52,16 @@ function Store() {
               ]}
               gap={4}
             >
-              {products.map(product => {
-                const { id } = product;
-                return (
-                  <GridItem key={id}>
-                    <StoreItem {...product} />
-                  </GridItem>
-                );
-              })}
+              {products
+                .filter(product => product.status === ProductStatus.ACTIVE)
+                .map(product => {
+                  const { id } = product;
+                  return (
+                    <GridItem key={id}>
+                      <StoreItem {...product} />
+                    </GridItem>
+                  );
+                })}
             </Grid>
           </InfiniteScroll>
         </Box>
