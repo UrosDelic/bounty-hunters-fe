@@ -51,7 +51,7 @@ const TaskDetails = ({
 
           <Text>{dayjs(createdAt).format('DD-MM-YYYY')}</Text>
 
-          <Text>{deadline}</Text>
+          <Text>{dayjs(deadline).format('DD-MM-YYYY')}</Text>
 
           <Text align="center"> {description}</Text>
 
