@@ -14,7 +14,6 @@ function ColorGroup({ colorArr }: ColorGroupProps) {
     name: 'size',
     defaultValue: colorArr[0]?.id,
     onChange: value => {
-      console.log(value);
       AttributeValuesStore.changeColor(value);
     },
   });

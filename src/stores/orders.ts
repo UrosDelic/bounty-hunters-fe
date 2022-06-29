@@ -64,7 +64,6 @@ class OrdersStore {
       if (data) {
         this._orders.success = true;
         this._orders.data = data?.data;
-        console.log('orders data iz stora', data);
       }
     });
   };
@@ -75,7 +74,6 @@ class OrdersStore {
     runInAction(() => {
       if (data) {
         this._orders.isOrderSent = true;
-        console.log('order sent (iz stora)', data);
       }
     });
   };
@@ -84,7 +82,6 @@ class OrdersStore {
     const res = await this.http.patch(`/orders/${id}/orderPending`);
     runInAction(() => {
       if (res) {
-        console.log(`status updated - pending`, res);
       }
     });
   };

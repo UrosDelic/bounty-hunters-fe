@@ -13,7 +13,6 @@ function SizeGroup({ sizeArr }: SizeGroupProps) {
     name: 'size',
     defaultValue: sizeArr[0]?.id,
     onChange: value => {
-      console.log(value);
       AttributeValuesStore.changeSize(value);
     },
   });

@@ -58,8 +58,8 @@ const sidebarData: Array<{
   },
   {
     role: Roles.ADMIN,
-    text: 'all tasks',
-    route: '/all-tasks',
+    text: 'Admin Panel',
+    route: '/admin-panel',
     icon: faList,
   },
   {

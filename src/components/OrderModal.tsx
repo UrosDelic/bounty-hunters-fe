@@ -31,7 +31,6 @@ function OrderModal({ isOpen, onClose, name }: OrderModalProps) {
         productId: id,
         attributeValueIds: [selectedSize, selectedColor],
       };
-      console.log(orderObject);
       OrdersStore.makeAnOrder(orderObject);
       setAddress('');
     }
