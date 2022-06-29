@@ -71,11 +71,25 @@ class TasksStore {
 
   getTaskDetailsById = async (id: string) => {
     this._tasks.loading = true;
-    const { data } = await this.http.get<Task>(`/tasks/${id}`);
+    const { data } = await this.http.get<Task>(`/tasks/${id}/details`);
     runInAction(() => {
       this._tasks.loading = false;
       if (data) {
         this._tasks.taskById = data;
+      }
+    });
+  };
+
+  addTaskSolution = async (id: string, solution: string) => {
+    this._tasks.loading = true;
+    const { data } = await this.http.patch<Task>(
+      `/tasks/${id}/submitSolution`,
+      { solution: solution }
+    );
+    runInAction(() => {
+      this._tasks.loading = false;
+      if (data) {
+        console.log(data, 'iz solution');
       }
     });
   };
