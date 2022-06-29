@@ -38,9 +38,10 @@ const FeedList = () => {
                         next={() => userFeeds.loadMoreFeeds()}
                         hasMore={checkForMore}
                         loader={
-                            <h4>
-                                <Skeleton minH={200} mx={2} rounded="md" />
-                            </h4>
+                            <Grid gridTemplateColumns={{ base: '1fr', lg: '1fr 1fr' }} gap={5}>
+                                <Skeleton minH={200} mx={2} my={5} rounded="md" />
+                                <Skeleton minH={200} mx={2} my={5} rounded="md" />
+                            </Grid>
                         }
                         endMessage={
                             <p style={{ textAlign: 'center' }}>

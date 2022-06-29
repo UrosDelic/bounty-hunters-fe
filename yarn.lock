@@ -1624,6 +1624,13 @@
   dependencies:
     "@chakra-ui/utils" "2.0.2"
 
+"@choc-ui/chakra-autocomplete@^4.22.0":
+  version "4.22.0"
+  resolved "https://registry.yarnpkg.com/@choc-ui/chakra-autocomplete/-/chakra-autocomplete-4.22.0.tgz#540b9f561309cc7a64e9fbd4f44ff30336189aa7"
+  integrity sha512-jP1IBM8Xtm7iNs4mB1ky/HRFpJQeNUDbVwA2CQ/UZyPHsoMGbo6dH2iHofaE1H4KuGPJV1gWvjmQ6o/uMYeT0g==
+  dependencies:
+    react-nanny "^2.9.0"
+
 "@csstools/normalize.css@*":
   version "12.0.0"
   resolved "https://registry.npmjs.org/@csstools/normalize.css/-/normalize.css-12.0.0.tgz"
@@ -6697,6 +6704,11 @@ lines-and-columns@^1.1.6:
   resolved "https://registry.npmjs.org/lines-and-columns/-/lines-and-columns-1.2.4.tgz"
   integrity sha512-7ylylesZQ/PV29jhEDl3Ufjo6ZX7gCqJr5F7PKrqc93v7fzSymt1BpwEU8nAUXs8qzzvqhbjhK5QZg6Mt/HkBg==
 
+loadash@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/loadash/-/loadash-1.0.0.tgz#b92e54d809f3c225f4f9a9cfbaeae5b56de1ca9f"
+  integrity sha512-xlX5HBsXB3KG0FJbJJG/3kYWCfsCyCSus3T+uHVu6QL6YxAdggmm3QeyLgn54N2yi5/UE6xxL5ZWJAAiHzHYEg==
+
 loader-runner@^4.2.0:
   version "4.3.0"
   resolved "https://registry.npmjs.org/loader-runner/-/loader-runner-4.3.0.tgz"
@@ -8305,6 +8317,11 @@ react-lifecycles-compat@^3.0.4:
   version "3.0.4"
   resolved "https://registry.npmjs.org/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
+
+react-nanny@^2.9.0:
+  version "2.14.0"
+  resolved "https://registry.yarnpkg.com/react-nanny/-/react-nanny-2.14.0.tgz#c53afa8cd9612ca0eee57a35e0d38b65f76445a4"
+  integrity sha512-lX+SNWlpbIhN4h3zJQAtRqr7AXwldmgKxJ8e+eChFvMQISsZmHaR2SJujb3u1S6fpC5pUnYKsdbtwZXUG/4Qjw==
 
 react-query@^3.39.1:
   version "3.39.1"

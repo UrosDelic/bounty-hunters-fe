@@ -31,6 +31,7 @@ import OrderModal from './OrderModal';
 import Pagination from './Pagination';
 import OrdersTable from './OrdersTable';
 import TasksTable from './TasksTable';
+import UserSearch from './core/UserSearch'
 
 export {
   Layout,
@@ -66,5 +67,5 @@ export {
   Pagination,
   OrdersTable,
   TasksTable,
-  
+  UserSearch
 };

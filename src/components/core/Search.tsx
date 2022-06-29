@@ -17,7 +17,7 @@ import { observer } from 'mobx-react';
 const Search = ({ searchTerm, makeSearch, resetSearch }: any) => {
     const [searchParams, setSearchParams] = useSearchParams('');
     const [inputValue, setInputValue] = useState('');
-    const [tag, setTag] = useState('');
+
 
     useEffect(() => {
         setSearchParams('');
@@ -28,7 +28,7 @@ const Search = ({ searchTerm, makeSearch, resetSearch }: any) => {
         const search = inputValue.trim();
         if (search) {
             searchParams.set(searchTerm, search);
-            setTag(search);
+
             setSearchParams(searchParams);
             makeSearch(search);
         } else {
@@ -37,27 +37,19 @@ const Search = ({ searchTerm, makeSearch, resetSearch }: any) => {
         }
     };
     const clearSearch = () => {
-        setTag('');
         searchParams.delete(searchTerm);
         setSearchParams(searchParams);
         resetSearch();
     };
 
     return (
-        <Flex alignItems="center">
-            {tag && (
-                <Box mx={2}>
-                    <Tag size="xs" p={1} rounded="md" variant="solid" colorScheme="gray">
-                        <TagLabel fontSize="xs">{tag}</TagLabel>
-                        <TagCloseButton onClick={() => clearSearch()} />
-                    </Tag>
-                </Box>
-            )}
+        <Flex alignItems="center" mx={2}>
+
             <form onSubmit={handleSearchParams}>
                 <InputGroup>
-                    <InputLeftElement zIndex="1" children={<SearchIcon />} />
+
                     <Input
-                        variant="flushed"
+
                         fontSize="xs"
                         onChange={e => setInputValue(e.target.value)}
                         placeholder="Search"
