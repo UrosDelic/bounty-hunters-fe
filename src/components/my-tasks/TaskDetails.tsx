@@ -25,17 +25,12 @@ const TaskDetails = ({
 }: Props) => {
   const [showEditor, setShowEditor] = useState(false);
 
-  const onAddDescription = () => {
-    setShowEditor(true);
+  const onEditorChange = () => {
+    showEditor ? setShowEditor(false) : setShowEditor(true);
   };
 
-  const closeEditor = () => {
-    setShowEditor(false);
-  };
+  const onSubmit = () => {};
 
-  const onSubmit = () => {
-    //
-  };
   return (
     <Box mt={10} w={['50rem']}>
       <StyledCard>
@@ -59,7 +54,7 @@ const TaskDetails = ({
             colorScheme="purple"
             variant="solid"
             alignSelf="center"
-            onClick={onAddDescription}
+            onClick={onEditorChange}
             rightIcon={<EditIcon />}
           >
             Add description
@@ -67,7 +62,7 @@ const TaskDetails = ({
 
           <BhEditor
             isOpen={showEditor}
-            isClosed={closeEditor}
+            isClosed={onEditorChange}
             submit={onSubmit}
           />
         </Stack>

@@ -16,7 +16,6 @@ const TaskDetailsPage = () => {
   }, [id]);
   return (
     <Flex direction="column" justify="center" align="center">
-      {' '}
       {loading ? <SpinnerLoader /> : null}
       {tasksById && !loading ? (
         <>
