@@ -46,6 +46,7 @@ function SingleAttribute({ name, id }: SingleAttributeProps) {
         onClose={onClose}
         isOpen={isOpen}
         productAttributeName={name}
+        productAttributeId={id}
       />
     </>
   );

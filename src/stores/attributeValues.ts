@@ -1,6 +1,6 @@
 import { initHttp } from 'http/index';
 import { makeAutoObservable, runInAction } from 'mobx';
-import { AttributeValue, AttributeValuePut } from 'types';
+import { AttributeValue, AttributeValuePut, AttributeValuePost } from 'types';
 
 interface AttributeValuesStoreProps {
   data: AttributeValue[];
@@ -94,6 +94,16 @@ class AttributeValuesStore {
       if (!data) {
         this.getAttributeValues();
         console.log('attribute value deleted', data);
+      }
+    });
+  };
+
+  addNewAttributeValue = async (value: AttributeValuePost) => {
+    const { data } = await this.http.post(`/attributeValues`, value);
+    runInAction(() => {
+      if (data) {
+        this.getAttributeValues();
+        console.log('attribute value added', data);
       }
     });
   };

@@ -12,3 +12,8 @@ export interface AttributeValue {
 export interface AttributeValuePut {
   value: string;
 }
+
+export interface AttributeValuePost {
+  value: string;
+  productAttributeId: string;
+}

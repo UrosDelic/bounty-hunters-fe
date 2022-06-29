@@ -4,6 +4,7 @@ import {
   SpinnerLoader,
   SingleAttributeValue,
 } from './index';
+import { Box, Input, Flex, Text, ButtonGroup } from '@chakra-ui/react';
 import AttributeValuesStore from '../stores/attributeValues';
 import { observer } from 'mobx-react';
 import { useFilterByProductAttributeName } from '../custom-hooks/useFilterByProductAttributeName';
@@ -15,6 +16,7 @@ interface AttributeModalProps {
   onClose: () => void;
   name: string;
   productAttributeName: string;
+  productAttributeId: string;
 }
 
 function AttributeModal({
@@ -22,6 +24,7 @@ function AttributeModal({
   onClose,
   name,
   productAttributeName,
+  productAttributeId,
 }: AttributeModalProps) {
   const { success, attributeValues } = AttributeValuesStore;
   const filteredData = useFilterByProductAttributeName(
@@ -36,6 +39,17 @@ function AttributeModal({
     formState: { errors },
   } = useForm();
 
+  function toggleInputField() {
+    setIsAddNewClicked(prev => !prev);
+    reset();
+  }
+
+  function addNew(data: any) {
+    console.log({ ...data, productAttributeId });
+    AttributeValuesStore.addNewAttributeValue({ ...data, productAttributeId });
+    toggleInputField();
+  }
+
   return (
     <ModalLayout isOpen={isOpen} onClose={onClose} name={name}>
       {success ? (
@@ -46,7 +60,33 @@ function AttributeModal({
       ) : (
         <SpinnerLoader />
       )}
-      {!isAddNewClicked && <PurpleButton>Add New</PurpleButton>}
+      {!isAddNewClicked && (
+        <PurpleButton onClick={toggleInputField}>Add New</PurpleButton>
+      )}
+      {isAddNewClicked && (
+        <form onSubmit={handleSubmit(addNew)}>
+          <Flex maxW="380px" justifyContent="space-between">
+            <Box>
+              <Input
+                {...register('value', { required: 'This is required' })}
+                type="text"
+                placeholder="Add new..."
+                focusBorderColor="purple.500"
+                w="100%"
+              />
+              {errors.name && (
+                <Text color="red.500" margin="5px 0px">
+                  Required!
+                </Text>
+              )}
+            </Box>
+            <ButtonGroup>
+              <PurpleButton onClick={handleSubmit(addNew)}>Save</PurpleButton>
+              <PurpleButton onClick={toggleInputField}>Cancel</PurpleButton>
+            </ButtonGroup>
+          </Flex>
+        </form>
+      )}
     </ModalLayout>
   );
 }
