@@ -95,7 +95,7 @@ const AdminPanel = () => {
                         </Flex>
                     </Flex>
                     <Flex alignItems="end">
-                        <UserSearch setUser={''} />
+                        <UserSearch />
                     </Flex>
                 </Flex>
 
