@@ -6,11 +6,11 @@ interface RequiredWarningTextProps {
 
 function RequiredWarningText({ isShown }: RequiredWarningTextProps) {
   return isShown ? (
-    <Text color="red.500" margin="5px 0px">
+    <Text color="red.500" margin="2px 0px">
       Required!
     </Text>
   ) : (
-    <Text margin="5px 0px">&nbsp;</Text>
+    <Text margin="2px 0px">&nbsp;</Text>
   );
 }
 

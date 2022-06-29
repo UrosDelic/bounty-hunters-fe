@@ -1,6 +1,6 @@
 import { Box, Input, Flex, Text, ButtonGroup } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
-import { SingleAttribute } from '../components/index';
+import { SingleAttribute, RequiredWarningText } from '../components/index';
 import ProductAttributesStore from '../stores/productAttributes';
 import AttributeValuesStore from '../stores/attributeValues';
 import { SpinnerLoader, PurpleButton } from '../components/index';
@@ -70,13 +70,7 @@ function Attributes() {
                     focusBorderColor="purple.500"
                     w="100%"
                   />
-                  {errors.name ? (
-                    <Text color="red.500" margin="5px 0px">
-                      Required!
-                    </Text>
-                  ) : (
-                    <Text margin="5px 0px">&nbsp;</Text>
-                  )}
+                  <RequiredWarningText isShown={errors?.name} />
                 </Box>
                 <ButtonGroup>
                   <PurpleButton onClick={handleSubmit(postNewAttribute)}>

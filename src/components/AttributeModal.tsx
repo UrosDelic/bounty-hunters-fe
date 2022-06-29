@@ -3,6 +3,7 @@ import {
   PurpleButton,
   SpinnerLoader,
   SingleAttributeValue,
+  RequiredWarningText,
 } from './index';
 import { Box, Input, Flex, Text, ButtonGroup } from '@chakra-ui/react';
 import AttributeValuesStore from '../stores/attributeValues';
@@ -74,11 +75,7 @@ function AttributeModal({
                 focusBorderColor="purple.500"
                 w="100%"
               />
-              {errors.name && (
-                <Text color="red.500" margin="5px 0px">
-                  Required!
-                </Text>
-              )}
+              <RequiredWarningText isShown={errors?.value} />
             </Box>
             <ButtonGroup>
               <PurpleButton onClick={handleSubmit(addNew)}>Save</PurpleButton>

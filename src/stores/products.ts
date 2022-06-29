@@ -122,7 +122,6 @@ class ProductsStore {
     const { data } = await this.http.post(`/products`, value);
     runInAction(() => {
       if (data) {
-        // this.getProducts();
         console.log('new product added value added', data);
       }
     });

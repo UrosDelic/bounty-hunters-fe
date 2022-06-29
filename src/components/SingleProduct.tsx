@@ -47,7 +47,7 @@ function SingleProduct({ id, name, price, status }: SingleCardProps) {
         width="100%"
         height="100%"
       >
-        <Link as={RouteLink} to={`/products/${id}`}>
+        {/* <Link as={RouteLink} to={`/products/${id}`}>
           <Text
             position="absolute"
             top="10px"
@@ -56,7 +56,7 @@ function SingleProduct({ id, name, price, status }: SingleCardProps) {
           >
             Details
           </Text>
-        </Link>
+        </Link> */}
         <Box marginBottom="25px">
           <Heading fontSize="18px">{name}</Heading>
           <Text fontSize="16px">{price} points</Text>
