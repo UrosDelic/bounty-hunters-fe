@@ -1,5 +1,6 @@
 import { useCallback, useState } from 'react';
 import {
+    Flex,
     Box,
     Text,
     InputRightElement,
@@ -47,13 +48,14 @@ const UserSearch = (rr: any) => {
     };
     return (
         <>
-            <FormControl fontSize="xs" px={2}>
+            <FormControl fontSize="xs" >
                 <AutoComplete
                     restoreOnBlurIfEmpty={true}
                     openOnFocus={false}
-                    emptyState={'No one is named that'}
+                    emptyState={'No users'}
+
                 >
-                    <InputGroup>
+                    <InputGroup w={220}>
                         <Tooltip
                             hasArrow
                             fontSize="xs"
@@ -64,6 +66,8 @@ const UserSearch = (rr: any) => {
                             placement="top-start"
                         >
                             <AutoCompleteInput
+
+                                autoComplete='off'
                                 onChange={e => {
                                     debounceOnChange(e);
                                     searchTerm(e);
@@ -90,7 +94,7 @@ const UserSearch = (rr: any) => {
                         )}
                     </InputGroup>
 
-                    <AutoCompleteList>
+                    <AutoCompleteList w={220}>
                         {users.map((n, key: any) => (
                             <>
                                 <AutoCompleteItem
@@ -102,9 +106,14 @@ const UserSearch = (rr: any) => {
                                         selectUser(n.id, `${n.firstName} ${n.lastName}`)
                                     }
                                 >
-                                    <Avatar size="sm" mx={1} name={n.firstName} />
-                                    <Text mx={1}>{n.firstName}</Text>
-                                    <Text mx={1}>{n.lastName}</Text>
+                                    <Avatar size="sm" mx={1} name={`${n.firstName} ${n.lastName}`} />
+                                    <Flex flexDirection='column'>
+                                        <Flex>
+                                            <Text mr={1}>{n.firstName}</Text>
+                                            <Text >{n.lastName}</Text>
+                                        </Flex>
+                                        <Text as='sub' >{n.email}</Text>
+                                    </Flex>
                                 </AutoCompleteItem>
                             </>
                         ))}
