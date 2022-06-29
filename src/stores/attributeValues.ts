@@ -81,7 +81,6 @@ class AttributeValuesStore {
         this._attributeValues.selectedColor = colors[0]?.id;
         this._attributeValues.sizeData = sizes;
         this._attributeValues.selectedSize = sizes[0]?.id;
-        console.log('roles data iz stora', sizes);
       }
     });
   };

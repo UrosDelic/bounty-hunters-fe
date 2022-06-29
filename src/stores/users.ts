@@ -1,6 +1,8 @@
 import { initHttp } from 'http/index';
 import { makeAutoObservable, runInAction } from 'mobx';
 import { Users } from 'types';
+import Login from './Login';
+import LoginStore from './Login';
 
 interface UsersStoreProps {
   loading: boolean;
@@ -98,7 +100,7 @@ class UsersStore {
       if (data) {
         this._users.isUserUpdated = true;
         this.getUsers();
-        console.log('updated users roles from store', data);
+        LoginStore.checkUserFromStorage();
       }
     });
   };

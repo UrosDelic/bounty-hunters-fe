@@ -62,7 +62,6 @@ class MyOrdersStore {
       if (data) {
         this._MyOrders.success = true;
         this._MyOrders.data = data?.data;
-        console.log('my orders iz stora', data);
       }
     });
   };
