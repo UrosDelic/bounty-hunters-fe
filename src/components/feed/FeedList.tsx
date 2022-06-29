@@ -25,6 +25,7 @@ const FeedList = () => {
                         <Text
                             fontWeight="thin"
                             fontSize={{ base: 'xl', md: '2xl' }}
+                            mt={2}
                             mb={4}
                             mx={5}
                             textAlign={{ base: 'center', lg: 'start' }}
@@ -58,12 +59,6 @@ const FeedList = () => {
                                         p={2}
                                         w={{ base: '90%', md: '100%' }}
 
-                                        _hover={{
-                                            cursor: 'pointer',
-                                            transform: 'scale(1.1)',
-                                            transition: '0.4s ease-out',
-
-                                        }}
                                     >
                                         <StyledCard>
                                             <Link

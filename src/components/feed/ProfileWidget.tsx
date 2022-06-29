@@ -30,18 +30,18 @@ const ProfileWidget = () => {
         <>
             <Hide below="xl">
                 <Box h="100vh" w="30vw" position="fixed" right={0} boxShadow="dark-lg">
-                    <Grid rowGap={5}>
+                    <Grid gap={10} >
                         <Flex py={8} px={5} justifyContent="center">
                             <Avatar
                                 src={googleProfile?.picture}
-                                size="xl"
+                                size="2xl"
                                 name={googleProfile?.name}
                             />
-                            <Flex flexDirection="column" mx={4} alignItems="start">
-                                <Text fontWeight="thin" fontSize="2xl" mt={2}>
+                            <Flex flexDirection="column" mx={4} alignItems="center">
+                                <Text fontWeight="thin" fontSize="3xl" mt={2}>
                                     {googleProfile.name}
                                 </Text>
-                                <Text fontWeight="thin" fontSize="sm" mt={2}>
+                                <Text fontWeight="thin" fontSize="md">
                                     {googleProfile.email}
                                 </Text>
                             </Flex>
@@ -173,7 +173,7 @@ const ProfileWidget = () => {
                             </Link>
                         </Grid>
                         <Flex
-                            h="100%"
+                            h="400"
                             w="90%"
                             mx="auto"
                             my={2}
@@ -186,180 +186,182 @@ const ProfileWidget = () => {
                                     <Text>{t.message}</Text>
                                 ))}
                             </Text>
-                            <Image src={img} alt="logo" width={100} />
+                            <Image src={img} alt="logo" width={150} />
                         </Flex>
                     </Grid>
                 </Box>
             </Hide>
             <Show below="xl">
                 <Hide below="lg">
-                    <Box
-                        h="100vh"
-                        w="30vw"
-                        position="fixed"
-                        right={0}
-                        boxShadow="dark-lg"
-                    >
-                        <Flex mt={8} px={5} justifyContent="center">
-                            <Avatar
-                                src={googleProfile.picture}
-                                size="lg"
-                                name={googleProfile.name}
-                            />
-                            <Flex flexDirection="column" mx={4} alignItems="start">
-                                <Text fontWeight="thin" fontSize="xl" mt={2}>
-                                    {googleProfile.name}
-                                </Text>
-                                <Text fontWeight="thin" fontSize="xs">
-                                    {googleProfile.email}
-                                </Text>
+                    <Grid gap={10} >
+                        <Box
+                            h="100vh"
+                            w="30vw"
+                            position="fixed"
+                            right={0}
+                            boxShadow="dark-lg"
+                        >
+                            <Flex mt={10} px={5} justifyContent="center">
+                                <Avatar
+                                    src={googleProfile.picture}
+                                    size="xl"
+                                    name={googleProfile.name}
+                                />
+                                <Flex flexDirection="column" mx={4} alignItems="start">
+                                    <Text fontWeight="thin" fontSize="2xl" mt={2}>
+                                        {googleProfile.name}
+                                    </Text>
+                                    <Text fontWeight="thin" fontSize="sm">
+                                        {googleProfile.email}
+                                    </Text>
+                                </Flex>
                             </Flex>
-                        </Flex>
 
-                        <Grid
-                            justifyContent="center"
-                            gridTemplateColumns="repeat(2, 1fr)"
-                            gap={3}
-                            p={3}
-                            my={4}
-                        >
-                            <Link
-                                as={RouterLink}
-                                to={`/my-tasks`}
-                                _focus={{ outline: 0 }}
-                                style={{ textDecoration: 'none' }}
+                            <Grid
+                                justifyContent="center"
+                                gridTemplateColumns="repeat(2, 1fr)"
+                                gap={5}
+                                p={3}
+                                my={4}
                             >
-                                <Box
-                                    alignItems="start"
-                                    justifyContent="space-evenly"
-                                    flexDirection="column"
+                                <Link
+                                    as={RouterLink}
+                                    to={`/my-tasks`}
+                                    _focus={{ outline: 0 }}
+                                    style={{ textDecoration: 'none' }}
                                 >
-                                    <Text
-                                        fontSize="sm"
-                                        textAlign="center"
-                                        rounded="md"
-                                        fontWeight="thin"
-                                        bg="purple.400"
-                                        borderLeft="4px"
-                                        borderColor="white"
-                                        p={1}
+                                    <Box
+                                        alignItems="start"
+                                        justifyContent="space-evenly"
+                                        flexDirection="column"
                                     >
-                                        Assigned Tasks
-                                        <Text fontWeight="medium" fontSize="md">
-                                            35
+                                        <Text
+                                            fontSize="sm"
+                                            textAlign="center"
+                                            rounded="md"
+                                            fontWeight="thin"
+                                            bg="purple.400"
+                                            borderLeft="4px"
+                                            borderColor="white"
+                                            p={1}
+                                        >
+                                            Assigned Tasks
+                                            <Text fontWeight="medium" fontSize="md">
+                                                35
+                                            </Text>
                                         </Text>
-                                    </Text>
-                                </Box>
-                            </Link>
+                                    </Box>
+                                </Link>
 
-                            <Link
-                                as={RouterLink}
-                                to={`/my-tasks`}
-                                _focus={{ outline: 0 }}
-                                style={{ textDecoration: 'none' }}
-                            >
-                                <Box
-                                    alignItems="start"
-                                    justifyContent="space-evenly"
-                                    flexDirection="column"
-                                    rounded="md"
+                                <Link
+                                    as={RouterLink}
+                                    to={`/my-tasks`}
+                                    _focus={{ outline: 0 }}
+                                    style={{ textDecoration: 'none' }}
                                 >
-                                    <Text
-                                        fontSize="sm"
-                                        textAlign="center"
+                                    <Box
+                                        alignItems="start"
+                                        justifyContent="space-evenly"
+                                        flexDirection="column"
                                         rounded="md"
-                                        fontWeight="thin"
-                                        borderLeft="4px"
-                                        borderColor="purple.400"
-                                        bg="gray.600"
-                                        boxShadow="md"
-                                        p={1}
                                     >
-                                        Completed Tasks
-                                        <Text fontWeight="medium" fontSize="md">
-                                            35
+                                        <Text
+                                            fontSize="sm"
+                                            textAlign="center"
+                                            rounded="md"
+                                            fontWeight="thin"
+                                            borderLeft="4px"
+                                            borderColor="purple.400"
+                                            bg="gray.600"
+                                            boxShadow="md"
+                                            p={1}
+                                        >
+                                            Completed Tasks
+                                            <Text fontWeight="medium" fontSize="md">
+                                                35
+                                            </Text>
                                         </Text>
-                                    </Text>
-                                </Box>
-                            </Link>
-                            <Link
-                                as={RouterLink}
-                                to={`/my-tasks`}
-                                _focus={{ outline: 0 }}
-                                style={{ textDecoration: 'none' }}
-                            >
-                                <Box
-                                    alignItems="start"
-                                    justifyContent="space-evenly"
-                                    flexDirection="column"
-                                    rounded="md"
+                                    </Box>
+                                </Link>
+                                <Link
+                                    as={RouterLink}
+                                    to={`/my-tasks`}
+                                    _focus={{ outline: 0 }}
+                                    style={{ textDecoration: 'none' }}
                                 >
-                                    <Text
-                                        fontSize="md"
-                                        textAlign="center"
-                                        rounded="sm"
-                                        fontWeight="thin"
-                                        borderLeft="4px"
-                                        borderColor="purple.400"
-                                        bg="gray.600"
-                                        boxShadow="md"
-                                        p={1}
-                                    >
-                                        Available Points
-                                        <Text fontWeight="medium" fontSize="md">
-                                            356
-                                        </Text>
-                                    </Text>
-                                </Box>
-                            </Link>
-                            <Link
-                                as={RouterLink}
-                                to={`/my-tasks`}
-                                _focus={{ outline: 0 }}
-                                style={{ textDecoration: 'none' }}
-                            >
-                                <Box
-                                    alignItems="start"
-                                    justifyContent="space-evenly"
-                                    flexDirection="column"
-                                    rounded="md"
-                                >
-                                    <Text
-                                        fontSize="sm"
-                                        textAlign="center"
+                                    <Box
+                                        alignItems="start"
+                                        justifyContent="space-evenly"
+                                        flexDirection="column"
                                         rounded="md"
-                                        fontWeight="thin"
-                                        bg="purple.400"
-                                        borderLeft="4px"
-                                        borderColor="white"
-                                        p={1}
                                     >
-                                        Pending Orders
-                                        <Text fontWeight="medium" fontSize="md">
-                                            3
+                                        <Text
+                                            fontSize="md"
+                                            textAlign="center"
+                                            rounded="sm"
+                                            fontWeight="thin"
+                                            borderLeft="4px"
+                                            borderColor="purple.400"
+                                            bg="gray.600"
+                                            boxShadow="md"
+                                            p={1}
+                                        >
+                                            Available Points
+                                            <Text fontWeight="medium" fontSize="md">
+                                                356
+                                            </Text>
                                         </Text>
-                                    </Text>
-                                </Box>
-                            </Link>
-                        </Grid>
-                        <Flex
-                            h={130}
-                            w="90%"
-                            mx="auto"
-                            my={2}
-                            bgGradient="linear(to-l,purple.400, purple.700)"
-                            justifyContent="space-around"
-                            p={5}
-                        >
+                                    </Box>
+                                </Link>
+                                <Link
+                                    as={RouterLink}
+                                    to={`/my-tasks`}
+                                    _focus={{ outline: 0 }}
+                                    style={{ textDecoration: 'none' }}
+                                >
+                                    <Box
+                                        alignItems="start"
+                                        justifyContent="space-evenly"
+                                        flexDirection="column"
+                                        rounded="md"
+                                    >
+                                        <Text
+                                            fontSize="sm"
+                                            textAlign="center"
+                                            rounded="md"
+                                            fontWeight="thin"
+                                            bg="purple.400"
+                                            borderLeft="4px"
+                                            borderColor="white"
+                                            p={1}
+                                        >
+                                            Pending Orders
+                                            <Text fontWeight="medium" fontSize="md">
+                                                3
+                                            </Text>
+                                        </Text>
+                                    </Box>
+                                </Link>
+                            </Grid>
+                            <Flex
+                                h={200}
+                                w="90%"
+                                mx="auto"
+                                my={2}
+                                bgGradient="linear(to-l,purple.400, purple.700)"
+                                justifyContent="space-around"
+                                p={5}
+                            >
 
-                            <Text fontSize="xs" fontWeight="thin" m='auto'>
-                                {latestNotfiication.map((t: any, key: any) => (
-                                    <Text>{t.message}</Text>
-                                ))}
-                            </Text>
-                            <Image src={img} alt="logo" width={100} />
-                        </Flex>
-                    </Box>
+                                <Text fontSize="xs" fontWeight="thin" m='auto'>
+                                    {latestNotfiication.map((t: any, key: any) => (
+                                        <Text>{t.message}</Text>
+                                    ))}
+                                </Text>
+                                <Image src={img} alt="logo" width={150} />
+                            </Flex>
+                        </Box>
+                    </Grid>
                 </Hide>
             </Show>
             <Show below="lg">

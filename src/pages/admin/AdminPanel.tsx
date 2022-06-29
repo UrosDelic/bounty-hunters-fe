@@ -45,7 +45,7 @@ const AdminPanel = () => {
             title: input.title,
             points: parseInt(input.points),
             description: input.description,
-            // userId: '1d6a9841-77f0-4169-b61b-f8f043b64b90',
+            userId: '1d6a9841-77f0-4169-b61b-f8f043b64b90',
         });
         if (error) {
             toast({
@@ -79,7 +79,7 @@ const AdminPanel = () => {
                     w={'90%'}
                     mx="auto"
                 >
-                    <Flex justifyContent="start" alignItems="center" fontSize="xs">
+                    <Flex justifyContent="start" alignItems="center" fontSize="sm">
                         <Flex
                             bg="purple.400"
                             rounded="md"
@@ -87,9 +87,9 @@ const AdminPanel = () => {
                             justifyContent="start"
                             cursor="pointer"
                             onClick={onOpen}
-                            p={2}
+                            p={3}
                         >
-                            <Text fontWeight="thin" fontSize="md">
+                            <Text fontWeight="thin" fontSize="lg">
                                 Create New Task
                             </Text>
                         </Flex>
@@ -104,15 +104,16 @@ const AdminPanel = () => {
                         {' '}
                         <Text
                             mx={2}
-                            fontSize="xs"
+                            fontSize="md"
                         >{`${tasksLength} of ${totalTaskCount} records`}</Text>
                     </Flex>
                     <Grid
-                        gridTemplateColumns="100px repeat(4,1fr) 100px"
+                        gridTemplateColumns="120px repeat(4,1fr) 120px"
                         justifyItems="center"
                         bg="blackAlpha.500"
-                        fontSize="sm"
+                        fontSize="lg"
                         my={2}
+                        p={1}
                     >
                         <Box>Date</Box>
                         <Box>Title</Box>
@@ -125,11 +126,11 @@ const AdminPanel = () => {
                         dataLength={tasks.length}
                         next={() => AdminTasksStore.loadMoreTasks()}
                         hasMore={checkForMore}
-                        loader={[...Array(8).keys()].map((m, key) => (
-                            <Skeleton minH={50} my={4} key={key} />
+                        loader={[...Array(2).keys()].map((m, key) => (
+                            <Skeleton maxH={50} my={4} key={key} />
                         ))}
                         endMessage={
-                            <Text m={8} textAlign="center" fontSize="xs">
+                            <Text m={8} textAlign="center" fontSize="sm">
                                 There are no more tasks
                             </Text>
                         }
@@ -183,7 +184,7 @@ const AdminPanel = () => {
                                 type="submit"
                                 mt={2}
                                 colorScheme="purple"
-                                fontSize="xs"
+                                fontSize="sm"
                             >
                                 Submit
                             </Button>

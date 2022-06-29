@@ -48,17 +48,17 @@ const UserSearch = (rr: any) => {
     };
     return (
         <>
-            <FormControl fontSize="xs" >
+            <FormControl fontSize="md" >
                 <AutoComplete
                     restoreOnBlurIfEmpty={true}
                     openOnFocus={false}
                     emptyState={'No users'}
 
                 >
-                    <InputGroup w={220}>
+                    <InputGroup w={250}>
                         <Tooltip
                             hasArrow
-                            fontSize="xs"
+                            fontSize="sm"
                             fontWeight="normal"
                             label="Search order: firstname lastname ex(John Smith)"
                             bg="purple.400"
@@ -73,15 +73,17 @@ const UserSearch = (rr: any) => {
                                     searchTerm(e);
                                 }}
                                 value={user}
-                                size="md"
-                                fontSize="xs"
+                                size="lg"
+                                fontSize="md"
                                 placeholder="Search users"
                             />
                         </Tooltip>
                         {user && (
                             <InputRightElement
+                                zIndex={0}
                                 children={
                                     <Icon
+
                                         onClick={() => {
                                             resetSearch();
                                         }}
@@ -94,13 +96,13 @@ const UserSearch = (rr: any) => {
                         )}
                     </InputGroup>
 
-                    <AutoCompleteList w={220}>
+                    <AutoCompleteList w={250}>
                         {users.map((n, key: any) => (
                             <>
                                 <AutoCompleteItem
                                     key={n.id}
                                     value={`${n.firstName} ${n.lastName}`}
-                                    p={2}
+                                    p={3}
                                     cursor="pointer"
                                     onClick={() =>
                                         selectUser(n.id, `${n.firstName} ${n.lastName}`)

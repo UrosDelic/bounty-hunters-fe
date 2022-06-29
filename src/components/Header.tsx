@@ -3,14 +3,14 @@ import LoginStore from '../stores/Login';
 import { observer } from 'mobx-react';
 import {
   Flex,
-  Menu,
-  MenuButton,
-  MenuList,
   Circle,
   Box,
   Button,
-  IconButton,
-  Text
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverArrow,
+  PopoverBody,
 } from '@chakra-ui/react';
 import { UserNotifications } from 'components/index';
 import { useEffect, useState } from 'react';
@@ -28,7 +28,6 @@ function Header({ onOpen }: headerProps) {
     UserNotificationsStore.getNotificationCount();
   }, []);
 
-  //const nesto = 10000;
   return (
     <Flex
       minH="6vh"
@@ -42,22 +41,20 @@ function Header({ onOpen }: headerProps) {
       w="100%"
     >
       <HamburgerIcon cursor="pointer" w={8} h={8} onClick={onOpen} />
-
-      <Box >
-        <Menu>
-          <MenuButton
-            variant='ghost'
-            fontSize='3xl'
-            p={0}
-            as={Button}
-
-
-            onClick={() => setOpenNotifications(true)}
-            _hover={{ bg: 'transperent' }}
-            _active={{ bg: 'transperent' }}
-          >
-            <Box position="relative" >
-              <BellIcon fontSize='2xl' />
+      <Box>
+        <Popover >
+          <PopoverTrigger>
+            <Box
+              variant="ghost"
+              fontSize="3xl"
+              bg="transperent"
+              p={0}
+              as={Button}
+              onClick={() => setOpenNotifications(true)}
+              _hover={{ bg: 'gray.600' }}
+              _active={{ bg: 'transperent' }}
+            >
+              <BellIcon fontSize="1.1em" />
               {notificationsCount?.unreadCount > 0 ? (
                 <Circle
                   px={1}
@@ -67,47 +64,36 @@ function Header({ onOpen }: headerProps) {
                   position="absolute"
                   top={2}
                   right={1}
-                  size='auto'
+                  size="auto"
                 >
                   {notificationsCount?.unreadCount}
-
-
                 </Circle>
-              ) : ''}
+              ) : (
+                ''
+              )}
             </Box>
+          </PopoverTrigger>
+          <PopoverContent
 
-
-          </MenuButton>
-
-
-
-
-
-          <MenuList
-            w={{ base: '90vw', md: '70vw', lg: '30vw' }}
-            h="40vh"
+            w={{ base: '90vw', md: '70vw', lg: '35vw' }}
+            mx={5}
+            h="50vh"
             p={0}
             border={0}
             boxShadow="dark-lg"
           >
-            {notificationsOpen && <UserNotifications />}
-          </MenuList>
-        </Menu>
+            <PopoverArrow />
+            <PopoverBody p={0}>
+              {notificationsOpen && <UserNotifications />}
+            </PopoverBody>
+          </PopoverContent>
+        </Popover>
         <Button colorScheme="grey" variant="solid" onClick={logout}>
           Log Out
         </Button>
       </Box>
     </Flex>
   );
-
-  // function determineRight() {
-  //   if (nesto.toString().length > 2) {
-  //     return -1;
-  //   }
-
-  //   return 2;
-  // }
-
 }
 
 export default observer(Header);
