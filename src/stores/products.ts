@@ -62,7 +62,6 @@ class ProductsStore {
       if (data) {
         this._products.success = true;
         this._products.data = data?.data;
-        console.log('products data iz stora', data?.data);
       }
     });
   };
@@ -76,7 +75,6 @@ class ProductsStore {
       if (data) {
         this._products.success = true;
         this._products.productById = data;
-        console.log('single product iz stora', data);
       }
     });
   };

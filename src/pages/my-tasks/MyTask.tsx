@@ -1,4 +1,4 @@
-import { Box, Text, Heading } from '@chakra-ui/react';
+import { Box, Text, Heading, Grid, GridItem } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import TasksStore from '../../stores/tasks';
 import { Link } from 'react-router-dom';
@@ -13,16 +13,15 @@ const MyTasksPage = () => {
 
   useEffect(() => {
     TasksStore.getMyTasks();
-    console.log(tasks, 'tasks iz komp');
   }, []);
 
   return (
     <Box
-      marginTop="1rem"
-      className="my-tasks-page"
-      display="flex"
-      alignItems={['center', 'center']}
-      flexDirection="column"
+      margin="auto"
+      marginTop="50px"
+      maxWidth="1200px"
+      width="fit-content"
+      padding="0px 25px 25px"
     >
       <Heading as="h1" textAlign="center" marginTop="50px" marginBottom="50px">
         My Tasks
@@ -38,21 +37,34 @@ const MyTasksPage = () => {
         hasMore={hasMore}
         loader={<h3>loading...</h3>}
       >
-        {tasks
-          ? tasks.map(task => (
-              <Link key={task.id} to={`/task-details/${task.id}`}>
-                <MyTask
-                  key={task.id}
-                  title={task.title}
-                  description={task.description}
-                  status={task.status}
-                  createdAt={dayjs(task.createdAt).format('DD-MM-YYYY')}
-                  updatedAt={dayjs(task.updatedAt).format('DD-MM-YYYY')}
-                  points={task.points}
-                ></MyTask>
-              </Link>
-            ))
-          : null}
+        <Grid
+          margin="auto"
+          templateColumns={[
+            'repeat(1, minmax(auto, auto))',
+            'repeat(2, minmax(auto, auto))',
+          ]}
+          gap={5}
+          width="fit-content"
+          p={2}
+        >
+          {tasks
+            ? tasks.map(task => (
+                <GridItem key={task.id} borderRadius="8px">
+                  <Link key={task.id} to={`/task-details/${task.id}`}>
+                    <MyTask
+                      key={task.id}
+                      title={task.title}
+                      description={task.description}
+                      status={task.status}
+                      createdAt={dayjs(task.createdAt).format('DD-MM-YYYY')}
+                      updatedAt={dayjs(task.updatedAt).format('DD-MM-YYYY')}
+                      points={task.points}
+                    ></MyTask>
+                  </Link>
+                </GridItem>
+              ))
+            : null}
+        </Grid>
       </InfiniteScroll>
 
       {!loading && tasks.length === 0 ? <Text>No tasks data</Text> : null}

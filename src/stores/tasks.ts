@@ -53,7 +53,7 @@ class TasksStore {
     this._tasks.page = 1;
     this._tasks.hasMore = true;
     const { data } = await this.http.get<Tasks>(
-      //`/users/${LoginStore.userId}/tasks`
+      //`/users/${LoginStore.userId}/tasks?page=${this._tasks.page}&limit=${this._tasks.limit}`
       `/tasks?page=${this._tasks.page}&limit=${this._tasks.limit}`
     );
     runInAction(() => {

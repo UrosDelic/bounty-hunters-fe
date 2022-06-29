@@ -95,7 +95,6 @@ class WalletStore {
         this._wallet.totalPrice = data?.info.totalPrice;
         this._wallet.totalOrdersPages = data?.info.totalPages;
         this._wallet.orders = data?.data;
-        console.log('wallet orders data iz stora', data?.data);
       }
     });
   };
@@ -114,7 +113,6 @@ class WalletStore {
         this._wallet.totalPoints = data?.info.totalPoints;
         this._wallet.totalTasksPages = data?.info.totalPages;
         this._wallet.tasks = data?.data;
-        console.log('wallet tasks data iz stora', data.data);
       }
     });
   };
