@@ -38,6 +38,7 @@ import PurpleIconButton from './PurpleIconButton';
 import SingleAttributeValue from './SingleAttributeValue';
 import AddProductModal from './AddProductModal';
 import RequiredWarningText from './RequiredWarningText';
+import UserSearch from './core/UserSearch';
 
 export {
   Layout,
@@ -80,4 +81,5 @@ export {
   SingleAttributeValue,
   AddProductModal,
   RequiredWarningText,
+  UserSearch,
 };

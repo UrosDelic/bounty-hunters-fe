@@ -10,6 +10,7 @@ import {
   Box,
   Button,
   IconButton,
+  Text
 } from '@chakra-ui/react';
 import { UserNotifications } from 'components/index';
 import { useEffect, useState } from 'react';
@@ -27,6 +28,7 @@ function Header({ onOpen }: headerProps) {
     UserNotificationsStore.getNotificationCount();
   }, []);
 
+  //const nesto = 10000;
   return (
     <Flex
       minH="6vh"
@@ -41,38 +43,45 @@ function Header({ onOpen }: headerProps) {
     >
       <HamburgerIcon cursor="pointer" w={8} h={8} onClick={onOpen} />
 
-      <Box>
+      <Box >
         <Menu>
           <MenuButton
-            mx={4}
-            onClick={() => setOpenNotifications(true)}
-            position="relative"
-          >
-            <IconButton
-              icon={<BellIcon />}
-              variant="ghost"
-              aria-label="Notification Icon"
-              fontSize="25px"
-            ></IconButton>
+            variant='ghost'
+            fontSize='3xl'
+            p={0}
+            as={Button}
 
-            {notificationsCount?.unreadCount > 0 ? (
-              <Circle
-                size={'auto'}
-                px={'5px'}
-                mx={1}
-                fontSize="xs"
-                color="white"
-                bg="purple.400"
-                position="absolute"
-                top={1}
-                right={-1}
-              >
-                {notificationsCount?.unreadCount}
-              </Circle>
-            ) : (
-              ''
-            )}
+
+            onClick={() => setOpenNotifications(true)}
+            _hover={{ bg: 'transperent' }}
+            _active={{ bg: 'transperent' }}
+          >
+            <Box position="relative" >
+              <BellIcon fontSize='2xl' />
+              {notificationsCount?.unreadCount > 0 ? (
+                <Circle
+                  px={1}
+                  fontSize="xs"
+                  color="white"
+                  bg="purple.400"
+                  position="absolute"
+                  top={2}
+                  right={1}
+                  size='auto'
+                >
+                  {notificationsCount?.unreadCount}
+
+
+                </Circle>
+              ) : ''}
+            </Box>
+
+
           </MenuButton>
+
+
+
+
 
           <MenuList
             w={{ base: '90vw', md: '70vw', lg: '30vw' }}
@@ -90,6 +99,15 @@ function Header({ onOpen }: headerProps) {
       </Box>
     </Flex>
   );
+
+  // function determineRight() {
+  //   if (nesto.toString().length > 2) {
+  //     return -1;
+  //   }
+
+  //   return 2;
+  // }
+
 }
 
 export default observer(Header);

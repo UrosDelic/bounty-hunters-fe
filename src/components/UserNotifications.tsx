@@ -8,7 +8,6 @@ import {
     SkeletonCircle,
     Circle,
     Divider,
-
     Link,
 } from '@chakra-ui/react';
 import { useEffect } from 'react';
@@ -119,7 +118,7 @@ const UserNotifications = () => {
                                                 />
                                                 <Flex flexDirection="column">
                                                     <Flex>
-                                                        <Text fontSize="sm">{n.message} </Text>
+                                                        <Text fontSize="xs">{n.message} </Text>
                                                     </Flex>
 
                                                     <Text

@@ -56,6 +56,7 @@ const Task = (props: any) => {
     const [rejectedMessage, setRejectedMessage] = useState('');
     const [firstName] = useState(props?.details?.user?.firstName);
     const [lastName] = useState(props?.details?.user?.lastName);
+    const [email] = useState(props?.details?.user?.email);
     const [id] = useState(props.details.id);
 
     const fileTypes = [
@@ -160,11 +161,16 @@ const Task = (props: any) => {
 
                 <Box>
                     {props?.details?.user && (
-                        <Flex alignItems="center">
-                            <Avatar size="xs" name={`${firstName} ${lastName}`} mx={2} />
-                            <Text>
-                                {firstName} {lastName}
-                            </Text>
+                        <Flex alignItems="start">
+                            <Avatar size="sm" name={`${firstName} ${lastName}`} mx={2} />
+                            <Flex flexDirection='column'>
+                                <Text fontSize='md'>
+                                    {firstName} {lastName}
+                                </Text>
+                                <Text as='sub'>
+                                    {email}
+                                </Text>
+                            </Flex>
                         </Flex>
                     )}
                 </Box>

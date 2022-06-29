@@ -351,8 +351,11 @@ const ProfileWidget = () => {
                             justifyContent="space-around"
                             p={5}
                         >
-                            <Text fontSize="sm" fontWeight="thin">
-                                Informational Data
+
+                            <Text fontSize="xs" fontWeight="thin" m='auto'>
+                                {latestNotfiication.map((t: any, key: any) => (
+                                    <Text>{t.message}</Text>
+                                ))}
                             </Text>
                             <Image src={img} alt="logo" width={100} />
                         </Flex>

@@ -5,10 +5,6 @@ import {
     Text,
     Flex,
     Button,
-    Menu,
-    MenuList,
-    MenuItem,
-    MenuButton,
     useDisclosure,
     Input,
     NumberInput,
@@ -18,12 +14,13 @@ import {
     Skeleton,
     FormLabel,
 } from '@chakra-ui/react';
-import { ModalLayout, Search } from 'components';
+import { ModalLayout, UserSearch } from 'components';
 import { observer } from 'mobx-react';
 import { useForm } from 'react-hook-form';
-import { ChevronDownIcon } from '@chakra-ui/icons';
+
 import AdminTasksStore from 'stores/admin/tasks';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import UsersStore from 'stores/users';
 import Task from './Task';
 
 const statuses = [
@@ -32,16 +29,16 @@ const statuses = [
     { name: 'Fullfiled', value: 'FULLFILED' },
 ];
 const AdminPanel = () => {
-    const { tasks, checkForMore, totalTaskCount, tasksLength, searchByTitle, getTasks, initialTaskLoad } = AdminTasksStore;
-
+    const { tasks, checkForMore, totalTaskCount, tasksLength, initialTaskLoad } =
+        AdminTasksStore;
+    const { searchedUser } = UsersStore;
     const { register, handleSubmit } = useForm();
-
     const toast = useToast();
     const { isOpen, onOpen, onClose } = useDisclosure();
 
     useEffect(() => {
-        initialTaskLoad();
-    }, []);
+        initialTaskLoad(searchedUser);
+    }, [initialTaskLoad, searchedUser]);
 
     const createTask = async (input: any) => {
         const { data, error } = await AdminTasksStore.createTask({
@@ -72,8 +69,6 @@ const AdminPanel = () => {
         onClose();
     };
 
-
-
     return (
         <>
             <Box p={5} my={4} fontWeight="thin">
@@ -98,64 +93,20 @@ const AdminPanel = () => {
                                 Create New Task
                             </Text>
                         </Flex>
-                        <Text mx={2}>{`${tasksLength} of ${totalTaskCount} records`}</Text>
                     </Flex>
-                    <Flex alignItems="end" minW={350}>
-                        <Search searchTerm={'task'} makeSearch={searchByTitle} resetSearch={initialTaskLoad} />
-                        <Menu>
-                            <MenuButton
-                                size="xs"
-                                as={Button}
-                                mx={2}
-                                bg="purple.300"
-                                disabled
-                                rightIcon={<ChevronDownIcon />}
-                            >
-                                Status
-                            </MenuButton>
-
-                            <MenuList bg="gray.700">
-                                {statuses.map((n, key: any) => (
-                                    <MenuItem
-                                        key={key}
-                                        value={n.value}
-                                        _hover={{ background: 'purple.900', cursor: 'pointer' }}
-                                        _focus={{ boxShadow: 'outline' }}
-                                    >
-                                        {n.name}
-                                    </MenuItem>
-                                ))}
-                            </MenuList>
-                        </Menu>
-                        <Menu>
-                            <MenuButton
-                                size="xs"
-                                as={Button}
-                                mx={1}
-                                disabled
-                                bg="purple.600"
-                                rightIcon={<ChevronDownIcon />}
-                            >
-                                User
-                            </MenuButton>
-
-                            <MenuList bg="gray.700">
-                                {statuses.map((n, key: any) => (
-                                    <MenuItem
-                                        key={key}
-                                        value={n.value}
-                                        _hover={{ background: 'purple.900', cursor: 'pointer' }}
-                                        _focus={{ boxShadow: 'outline' }}
-                                    >
-                                        {n.name}
-                                    </MenuItem>
-                                ))}
-                            </MenuList>
-                        </Menu>
+                    <Flex alignItems="end">
+                        <UserSearch />
                     </Flex>
                 </Flex>
 
                 <Flex flexDirection="column" w={'90%'} mx="auto">
+                    <Flex justifyContent="end">
+                        {' '}
+                        <Text
+                            mx={2}
+                            fontSize="xs"
+                        >{`${tasksLength} of ${totalTaskCount} records`}</Text>
+                    </Flex>
                     <Grid
                         gridTemplateColumns="100px repeat(4,1fr) 100px"
                         justifyItems="center"
@@ -174,11 +125,9 @@ const AdminPanel = () => {
                         dataLength={tasks.length}
                         next={() => AdminTasksStore.loadMoreTasks()}
                         hasMore={checkForMore}
-                        loader={[...Array(3).keys()].map((m, key) => (
+                        loader={[...Array(8).keys()].map((m, key) => (
                             <Skeleton minH={50} my={4} key={key} />
                         ))}
-                        className="styled-scroll"
-                        height={400}
                         endMessage={
                             <Text m={8} textAlign="center" fontSize="xs">
                                 There are no more tasks

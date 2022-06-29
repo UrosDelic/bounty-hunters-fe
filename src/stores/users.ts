@@ -12,6 +12,7 @@ interface UsersStoreProps {
   page: number;
   hasMore: boolean;
   data: Users[];
+  searchTerm: string;
 }
 
 interface UsersDataProps {
@@ -27,6 +28,7 @@ class UsersStore {
     page: 1,
     hasMore: true,
     data: [],
+    searchTerm: '',
   };
 
   constructor(private http = initHttp()) {
@@ -52,6 +54,9 @@ class UsersStore {
   get hasMore() {
     return this._users.hasMore;
   }
+  get searchedUser() {
+    return this._users.searchTerm;
+  }
 
   getUsers = async () => {
     this._users.loading = true;
@@ -69,6 +74,22 @@ class UsersStore {
       }
     });
   };
+  searchUsers = async (firstName: any, lastName: any) => {
+    this._users.loading = true;
+    const { data } = await this.http.get<UsersDataProps>(
+      `/users?page=1&limit=${this._users.limit}${firstName ? `&firstName=${firstName}` : ``}${lastName ? `?lastName=${lastName}` : ``}`
+    );
+    runInAction(() => {
+      this._users.loading = false;
+      if (data) {
+        this._users.success = true;
+        this._users.data = data?.data;
+      }
+    });
+  };
+  clearUsers() {
+    this._users.data = [];
+  }
 
   updateRoles = async (userId: string, roleIds: any) => {
     this._users.isUserUpdated = false;
@@ -82,6 +103,10 @@ class UsersStore {
         LoginStore.checkUserFromStorage();
       }
     });
+  };
+
+  setSearchTerm = (term: string) => {
+    this._users.searchTerm = term;
   };
 
   loadMoreUsers = async () => {
