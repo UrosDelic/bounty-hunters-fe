@@ -1,21 +1,19 @@
-import { useState } from 'react';
 import ReactQuill from 'react-quill';
 import { Button, Flex } from '@chakra-ui/react';
 import 'react-quill/dist/quill.snow.css';
+
 interface Props {
   submit: () => void;
+  handleChange: (...args: any) => void;
+  value: string;
 }
 
-const BhEditor = ({ submit }: Props) => {
-  const [
-    editorState,
-    //   setEditorState
-  ] = useState('');
-  const handleChange = () => {
-    //console.log('editor test');
+const BhEditor = ({ submit, handleChange, value }: Props) => {
+  const onEditorChange = (value: string) => {
+    return handleChange(value);
   };
   return (
-    <>
+    <form onSubmit={submit}>
       <ReactQuill
         modules={{
           toolbar: {
@@ -41,15 +39,15 @@ const BhEditor = ({ submit }: Props) => {
           overflowY: 'hidden',
           marginTop: '1rem',
         }}
-        value={editorState}
-        onChange={handleChange}
+        value={value}
+        onChange={onEditorChange}
       ></ReactQuill>
       <Flex justifyContent="end" className="submit-editor-btn">
-        <Button colorScheme="purple" variant="solid" my={2} onClick={submit}>
+        <Button colorScheme="purple" variant="solid" my={2} type="submit">
           Submit
         </Button>
       </Flex>
-    </>
+    </form>
   );
 };
 

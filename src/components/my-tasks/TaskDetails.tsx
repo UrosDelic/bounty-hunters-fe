@@ -27,15 +27,24 @@ const TaskDetails = ({
 }: Props) => {
   const [showEditor, setShowEditor] = useState(false);
   const [showSolution, setShowSolution] = useState(false);
+  const [editorState, setEditorState] = useState(solution);
 
   const onEditorChange = () => {
     showEditor ? setShowEditor(false) : setShowEditor(true);
     showSolution ? setShowSolution(false) : setShowSolution(true);
   };
   const onSubmit = () => {
-    tasksStore.addTaskSolution(id, 'test');
+    if (editorState) {
+      tasksStore.addTaskSolution(id, editorState);
+    }
+
     setShowSolution(true);
     setShowEditor(false);
+  };
+
+  const handleChange = (value: string) => {
+    setEditorState(value);
+    console.log(editorState);
   };
 
   return (
@@ -70,9 +79,14 @@ const TaskDetails = ({
           ) : null}
 
           {showEditor ? (
-            <BhEditor submit={onSubmit} />
+            <BhEditor
+              value={editorState ? editorState : ''}
+              handleChange={handleChange}
+              submit={onSubmit}
+            />
           ) : (
             <Button
+              type="button"
               colorScheme="purple"
               variant="solid"
               alignSelf="center"
