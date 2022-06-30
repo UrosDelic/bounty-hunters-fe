@@ -16,10 +16,6 @@ import DoughnutChart from './DoughnutChart';
 import PointBreakdown from './PointBreakdown';
 import TransactionTable from './TransactionTable';
 import BarChart from './BarChart';
-import SizeRadioButton from './SizeRadioButton';
-import SizeGroup from './SizeGroup';
-import ColorRadioButton from './ColorRadioButton';
-import ColorGroup from './ColorGroup';
 import FeedList from './feed/FeedList';
 import StyledCard from './core/StyledCard';
 import NestedNavigation from './core/NestedNavigation';
@@ -62,10 +58,6 @@ export {
   PointBreakdown,
   TransactionTable,
   BarChart,
-  SizeRadioButton,
-  SizeGroup,
-  ColorRadioButton,
-  ColorGroup,
   FeedList,
   ProfileWidget,
   StyledCard,
