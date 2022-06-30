@@ -1,4 +1,6 @@
 // TODO double check type
+import { ProductMedia } from './index';
+
 export enum ProductStatus {
   ACTIVE = 'ACTIVE',
   INACTIVE = 'INACTIVE',
@@ -12,6 +14,7 @@ export interface Product {
   price: number;
   status: ProductStatus;
   updatedAt: string;
+  productMedia: ProductMedia[];
 }
 
 export interface ProductPost {
@@ -19,4 +22,10 @@ export interface ProductPost {
   name: string;
   price: number;
   status: ProductStatus;
+}
+
+export interface ProductPatch {
+  description: string;
+  name: string;
+  price: number;
 }

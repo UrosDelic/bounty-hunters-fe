@@ -15,34 +15,55 @@ import {
 import { PurpleButton, RequiredWarningText } from './index';
 import { useForm } from 'react-hook-form';
 import ProductsStore from '../stores/products';
-import { ProductStatus } from '../types/index';
+import ProductMediasStore from '../stores/productMedias';
 
 interface ProductDrawerProps {
   onClose: () => void;
   isOpen: boolean;
   name: string;
+  price: number;
+  description: string;
+  image: string;
+  productId: string;
 }
 
-function ProductsDrawer({ onClose, isOpen, name }: ProductDrawerProps) {
+function ProductsDrawer({
+  onClose,
+  isOpen,
+  name,
+  price,
+  description,
+  image,
+  productId,
+}: ProductDrawerProps) {
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm({ defaultValues: { name, price, description } });
+  } = useForm({ defaultValues: { name, price, description, image } });
 
   function submitProduct(data: any) {
-    ProductsStore.addNewProduct({ ...data, status: ProductStatus.ACTIVE });
+    ProductMediasStore.postProductMedias(data.image, productId);
+    ProductsStore.changeProduct(
+      { name: data.name, description: data.description, price: data.price },
+      productId
+    );
+    onClose();
+  }
+
+  function cancelChange() {
     reset();
+    onClose();
   }
 
   return (
     <Drawer isOpen={isOpen} placement="right" onClose={onClose}>
       <DrawerOverlay />
-      <DrawerContent backgroundColor="gray.600">
+      <DrawerContent backgroundColor="gray.700">
         <DrawerCloseButton />
         <DrawerHeader>Edit {name}</DrawerHeader>
-        <form action="">
+        <form onSubmit={handleSubmit(submitProduct)}>
           <DrawerBody>
             <Box marginBottom="5px">
               <Text marginBottom="10px">Product Name</Text>
@@ -73,14 +94,23 @@ function ProductsDrawer({ onClose, isOpen, name }: ProductDrawerProps) {
               />
               <RequiredWarningText isShown={errors?.description} />
             </Box>
+            <Box marginBottom="5px">
+              <Text marginBottom="10px">Product Image</Text>
+              <Input
+                placeholder="Enter image url here..."
+                focusBorderColor="purple.500"
+                {...register('image', { required: true })}
+              />
+              <RequiredWarningText isShown={errors?.image} />
+            </Box>
           </DrawerBody>
+          <DrawerFooter>
+            <PurpleButton>Save</PurpleButton>
+            <Button variant="outline" ml={3} onClick={cancelChange}>
+              Cancel
+            </Button>
+          </DrawerFooter>
         </form>
-        <DrawerFooter>
-          <Button variant="outline" mr={3} onClick={onClose}>
-            Cancel
-          </Button>
-          <Button colorScheme="blue">Save</Button>
-        </DrawerFooter>
       </DrawerContent>
     </Drawer>
   );

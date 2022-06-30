@@ -80,15 +80,17 @@ function Products() {
               margin="auto"
             >
               {products.map(product => {
-                const { id, name, price, status } = product;
+                const { id, name, price, status, description, productMedia } =
+                  product;
                 return (
-                  <GridItem>
+                  <GridItem key={id}>
                     <SingleProduct
-                      key={id}
                       id={id}
                       name={name}
                       price={price}
                       status={status}
+                      description={description}
+                      image={productMedia[0]?.url}
                     />
                   </GridItem>
                 );

@@ -9,17 +9,26 @@ import {
 } from '@chakra-ui/react';
 import { StyledCard, ProductsDrawer } from './index';
 import { useState } from 'react';
-import { ProductStatus } from '../types';
+import { ProductStatus, ProductMedia } from '../types';
 import ProductsStore from '../stores/products';
 
-type SingleCardProps = {
+type SingleProductProps = {
   id: string;
   name: string;
   price: number;
   status: ProductStatus;
+  description: string;
+  image: string;
 };
 
-function SingleProduct({ id, name, price, status }: SingleCardProps) {
+function SingleProduct({
+  id,
+  name,
+  price,
+  status,
+  description,
+  image,
+}: SingleProductProps) {
   const [productStatus, setProductStatus] = useState(status);
   const borderColor =
     productStatus === ProductStatus.INACTIVE ? 'main.gray' : '';
@@ -75,7 +84,15 @@ function SingleProduct({ id, name, price, status }: SingleCardProps) {
           </ButtonGroup>
         </Flex>
       </StyledCard>
-      <ProductsDrawer name={name} isOpen={isOpen} onClose={onClose} />
+      <ProductsDrawer
+        productId={id}
+        name={name}
+        price={price}
+        description={description}
+        image={image}
+        isOpen={isOpen}
+        onClose={onClose}
+      />
     </>
   );
 }

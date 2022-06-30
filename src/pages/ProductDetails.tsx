@@ -62,7 +62,11 @@ function ProductDetails() {
           padding="0px 25px 25px"
         >
           <GridItem padding="10px" borderRadius="5px">
-            <Image src={shirt} margin="auto" width="100%" />
+            <Image
+              src={productById?.productMedia[0]?.url || shirt}
+              margin="auto"
+              width="100%"
+            />
           </GridItem>
           <GridItem padding="10px" borderRadius="5px">
             <Heading as="h1" size="xl" marginBottom={4}>

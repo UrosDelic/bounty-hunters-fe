@@ -1,6 +1,6 @@
 import { initHttp } from 'http/index';
 import { makeAutoObservable, runInAction } from 'mobx';
-import { Product, ProductPost } from 'types';
+import { Product, ProductPost, ProductPatch } from 'types';
 
 interface ProductsStoreProps {
   loading: boolean;
@@ -61,7 +61,7 @@ class ProductsStore {
     this._products.loading = true;
     this._products.success = false;
     const { data } = await this.http.get<ProductsDataProps>(
-      `/products?page=1&limit=${this._products.limit}`
+      `/products/details?page=1&limit=${this._products.limit}`
     );
     runInAction(() => {
       this._products.loading = false;
@@ -75,7 +75,7 @@ class ProductsStore {
   getProductById = async (id: string | undefined) => {
     this._products.loading = true;
     this._products.success = false;
-    const { data } = await this.http.get<Product>(`/products/${id}`);
+    const { data } = await this.http.get<Product>(`/products/${id}/details`);
     runInAction(() => {
       this._products.loading = false;
       if (data) {
@@ -111,7 +111,7 @@ class ProductsStore {
   loadMoreProducts = async () => {
     this._products.page++;
     const { data } = await this.http.get<ProductsDataProps>(
-      `/products?page=${this._products.page}&limit=${this._products.limit}`
+      `/products/details?page=${this._products.page}&limit=${this._products.limit}`
     );
     runInAction(() => {
       if (data) {
@@ -127,7 +127,18 @@ class ProductsStore {
     const { data } = await this.http.post(`/products`, value);
     runInAction(() => {
       if (data) {
+        this.getProducts();
         console.log('new product added value added', data);
+      }
+    });
+  };
+
+  changeProduct = async (values: ProductPatch, id: string) => {
+    const { data } = await this.http.patch(`/products/${id}`, values);
+    runInAction(() => {
+      if (data) {
+        this.getProducts();
+        console.log('product value changed', data);
       }
     });
   };

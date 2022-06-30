@@ -20,6 +20,7 @@ function AddProductModal({ isOpen, onClose, name }: AddProductModalProps) {
 
   function submitProduct(data: any) {
     ProductsStore.addNewProduct({ ...data, status: ProductStatus.ACTIVE });
+    onClose();
     reset();
   }
 
