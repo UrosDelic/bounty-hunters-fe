@@ -8,12 +8,7 @@ import {
   Button,
   useDisclosure,
 } from '@chakra-ui/react';
-import {
-  SizeGroup,
-  ColorGroup,
-  SpinnerLoader,
-  OrderModal,
-} from '../components/index';
+import { SpinnerLoader, OrderModal, RadioGroup } from '../components/index';
 import shirt from '../img/shirt.jpg';
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
@@ -30,6 +25,7 @@ function ProductDetails() {
     loading: productLoading,
     success: productSuccess,
     productById,
+    productByIdName,
   } = ProductsStore;
   const {
     loading: attributeLoading,
@@ -42,8 +38,13 @@ function ProductDetails() {
 
   useEffect(() => {
     ProductsStore.getProductById(id);
-    AttributeValuesStore.getSizeAndColorAttributeValues();
   }, []);
+
+  useEffect(() => {
+    if (productByIdName) {
+      AttributeValuesStore.getSizeAndColorAttributeValues(productByIdName);
+    }
+  }, [productByIdName]);
 
   if (productLoading || attributeLoading) {
     return <SpinnerLoader />;
@@ -72,8 +73,8 @@ function ProductDetails() {
             </Heading>
             <Text marginBottom={4}>{productById?.description}</Text>
             <Box marginBottom="40px">
-              <SizeGroup sizeArr={sizeData} />
-              <ColorGroup colorArr={colorData} />
+              <RadioGroup name="size" attributeArr={sizeData} />
+              <RadioGroup name="color" attributeArr={colorData} />
             </Box>
             <Box marginTop="auto">
               <Button

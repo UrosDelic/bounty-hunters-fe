@@ -7,6 +7,7 @@ interface ProductsStoreProps {
   success: boolean;
   data: Product[];
   productById: Product | undefined;
+  productByIdName: string;
   limit: number;
   page: number;
   hasMore: boolean;
@@ -22,6 +23,7 @@ class ProductsStore {
     success: false,
     data: [],
     productById: undefined,
+    productByIdName: '',
     limit: 10,
     page: 1,
     hasMore: true,
@@ -45,6 +47,10 @@ class ProductsStore {
 
   get productById() {
     return this._products.productById;
+  }
+
+  get productByIdName() {
+    return this._products.productByIdName;
   }
 
   get hasMore() {
@@ -75,6 +81,7 @@ class ProductsStore {
       if (data) {
         this._products.success = true;
         this._products.productById = data;
+        this._products.productByIdName = data.name;
       }
     });
   };

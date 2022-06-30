@@ -39,6 +39,9 @@ import SingleAttributeValue from './SingleAttributeValue';
 import AddProductModal from './AddProductModal';
 import RequiredWarningText from './RequiredWarningText';
 import UserSearch from './core/UserSearch';
+import RadioGroup from './RadioGroup';
+import SingleRadioButton from './SingleRadioButton';
+import ProductsDrawer from './ProductsDrawer';
 
 export {
   Layout,
@@ -82,4 +85,7 @@ export {
   AddProductModal,
   RequiredWarningText,
   UserSearch,
+  RadioGroup,
+  SingleRadioButton,
+  ProductsDrawer,
 };
