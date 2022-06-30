@@ -89,6 +89,7 @@ const UserSearch = (rr: any) => {
                                         }}
                                         cursor="pointer"
                                         w="10px"
+                                        mt={2}
                                         as={CloseIcon}
                                     />
                                 }

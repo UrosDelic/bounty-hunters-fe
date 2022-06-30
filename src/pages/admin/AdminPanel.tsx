@@ -45,7 +45,7 @@ const AdminPanel = () => {
             title: input.title,
             points: parseInt(input.points),
             description: input.description,
-            userId: '1d6a9841-77f0-4169-b61b-f8f043b64b90',
+            //userId: '1d6a9841-77f0-4169-b61b-f8f043b64b90',
         });
         if (error) {
             toast({
@@ -126,7 +126,7 @@ const AdminPanel = () => {
                         dataLength={tasks.length}
                         next={() => AdminTasksStore.loadMoreTasks()}
                         hasMore={checkForMore}
-                        loader={[...Array(2).keys()].map((m, key) => (
+                        loader={[...Array(5).keys()].map((m, key) => (
                             <Skeleton maxH={50} my={4} key={key} />
                         ))}
                         endMessage={

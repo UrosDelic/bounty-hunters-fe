@@ -157,17 +157,17 @@ const Task = (props: any) => {
                     </Text>
                 </Flex>
 
-                <Text fontSize='sm' mb={2}>{props.details.title}</Text>
+                <Text fontSize='md' mb={2}>{props.details.title}</Text>
 
                 <Box>
                     {props?.details?.user && (
                         <Flex alignItems="start">
-                            <Avatar size="sm" name={`${firstName} ${lastName}`} mx={2} />
-                            <Flex flexDirection='column'>
-                                <Text fontSize='lg'>
+                            <Avatar size="md" name={`${firstName} ${lastName}`} mx={2} />
+                            <Flex flexDirection='column' fontSize='lg'>
+                                <Text fontSize='md'>
                                     {firstName} {lastName}
                                 </Text>
-                                <Text as='sub' size="sm" >
+                                <Text as='sub' >
                                     {email}
                                 </Text>
                             </Flex>
