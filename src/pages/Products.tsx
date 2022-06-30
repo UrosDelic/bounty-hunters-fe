@@ -2,8 +2,18 @@ import {
   SingleProduct,
   SpinnerLoader,
   SearchByInput,
+  AddProductModal,
 } from '../components/index';
-import { Box, Grid, GridItem, Text } from '@chakra-ui/react';
+import {
+  Box,
+  Grid,
+  GridItem,
+  Text,
+  Flex,
+  Button,
+  useDisclosure,
+} from '@chakra-ui/react';
+import { AddIcon } from '@chakra-ui/icons';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import ProductsStore from '../stores/products';
 import { observer } from 'mobx-react';
@@ -11,6 +21,7 @@ import { useEffect } from 'react';
 
 function Products() {
   const { loading, success, products, hasMore } = ProductsStore;
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   useEffect(() => {
     ProductsStore.getProducts();
@@ -30,9 +41,26 @@ function Products() {
           padding="0px 25px 25px"
           width="fit-content"
         >
-          <Box marginBottom="50px">
-            <SearchByInput />
-          </Box>
+          <Flex
+            justifyContent="space-between"
+            direction={['column', 'column', 'row']}
+            marginBottom="50px"
+          >
+            <Box flex="1" marginBottom={['15px', '15px', '0px']}>
+              <SearchByInput />
+            </Box>
+            <Button
+              backgroundColor="green.500"
+              display="flex"
+              alignItems="center"
+              justifyContent="space-between"
+              width="180px"
+              onClick={onOpen}
+            >
+              <AddIcon />
+              <Text marginLeft="5px">Add new product</Text>
+            </Button>
+          </Flex>
           <InfiniteScroll
             dataLength={products.length}
             next={() => ProductsStore.loadMoreProducts()}
@@ -69,6 +97,11 @@ function Products() {
           </InfiniteScroll>
         </Box>
       )}
+      <AddProductModal
+        isOpen={isOpen}
+        onClose={onClose}
+        name="Add new product"
+      />
     </>
   );
 }

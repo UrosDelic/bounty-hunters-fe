@@ -18,7 +18,7 @@ import {
   faCalendarAlt
 } from '@fortawesome/free-solid-svg-icons';
 import { Search2Icon } from '@chakra-ui/icons'
-import StyledTable from '../components/core/StyledTable'
+
 
 
 
@@ -98,13 +98,13 @@ const NewTasks = () => {
 
 
           <GridItem colSpan={2} width={{ base: '80%', md: '60%' }} m='auto' >
-
+            {/* 
             <StyledTable
               loading={loading}
               title={'Check out New Tasks!'}
               type={'table-row'}
-            >
-              {/* {data.map((task, key) => (
+            > */}
+            {/* {data.map((task, key) => (
                 <TableRow bg={backgrounds[key]} loading={false}>
                   <Flex alignItems='center'>
                     <Avatar size="lg" src={avatars[key]} m={2} />
@@ -126,7 +126,7 @@ const NewTasks = () => {
                   </Flex>
                 </TableRow>
               ))} */}
-            </StyledTable>
+            {/* </StyledTable> */}
 
 
           </GridItem>

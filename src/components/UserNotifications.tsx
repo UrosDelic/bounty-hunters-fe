@@ -8,7 +8,6 @@ import {
     SkeletonCircle,
     Circle,
     Divider,
-
     Link,
 } from '@chakra-ui/react';
 import { useEffect } from 'react';
@@ -38,7 +37,7 @@ const UserNotifications = () => {
     };
 
     return (
-        <Flex flexDirection="column" bg="gray.700">
+        <Flex flexDirection="column" bg="gray.700" zIndex={10} >
             {loading ? (
                 [...Array(3).keys()].map(() => (
                     <>
@@ -62,9 +61,9 @@ const UserNotifications = () => {
                                 <SkeletonText m="2" noOfLines={2} spacing="2" />
                             </Box>
                         }
-                        height={'40vh'}
+                        height={'50vh'}
                         endMessage={
-                            <Text m={2} fontWeight="thin" textAlign="center" fontSize="xs">
+                            <Text m={2} fontWeight="thin" textAlign="center" fontSize="sm">
                                 There are no more notifications
                             </Text>
                         }
@@ -72,19 +71,19 @@ const UserNotifications = () => {
                         <Flex
                             justifyContent="space-between"
                             alignItems="center"
-                            p={2}
                             borderBottom="1px"
                             borderColor="gray.600"
+                            py={2}
                         >
-                            <Text fontSize="xl" fontWeight="thin" mx={4} my={2}>
+                            <Text fontSize="2xl" fontWeight="thin" mx={4} my={2}>
                                 Notifications
                             </Text>
                             <Button
                                 mx={4}
                                 my={2}
                                 variant="solid"
-                                size="xs"
-                                colorScheme="purple"
+                                size="sm"
+                                bg="purple.400"
                                 color="white"
                                 onClick={() => markAllAsRead()}
                             >
@@ -111,7 +110,7 @@ const UserNotifications = () => {
                                         borderColor="gray.600"
                                     >
                                         <Flex key={key} p={4} rounded="sm" minH={50}>
-                                            <Flex alignItems="start">
+                                            <Flex alignItems="center">
                                                 <Avatar
                                                     size={'md'}
                                                     src={googleProfile?.picture}
@@ -119,7 +118,7 @@ const UserNotifications = () => {
                                                 />
                                                 <Flex flexDirection="column">
                                                     <Flex>
-                                                        <Text fontSize="sm">{n.message} </Text>
+                                                        <Text fontSize="md">{n.message} </Text>
                                                     </Flex>
 
                                                     <Text

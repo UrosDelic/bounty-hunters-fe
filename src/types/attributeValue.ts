@@ -8,3 +8,12 @@ export interface AttributeValue {
     name: string;
   };
 }
+
+export interface AttributeValuePut {
+  value: string;
+}
+
+export interface AttributeValuePost {
+  value: string;
+  productAttributeId: string;
+}

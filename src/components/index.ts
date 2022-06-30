@@ -25,12 +25,21 @@ import StyledCard from './core/StyledCard';
 import NestedNavigation from './core/NestedNavigation';
 import UserNotifications from './UserNotifications';
 import ProfileWidget from './feed/ProfileWidget';
-import Search from './core/Search'
+import Search from './core/Search';
 import SearchByInput from './SearchByInput';
 import OrderModal from './OrderModal';
 import Pagination from './Pagination';
 import OrdersTable from './OrdersTable';
 import TasksTable from './TasksTable';
+import SingleAttribute from './SingleAttribute';
+import AttributeModal from './AttributeModal';
+import PurpleButton from './PurpleButton';
+import PurpleIconButton from './PurpleIconButton';
+import SingleAttributeValue from './SingleAttributeValue';
+import AddProductModal from './AddProductModal';
+import RequiredWarningText from './RequiredWarningText';
+import UserSearch from './core/UserSearch';
+import StatusFilter from './core/StatusFilter';
 
 export {
   Layout,
@@ -66,5 +75,13 @@ export {
   Pagination,
   OrdersTable,
   TasksTable,
-  
+  SingleAttribute,
+  AttributeModal,
+  PurpleButton,
+  PurpleIconButton,
+  SingleAttributeValue,
+  AddProductModal,
+  RequiredWarningText,
+  UserSearch,
+  StatusFilter
 };

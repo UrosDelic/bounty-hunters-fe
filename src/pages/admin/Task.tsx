@@ -6,8 +6,6 @@ import {
     MenuList,
     MenuItem,
     MenuButton,
-    Circle,
-    Square,
     Grid,
     Tag,
     Text,
@@ -56,6 +54,7 @@ const Task = (props: any) => {
     const [rejectedMessage, setRejectedMessage] = useState('');
     const [firstName] = useState(props?.details?.user?.firstName);
     const [lastName] = useState(props?.details?.user?.lastName);
+    const [email] = useState(props?.details?.user?.email);
     const [id] = useState(props.details.id);
 
     const fileTypes = [
@@ -141,39 +140,44 @@ const Task = (props: any) => {
     return (
         <Box key={props.id}>
             <Grid
-                gridTemplateColumns="100px repeat(4,1fr) 100px"
+                gridTemplateColumns="120px repeat(4,1fr) 120px"
                 alignItems="center"
                 justifyItems="center"
                 bg="gray.600"
                 boxShadow="lg"
-                fontSize="xs"
+                fontSize="sm"
                 fontWeight="thin"
             >
-                <Flex flexDirection="column" py={5}>
+                <Flex flexDirection="column" py={8} fontSize="sm">
                     <Text>{dayjs(props.details.createdAt).format(' MMMM D, YYYY')}</Text>
                     <Text as="sub" colorScheme="">
                         {dayjs(props.details.createdAt).format('HH:mm A')}
                     </Text>
                 </Flex>
 
-                <Text mb={2}>{props.details.title}</Text>
+                <Text fontSize="md" mb={2}>
+                    {props.details.title}
+                </Text>
 
                 <Box>
                     {props?.details?.user && (
-                        <Flex alignItems="center">
-                            <Avatar size="xs" name={`${firstName} ${lastName}`} mx={2} />
-                            <Text>
-                                {firstName} {lastName}
-                            </Text>
+                        <Flex alignItems="start">
+                            <Avatar size="md" name={`${firstName} ${lastName}`} mx={2} />
+                            <Flex flexDirection="column" fontSize="lg">
+                                <Text fontSize="md">
+                                    {firstName} {lastName}
+                                </Text>
+                                <Text as="sub">{email}</Text>
+                            </Flex>
                         </Flex>
                     )}
                 </Box>
 
-                <Text>
+                <Text fontSize="sm">
                     <b>{props.details.points} </b>points
                 </Text>
                 <Tag
-                    size="sm"
+                    size="md"
                     colorScheme={useStatusesStyle(props.details.status).color}
                 >
                     {useStatusesStyle(props.details.status).data}
@@ -182,7 +186,7 @@ const Task = (props: any) => {
                 <Flex>
                     <Button
                         mr={2}
-                        size="xs"
+                        size="sm"
                         fontWeight="normal"
                         variant="link"
                         color="white"
@@ -193,8 +197,9 @@ const Task = (props: any) => {
                     <Button
                         size="xs"
                         fontWeight="normal"
-                        colorScheme="purple"
+                        bg="purple.400"
                         onClick={onOpen}
+                        mr={5}
                     >
                         Delete
                     </Button>
@@ -211,7 +216,7 @@ const Task = (props: any) => {
                     <Flex flexDirection="column" fontWeight="normal">
                         <Flex alignItems="center">
                             <Text>Edit Task</Text>
-                            <Text fontSize="xs" my={1}>
+                            <Text fontSize="sm" my={1}>
                                 <Tag
                                     ml={2}
                                     size="sm"
@@ -221,7 +226,7 @@ const Task = (props: any) => {
                                 </Tag>{' '}
                             </Text>
                         </Flex>
-                        <Text fontSize="xs" mr={2}>
+                        <Text fontSize="sm" mr={2}>
                             {' '}
                             Updated {relativeTime(updated)}
                         </Text>
@@ -440,15 +445,16 @@ const Task = (props: any) => {
                 isOpen={isOpen}
             >
                 <AlertDialogContent>
-                    <AlertDialogBody color="black">
+                    <AlertDialogBody color="white">
                         Do you want to delete this task?
                     </AlertDialogBody>
                     <AlertDialogFooter>
-                        <Button ref={cancelRef} onClick={onClose} bg="gray.400">
+                        <Button ref={cancelRef} onClick={onClose} bg="gray.500">
                             No
                         </Button>
                         <Button
-                            colorScheme="purple"
+                            bg="purple.400"
+                            color="white"
                             ml={3}
                             onClick={() => {
                                 onClose();

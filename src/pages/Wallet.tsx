@@ -67,6 +67,7 @@ function Wallet() {
           <BarChart dateObj={dateObj} />
           <Flex
             justifyContent="center"
+            alignItems="stretch"
             direction={['column', 'column', 'row']}
             marginTop="30px"
           >

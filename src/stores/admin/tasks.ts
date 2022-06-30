@@ -5,7 +5,7 @@ import { Task, Tasks } from 'types';
 interface TaskStoreProps {
   loading: boolean;
   data: Task[];
-  info: number;
+  total: number;
   limit: number;
   page: number;
   hasMore: boolean;
@@ -18,7 +18,7 @@ class AdminTasksStore {
     loading: false,
     data: [],
     searchTerm: '',
-    info: 0,
+    total: 0,
     limit: 8,
     page: 1,
     hasMore: true,
@@ -33,7 +33,7 @@ class AdminTasksStore {
     return this._tasks.data;
   }
   get totalTaskCount() {
-    return this._tasks.info;
+    return this._tasks.total;
   }
   get tasksLength() {
     return this._tasks.data.length;
@@ -49,23 +49,29 @@ class AdminTasksStore {
   get checkForMore() {
     return this._tasks.hasMore;
   }
-  initialTaskLoad = async () => {
+
+  initialTaskLoad = async (searchedUser: string, searchedStatus: string) => {
     this._tasks.loading = true;
     this._tasks.hasMore = true;
     this._tasks.data = [];
-    this._tasks.info = 0;
+    this._tasks.total = 0;
     this._tasks.page = 1;
+    this._tasks.limit = 8;
 
-    const { data } = await this.http.get<Tasks>(`/tasks?page=1&limit=8`);
+    const { data } = await this.http.get<Tasks>(
+      `/tasks?page=${this._tasks.page}&limit=${this._tasks.limit}${
+        searchedUser ? `&userId=${searchedUser}` : ``
+      }${searchedStatus ? `&status=${searchedStatus}` : ``}`
+    );
     runInAction(() => {
       this._tasks.loading = false;
       if (data) {
-        if (!data?.data.length) {
+        if (!data?.data.length || data?.data.length > this._tasks.limit) {
           this._tasks.hasMore = false;
         }
 
         this._tasks.data = data?.data;
-        this._tasks.info = data.info.totalCount;
+        this._tasks.total = data.info.totalCount;
       }
     });
   };
@@ -82,7 +88,7 @@ class AdminTasksStore {
           this._tasks.hasMore = false;
         }
         this._tasks.data = [...this._tasks.data, ...data?.data];
-        this._tasks.info = data.info.totalCount;
+        this._tasks.total = data.info.totalCount;
       }
     });
   };
@@ -92,6 +98,7 @@ class AdminTasksStore {
     if (data) {
       runInAction(() => {
         this._tasks.data.unshift(data);
+        this._tasks.total++;
       });
     }
     return { data, error };
@@ -103,6 +110,7 @@ class AdminTasksStore {
       runInAction(() => {
         let newData = this._tasks.data.filter(t => t.id !== id);
         this._tasks.data = newData;
+        this._tasks.total--;
       });
     }
     return { error };
@@ -121,16 +129,15 @@ class AdminTasksStore {
             el.title = payload?.title;
             el.points = payload?.points;
             el.description = payload?.description;
-
             return el;
           });
       });
     }
     return { data, error };
   };
+
   approveTask = async (id: string) => {
     const { data, error } = await this.http.patch(`/tasks/${id}/approveTask`);
-
     runInAction(() => {
       this._tasks.data
         .filter(data => data.id === id)
@@ -141,6 +148,7 @@ class AdminTasksStore {
     });
     return { data, error };
   };
+
   rejectTask = async (id: string, payload: any) => {
     const message = { rejectedMessage: payload };
     const { data, error } = await this.http.patch(
@@ -157,6 +165,7 @@ class AdminTasksStore {
     });
     return { data, error };
   };
+
   searchByTitle = async (title: string) => {
     this._tasks.loading = true;
     const { data } = await this.http.get<Tasks>(
@@ -166,7 +175,7 @@ class AdminTasksStore {
       this._tasks.loading = false;
       if (data) {
         this._tasks.data = data?.data;
-        this._tasks.info = data.info.totalCount;
+        this._tasks.total = data.info.totalCount;
         if (data?.data.length >= data.info.totalCount) {
           this._tasks.hasMore = false;
         }

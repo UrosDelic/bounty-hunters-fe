@@ -11,3 +11,10 @@ export interface Orders {
     email: string | null;
   };
 }
+
+export interface OrderPost {
+  userId: string;
+  shippingAddress: string;
+  productId: string | undefined;
+  attributeValueIds: string[];
+}

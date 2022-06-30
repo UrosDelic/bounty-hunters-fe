@@ -15,8 +15,11 @@ import {
   Orders,
   NewTasks,
   Feed,
+  EditProduct,
+  Attributes,
   AdminPanel,
 } from './pages';
+
 import theme from './theme/index';
 import ProtectedRoute from './routes/ProtectedRoute';
 import MyTasksPage from './pages/my-tasks/MyTask';
@@ -65,7 +68,9 @@ function App() {
               >
                 <Route path="/users" element={<Users />} />
                 <Route path="/products" element={<Products />} />
+                <Route path="/products/:id" element={<EditProduct />} />
                 <Route path="/all-orders" element={<Orders />} />
+                <Route path="/attributes" element={<Attributes />} />
               </Route>
 
               <Route path="*" element={<NotFound />} />

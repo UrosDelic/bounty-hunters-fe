@@ -5,11 +5,9 @@ import UsersStore from '../stores/users';
 import RolesStore from '../stores/roles';
 import { observer } from 'mobx-react';
 import { useEffect } from 'react';
-import { useFilterBySearch } from '../custom-hooks/useFilterBySearch';
 
 function Users() {
   const { loading, success, users, hasMore } = UsersStore;
-  const filteredUsers = useFilterBySearch(users, ['firstName', 'lastName']);
 
   useEffect(() => {
     UsersStore.getUsers();
@@ -32,7 +30,7 @@ function Users() {
         <SearchByInput />
       </Box>
       <InfiniteScroll
-        dataLength={filteredUsers.length}
+        dataLength={users.length}
         next={() => UsersStore.loadMoreUsers()}
         hasMore={hasMore}
         loader={<h3>loading...</h3>}
@@ -50,7 +48,7 @@ function Users() {
             width="fit-content"
             p={2}
           >
-            {filteredUsers.map(user => {
+            {users.map(user => {
               const { id } = user;
               return (
                 <GridItem key={id} boxShadow="dark-lg" borderRadius="8px">

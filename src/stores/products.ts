@@ -1,6 +1,6 @@
 import { initHttp } from 'http/index';
 import { makeAutoObservable, runInAction } from 'mobx';
-import { Product } from 'types';
+import { Product, ProductPost } from 'types';
 
 interface ProductsStoreProps {
   loading: boolean;
@@ -112,6 +112,15 @@ class ProductsStore {
         this._products.loading = false;
         this._products.success = true;
         this._products.data = [...this._products.data, ...data?.data];
+      }
+    });
+  };
+
+  addNewProduct = async (value: ProductPost) => {
+    const { data } = await this.http.post(`/products`, value);
+    runInAction(() => {
+      if (data) {
+        console.log('new product added value added', data);
       }
     });
   };

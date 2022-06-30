@@ -9,6 +9,7 @@ import {
   faUsers,
   faDolly,
   faClipboardList,
+  faSwatchbook,
   IconDefinition,
 } from '@fortawesome/free-solid-svg-icons';
 import { Roles } from '../types';
@@ -78,6 +79,12 @@ const sidebarData: Array<{
     text: 'all orders',
     route: '/all-orders',
     icon: faClipboardList,
+  },
+  {
+    role: Roles.SUPER_ADMIN,
+    text: 'attributes',
+    route: '/attributes',
+    icon: faSwatchbook,
   },
 ];
 

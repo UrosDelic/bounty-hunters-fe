@@ -5,10 +5,6 @@ import {
   Text,
   Flex,
   Button,
-  Menu,
-  MenuList,
-  MenuItem,
-  MenuButton,
   useDisclosure,
   Input,
   NumberInput,
@@ -18,46 +14,34 @@ import {
   Skeleton,
   FormLabel,
 } from '@chakra-ui/react';
-import { ModalLayout, Search } from 'components';
+import { ModalLayout, UserSearch, StatusFilter } from 'components';
 import { observer } from 'mobx-react';
 import { useForm } from 'react-hook-form';
-import { ChevronDownIcon } from '@chakra-ui/icons';
+
+import searchFilters from 'stores/searchFilters';
 import AdminTasksStore from 'stores/admin/tasks';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import LoginStore from 'stores/Login';
 import Task from './Task';
 
-const statuses = [
-  { name: 'In Progress', value: 'IN_PROGRESS' },
-  { name: 'Pending', value: 'PENDING' },
-  { name: 'Fullfiled', value: 'FULLFILED' },
-];
 const AdminPanel = () => {
-  const {
-    tasks,
-    checkForMore,
-    totalTaskCount,
-    tasksLength,
-    searchByTitle,
-    getTasks,
-    initialTaskLoad,
-  } = AdminTasksStore;
-
+  const { tasks, checkForMore, totalTaskCount, tasksLength, initialTaskLoad } =
+    AdminTasksStore;
+  const { searchedUser, searchedStatus } = searchFilters;
   const { register, handleSubmit } = useForm();
-
   const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   useEffect(() => {
-    initialTaskLoad();
-  }, []);
+    initialTaskLoad(searchedUser, searchedStatus);
+  }, [initialTaskLoad, searchedUser, searchedStatus]);
 
   const createTask = async (input: any) => {
     const { data, error } = await AdminTasksStore.createTask({
       title: input.title,
       points: parseInt(input.points),
       description: input.description,
-      userId: LoginStore.userId,
+      //userId: '1d6a9841-77f0-4169-b61b-f8f043b64b90',
     });
     if (error) {
       toast({
@@ -91,7 +75,7 @@ const AdminPanel = () => {
           w={'90%'}
           mx="auto"
         >
-          <Flex justifyContent="start" alignItems="center" fontSize="xs">
+          <Flex justifyContent="start" alignItems="center" fontSize="sm">
             <Flex
               bg="purple.400"
               rounded="md"
@@ -99,80 +83,36 @@ const AdminPanel = () => {
               justifyContent="start"
               cursor="pointer"
               onClick={onOpen}
-              p={2}
+              p={3}
             >
-              <Text fontWeight="thin" fontSize="md">
+              <Text fontWeight="thin" fontSize="lg">
                 Create New Task
               </Text>
             </Flex>
-            <Text mx={2}>{`${tasksLength} of ${totalTaskCount} records`}</Text>
           </Flex>
-          <Flex alignItems="end" minW={350}>
-            <Search
-              searchTerm={'task'}
-              makeSearch={searchByTitle}
-              resetSearch={initialTaskLoad}
-            />
-            <Menu>
-              <MenuButton
-                size="xs"
-                as={Button}
-                mx={2}
-                bg="purple.300"
-                disabled
-                rightIcon={<ChevronDownIcon />}
-              >
-                Status
-              </MenuButton>
-
-              <MenuList bg="gray.700">
-                {statuses.map((n, key: any) => (
-                  <MenuItem
-                    key={key}
-                    value={n.value}
-                    _hover={{ background: 'purple.900', cursor: 'pointer' }}
-                    _focus={{ boxShadow: 'outline' }}
-                  >
-                    {n.name}
-                  </MenuItem>
-                ))}
-              </MenuList>
-            </Menu>
-            <Menu>
-              <MenuButton
-                size="xs"
-                as={Button}
-                mx={1}
-                disabled
-                bg="purple.600"
-                rightIcon={<ChevronDownIcon />}
-              >
-                User
-              </MenuButton>
-
-              <MenuList bg="gray.700">
-                {statuses.map((n, key: any) => (
-                  <MenuItem
-                    key={key}
-                    value={n.value}
-                    _hover={{ background: 'purple.900', cursor: 'pointer' }}
-                    _focus={{ boxShadow: 'outline' }}
-                  >
-                    {n.name}
-                  </MenuItem>
-                ))}
-              </MenuList>
-            </Menu>
+          <Flex alignItems="end">
+            <Flex justifyContent="space-between">
+              <StatusFilter />
+              <UserSearch />
+            </Flex>
           </Flex>
         </Flex>
 
         <Flex flexDirection="column" w={'90%'} mx="auto">
+          <Flex justifyContent="end">
+            {' '}
+            <Text
+              mx={2}
+              fontSize="md"
+            >{`${tasksLength} of ${totalTaskCount} records`}</Text>
+          </Flex>
           <Grid
-            gridTemplateColumns="100px repeat(4,1fr) 100px"
+            gridTemplateColumns="120px repeat(4,1fr) 120px"
             justifyItems="center"
             bg="blackAlpha.500"
-            fontSize="sm"
+            fontSize="lg"
             my={2}
+            p={1}
           >
             <Box>Date</Box>
             <Box>Title</Box>
@@ -185,13 +125,11 @@ const AdminPanel = () => {
             dataLength={tasks.length}
             next={() => AdminTasksStore.loadMoreTasks()}
             hasMore={checkForMore}
-            loader={[...Array(3).keys()].map((m, key) => (
-              <Skeleton minH={50} my={4} key={key} />
+            loader={[...Array(5).keys()].map((m, key) => (
+              <Skeleton maxH={50} my={4} key={key} />
             ))}
-            className="styled-scroll"
-            height={400}
             endMessage={
-              <Text m={8} textAlign="center" fontSize="xs">
+              <Text m={8} textAlign="center" fontSize="sm">
                 There are no more tasks
               </Text>
             }
@@ -210,7 +148,6 @@ const AdminPanel = () => {
       <ModalLayout isOpen={isOpen} onClose={onClose} name={'Create Task'}>
         <Flex flexDirection="column" p={2} fontSize="sm">
           <form onSubmit={handleSubmit(createTask)}>
-            <Flex alignItems="center"></Flex>
             <FormLabel fontWeight="thin">Task Title</FormLabel>
             <Input
               {...register('title')}
@@ -245,7 +182,7 @@ const AdminPanel = () => {
                 type="submit"
                 mt={2}
                 colorScheme="purple"
-                fontSize="xs"
+                fontSize="sm"
               >
                 Submit
               </Button>

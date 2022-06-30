@@ -13,3 +13,10 @@ export interface Product {
   status: ProductStatus;
   updatedAt: string;
 }
+
+export interface ProductPost {
+  description: string;
+  name: string;
+  price: number;
+  status: ProductStatus;
+}

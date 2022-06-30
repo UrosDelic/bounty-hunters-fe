@@ -1,6 +1,6 @@
 import { initHttp } from 'http/index';
 import { makeAutoObservable, runInAction } from 'mobx';
-import { AttributeValue } from 'types';
+import { AttributeValue, AttributeValuePut, AttributeValuePost } from 'types';
 
 interface AttributeValuesStoreProps {
   data: AttributeValue[];
@@ -64,6 +64,51 @@ class AttributeValuesStore {
   }
 
   getAttributeValues = async () => {
+    this._attributeValues.loading = true;
+    const { data } = await this.http.get<AttributeValue[]>('/attributeValues');
+    runInAction(() => {
+      this._attributeValues.loading = false;
+      if (data) {
+        this._attributeValues.success = true;
+        this._attributeValues.data = data;
+        console.log('roles data iz stora', data);
+      }
+    });
+  };
+
+  changeAttributeValue = async (id: string, value: AttributeValuePut) => {
+    this._attributeValues.loading = true;
+    const { data } = await this.http.patch(`/attributeValues/${id}`, value);
+    runInAction(() => {
+      if (!data) {
+        this._attributeValues.loading = false;
+        this.getAttributeValues();
+        console.log('attribute value updated', data);
+      }
+    });
+  };
+
+  deleteAttributeValue = async (id: string) => {
+    const { data } = await this.http.delete(`/attributeValues/${id}`);
+    runInAction(() => {
+      if (!data) {
+        this.getAttributeValues();
+        console.log('attribute value deleted', data);
+      }
+    });
+  };
+
+  addNewAttributeValue = async (value: AttributeValuePost) => {
+    const { data } = await this.http.post(`/attributeValues`, value);
+    runInAction(() => {
+      if (data) {
+        this.getAttributeValues();
+        console.log('attribute value added', data);
+      }
+    });
+  };
+
+  getSizeAndColorAttributeValues = async () => {
     this._attributeValues.loading = true;
     const { data } = await this.http.get<AttributeValue[]>('/attributeValues');
     runInAction(() => {

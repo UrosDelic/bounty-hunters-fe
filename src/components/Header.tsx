@@ -3,13 +3,14 @@ import LoginStore from '../stores/Login';
 import { observer } from 'mobx-react';
 import {
   Flex,
-  Menu,
-  MenuButton,
-  MenuList,
   Circle,
   Box,
   Button,
-  IconButton,
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverArrow,
+  PopoverBody,
 } from '@chakra-ui/react';
 import { UserNotifications } from 'components/index';
 import { useEffect, useState } from 'react';
@@ -40,50 +41,53 @@ function Header({ onOpen }: headerProps) {
       w="100%"
     >
       <HamburgerIcon cursor="pointer" w={8} h={8} onClick={onOpen} />
-
       <Box>
-        <Menu>
-          <MenuButton
-            mx={4}
-            onClick={() => setOpenNotifications(true)}
-            position="relative"
-          >
-            <IconButton
-              icon={<BellIcon />}
+        <Popover >
+          <PopoverTrigger>
+            <Box
               variant="ghost"
-              aria-label="Notification Icon"
-              fontSize="25px"
-            ></IconButton>
+              fontSize="3xl"
+              bg="transperent"
+              p={0}
+              as={Button}
+              onClick={() => setOpenNotifications(true)}
+              _hover={{ bg: 'gray.600' }}
+              _active={{ bg: 'transperent' }}
+            >
+              <BellIcon fontSize="1.1em" />
+              {notificationsCount?.unreadCount > 0 ? (
+                <Circle
+                  px={1}
+                  fontSize="xs"
+                  color="white"
+                  bg="purple.400"
+                  position="absolute"
+                  top={2}
+                  right={1}
+                  size="auto"
+                >
+                  {notificationsCount?.unreadCount}
+                </Circle>
+              ) : (
+                ''
+              )}
+            </Box>
+          </PopoverTrigger>
+          <PopoverContent
 
-            {notificationsCount?.unreadCount > 0 ? (
-              <Circle
-                size={'auto'}
-                px={'5px'}
-                mx={1}
-                fontSize="xs"
-                color="white"
-                bg="purple.400"
-                position="absolute"
-                top={1}
-                right={-1}
-              >
-                {notificationsCount?.unreadCount}
-              </Circle>
-            ) : (
-              ''
-            )}
-          </MenuButton>
-
-          <MenuList
-            w={{ base: '90vw', md: '70vw', lg: '30vw' }}
-            h="40vh"
+            w={{ base: '90vw', md: '70vw', lg: '35vw' }}
+            mx={5}
+            h="50vh"
             p={0}
             border={0}
             boxShadow="dark-lg"
           >
-            {notificationsOpen && <UserNotifications />}
-          </MenuList>
-        </Menu>
+            <PopoverArrow />
+            <PopoverBody p={0}>
+              {notificationsOpen && <UserNotifications />}
+            </PopoverBody>
+          </PopoverContent>
+        </Popover>
         <Button colorScheme="grey" variant="solid" onClick={logout}>
           Log Out
         </Button>
