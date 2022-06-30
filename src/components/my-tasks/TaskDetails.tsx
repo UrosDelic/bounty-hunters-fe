@@ -23,7 +23,7 @@ interface Props {
 }
 
 const TaskDetails = ({
-  task: { title, description, createdAt, deadline, points, id },
+  task: { title, description, createdAt, deadline, points, id, solution },
 }: Props) => {
   const [showEditor, setShowEditor] = useState(false);
   const [showSolution, setShowSolution] = useState(false);
@@ -79,10 +79,12 @@ const TaskDetails = ({
               onClick={onEditorChange}
               rightIcon={<EditIcon />}
             >
-              Add Solution
+              {solution ? `Edit Solution` : `Add Solution`}
             </Button>
           )}
-          {showSolution ? <Textarea>Test</Textarea> : null}
+          {!showEditor && solution ? (
+            <Textarea readOnly defaultValue={solution}></Textarea>
+          ) : null}
         </VStack>
       </StyledCard>
     </Box>

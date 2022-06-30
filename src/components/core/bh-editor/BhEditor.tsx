@@ -2,8 +2,6 @@ import { useState } from 'react';
 import ReactQuill from 'react-quill';
 import { Button, Flex } from '@chakra-ui/react';
 import 'react-quill/dist/quill.snow.css';
-import ModalLayout from 'components/ModalLayout';
-
 interface Props {
   submit: () => void;
 }
