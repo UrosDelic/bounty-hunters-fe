@@ -7,7 +7,6 @@ import { Tasks } from 'types';
 
 interface TaskStoreProps {
   loading: boolean;
-  //data: { task: Task; createdAtDate: string; updatedAtDate: string }[];
   data: Task[];
   taskById: Task | undefined;
   limit: number;
@@ -53,18 +52,12 @@ class TasksStore {
     this._tasks.page = 1;
     this._tasks.hasMore = true;
     const { data } = await this.http.get<Tasks>(
-      //`/users/${LoginStore.userId}/tasks?page=${this._tasks.page}&limit=${this._tasks.limit}`
-      `/tasks?page=${this._tasks.page}&limit=${this._tasks.limit}`
+      `/users/${LoginStore.userId}/tasks?page=${this._tasks.page}&limit=${this._tasks.limit}`
     );
     runInAction(() => {
       this._tasks.loading = false;
       if (data) {
         this._tasks.data = data.data;
-        // this._tasks.data = data.data.map(data => {
-        //   const createdAtDate = dayjs(data.createdAt).format('DD-MM-YYYY');
-        //   const updatedAtDate = dayjs(data.updatedAt).format('DD-MM-YYYY');
-        //   return { task: data, createdAtDate, updatedAtDate };
-        // });
       }
     });
   };
@@ -102,7 +95,6 @@ class TasksStore {
         if (!data?.data.length) this._tasks.hasMore = false;
         this._tasks.loading = false;
         this._tasks.success = true;
-        // this._tasks.data = data.data;
         this._tasks.data = [...this._tasks.data, ...data?.data];
       }
     });
