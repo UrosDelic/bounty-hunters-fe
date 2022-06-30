@@ -54,9 +54,6 @@ class UsersStore {
   get hasMore() {
     return this._users.hasMore;
   }
-  get searchedUser() {
-    return this._users.searchTerm;
-  }
 
   getUsers = async () => {
     this._users.loading = true;
@@ -105,9 +102,6 @@ class UsersStore {
     });
   };
 
-  setSearchTerm = (term: string) => {
-    this._users.searchTerm = term;
-  };
 
   loadMoreUsers = async () => {
     this._users.page++;

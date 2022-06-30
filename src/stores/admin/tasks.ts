@@ -49,7 +49,8 @@ class AdminTasksStore {
   get checkForMore() {
     return this._tasks.hasMore;
   }
-  initialTaskLoad = async (searchedUser: string) => {
+
+  initialTaskLoad = async (searchedUser: string, searchedStatus: string) => {
     this._tasks.loading = true;
     this._tasks.hasMore = true;
     this._tasks.data = [];
@@ -57,27 +58,22 @@ class AdminTasksStore {
     this._tasks.page = 1;
     this._tasks.limit = 8;
 
-    if (searchedUser) {
-      const { data } = await this.http.get<Tasks>(
-        `/tasks?page=${this._tasks.page}&limit=${this._tasks.limit}
-        ${ searchedUser ? `&userId=${searchedUser}` : ``}
-        `
-      );
-
-      runInAction(() => {
-        this._tasks.loading = false;
-        if (data) {
-          if (!data?.data.length || data?.data.length <= this._tasks.limit) {
-            this._tasks.hasMore = false;
-          }
-
-          this._tasks.data = data?.data;
-          this._tasks.total = data.info.totalCount;
+    const { data } = await this.http.get<Tasks>(
+      `/tasks?page=${this._tasks.page}&limit=${this._tasks.limit}${
+        searchedUser ? `&userId=${searchedUser}` : ``
+      }${searchedStatus ? `&status=${searchedStatus}` : ``}`
+    );
+    runInAction(() => {
+      this._tasks.loading = false;
+      if (data) {
+        if (!data?.data.length || data?.data.length > this._tasks.limit) {
+          this._tasks.hasMore = false;
         }
-      });
-    } else {
-      this.getTasks();
-    }
+
+        this._tasks.data = data?.data;
+        this._tasks.total = data.info.totalCount;
+      }
+    });
   };
 
   getTasks = async () => {
@@ -142,7 +138,6 @@ class AdminTasksStore {
 
   approveTask = async (id: string) => {
     const { data, error } = await this.http.patch(`/tasks/${id}/approveTask`);
-
     runInAction(() => {
       this._tasks.data
         .filter(data => data.id === id)

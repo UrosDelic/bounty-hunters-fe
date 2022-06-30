@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 import {
-    Flex,
     Box,
+    Flex,
     Text,
     InputRightElement,
     Avatar,
@@ -11,8 +11,8 @@ import {
     Tooltip,
 } from '@chakra-ui/react';
 import UsersStore from 'stores/users';
+import searchFilters from 'stores/searchFilters';
 import { observer } from 'mobx-react';
-
 import debounce from 'lodash/debounce';
 import {
     AutoComplete,
@@ -21,9 +21,9 @@ import {
     AutoCompleteList,
 } from '@choc-ui/chakra-autocomplete';
 import { CloseIcon } from '@chakra-ui/icons';
-
-const UserSearch = (rr: any) => {
-    const { users, setSearchTerm } = UsersStore;
+const UserSearch = () => {
+    const { users } = UsersStore;
+    const { setSearchUser } = searchFilters;
     const [user, setUser] = useState('');
 
     const searchUsers = (e: any) => {
@@ -40,11 +40,11 @@ const UserSearch = (rr: any) => {
     };
     const selectUser = (id: any, e: string) => {
         setUser(e);
-        setSearchTerm(id);
+        setSearchUser(id);
     };
     const resetSearch = () => {
         setUser('');
-        setSearchTerm('');
+        setSearchUser('');
     };
     return (
         <>
@@ -52,10 +52,10 @@ const UserSearch = (rr: any) => {
                 <AutoComplete
                     restoreOnBlurIfEmpty={true}
                     openOnFocus={false}
-                    emptyState={'No users'}
+                    emptyState={<Text mx={5}>No one is named that</Text>}
 
                 >
-                    <InputGroup w={250}>
+                    <InputGroup >
                         <Tooltip
                             hasArrow
                             fontSize="sm"

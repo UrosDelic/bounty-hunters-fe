@@ -14,31 +14,26 @@ import {
     Skeleton,
     FormLabel,
 } from '@chakra-ui/react';
-import { ModalLayout, UserSearch } from 'components';
+import { ModalLayout, UserSearch, StatusFilter } from 'components';
 import { observer } from 'mobx-react';
 import { useForm } from 'react-hook-form';
 
+import searchFilters from 'stores/searchFilters';
 import AdminTasksStore from 'stores/admin/tasks';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import UsersStore from 'stores/users';
 import Task from './Task';
 
-const statuses = [
-    { name: 'In Progress', value: 'IN_PROGRESS' },
-    { name: 'Pending', value: 'PENDING' },
-    { name: 'Fullfiled', value: 'FULLFILED' },
-];
 const AdminPanel = () => {
     const { tasks, checkForMore, totalTaskCount, tasksLength, initialTaskLoad } =
         AdminTasksStore;
-    const { searchedUser } = UsersStore;
+    const { searchedUser, searchedStatus } = searchFilters;
     const { register, handleSubmit } = useForm();
     const toast = useToast();
     const { isOpen, onOpen, onClose } = useDisclosure();
 
     useEffect(() => {
-        initialTaskLoad(searchedUser);
-    }, [initialTaskLoad, searchedUser]);
+        initialTaskLoad(searchedUser, searchedStatus);
+    }, [initialTaskLoad, searchedUser, searchedStatus]);
 
     const createTask = async (input: any) => {
         const { data, error } = await AdminTasksStore.createTask({
@@ -95,7 +90,10 @@ const AdminPanel = () => {
                         </Flex>
                     </Flex>
                     <Flex alignItems="end">
-                        <UserSearch />
+                        <Flex justifyContent="space-between">
+                            <StatusFilter />
+                            <UserSearch />
+                        </Flex>
                     </Flex>
                 </Flex>
 
@@ -149,7 +147,6 @@ const AdminPanel = () => {
             <ModalLayout isOpen={isOpen} onClose={onClose} name={'Create Task'}>
                 <Flex flexDirection="column" p={2} fontSize="sm">
                     <form onSubmit={handleSubmit(createTask)}>
-                        <Flex alignItems="center"></Flex>
                         <FormLabel fontWeight="thin">Task Title</FormLabel>
                         <Input
                             {...register('title')}

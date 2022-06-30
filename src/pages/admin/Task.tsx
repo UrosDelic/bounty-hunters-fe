@@ -6,8 +6,6 @@ import {
     MenuList,
     MenuItem,
     MenuButton,
-    Circle,
-    Square,
     Grid,
     Tag,
     Text,
@@ -150,32 +148,32 @@ const Task = (props: any) => {
                 fontSize="sm"
                 fontWeight="thin"
             >
-                <Flex flexDirection="column" py={8} fontSize='sm'>
+                <Flex flexDirection="column" py={8} fontSize="sm">
                     <Text>{dayjs(props.details.createdAt).format(' MMMM D, YYYY')}</Text>
                     <Text as="sub" colorScheme="">
                         {dayjs(props.details.createdAt).format('HH:mm A')}
                     </Text>
                 </Flex>
 
-                <Text fontSize='md' mb={2}>{props.details.title}</Text>
+                <Text fontSize="md" mb={2}>
+                    {props.details.title}
+                </Text>
 
                 <Box>
                     {props?.details?.user && (
                         <Flex alignItems="start">
                             <Avatar size="md" name={`${firstName} ${lastName}`} mx={2} />
-                            <Flex flexDirection='column' fontSize='lg'>
-                                <Text fontSize='md'>
+                            <Flex flexDirection="column" fontSize="lg">
+                                <Text fontSize="md">
                                     {firstName} {lastName}
                                 </Text>
-                                <Text as='sub' >
-                                    {email}
-                                </Text>
+                                <Text as="sub">{email}</Text>
                             </Flex>
                         </Flex>
                     )}
                 </Box>
 
-                <Text fontSize='sm'>
+                <Text fontSize="sm">
                     <b>{props.details.points} </b>points
                 </Text>
                 <Tag
