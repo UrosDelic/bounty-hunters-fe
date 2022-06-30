@@ -25,7 +25,7 @@ import StyledCard from './core/StyledCard';
 import NestedNavigation from './core/NestedNavigation';
 import UserNotifications from './UserNotifications';
 import ProfileWidget from './feed/ProfileWidget';
-import Search from './core/Search';
+import SearchTasks from './admin/SearchTasks';
 import SearchByInput from './SearchByInput';
 import OrderModal from './OrderModal';
 import Pagination from './Pagination';
@@ -70,7 +70,7 @@ export {
   NestedNavigation,
   UserNotifications,
   SearchByInput,
-  Search,
+  SearchTasks,
   OrderModal,
   Pagination,
   OrdersTable,

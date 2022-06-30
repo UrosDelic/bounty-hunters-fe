@@ -1,6 +1,5 @@
 import { useCallback, useState } from 'react';
 import {
-    Box,
     Flex,
     Text,
     InputRightElement,
@@ -8,7 +7,6 @@ import {
     Icon,
     InputGroup,
     FormControl,
-    Tooltip,
 } from '@chakra-ui/react';
 import UsersStore from 'stores/users';
 import searchFilters from 'stores/searchFilters';
@@ -21,6 +19,7 @@ import {
     AutoCompleteList,
 } from '@choc-ui/chakra-autocomplete';
 import { CloseIcon } from '@chakra-ui/icons';
+
 const UserSearch = () => {
     const { users } = UsersStore;
     const { setSearchUser } = searchFilters;
@@ -48,42 +47,31 @@ const UserSearch = () => {
     };
     return (
         <>
-            <FormControl fontSize="md" >
+            <FormControl fontSize="md" w={250}>
                 <AutoComplete
                     restoreOnBlurIfEmpty={true}
                     openOnFocus={false}
                     emptyState={<Text mx={5}>No one is named that</Text>}
-
                 >
-                    <InputGroup >
-                        <Tooltip
-                            hasArrow
-                            fontSize="sm"
-                            fontWeight="normal"
-                            label="Search order: firstname lastname ex(John Smith)"
-                            bg="purple.400"
-                            color="white"
-                            placement="top-start"
-                        >
-                            <AutoCompleteInput
+                    <InputGroup>
+                        <AutoCompleteInput
+                            zIndex={0}
+                            autoComplete="off"
+                            onChange={e => {
+                                debounceOnChange(e);
+                                searchTerm(e);
+                            }}
+                            value={user}
+                            size="lg"
+                            fontSize="md"
+                            placeholder="Search users ex (John Doe)"
+                        />
 
-                                autoComplete='off'
-                                onChange={e => {
-                                    debounceOnChange(e);
-                                    searchTerm(e);
-                                }}
-                                value={user}
-                                size="lg"
-                                fontSize="md"
-                                placeholder="Search users"
-                            />
-                        </Tooltip>
                         {user && (
                             <InputRightElement
-                                zIndex={0}
+                                zIndex={1}
                                 children={
                                     <Icon
-
                                         onClick={() => {
                                             resetSearch();
                                         }}
@@ -109,13 +97,17 @@ const UserSearch = () => {
                                         selectUser(n.id, `${n.firstName} ${n.lastName}`)
                                     }
                                 >
-                                    <Avatar size="sm" mx={1} name={`${n.firstName} ${n.lastName}`} />
-                                    <Flex flexDirection='column'>
+                                    <Avatar
+                                        size="sm"
+                                        mx={1}
+                                        name={`${n.firstName} ${n.lastName}`}
+                                    />
+                                    <Flex flexDirection="column">
                                         <Flex>
                                             <Text mr={1}>{n.firstName}</Text>
-                                            <Text >{n.lastName}</Text>
+                                            <Text>{n.lastName}</Text>
                                         </Flex>
-                                        <Text as='sub' >{n.email}</Text>
+                                        <Text as="sub">{n.email}</Text>
                                     </Flex>
                                 </AutoCompleteItem>
                             </>

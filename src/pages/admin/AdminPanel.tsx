@@ -14,7 +14,7 @@ import {
     Skeleton,
     FormLabel,
 } from '@chakra-ui/react';
-import { ModalLayout, UserSearch, StatusFilter } from 'components';
+import { ModalLayout, UserSearch, StatusFilter, SearchTasks } from 'components';
 import { observer } from 'mobx-react';
 import { useForm } from 'react-hook-form';
 
@@ -24,16 +24,17 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import Task from './Task';
 
 const AdminPanel = () => {
-    const { tasks, checkForMore, totalTaskCount, tasksLength, initialTaskLoad } =
-        AdminTasksStore;
-    const { searchedUser, searchedStatus } = searchFilters;
+    const { tasks, checkForMore, totalTaskCount, tasksLength, initialTaskLoad } = AdminTasksStore;
+    const { searchedUser, searchedStatus, searchedTitle } = searchFilters;
     const { register, handleSubmit } = useForm();
     const toast = useToast();
     const { isOpen, onOpen, onClose } = useDisclosure();
 
     useEffect(() => {
-        initialTaskLoad(searchedUser, searchedStatus);
-    }, [initialTaskLoad, searchedUser, searchedStatus]);
+
+        initialTaskLoad(searchedUser, searchedStatus, searchedTitle);
+    },
+        [initialTaskLoad, searchedUser, searchedStatus, searchedTitle]);
 
     const createTask = async (input: any) => {
         const { data, error } = await AdminTasksStore.createTask({
@@ -91,6 +92,7 @@ const AdminPanel = () => {
                     </Flex>
                     <Flex alignItems="end">
                         <Flex justifyContent="space-between">
+                            <SearchTasks />
                             <StatusFilter />
                             <UserSearch />
                         </Flex>
@@ -102,7 +104,7 @@ const AdminPanel = () => {
                         {' '}
                         <Text
                             mx={2}
-                            fontSize="md"
+                            fontSize="sm"
                         >{`${tasksLength} of ${totalTaskCount} records`}</Text>
                     </Flex>
                     <Grid

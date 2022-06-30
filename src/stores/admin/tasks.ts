@@ -50,7 +50,7 @@ class AdminTasksStore {
     return this._tasks.hasMore;
   }
 
-  initialTaskLoad = async (searchedUser: string, searchedStatus: string) => {
+  initialTaskLoad = async (searchedUser: string, searchedStatus: string, title:string) => {
     this._tasks.loading = true;
     this._tasks.hasMore = true;
     this._tasks.data = [];
@@ -58,22 +58,24 @@ class AdminTasksStore {
     this._tasks.page = 1;
     this._tasks.limit = 8;
 
-    const { data } = await this.http.get<Tasks>(
-      `/tasks?page=${this._tasks.page}&limit=${this._tasks.limit}${
-        searchedUser ? `&userId=${searchedUser}` : ``
-      }${searchedStatus ? `&status=${searchedStatus}` : ``}`
-    );
-    runInAction(() => {
-      this._tasks.loading = false;
-      if (data) {
-        if (!data?.data.length || data?.data.length > this._tasks.limit) {
-          this._tasks.hasMore = false;
-        }
+    if (searchedUser || searchedStatus || title) {
+      const { data } = await this.http.get<Tasks>(
+        `/tasks?page=${this._tasks.page}&limit=${this._tasks.limit}${searchedUser ? `&userId=${searchedUser}` : ``}${searchedStatus ? `&status=${searchedStatus}` : ``}${title ? `&title=${title}` : ``}`
+      );
+      runInAction(() => {
+        this._tasks.loading = false;
+        if (data) {
+          if (!data?.data.length || data?.data.length <= this._tasks.limit) {
+            this._tasks.hasMore = false;
+          }
 
-        this._tasks.data = data?.data;
-        this._tasks.total = data.info.totalCount;
-      }
-    });
+          this._tasks.data = data?.data;
+          this._tasks.total = data.info.totalCount;
+        }
+      });
+    } else {
+      this.getTasks();
+    }
   };
 
   getTasks = async () => {
