@@ -1,6 +1,4 @@
 import {
-  Flex,
-  Spacer,
   Text,
   Box,
   Badge,
@@ -9,6 +7,7 @@ import {
   HStack,
   VStack,
   Divider,
+  Textarea,
 } from '@chakra-ui/react';
 import { EditIcon } from '@chakra-ui/icons';
 import { Task } from 'types';
@@ -27,12 +26,16 @@ const TaskDetails = ({
   task: { title, description, createdAt, deadline, points, id },
 }: Props) => {
   const [showEditor, setShowEditor] = useState(false);
+  const [showSolution, setShowSolution] = useState(false);
 
   const onEditorChange = () => {
     showEditor ? setShowEditor(false) : setShowEditor(true);
+    showSolution ? setShowSolution(false) : setShowSolution(true);
   };
   const onSubmit = () => {
     tasksStore.addTaskSolution(id, 'test');
+    setShowSolution(true);
+    setShowEditor(false);
   };
 
   return (
@@ -59,24 +62,27 @@ const TaskDetails = ({
             ) : null}
           </HStack>
           <Divider />
-          {description ? <Text align="center"> description</Text> : null}
-          <Divider />
+          {description ? (
+            <>
+              <Text align="center"> {description}</Text>
+              <Divider />
+            </>
+          ) : null}
 
-          <Button
-            colorScheme="purple"
-            variant="solid"
-            alignSelf="center"
-            onClick={onEditorChange}
-            rightIcon={<EditIcon />}
-          >
-            Submit Solution
-          </Button>
-
-          <BhEditor
-            isOpen={showEditor}
-            isClosed={onEditorChange}
-            submit={onSubmit}
-          />
+          {showEditor ? (
+            <BhEditor submit={onSubmit} />
+          ) : (
+            <Button
+              colorScheme="purple"
+              variant="solid"
+              alignSelf="center"
+              onClick={onEditorChange}
+              rightIcon={<EditIcon />}
+            >
+              Add Solution
+            </Button>
+          )}
+          {showSolution ? <Textarea>Test</Textarea> : null}
         </VStack>
       </StyledCard>
     </Box>

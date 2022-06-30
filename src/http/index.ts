@@ -18,7 +18,7 @@ class HttpCommunicator {
         return res;
       },
       err => {
-        if (err.response.status === 401 || err.response.status === 403) {
+        if (err.response.status === 401) {
           LoginStore.logout();
         }
       }
@@ -74,8 +74,6 @@ class HttpCommunicator {
       });
   }
 }
-
-
 
 let instance: HttpCommunicator | null = null;
 export function initHttp() {

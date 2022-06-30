@@ -5,12 +5,10 @@ import 'react-quill/dist/quill.snow.css';
 import ModalLayout from 'components/ModalLayout';
 
 interface Props {
-  isOpen: boolean;
-  isClosed: () => void;
   submit: () => void;
 }
 
-const BhEditor = ({ isOpen, isClosed, submit }: Props) => {
+const BhEditor = ({ submit }: Props) => {
   const [
     editorState,
     //   setEditorState
@@ -19,7 +17,7 @@ const BhEditor = ({ isOpen, isClosed, submit }: Props) => {
     //console.log('editor test');
   };
   return (
-    <ModalLayout isOpen={isOpen} onClose={isClosed}>
+    <>
       <ReactQuill
         modules={{
           toolbar: {
@@ -49,11 +47,11 @@ const BhEditor = ({ isOpen, isClosed, submit }: Props) => {
         onChange={handleChange}
       ></ReactQuill>
       <Flex justifyContent="end" className="submit-editor-btn">
-        <Button variant="solid" bg="purple.300" my={2} onClick={submit}>
+        <Button colorScheme="purple" variant="solid" my={2} onClick={submit}>
           Submit
         </Button>
       </Flex>
-    </ModalLayout>
+    </>
   );
 };
 
