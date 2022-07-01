@@ -4,14 +4,20 @@ import 'react-quill/dist/quill.snow.css';
 
 interface Props {
   submit: () => void;
-  handleChange: (...args: any) => void;
+  // handleChange: (...args: any) => void;
   value: string;
 }
 
-const BhEditor = ({ submit, handleChange, value }: Props) => {
-  const onEditorChange = (value: string) => {
-    return handleChange(value);
+const BhEditor = ({
+  submit,
+  //handleChange,
+  value,
+}: Props) => {
+  const handleChange = (value: string) => {
+    // setEditorState(value);
+    console.log(value);
   };
+
   return (
     <form onSubmit={submit}>
       <ReactQuill
@@ -40,7 +46,7 @@ const BhEditor = ({ submit, handleChange, value }: Props) => {
           marginTop: '1rem',
         }}
         value={value}
-        onChange={onEditorChange}
+        onChange={handleChange}
       ></ReactQuill>
       <Flex justifyContent="end" className="submit-editor-btn">
         <Button colorScheme="purple" variant="solid" my={2} type="submit">

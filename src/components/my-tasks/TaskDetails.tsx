@@ -36,16 +36,17 @@ const TaskDetails = ({
   const onSubmit = () => {
     if (editorState) {
       tasksStore.addTaskSolution(id, editorState);
+      tasksStore.getTaskDetailsById(id);
     }
 
     setShowSolution(true);
     setShowEditor(false);
   };
 
-  const handleChange = (value: string) => {
-    setEditorState(value);
-    console.log(editorState);
-  };
+  // const handleChange = (value: string) => {
+  //   setEditorState(value);
+  //   console.log(editorState);
+  // };
 
   return (
     <Box w={['50rem']}>
@@ -81,7 +82,7 @@ const TaskDetails = ({
           {showEditor ? (
             <BhEditor
               value={editorState ? editorState : ''}
-              handleChange={handleChange}
+              //  handleChange={handleChange}
               submit={onSubmit}
             />
           ) : (
