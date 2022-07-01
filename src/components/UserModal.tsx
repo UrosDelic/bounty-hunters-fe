@@ -4,15 +4,14 @@ import {
   Stack,
   useCheckboxGroup,
   ButtonGroup,
-  Button,
   Box,
 } from '@chakra-ui/react';
-import { ModalLayout } from './index';
+import { ModalLayout, PurpleButton } from './index';
 import { UserRoles } from 'types';
 import { observer } from 'mobx-react';
 import RolesStore from '../stores/roles';
 import UsersStore from '../stores/users';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 export type UserModalProps = {
   isOpen: boolean;
@@ -29,9 +28,15 @@ function UserModal({ isOpen, onClose, name, roles, userId }: UserModalProps) {
   const { value, setValue, getCheckboxProps } = useCheckboxGroup({
     defaultValue: roleIds,
   });
+  const [isErrorShown, setIsErrorShown] = useState(false);
 
   function updateRole() {
-    if (value.length) UsersStore.updateRoles(userId, value);
+    if (value.length) {
+      UsersStore.updateRoles(userId, value);
+      setIsErrorShown(false);
+    } else {
+      setIsErrorShown(true);
+    }
   }
 
   useEffect(() => {
@@ -58,14 +63,14 @@ function UserModal({ isOpen, onClose, name, roles, userId }: UserModalProps) {
             })}
           </Stack>
           <Box color="red" fontSize="14px">
-            {value.length ? (
-              <Text>&nbsp;</Text>
-            ) : (
+            {isErrorShown ? (
               <Text>Must pick at least one role.</Text>
+            ) : (
+              <Text>&nbsp;</Text>
             )}
           </Box>
           <ButtonGroup marginTop="10px">
-            <Button onClick={updateRole}>Update</Button>
+            <PurpleButton onClick={updateRole}>Update</PurpleButton>
           </ButtonGroup>
         </>
       )}
