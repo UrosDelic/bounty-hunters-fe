@@ -1,6 +1,6 @@
 import { initHttp } from 'http/index';
 import { makeAutoObservable, runInAction } from 'mobx';
-import { Users } from 'types';
+import { Users, UserRoles } from 'types';
 import Login from './Login';
 import LoginStore from './Login';
 
@@ -13,6 +13,10 @@ interface UsersStoreProps {
   hasMore: boolean;
   data: Users[];
   searchTerm: string;
+  currentUser: Users | undefined;
+  currentUserId: string;
+  currentUserLoading: boolean;
+  currentUserSuccess: boolean;
 }
 
 interface UsersDataProps {
@@ -29,6 +33,10 @@ class UsersStore {
     hasMore: true,
     data: [],
     searchTerm: '',
+    currentUser: undefined,
+    currentUserId: '',
+    currentUserLoading: false,
+    currentUserSuccess: false,
   };
 
   constructor(private http = initHttp()) {
@@ -55,6 +63,22 @@ class UsersStore {
     return this._users.hasMore;
   }
 
+  get currentUser() {
+    return this._users.currentUser;
+  }
+
+  get currentUserId() {
+    return this._users.currentUserId;
+  }
+
+  get currentUserLoading() {
+    return this._users.currentUserLoading;
+  }
+
+  get currentUserSuccess() {
+    return this._users.currentUserSuccess;
+  }
+
   getUsers = async () => {
     this._users.loading = true;
     this._users.success = false;
@@ -74,7 +98,9 @@ class UsersStore {
   searchUsers = async (firstName: any, lastName: any) => {
     this._users.loading = true;
     const { data } = await this.http.get<UsersDataProps>(
-      `/users?page=1&limit=${this._users.limit}${firstName ? `&firstName=${firstName}` : ``}${lastName ? `?lastName=${lastName}` : ``}`
+      `/users?page=1&limit=${this._users.limit}${
+        firstName ? `&firstName=${firstName}` : ``
+      }${lastName ? `?lastName=${lastName}` : ``}`
     );
     runInAction(() => {
       this._users.loading = false;
@@ -88,7 +114,7 @@ class UsersStore {
     this._users.data = [];
   }
 
-  updateRoles = async (userId: string, roleIds: any) => {
+  updateRoles = async (userId: string | undefined, roleIds: any) => {
     this._users.isUserUpdated = false;
     const { data } = await this.http.patch(`/users/${userId}/updateRoles`, {
       roleIds,
@@ -101,7 +127,6 @@ class UsersStore {
       }
     });
   };
-
 
   loadMoreUsers = async () => {
     this._users.page++;
@@ -117,6 +142,25 @@ class UsersStore {
       }
     });
   };
+
+  getUserById = async () => {
+    this._users.currentUserLoading = true;
+    this._users.currentUserSuccess = false;
+    const { data } = await this.http.get<Users>(
+      `/users/${this._users.currentUserId}`
+    );
+    runInAction(() => {
+      if (data) {
+        this._users.currentUserLoading = false;
+        this._users.currentUserSuccess = true;
+        this._users.currentUser = data;
+      }
+    });
+  };
+
+  setCurrentUserId(id: string) {
+    this._users.currentUserId = id;
+  }
 }
 
 export default new UsersStore();
