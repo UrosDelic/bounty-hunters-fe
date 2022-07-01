@@ -76,7 +76,7 @@ const UserNotifications = () => {
                             py={2}
                         >
                             <Text fontSize="2xl" fontWeight="thin" mx={4} my={2}>
-                                Notifications
+                                User Activity
                             </Text>
                             <Button
                                 mx={4}

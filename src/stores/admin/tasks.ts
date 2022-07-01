@@ -50,7 +50,7 @@ class AdminTasksStore {
     return this._tasks.hasMore;
   }
 
-  initialTaskLoad = async (searchedUser: string, searchedStatus: string, title:string) => {
+  getTasksByFilter = async (searchedUser: string, searchedStatus: string, title:string) => {
     this._tasks.loading = true;
     this._tasks.hasMore = true;
     this._tasks.data = [];

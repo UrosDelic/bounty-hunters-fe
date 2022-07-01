@@ -24,7 +24,7 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import Task from './Task';
 
 const AdminPanel = () => {
-    const { tasks, checkForMore, totalTaskCount, tasksLength, initialTaskLoad } = AdminTasksStore;
+    const { tasks, checkForMore, totalTaskCount, tasksLength, getTasksByFilter } = AdminTasksStore;
     const { searchedUser, searchedStatus, searchedTitle } = searchFilters;
     const { register, handleSubmit } = useForm();
     const toast = useToast();
@@ -32,9 +32,9 @@ const AdminPanel = () => {
 
     useEffect(() => {
 
-        initialTaskLoad(searchedUser, searchedStatus, searchedTitle);
+        getTasksByFilter(searchedUser, searchedStatus, searchedTitle);
     },
-        [initialTaskLoad, searchedUser, searchedStatus, searchedTitle]);
+        [getTasksByFilter, searchedUser, searchedStatus, searchedTitle]);
 
     const createTask = async (input: any) => {
         const { data, error } = await AdminTasksStore.createTask({

@@ -32,7 +32,7 @@ const UserSearch = () => {
             : UsersStore.searchUsers(result[0], result[1]);
     };
 
-    const debounceOnChange = useCallback(debounce(searchUsers, 1000), []);
+    const debounceOnChange = useCallback(debounce(searchUsers, 1500), []);
 
     const searchTerm = (e: any) => {
         setUser(e.target.value);
