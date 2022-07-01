@@ -45,8 +45,10 @@ const TaskDetails = ({
 
   const handleChange = (value: string) => {
     setEditorState(value);
-    console.log(editorState);
+    console.log(editorState, 'h');
   };
+
+  console.log(editorState, 'm');
 
   return (
     <Box w={['50rem']}>
