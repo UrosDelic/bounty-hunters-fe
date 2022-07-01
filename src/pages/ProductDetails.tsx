@@ -63,7 +63,10 @@ function ProductDetails() {
         >
           <GridItem padding="10px" borderRadius="5px">
             <Image
-              src={productById?.productMedia[0]?.url || shirt}
+              src={
+                productById?.productMedia[productById?.productMedia.length - 1]
+                  ?.url || shirt
+              }
               margin="auto"
               width="100%"
             />

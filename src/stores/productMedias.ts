@@ -45,6 +45,16 @@ class ProductMediasStore {
   };
 
   postProductMedias = async (imageUrl: string, productId: string) => {
+    await this.getProductMedias();
+    console.log(this.productMediasData);
+    const mediaForSelectedProduct = this.productMediasData.filter(
+      pm => pm.productId === productId
+    );
+    const lastMediaForSelectedProduct =
+      mediaForSelectedProduct[mediaForSelectedProduct.length - 1];
+    if (lastMediaForSelectedProduct?.url === imageUrl) {
+      return;
+    }
     const productMediaObj = {
       url: imageUrl,
       type: 'PHOTO',

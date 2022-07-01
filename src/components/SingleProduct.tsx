@@ -9,7 +9,7 @@ import {
 } from '@chakra-ui/react';
 import { StyledCard, ProductsDrawer } from './index';
 import { useState } from 'react';
-import { ProductStatus, ProductMedia } from '../types';
+import { ProductStatus } from '../types';
 import ProductsStore from '../stores/products';
 
 type SingleProductProps = {

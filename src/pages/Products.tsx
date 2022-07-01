@@ -90,7 +90,7 @@ function Products() {
                       price={price}
                       status={status}
                       description={description}
-                      image={productMedia[0]?.url}
+                      image={productMedia[productMedia.length - 1]?.url}
                     />
                   </GridItem>
                 );

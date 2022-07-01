@@ -18,7 +18,7 @@ function StoreItem({ id, name, price, productMedia }: StoreItemProps) {
       <Flex direction="column" height="100%">
         <Flex width="100%" flex={1} direction="column" justifyContent="center">
           <Image
-            src={productMedia[0]?.url || defaultImage}
+            src={productMedia[productMedia.length - 1]?.url || defaultImage}
             alt={name}
             margin="auto"
             width="100%"
