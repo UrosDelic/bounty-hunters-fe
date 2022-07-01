@@ -14,7 +14,7 @@ import { Task } from 'types';
 import dayjs from 'dayjs';
 import BhEditor from 'components/core/bh-editor/BhEditor';
 import { observer } from 'mobx-react';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import tasksStore from 'stores/tasks';
 import StyledCard from 'components/core/StyledCard';
 
@@ -33,15 +33,18 @@ const TaskDetails = ({
     showEditor ? setShowEditor(false) : setShowEditor(true);
     showSolution ? setShowSolution(false) : setShowSolution(true);
   };
-  const onSubmit = () => {
-    if (editorState) {
-      tasksStore.addTaskSolution(id, editorState);
-      tasksStore.getTaskDetailsById(id);
-    }
+  const onSubmit = useCallback(
+    (value: string) => {
+      if (value) {
+        tasksStore.addTaskSolution(id, value);
+        tasksStore.getTaskDetailsById(id);
+      }
 
-    setShowSolution(true);
-    setShowEditor(false);
-  };
+      setShowSolution(true);
+      setShowEditor(false);
+    },
+    [id]
+  );
 
   const handleChange = (value: string) => {
     setEditorState(value);
@@ -83,8 +86,8 @@ const TaskDetails = ({
 
           {showEditor ? (
             <BhEditor
-              value={editorState || ''}
-              onEditorChange={handleChange}
+              defaultValue={editorState}
+              //onEditorChange={setEditorState}
               submit={onSubmit}
             />
           ) : (

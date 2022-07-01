@@ -1,23 +1,31 @@
 import ReactQuill from 'react-quill';
 import { Button, Flex } from '@chakra-ui/react';
 import 'react-quill/dist/quill.snow.css';
-import { useState } from 'react';
+import { memo, useRef, useState } from 'react';
 
 interface Props {
-  submit: () => void;
-  onEditorChange: (...args: any) => void;
-  value: string;
+  submit: (value: string) => void;
+  //onEditorChange: (...args: any) => void;
+  defaultValue?: string | null;
 }
 
-const BhEditor = ({ submit, onEditorChange, value }: Props) => {
+const BhEditor = ({ submit, defaultValue }: Props) => {
   // const handleChange = (value: string) => {
   //   setEditorState(value);
   //   console.log(value);
   // };
+  const ref = useRef<any>();
 
+  const onSubmit = (e: any) => {
+    e.preventDefault();
+    if (submit) submit(ref.current.state.value);
+  };
+
+  console.log(123);
   return (
-    <form onSubmit={submit}>
+    <form onSubmit={onSubmit}>
       <ReactQuill
+        ref={ref}
         modules={{
           toolbar: {
             container: [
@@ -42,8 +50,7 @@ const BhEditor = ({ submit, onEditorChange, value }: Props) => {
           overflowY: 'hidden',
           marginTop: '1rem',
         }}
-        value={value}
-        onChange={onEditorChange}
+        defaultValue={defaultValue || undefined}
       ></ReactQuill>
       <Flex justifyContent="end" className="submit-editor-btn">
         <Button variant="solid" my={2} type="submit">
@@ -54,4 +61,4 @@ const BhEditor = ({ submit, onEditorChange, value }: Props) => {
   );
 };
 
-export default BhEditor;
+export default memo(BhEditor);
