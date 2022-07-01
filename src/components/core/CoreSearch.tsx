@@ -6,33 +6,30 @@ import {
     Icon,
 } from '@chakra-ui/react';
 
-import searchFilters from 'stores/searchFilters';
 import { useCallback, useState } from 'react';
 import { CloseIcon } from '@chakra-ui/icons';
 import { observer } from 'mobx-react';
 import debounce from 'lodash/debounce';
-const SearchTasks = () => {
-    const { setSearchTitle } = searchFilters;
+const CoreSearch = ({ setSearchTerm, placeholder }: any) => {
     const [title, setTitle] = useState('');
-
 
     const searchTerm = (e: any) => {
         setTitle(e.target.value);
     };
     const handleOnChange = (e: any) => {
         const search = e.trim();
-        setSearchTitle(search);
+        setSearchTerm(search);
         if (search) {
             setTitle(search);
         } else {
-            setSearchTitle('');
+            setSearchTerm('');
             setTitle('');
         }
     };
     const debounceOnChange = useCallback(debounce(handleOnChange, 1500), []);
 
     const resetSearch = () => {
-        setSearchTitle('');
+        setSearchTerm('');
         setTitle('');
     };
     return (
@@ -40,8 +37,11 @@ const SearchTasks = () => {
             <InputGroup>
                 <Input
                     size="lg"
-                    onChange={e => { debounceOnChange(e.target.value); searchTerm(e); }}
-                    placeholder="Search task"
+                    onChange={e => {
+                        debounceOnChange(e.target.value);
+                        searchTerm(e);
+                    }}
+                    placeholder={placeholder}
                     value={title}
                 />
                 {title && (
@@ -64,4 +64,4 @@ const SearchTasks = () => {
     );
 };
 
-export default observer(SearchTasks);
+export default observer(CoreSearch);

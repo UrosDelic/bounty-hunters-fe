@@ -9,7 +9,6 @@ import {
     FormControl,
 } from '@chakra-ui/react';
 import UsersStore from 'stores/users';
-import searchFilters from 'stores/searchFilters';
 import { observer } from 'mobx-react';
 import debounce from 'lodash/debounce';
 import {
@@ -20,10 +19,10 @@ import {
 } from '@choc-ui/chakra-autocomplete';
 import { CloseIcon } from '@chakra-ui/icons';
 
-const UserSearch = () => {
+const UserSearch = ({ setUserById }: any) => {
     const { users } = UsersStore;
-    const { setSearchUser } = searchFilters;
-    const [user, setUser] = useState('');
+
+    const [user, setSearchedUser] = useState('');
 
     const searchUsers = (e: any) => {
         const result = e.target.value.trim().split(/\s+/);
@@ -35,15 +34,15 @@ const UserSearch = () => {
     const debounceOnChange = useCallback(debounce(searchUsers, 1500), []);
 
     const searchTerm = (e: any) => {
-        setUser(e.target.value);
+        setSearchedUser(e.target.value);
     };
     const selectUser = (id: any, e: string) => {
-        setUser(e);
-        setSearchUser(id);
+        setSearchedUser(e);
+        setUserById(id);
     };
     const resetSearch = () => {
-        setUser('');
-        setSearchUser('');
+        setSearchedUser('');
+        setUserById('');
     };
     return (
         <>

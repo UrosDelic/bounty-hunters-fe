@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Box, Select } from '@chakra-ui/react';
 import { observer } from 'mobx-react';
-import searchFilters from 'stores/searchFilters';
+
 
 const statuses = [
     { name: 'In Progress', value: 'IN_PROGRESS' },
@@ -12,11 +12,11 @@ const statuses = [
 ];
 
 
-const StatusFilter = () => {
+const StatusFilter = ({ setFilterStatus }: any) => {
     const [status, setStatus] = useState('')
     const handleChange = (e: any) => {
         setStatus(e);
-        e ? searchFilters.setSearchStatus(e) : searchFilters.setSearchStatus('');
+        setFilterStatus(e);
     }
 
     return (
