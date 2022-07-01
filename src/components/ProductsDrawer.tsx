@@ -49,7 +49,7 @@ function ProductsDrawer({
       { name: data.name, description: data.description, price: data.price },
       productId
     );
-    onClose();
+    // onClose();
   }
 
   function cancelChange() {

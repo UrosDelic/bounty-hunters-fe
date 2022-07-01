@@ -49,7 +49,8 @@ class AdminTasksStore {
   get checkForMore() {
     return this._tasks.hasMore;
   }
-  initialTaskLoad = async (searchedUser: string) => {
+
+  getTasksByFilter = async (searchedUser: string, searchedStatus: string, title:string) => {
     this._tasks.loading = true;
     this._tasks.hasMore = true;
     this._tasks.data = [];
@@ -57,13 +58,10 @@ class AdminTasksStore {
     this._tasks.page = 1;
     this._tasks.limit = 8;
 
-    if (searchedUser) {
+    if (searchedUser || searchedStatus || title) {
       const { data } = await this.http.get<Tasks>(
-        `/tasks?page=${this._tasks.page}&limit=${this._tasks.limit}
-        ${ searchedUser ? `&userId=${searchedUser}` : ``}
-        `
+        `/tasks?page=${this._tasks.page}&limit=${this._tasks.limit}${searchedUser ? `&userId=${searchedUser}` : ``}${searchedStatus ? `&status=${searchedStatus}` : ``}${title ? `&title=${title}` : ``}`
       );
-
       runInAction(() => {
         this._tasks.loading = false;
         if (data) {
@@ -142,7 +140,6 @@ class AdminTasksStore {
 
   approveTask = async (id: string) => {
     const { data, error } = await this.http.patch(`/tasks/${id}/approveTask`);
-
     runInAction(() => {
       this._tasks.data
         .filter(data => data.id === id)

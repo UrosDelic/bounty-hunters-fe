@@ -1,18 +1,16 @@
 import { useCallback, useState } from 'react';
 import {
     Flex,
-    Box,
     Text,
     InputRightElement,
     Avatar,
     Icon,
     InputGroup,
     FormControl,
-    Tooltip,
 } from '@chakra-ui/react';
 import UsersStore from 'stores/users';
+import searchFilters from 'stores/searchFilters';
 import { observer } from 'mobx-react';
-
 import debounce from 'lodash/debounce';
 import {
     AutoComplete,
@@ -22,8 +20,9 @@ import {
 } from '@choc-ui/chakra-autocomplete';
 import { CloseIcon } from '@chakra-ui/icons';
 
-const UserSearch = (rr: any) => {
-    const { users, setSearchTerm } = UsersStore;
+const UserSearch = () => {
+    const { users } = UsersStore;
+    const { setSearchUser } = searchFilters;
     const [user, setUser] = useState('');
 
     const searchUsers = (e: any) => {
@@ -33,57 +32,46 @@ const UserSearch = (rr: any) => {
             : UsersStore.searchUsers(result[0], result[1]);
     };
 
-    const debounceOnChange = useCallback(debounce(searchUsers, 1000), []);
+    const debounceOnChange = useCallback(debounce(searchUsers, 1500), []);
 
     const searchTerm = (e: any) => {
         setUser(e.target.value);
     };
     const selectUser = (id: any, e: string) => {
         setUser(e);
-        setSearchTerm(id);
+        setSearchUser(id);
     };
     const resetSearch = () => {
         setUser('');
-        setSearchTerm('');
+        setSearchUser('');
     };
     return (
         <>
-            <FormControl fontSize="md" >
+            <FormControl fontSize="md" w={250}>
                 <AutoComplete
                     restoreOnBlurIfEmpty={true}
                     openOnFocus={false}
-                    emptyState={'No users'}
-
+                    emptyState={<Text mx={5}>No one is named that</Text>}
                 >
-                    <InputGroup w={250}>
-                        <Tooltip
-                            hasArrow
-                            fontSize="sm"
-                            fontWeight="normal"
-                            label="Search order: firstname lastname ex(John Smith)"
-                            bg="purple.400"
-                            color="white"
-                            placement="top-start"
-                        >
-                            <AutoCompleteInput
+                    <InputGroup>
+                        <AutoCompleteInput
+                            zIndex={0}
+                            autoComplete="off"
+                            onChange={e => {
+                                debounceOnChange(e);
+                                searchTerm(e);
+                            }}
+                            value={user}
+                            size="lg"
+                            fontSize="md"
+                            placeholder="Search users ex (John Doe)"
+                        />
 
-                                autoComplete='off'
-                                onChange={e => {
-                                    debounceOnChange(e);
-                                    searchTerm(e);
-                                }}
-                                value={user}
-                                size="lg"
-                                fontSize="md"
-                                placeholder="Search users"
-                            />
-                        </Tooltip>
                         {user && (
                             <InputRightElement
-                                zIndex={0}
+                                zIndex={1}
                                 children={
                                     <Icon
-
                                         onClick={() => {
                                             resetSearch();
                                         }}
@@ -109,13 +97,17 @@ const UserSearch = (rr: any) => {
                                         selectUser(n.id, `${n.firstName} ${n.lastName}`)
                                     }
                                 >
-                                    <Avatar size="sm" mx={1} name={`${n.firstName} ${n.lastName}`} />
-                                    <Flex flexDirection='column'>
+                                    <Avatar
+                                        size="sm"
+                                        mx={1}
+                                        name={`${n.firstName} ${n.lastName}`}
+                                    />
+                                    <Flex flexDirection="column">
                                         <Flex>
                                             <Text mr={1}>{n.firstName}</Text>
-                                            <Text >{n.lastName}</Text>
+                                            <Text>{n.lastName}</Text>
                                         </Flex>
-                                        <Text as='sub' >{n.email}</Text>
+                                        <Text as="sub">{n.email}</Text>
                                     </Flex>
                                 </AutoCompleteItem>
                             </>
