@@ -42,7 +42,7 @@ function Header({ onOpen }: headerProps) {
     >
       <HamburgerIcon cursor="pointer" w={8} h={8} onClick={onOpen} />
       <Box>
-        <Popover >
+        <Popover>
           <PopoverTrigger>
             <Box
               variant="ghost"
@@ -74,7 +74,6 @@ function Header({ onOpen }: headerProps) {
             </Box>
           </PopoverTrigger>
           <PopoverContent
-
             w={{ base: '90vw', md: '70vw', lg: '35vw' }}
             mx={5}
             h="50vh"
@@ -88,7 +87,7 @@ function Header({ onOpen }: headerProps) {
             </PopoverBody>
           </PopoverContent>
         </Popover>
-        <Button colorScheme="grey" variant="solid" onClick={logout}>
+        <Button variant="solid" onClick={logout}>
           Log Out
         </Button>
       </Box>

@@ -1,22 +1,19 @@
 import ReactQuill from 'react-quill';
 import { Button, Flex } from '@chakra-ui/react';
 import 'react-quill/dist/quill.snow.css';
+import { useState } from 'react';
 
 interface Props {
   submit: () => void;
-  // handleChange: (...args: any) => void;
+  onEditorChange: (...args: any) => void;
   value: string;
 }
 
-const BhEditor = ({
-  submit,
-  //handleChange,
-  value,
-}: Props) => {
-  const handleChange = (value: string) => {
-    // setEditorState(value);
-    console.log(value);
-  };
+const BhEditor = ({ submit, onEditorChange, value }: Props) => {
+  // const handleChange = (value: string) => {
+  //   setEditorState(value);
+  //   console.log(value);
+  // };
 
   return (
     <form onSubmit={submit}>
@@ -46,10 +43,10 @@ const BhEditor = ({
           marginTop: '1rem',
         }}
         value={value}
-        onChange={handleChange}
+        onChange={onEditorChange}
       ></ReactQuill>
       <Flex justifyContent="end" className="submit-editor-btn">
-        <Button colorScheme="purple" variant="solid" my={2} type="submit">
+        <Button variant="solid" my={2} type="submit">
           Submit
         </Button>
       </Flex>

@@ -29,7 +29,7 @@ const TaskDetails = ({
   const [showSolution, setShowSolution] = useState(false);
   const [editorState, setEditorState] = useState(solution);
 
-  const onEditorChange = () => {
+  const onSolutionButtonClick = () => {
     showEditor ? setShowEditor(false) : setShowEditor(true);
     showSolution ? setShowSolution(false) : setShowSolution(true);
   };
@@ -43,10 +43,10 @@ const TaskDetails = ({
     setShowEditor(false);
   };
 
-  // const handleChange = (value: string) => {
-  //   setEditorState(value);
-  //   console.log(editorState);
-  // };
+  const handleChange = (value: string) => {
+    setEditorState(value);
+    console.log(editorState);
+  };
 
   return (
     <Box w={['50rem']}>
@@ -81,17 +81,17 @@ const TaskDetails = ({
 
           {showEditor ? (
             <BhEditor
-              value={editorState ? editorState : ''}
-              //  handleChange={handleChange}
+              value={editorState || ''}
+              onEditorChange={handleChange}
               submit={onSubmit}
             />
           ) : (
             <Button
               type="button"
-              colorScheme="purple"
+              //  colorScheme="purple"
               variant="solid"
               alignSelf="center"
-              onClick={onEditorChange}
+              onClick={onSolutionButtonClick}
               rightIcon={<EditIcon />}
             >
               {solution ? `Edit Solution` : `Add Solution`}
