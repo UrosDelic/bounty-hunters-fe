@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     Box,
     Grid,
@@ -14,27 +14,27 @@ import {
     Skeleton,
     FormLabel,
 } from '@chakra-ui/react';
-import { ModalLayout, UserSearch, StatusFilter, SearchTasks } from 'components';
+import { ModalLayout, UserSearch, StatusFilter, CoreSearch } from 'components';
 import { observer } from 'mobx-react';
 import { useForm } from 'react-hook-form';
-
-import searchFilters from 'stores/searchFilters';
 import AdminTasksStore from 'stores/admin/tasks';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Task from './Task';
 
 const AdminPanel = () => {
-    const { tasks, checkForMore, totalTaskCount, tasksLength, getTasksByFilter } = AdminTasksStore;
-    const { searchedUser, searchedStatus, searchedTitle } = searchFilters;
+    const { tasks, checkForMore, totalTaskCount, tasksLength, getTasksByFilter } =
+        AdminTasksStore;
+
     const { register, handleSubmit } = useForm();
     const toast = useToast();
     const { isOpen, onOpen, onClose } = useDisclosure();
+    const [user, setUser] = useState('');
+    const [status, setStatus] = useState('');
+    const [title, setTitle] = useState('');
 
     useEffect(() => {
-
-        getTasksByFilter(searchedUser, searchedStatus, searchedTitle);
-    },
-        [getTasksByFilter, searchedUser, searchedStatus, searchedTitle]);
+        getTasksByFilter(user, status, title);
+    }, [getTasksByFilter, user, status, title]);
 
     const createTask = async (input: any) => {
         const { data, error } = await AdminTasksStore.createTask({
@@ -64,7 +64,15 @@ const AdminPanel = () => {
 
         onClose();
     };
-
+    const handleUser = (e: string) => {
+        if (e) setUser(e);
+    };
+    const handleStatus = (e: string) => {
+        e ? setStatus(e) : setStatus('');
+    };
+    const handleSearch = (e: string) => {
+        if (e) setTitle(e);
+    };
     return (
         <>
             <Box p={5} my={4} fontWeight="thin">
@@ -92,9 +100,12 @@ const AdminPanel = () => {
                     </Flex>
                     <Flex alignItems="end">
                         <Flex justifyContent="space-between">
-                            <SearchTasks />
-                            <StatusFilter />
-                            <UserSearch />
+                            <CoreSearch
+                                setSearchTerm={handleSearch}
+                                placeholder={'Search task'}
+                            />
+                            <StatusFilter setFilterStatus={handleStatus} />
+                            <UserSearch setUserById={handleUser} />
                         </Flex>
                     </Flex>
                 </Flex>
