@@ -17,7 +17,7 @@ const BhEditor = ({ submit, defaultValue }: Props) => {
   const ref = useRef<any>();
 
   const onSubmit = (e: any) => {
-    e.preventDefault();
+    // e.preventDefault();
     if (submit) submit(ref.current.state.value);
   };
 

@@ -70,6 +70,7 @@ class TasksStore {
       this._tasks.loading = false;
       if (data) {
         this._tasks.taskById = data;
+        console.log(this._tasks.taskById, 'iz stora');
       }
     });
   };

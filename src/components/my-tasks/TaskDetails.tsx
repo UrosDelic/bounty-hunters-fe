@@ -39,7 +39,6 @@ const TaskDetails = ({
         tasksStore.addTaskSolution(id, value);
         tasksStore.getTaskDetailsById(id);
       }
-
       setShowSolution(true);
       setShowEditor(false);
     },
@@ -48,10 +47,7 @@ const TaskDetails = ({
 
   const handleChange = (value: string) => {
     setEditorState(value);
-    console.log(editorState, 'h');
   };
-
-  console.log(editorState, 'm');
 
   return (
     <Box w={['50rem']}>
