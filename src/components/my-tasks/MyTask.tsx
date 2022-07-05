@@ -43,7 +43,7 @@ const MyTask = ({
   return (
     <Box margin="1rem" w={['20rem', '25rem', '25rem', '30rem']}>
       <StyledCard>
-        <VStack spacing="24px" w="100%">
+        <VStack spacing="24px" w="100%" p="1rem">
           <Heading textAlign="center">{title}</Heading>
 
           <Badge
