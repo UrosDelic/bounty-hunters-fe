@@ -48,6 +48,7 @@ const MyTask = ({
 
           <Badge
             px="5"
+            py="1"
             borderRadius="full"
             colorScheme={switchStatusColor(status)}
           >
