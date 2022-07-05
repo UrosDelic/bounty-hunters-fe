@@ -1,6 +1,7 @@
 import { useRadio, Box, Flex } from '@chakra-ui/react';
+import { observer } from 'mobx-react';
 
-function SizeRadioButton(props: any) {
+function SingleRadioButton(props: any) {
   const { getInputProps, getCheckboxProps } = useRadio(props);
   const input = getInputProps();
   const checkbox = getCheckboxProps();
@@ -12,8 +13,7 @@ function SizeRadioButton(props: any) {
         {...checkbox}
         alignItems="center"
         justifyContent="center"
-        width={['50px', '60px', '60px', '60px']}
-        height="40px"
+        minWidth={['50px', '60px', '60px', '60px']}
         textAlign="center"
         textTransform="uppercase"
         boxSizing="border-box"
@@ -37,7 +37,9 @@ function SizeRadioButton(props: any) {
           outline: 0,
         }}
         px={5}
-        py={3}
+        py={2}
+        marginRight="7px"
+        marginTop="7px"
       >
         {props.children}
       </Flex>
@@ -45,4 +47,4 @@ function SizeRadioButton(props: any) {
   );
 }
 
-export default SizeRadioButton;
+export default observer(SingleRadioButton);

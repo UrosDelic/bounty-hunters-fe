@@ -16,10 +16,6 @@ import DoughnutChart from './DoughnutChart';
 import PointBreakdown from './PointBreakdown';
 import TransactionTable from './TransactionTable';
 import BarChart from './BarChart';
-import SizeRadioButton from './SizeRadioButton';
-import SizeGroup from './SizeGroup';
-import ColorRadioButton from './ColorRadioButton';
-import ColorGroup from './ColorGroup';
 import FeedList from './feed/FeedList';
 import StyledCard from './core/StyledCard';
 import NestedNavigation from './core/NestedNavigation';
@@ -39,6 +35,9 @@ import SingleAttributeValue from './SingleAttributeValue';
 import AddProductModal from './AddProductModal';
 import RequiredWarningText from './RequiredWarningText';
 import UserSearch from './core/UserSearch';
+import RadioGroup from './RadioGroup';
+import SingleRadioButton from './SingleRadioButton';
+import ProductsDrawer from './ProductsDrawer';
 import StatusFilter from './core/StatusFilter';
 import CoreTable from './core/CoreTable';
 
@@ -62,10 +61,6 @@ export {
   PointBreakdown,
   TransactionTable,
   BarChart,
-  SizeRadioButton,
-  SizeGroup,
-  ColorRadioButton,
-  ColorGroup,
   FeedList,
   ProfileWidget,
   StyledCard,
@@ -85,6 +80,9 @@ export {
   AddProductModal,
   RequiredWarningText,
   UserSearch,
+  RadioGroup,
+  SingleRadioButton,
+  ProductsDrawer,
   StatusFilter,
   CoreTable
 };

@@ -42,7 +42,11 @@ function SingleAttributeValue({ id, value }: SingleAttributeValueProps) {
         justifyContent="space-between"
         padding="0px 5px"
       >
-        {!isEditClicked && <Text fontSize="18px">{value}</Text>}
+        {!isEditClicked && (
+          <Text fontSize="18px" textTransform="capitalize">
+            {value}
+          </Text>
+        )}
         {isEditClicked && (
           <Box width="100%">
             <form onSubmit={handleSubmit(changeAttributeValue)}>
@@ -55,7 +59,7 @@ function SingleAttributeValue({ id, value }: SingleAttributeValueProps) {
                     {...register('value', { required: 'This is required' })}
                   />
                 </Box>
-                <ButtonGroup>
+                <ButtonGroup marginLeft="10px">
                   <PurpleButton onClick={handleSubmit(changeAttributeValue)}>
                     Save
                   </PurpleButton>
@@ -66,7 +70,7 @@ function SingleAttributeValue({ id, value }: SingleAttributeValueProps) {
           </Box>
         )}
         {!isEditClicked && (
-          <ButtonGroup marginLeft="10px">
+          <ButtonGroup>
             <PurpleIconButton
               icon={<EditIcon />}
               ariaLabel={`edit ${value}`}

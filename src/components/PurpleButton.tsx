@@ -10,6 +10,7 @@ function PurpleButton({ children, onClick }: PurpleButtonProps) {
     <Button
       backgroundColor="purple.500"
       _hover={{ backgroundColor: 'purple.300' }}
+      type="submit"
       onClick={onClick}
     >
       {children}

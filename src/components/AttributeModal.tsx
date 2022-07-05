@@ -77,7 +77,7 @@ function AttributeModal({
               />
               <RequiredWarningText isShown={errors?.value} />
             </Box>
-            <ButtonGroup>
+            <ButtonGroup marginLeft="10px">
               <PurpleButton onClick={handleSubmit(addNew)}>Save</PurpleButton>
               <PurpleButton onClick={toggleInputField}>Cancel</PurpleButton>
             </ButtonGroup>
