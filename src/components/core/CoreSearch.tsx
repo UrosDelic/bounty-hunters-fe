@@ -33,10 +33,10 @@ const CoreSearch = ({ setSearchTerm, placeholder }: any) => {
         setTitle('');
     };
     return (
-        <Flex alignItems="center">
+        <Flex >
             <InputGroup>
                 <Input
-                    size="lg"
+                    size="md"
                     onChange={e => {
                         debounceOnChange(e.target.value);
                         searchTerm(e);
@@ -53,7 +53,7 @@ const CoreSearch = ({ setSearchTerm, placeholder }: any) => {
                                 }}
                                 cursor="pointer"
                                 w="10px"
-                                mt={2}
+                                mt={1}
                                 as={CloseIcon}
                             />
                         }

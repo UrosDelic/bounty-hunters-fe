@@ -40,6 +40,8 @@ import AddProductModal from './AddProductModal';
 import RequiredWarningText from './RequiredWarningText';
 import UserSearch from './core/UserSearch';
 import StatusFilter from './core/StatusFilter';
+import CoreTable from './core/CoreTable';
+
 
 export {
   Layout,
@@ -83,5 +85,6 @@ export {
   AddProductModal,
   RequiredWarningText,
   UserSearch,
-  StatusFilter
+  StatusFilter,
+  CoreTable
 };

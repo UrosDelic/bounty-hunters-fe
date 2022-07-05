@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
     Box,
     Grid,
@@ -11,18 +11,23 @@ import {
     NumberInputField,
     useToast,
     Textarea,
-    Skeleton,
     FormLabel,
 } from '@chakra-ui/react';
-import { ModalLayout, UserSearch, StatusFilter, CoreSearch } from 'components';
+import {
+    ModalLayout,
+    UserSearch,
+    StatusFilter,
+    CoreSearch,
+    CoreTable,
+} from 'components';
 import { observer } from 'mobx-react';
 import { useForm } from 'react-hook-form';
 import AdminTasksStore from 'stores/admin/tasks';
-import InfiniteScroll from 'react-infinite-scroll-component';
+
 import Task from './Task';
 
 const AdminPanel = () => {
-    const { tasks, checkForMore, totalTaskCount, tasksLength, getTasksByFilter } =
+    const { tasks, totalTaskCount, getTasksByFilter, page, setPage, loading } =
         AdminTasksStore;
 
     const { register, handleSubmit } = useForm();
@@ -32,9 +37,17 @@ const AdminPanel = () => {
     const [status, setStatus] = useState('');
     const [title, setTitle] = useState('');
 
+    const columns = [
+        { title: 'Task Title', align: 'start' },
+        { title: 'Assignee', align: 'start' },
+        { title: 'Points', align: 'end' },
+        { title: 'Date', align: 'end' },
+        { title: 'Status', align: 'end' },
+    ];
+
     useEffect(() => {
         getTasksByFilter(user, status, title);
-    }, [getTasksByFilter, user, status, title]);
+    }, [getTasksByFilter, user, status, title, page]);
 
     const createTask = async (input: any) => {
         const { data, error } = await AdminTasksStore.createTask({
@@ -65,96 +78,68 @@ const AdminPanel = () => {
         onClose();
     };
     const handleUser = (e: string) => {
-        if (e) setUser(e);
+        if (e) {
+            setUser(e);
+        } else {
+            setUser('');
+        }
+        setPage(1);
     };
     const handleStatus = (e: string) => {
-        e ? setStatus(e) : setStatus('');
+        if (e) {
+            setStatus(e);
+        } else {
+            setStatus('');
+        }
+        setPage(1);
     };
     const handleSearch = (e: string) => {
-        if (e) setTitle(e);
+        if (e) {
+            setTitle(e);
+        } else {
+            setTitle('');
+        }
+        setPage(1);
     };
     return (
         <>
-            <Box p={5} my={4} fontWeight="thin">
-                <Flex
-                    my={2}
-                    justifyContent="space-between"
-                    alignItems="end"
-                    w={'90%'}
-                    mx="auto"
+            <Box mx="auto" width={{ xl: '90%' }}>
+                <Flex justifyContent="space-between" mt={10}>
+                    <Flex
+                        bg="purple.400"
+                        rounded="md"
+                        alignItems="center"
+                        justifyContent="start"
+                        cursor="pointer"
+                        onClick={onOpen}
+                        p={3}
+                    >
+                        <Text fontWeight="thin" fontSize="lg">
+                            Create New Task
+                        </Text>
+                    </Flex>
+                    <Flex justifyContent="space-between" alignItems="center">
+                        <CoreSearch
+                            setSearchTerm={handleSearch}
+                            placeholder={'Search task'}
+                        />
+                        <StatusFilter setFilterStatus={handleStatus} />
+                        <UserSearch setUserById={handleUser} />
+                    </Flex>
+                </Flex>
+                <CoreTable
+                    columns={columns}
+                    templateColumns="2fr repeat(5, 1fr)"
+                    page={page}
+                    totalCount={totalTaskCount}
+                    dataLength={tasks.length}
+                    setPage={setPage}
+                    loading={loading}
                 >
-                    <Flex justifyContent="start" alignItems="center" fontSize="sm">
-                        <Flex
-                            bg="purple.400"
-                            rounded="md"
-                            alignItems="center"
-                            justifyContent="start"
-                            cursor="pointer"
-                            onClick={onOpen}
-                            p={3}
-                        >
-                            <Text fontWeight="thin" fontSize="lg">
-                                Create New Task
-                            </Text>
-                        </Flex>
-                    </Flex>
-                    <Flex alignItems="end">
-                        <Flex justifyContent="space-between">
-                            <CoreSearch
-                                setSearchTerm={handleSearch}
-                                placeholder={'Search task'}
-                            />
-                            <StatusFilter setFilterStatus={handleStatus} />
-                            <UserSearch setUserById={handleUser} />
-                        </Flex>
-                    </Flex>
-                </Flex>
-
-                <Flex flexDirection="column" w={'90%'} mx="auto">
-                    <Flex justifyContent="end">
-                        {' '}
-                        <Text
-                            mx={2}
-                            fontSize="sm"
-                        >{`${tasksLength} of ${totalTaskCount} records`}</Text>
-                    </Flex>
-                    <Grid
-                        gridTemplateColumns="120px repeat(4,1fr) 120px"
-                        justifyItems="center"
-                        bg="blackAlpha.500"
-                        fontSize="lg"
-                        my={2}
-                        p={1}
-                    >
-                        <Box>Date</Box>
-                        <Box>Title</Box>
-                        <Box>Assignee</Box>
-                        <Box>Points</Box>
-                        <Box>Status</Box>
-                    </Grid>
-
-                    <InfiniteScroll
-                        dataLength={tasks.length}
-                        next={() => AdminTasksStore.loadMoreTasks()}
-                        hasMore={checkForMore}
-                        loader={[...Array(5).keys()].map((m, key) => (
-                            <Skeleton maxH={50} my={4} key={key} />
-                        ))}
-                        endMessage={
-                            <Text m={8} textAlign="center" fontSize="sm">
-                                There are no more tasks
-                            </Text>
-                        }
-                    >
-                        <>
-                            {tasks.map((task, key) => (
-                                <React.Fragment key={task.id}>
-                                    <Task details={task} />
-                                </React.Fragment>
-                            ))}
-                        </>
-                    </InfiniteScroll>
-                </Flex>
+                    {tasks.map((task: any) => (
+                        <Task details={task} />
+                    ))}
+                </CoreTable>
             </Box>
 
             <ModalLayout isOpen={isOpen} onClose={onClose} name={'Create Task'}>

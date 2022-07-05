@@ -21,7 +21,7 @@ const StatusFilter = ({ setFilterStatus }: any) => {
 
     return (
         <Box mx={2} w={250}>
-            <Select size="lg" placeholder="Status" onChange={(e) => handleChange(e.target.value)} value={status}>
+            <Select size="md" placeholder="Status" onChange={(e) => handleChange(e.target.value)} value={status}>
                 {statuses.map(task => (
                     <option key={task.name} value={task.value} >
                         {task.name}

@@ -16,19 +16,19 @@ import {
     AlertDialogFooter,
     AlertDialogContent,
     Button,
+    IconButton,
+    Input,
     EditableInput,
     EditablePreview,
     Editable,
     Textarea,
     Avatar,
-    DrawerHeader,
-    DrawerBody,
-    Input,
 } from '@chakra-ui/react';
-
+import { faEllipsis } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import AdminTasksStore from 'stores/admin/tasks';
 import { observer } from 'mobx-react';
-import CoreDrawer from '../../components/core/CoreDrawer';
+import { ModalLayout } from 'components';
 import { useForm } from 'react-hook-form';
 import dayjs from 'dayjs';
 import { useRelativeTime } from 'custom-hooks/useRelativeTime';
@@ -38,9 +38,9 @@ const Task = (props: any) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const { register } = useForm();
     const {
-        isOpen: isOpenDrawer,
-        onOpen: onOpenDrawer,
-        onClose: onCloseDrawer,
+        isOpen: isOpenEdit,
+        onOpen: onOpenEdit,
+        onClose: onCloseEdit,
     } = useDisclosure();
 
     const relativeTime = useRelativeTime();
@@ -70,7 +70,7 @@ const Task = (props: any) => {
             points: parsed,
             description,
         });
-        onCloseDrawer();
+        onCloseEdit();
         const date = new Date().toISOString();
         setUpdatedAt(date);
     };
@@ -114,7 +114,7 @@ const Task = (props: any) => {
                 isClosable: true,
             });
         }
-        onCloseDrawer();
+        onCloseEdit();
     };
     const rejectTask = async (id: string) => {
         const { error } = await AdminTasksStore.rejectTask(id, rejectedMessage);
@@ -135,309 +135,301 @@ const Task = (props: any) => {
                 isClosable: true,
             });
         }
-        onCloseDrawer();
+        onCloseEdit();
     };
     return (
-        <Box key={props.id}>
+        <>
             <Grid
-                gridTemplateColumns="120px repeat(4,1fr) 120px"
-                alignItems="center"
-                justifyItems="center"
-                bg="gray.600"
-                boxShadow="lg"
-                fontSize="sm"
-                fontWeight="thin"
+                gridTemplateColumns="2fr repeat(5, 1fr)"
+                gridAutoFlow="column"
+                gridAutoRows="2fr"
+                borderBottom="1px"
+                borderColor="gray.600"
+                gap={1}
+                p={1}
+                m={0}
+                fontSize="lg"
+                width="100%"
+                minH={50}
+                maxH="10%"
+                color="white"
             >
-                <Flex flexDirection="column" py={8} fontSize="sm">
-                    <Text>{dayjs(props.details.createdAt).format(' MMMM D, YYYY')}</Text>
-                    <Text as="sub" colorScheme="">
-                        {dayjs(props.details.createdAt).format('HH:mm A')}
-                    </Text>
-                </Flex>
-
-                <Text fontSize="md" mb={2}>
+                <Text fontSize="md" maxW="100%">
                     {props.details.title}
                 </Text>
 
-                <Box>
+                <Flex minW="100%" fontSize="lg">
                     {props?.details?.user && (
-                        <Flex alignItems="start">
-                            <Avatar size="md" name={`${firstName} ${lastName}`} mx={2} />
-                            <Flex flexDirection="column" fontSize="lg">
-                                <Text fontSize="md">
+                        <Flex alignItems="center">
+                            <Avatar
+                                size="sm"
+                                name={`${firstName} ${lastName}`}
+                                mr={2}
+                                mb={2}
+                            />
+                            <Flex flexDirection="column" alignItems="start">
+                                <Text as="sup" fontSize="md">
                                     {firstName} {lastName}
                                 </Text>
-                                <Text as="sub">{email}</Text>
+                                <Text as="sub" mt={1}>
+                                    {email}
+                                </Text>
                             </Flex>
                         </Flex>
                     )}
+                </Flex>
+
+                <Box minW="100%" fontSize="sm" textAlign="end">
+                    <b>{props.details.points} </b> points
                 </Box>
 
-                <Text fontSize="sm">
-                    <b>{props.details.points} </b>points
+                <Text minW="100%" fontSize="sm" textAlign="end">
+                    {dayjs(props.details.createdAt).format(' MMMM D, YYYY')}
                 </Text>
-                <Tag
-                    size="md"
-                    colorScheme={useStatusesStyle(props.details.status).color}
-                >
-                    {useStatusesStyle(props.details.status).data}
-                </Tag>
 
-                <Flex>
-                    <Button
-                        mr={2}
-                        size="sm"
-                        fontWeight="normal"
-                        variant="link"
-                        color="white"
-                        onClick={onOpenDrawer}
+                <Flex minW="100%" justifyContent="end" alignItems="center">
+                    <Tag
+                        h={2}
+                        size="md"
+                        colorScheme={useStatusesStyle(props.details.status).color}
                     >
-                        Edit
-                    </Button>
-                    <Button
-                        size="xs"
-                        fontWeight="normal"
-                        bg="purple.400"
-                        onClick={onOpen}
-                        mr={5}
-                    >
-                        Delete
-                    </Button>
+                        {useStatusesStyle(props.details.status).data}
+                    </Tag>
+                </Flex>
+                <Flex justifyContent="center">
+                    <Box w={50} fontSize="md">
+                        <Menu>
+                            <MenuButton
+                                as={IconButton}
+                                aria-label="Options"
+                                icon={<FontAwesomeIcon icon={faEllipsis} />}
+                                variant="ghost"
+                                size="md"
+                            />
+                            <MenuList>
+                                <MenuItem onClick={onOpen} textAlign="center">
+                                    Delete
+                                </MenuItem>
+                                <MenuItem onClick={onOpenEdit}>Edit</MenuItem>
+                            </MenuList>
+                        </Menu>
+                    </Box>
                 </Flex>
             </Grid>
 
-            <CoreDrawer
-                size="xl"
-                isOpen={isOpenDrawer}
-                onOpen={onOpenDrawer}
-                onClose={onCloseDrawer}
-            >
-                <DrawerHeader>
-                    <Flex flexDirection="column" fontWeight="normal">
-                        <Flex alignItems="center">
-                            <Text>Edit Task</Text>
-                            <Text fontSize="sm" my={1}>
-                                <Tag
-                                    ml={2}
-                                    size="sm"
-                                    colorScheme={useStatusesStyle(props.details.status).color}
-                                >
-                                    {useStatusesStyle(props.details.status).data}
-                                </Tag>{' '}
-                            </Text>
+            <ModalLayout isOpen={isOpenEdit} onClose={onCloseEdit} name={'Edit Task'}>
+                <Grid>
+                    <Box mx="auto" minW="80%">
+                        <Flex flexDirection="column" fontWeight="normal">
+                            <Flex justifyContent="space-between" alignItems="center">
+                                <Text fontSize="sm" mr={2}>
+                                    Updated {relativeTime(updated)}
+                                </Text>
+                                <Text fontSize="sm" my={1}>
+                                    <Tag
+                                        ml={2}
+                                        size="md"
+                                        colorScheme={useStatusesStyle(props.details.status).color}
+                                    >
+                                        {useStatusesStyle(props.details.status).data}
+                                    </Tag>{' '}
+                                </Text>
+                            </Flex>
                         </Flex>
-                        <Text fontSize="sm" mr={2}>
-                            {' '}
-                            Updated {relativeTime(updated)}
-                        </Text>
-                    </Flex>
-                </DrawerHeader>
-                <DrawerBody>
-                    <Grid
-                        color="white"
-                        gridTemplateRows="40% 40%"
-                        gap={12}
-                        fontWeight="thin"
-                        fontSize="sm"
-                    >
-                        {/* {props.details.id} */}
-                        <Box mx="auto" minW="80%">
-                            <Flex flexDirection="column">
-                                <Text mb={2}>Title</Text>
-                                <Editable defaultValue={title}>
+                        <Flex flexDirection="column" mt={4}>
+                            <Text mb={2} fontWeight="normal" fontSize="sm">
+                                Title
+                            </Text>
+                            <Editable defaultValue={title}>
+                                <EditablePreview
+                                    border="1px"
+                                    p={2}
+                                    fontWeight="thin"
+                                    {...register('title')}
+                                    minW="100%"
+                                />
+                                <EditableInput
+                                    onChange={e => {
+                                        setTitle(e.target.value);
+                                    }}
+                                />
+                            </Editable>
+                        </Flex>
+                        <Grid
+                            gridTemplateColumns="repeat(3, 1fr)"
+                            alignItems="center"
+                            gap={5}
+                        >
+                            <Flex my={1} flexDirection="column">
+                                <Text my={1}>Points</Text>
+                                <Editable defaultValue={points}>
                                     <EditablePreview
                                         border="1px"
                                         p={2}
                                         fontWeight="thin"
-                                        {...register('title')}
+                                        {...register('points')}
                                         minW="100%"
                                     />
                                     <EditableInput
-                                        onChange={e => {
-                                            setTitle(e.target.value);
-                                        }}
-                                    />
-                                </Editable>
-                            </Flex>
-                            <Grid
-                                gridTemplateColumns="repeat(3, 1fr)"
-                                alignItems="center"
-                                gap={5}
-                            >
-                                <Flex my={1} flexDirection="column">
-                                    <Text my={1}>Points</Text>
-                                    <Editable defaultValue={points}>
-                                        <EditablePreview
-                                            border="1px"
-                                            p={2}
-                                            fontWeight="thin"
-                                            {...register('points')}
-                                            minW="100%"
-                                        />
-                                        <EditableInput
-                                            type="number"
-                                            onChange={e => {
-                                                setPoints(e.target.value);
-                                            }}
-                                        />
-                                    </Editable>
-                                </Flex>
-                                <Flex my={1} flexDirection="column">
-                                    <Text my={1}>File Type</Text>
-
-                                    <Menu>
-                                        <MenuButton
-                                            as={Button}
-                                            size="md"
-                                            disabled={true}
-                                            fontWeight="thin"
-                                            variant="outline"
-                                            _hover={{ background: 'purple.400' }}
-                                        >
-                                            Select file type
-                                        </MenuButton>
-                                        <MenuList bg="gray.700">
-                                            {fileTypes.map(t => (
-                                                <MenuItem value={t.name} key={t.name}>
-                                                    {t.name}
-                                                </MenuItem>
-                                            ))}
-                                        </MenuList>
-                                    </Menu>
-                                </Flex>
-                                <Flex my={1} flexDirection="column">
-                                    <Text my={1}>Deadline</Text>
-
-                                    <Input
-                                        p={2}
-                                        fontWeight="thin"
-                                        {...register('deadline')}
-                                        minW="100%"
-                                        disabled={true}
-                                        type="date"
+                                        type="number"
                                         onChange={e => {
                                             setPoints(e.target.value);
                                         }}
                                     />
-                                </Flex>
-                            </Grid>
+                                </Editable>
+                            </Flex>
                             <Flex my={1} flexDirection="column">
-                                <Text my={1}>Description</Text>
-                                <Textarea
-                                    h={100}
-                                    resize="none"
-                                    placeholder="Task Description"
-                                    value={description}
-                                    onChange={e => {
-                                        setDescription(e.target.value);
-                                    }}
-                                >
-                                    {description}
-                                </Textarea>
+                                <Text my={1}>File Type</Text>
+
+                                <Menu>
+                                    <MenuButton
+                                        as={Button}
+                                        size="md"
+                                        disabled={true}
+                                        fontWeight="thin"
+                                        variant="outline"
+                                        _hover={{ background: 'purple.400' }}
+                                    >
+                                        Select file type
+                                    </MenuButton>
+                                    <MenuList bg="gray.700">
+                                        {fileTypes.map(t => (
+                                            <MenuItem value={t.name} key={t.name}>
+                                                {t.name}
+                                            </MenuItem>
+                                        ))}
+                                    </MenuList>
+                                </Menu>
                             </Flex>
-                            <Flex justifyContent="space-between" alignItems="center" mt={2}>
-                                <Button
-                                    rounded="md"
-                                    variant="solid"
-                                    bg="purple.400"
+                            <Flex my={1} flexDirection="column">
+                                <Text my={1}>Deadline</Text>
+
+                                <Input
                                     p={2}
-                                    maxH={40}
-                                    w={120}
-                                    cursor="pointer"
-                                    size="sm"
-                                    onClick={() => editTask()}
-                                >
-                                    Save Changes
-                                </Button>
+                                    fontWeight="thin"
+                                    {...register('deadline')}
+                                    minW="100%"
+                                    disabled={true}
+                                    type="date"
+                                    onChange={e => {
+                                        setPoints(e.target.value);
+                                    }}
+                                />
                             </Flex>
-                        </Box>
+                        </Grid>
+                        <Flex my={1} flexDirection="column">
+                            <Text my={1}>Description</Text>
+                            <Textarea
+                                h={100}
+                                resize="none"
+                                placeholder="Task Description"
+                                value={description}
+                                onChange={e => {
+                                    setDescription(e.target.value);
+                                }}
+                            >
+                                {description}
+                            </Textarea>
+                        </Flex>
+                        <Flex justifyContent="end" alignItems="center" mt={2}>
+                            <Button
+                                rounded="md"
+                                variant="solid"
+                                bg="purple.400"
+                                p={2}
+                                maxH={40}
+                                w={120}
+                                cursor="pointer"
+                                size="sm"
+                                onClick={() => editTask()}
+                            >
+                                Save Changes
+                            </Button>
+                        </Flex>
+                    </Box>
 
-                        <Flex flexDirection="column" mx="auto" minW="80%" my={10}>
-                            {props?.details?.user ? (
-                                <>
-                                    <Flex alignItems="start" justifyContent="space-between" p={2}>
-                                        <Flex flexDirection="column" alignItems="start" h="30vh">
-                                            <Flex my={2}>
-                                                <Avatar
-                                                    size="sm"
-                                                    name={`${firstName} ${lastName}`}
-                                                    mr={2}
-                                                />
-                                                <Text>
-                                                    {firstName} {lastName}
-                                                </Text>
-                                            </Flex>
-                                            {props.details.solution ? (
-                                                <Box
-                                                    fontSize="sm"
-                                                    overflowX="hidden"
-                                                    className="styled-scroll"
-                                                    h={200}
-                                                    w={350}
-                                                >
-                                                    {props.details.solution}
-                                                </Box>
-                                            ) : (
-                                                <Text>There are no solution provided yet</Text>
-                                            )}
+                    <Flex flexDirection="column" mt={10}>
+                        {props?.details?.user ? (
+                            <>
+                                <Flex alignItems="start" justifyContent="space-between">
+                                    <Flex flexDirection="column" alignItems="start">
+                                        <Flex>
+                                            <Avatar
+                                                size="sm"
+                                                name={`${firstName} ${lastName}`}
+                                                mr={2}
+                                            />
+                                            <Text>
+                                                {firstName} {lastName}
+                                            </Text>
                                         </Flex>
-
-                                        {props.details.taskFiles.length !== 0 ? (
-                                            <Box></Box>
+                                        {props.details.solution ? (
+                                            <Box
+                                                fontSize="sm"
+                                                overflowX="hidden"
+                                                className="styled-scroll"
+                                            >
+                                                {props.details.solution}
+                                            </Box>
                                         ) : (
-                                            <Box>There are no files </Box>
+                                            <Text>There are no solution provided yet</Text>
                                         )}
                                     </Flex>
-                                </>
-                            ) : (
-                                <Text>This is unassigned task</Text>
-                            )}
 
-                            {props.details.solution && props.details.status !== 'APPROVED' && (
-                                <Flex alignItems="center" justifyContent="end">
-                                    <Button
-                                        size="xs"
-                                        colorScheme="purple"
-                                        onClick={() => approveTask(id)}
-                                        mx={2}
-                                    >
-                                        Approve
-                                    </Button>
-                                    <Menu>
-                                        <MenuButton rounded="md" mx={2}>
-                                            Reject
-                                        </MenuButton>
-                                        <MenuList bg="gray.700" w={400} p={2} border="none">
-                                            <form>
-                                                <Flex flexDirection="column">
-                                                    <Textarea
-                                                        h="100%"
-                                                        resize="none"
-                                                        placeholder="Please provide the reason for rejection"
-                                                        onChange={e => {
-                                                            setRejectedMessage(e.target.value);
-                                                        }}
-                                                    />
-                                                    <Button
-                                                        w={50}
-                                                        mt={2}
-                                                        size="xs"
-                                                        colorScheme="purple"
-                                                        onClick={() => rejectTask(id)}
-                                                    >
-                                                        Reject
-                                                    </Button>
-                                                </Flex>
-                                            </form>
-                                        </MenuList>
-                                    </Menu>
+                                    {props.details.taskFiles.length !== 0 ? (
+                                        <Box></Box>
+                                    ) : (
+                                        <Box>There are no files </Box>
+                                    )}
                                 </Flex>
-                            )}
-                        </Flex>
-                    </Grid>
-                </DrawerBody>
-            </CoreDrawer>
+                            </>
+                        ) : (
+                            <Text>This is unassigned task</Text>
+                        )}
 
+                        {props.details.solution && props.details.status !== 'APPROVED' && (
+                            <Flex alignItems="center" justifyContent="end">
+                                <Button
+                                    size="xs"
+                                    colorScheme="purple"
+                                    onClick={() => approveTask(id)}
+                                    mx={2}
+                                >
+                                    Approve
+                                </Button>
+                                <Menu>
+                                    <MenuButton rounded="md" mx={2}>
+                                        Reject
+                                    </MenuButton>
+                                    <MenuList bg="gray.700" w={400} p={2} border="none">
+                                        <form>
+                                            <Flex flexDirection="column">
+                                                <Textarea
+                                                    h="100%"
+                                                    resize="none"
+                                                    placeholder="Please provide the reason for rejection"
+                                                    onChange={e => {
+                                                        setRejectedMessage(e.target.value);
+                                                    }}
+                                                />
+                                                <Button
+                                                    w={50}
+                                                    mt={2}
+                                                    size="xs"
+                                                    colorScheme="purple"
+                                                    onClick={() => rejectTask(id)}
+                                                >
+                                                    Reject
+                                                </Button>
+                                            </Flex>
+                                        </form>
+                                    </MenuList>
+                                </Menu>
+                            </Flex>
+                        )}
+                    </Flex>
+                </Grid>
+            </ModalLayout>
             <AlertDialog
                 motionPreset="slideInBottom"
                 leastDestructiveRef={cancelRef}
@@ -466,7 +458,7 @@ const Task = (props: any) => {
                     </AlertDialogFooter>
                 </AlertDialogContent>
             </AlertDialog>
-        </Box>
+        </>
     );
 };
 

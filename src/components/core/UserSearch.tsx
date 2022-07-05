@@ -61,7 +61,7 @@ const UserSearch = ({ setUserById }: any) => {
                                 searchTerm(e);
                             }}
                             value={user}
-                            size="lg"
+                            size="md"
                             fontSize="md"
                             placeholder="Search users ex (John Doe)"
                         />
@@ -76,7 +76,7 @@ const UserSearch = ({ setUserById }: any) => {
                                         }}
                                         cursor="pointer"
                                         w="10px"
-                                        mt={2}
+                                        mt={1}
                                         as={CloseIcon}
                                     />
                                 }

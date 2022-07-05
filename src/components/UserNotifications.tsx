@@ -39,7 +39,7 @@ const UserNotifications = () => {
     return (
         <Flex flexDirection="column" bg="gray.700" zIndex={10} >
             {loading ? (
-                [...Array(3).keys()].map(() => (
+                [...Array(4).keys()].map(() => (
                     <>
                         <Box bg="gray.700" minH={50} p={2}>
                             <SkeletonCircle m="2" size="10" />
