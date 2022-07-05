@@ -1,12 +1,4 @@
-import {
-  Box,
-  Badge,
-  Flex,
-  Text,
-  Heading,
-  VStack,
-  HStack,
-} from '@chakra-ui/react';
+import { Box, Badge, Text, Heading, VStack, HStack } from '@chakra-ui/react';
 import StyledCard from 'components/core/StyledCard';
 import { observer } from 'mobx-react';
 interface MyTaskProps {

@@ -1,7 +1,7 @@
 import { ChakraProvider } from '@chakra-ui/react';
 import { Routes, Route } from 'react-router-dom';
 import { BrowserRouter } from 'react-router-dom';
-import { Layout, SpinnerLoader } from './components';
+import { Layout } from './components';
 import { observer } from 'mobx-react';
 import {
   DefaultPage,
@@ -25,13 +25,16 @@ import ProtectedRoute from './routes/ProtectedRoute';
 import MyTasksPage from './pages/my-tasks/MyTask';
 import TaskDetailsPage from './pages/my-tasks/TaskDetails';
 import './theme/styles.css';
-import Login from 'components/Login';
+//import Login from 'components/Login';
 import LoginStore from 'stores/Login';
 import { useEffect } from 'react';
 import { Roles } from 'types';
 
 function App() {
-  const { isAuth, authResolved } = LoginStore;
+  const {
+    //isAuth,
+    authResolved,
+  } = LoginStore;
   useEffect(() => {
     LoginStore.checkUserFromStorage();
   }, []);
