@@ -88,7 +88,7 @@ function Header({ onOpen }: headerProps) {
             </PopoverBody>
           </PopoverContent>
         </Popover>
-        <Button colorScheme="grey" variant="solid" onClick={logout}>
+        <Button variant="solid" onClick={logout}>
           Log Out
         </Button>
       </Box>

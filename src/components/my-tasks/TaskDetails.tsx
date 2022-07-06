@@ -1,13 +1,4 @@
-import {
-  Flex,
-  Spacer,
-  Text,
-  Box,
-  Badge,
-  Button,
-  Stack,
-  Heading,
-} from '@chakra-ui/react';
+import { Text, Box, Badge, Button, Stack, Heading } from '@chakra-ui/react';
 import { EditIcon } from '@chakra-ui/icons';
 import { Task } from 'types';
 import dayjs from 'dayjs';

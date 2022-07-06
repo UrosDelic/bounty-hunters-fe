@@ -1,7 +1,6 @@
 import { initHttp } from 'http/index';
 import { makeAutoObservable, runInAction } from 'mobx';
-import { Users, UserRoles } from 'types';
-import Login from './Login';
+import { Users } from 'types';
 import LoginStore from './Login';
 
 interface UsersStoreProps {
