@@ -19,7 +19,7 @@ class AdminTasksStore {
     data: [],
     searchTerm: '',
     total: 0,
-    limit: 8,
+    limit: 10,
     page: 1,
     hasMore: true,
     taskById: undefined,
@@ -49,31 +49,45 @@ class AdminTasksStore {
   get checkForMore() {
     return this._tasks.hasMore;
   }
+  get page() {
+    return this._tasks.page;
+  }
 
-  initialTaskLoad = async (searchedUser: string, searchedStatus: string) => {
-    this._tasks.loading = true;
-    this._tasks.hasMore = true;
-    this._tasks.data = [];
-    this._tasks.total = 0;
-    this._tasks.page = 1;
-    this._tasks.limit = 8;
+  setPage = (page: number) => {
+    this._tasks.page = page;
+  };
 
-    const { data } = await this.http.get<Tasks>(
-      `/tasks?page=${this._tasks.page}&limit=${this._tasks.limit}${
-        searchedUser ? `&userId=${searchedUser}` : ``
-      }${searchedStatus ? `&status=${searchedStatus}` : ``}`
-    );
-    runInAction(() => {
-      this._tasks.loading = false;
-      if (data) {
-        if (!data?.data.length || data?.data.length > this._tasks.limit) {
-          this._tasks.hasMore = false;
+  getTasksByFilter = async (
+    searchedUser: string,
+    searchedStatus: string,
+    title: string
+  ) => {
+    if (searchedUser || searchedStatus || title) {
+      this._tasks.loading = true;
+      this._tasks.data = [];
+      this._tasks.total = 0;
+
+      const { data } = await this.http.get<Tasks>(
+        `/tasks?page=${this._tasks.page}&limit=${this._tasks.limit}${
+          searchedUser ? `&userId=${searchedUser}` : ``
+        }${searchedStatus ? `&status=${searchedStatus}` : ``}${
+          title ? `&title=${title}` : ``
+        }`
+      );
+      runInAction(() => {
+        this._tasks.loading = false;
+        if (data) {
+          if (!data?.data.length || data?.data.length <= this._tasks.limit) {
+            this._tasks.hasMore = false;
+          }
+
+          this._tasks.data = data?.data;
+          this._tasks.total = data.info.totalCount;
         }
-
-        this._tasks.data = data?.data;
-        this._tasks.total = data.info.totalCount;
-      }
-    });
+      });
+    } else {
+      this.getTasks();
+    }
   };
 
   getTasks = async () => {
@@ -84,10 +98,7 @@ class AdminTasksStore {
     runInAction(() => {
       this._tasks.loading = false;
       if (data) {
-        if (!data?.data.length) {
-          this._tasks.hasMore = false;
-        }
-        this._tasks.data = [...this._tasks.data, ...data?.data];
+        this._tasks.data = data?.data;
         this._tasks.total = data.info.totalCount;
       }
     });
@@ -166,22 +177,7 @@ class AdminTasksStore {
     return { data, error };
   };
 
-  searchByTitle = async (title: string) => {
-    this._tasks.loading = true;
-    const { data } = await this.http.get<Tasks>(
-      `/tasks?title=${title}&page=1&limit=8`
-    );
-    runInAction(() => {
-      this._tasks.loading = false;
-      if (data) {
-        this._tasks.data = data?.data;
-        this._tasks.total = data.info.totalCount;
-        if (data?.data.length >= data.info.totalCount) {
-          this._tasks.hasMore = false;
-        }
-      }
-    });
-  };
+
   loadMoreTasks = () => {
     this._tasks.page++;
     this.getTasks();

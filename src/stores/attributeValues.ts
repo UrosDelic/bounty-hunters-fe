@@ -108,8 +108,9 @@ class AttributeValuesStore {
     });
   };
 
-  getSizeAndColorAttributeValues = async () => {
+  getSizeAndColorAttributeValues = async (productName: string | undefined) => {
     this._attributeValues.loading = true;
+    this._attributeValues.success = false;
     const { data } = await this.http.get<AttributeValue[]>('/attributeValues');
     runInAction(() => {
       this._attributeValues.loading = false;
@@ -117,10 +118,14 @@ class AttributeValuesStore {
         this._attributeValues.success = true;
         this._attributeValues.data = data;
         const colors = data.filter(
-          av => av.productAttribute.name.toLowerCase() === 'colors'
+          av =>
+            av.productAttribute.name.toLowerCase() ===
+            `${productName?.toLowerCase()} color`
         );
         const sizes = data.filter(
-          av => av.productAttribute.name.toLowerCase() === 'size'
+          av =>
+            av.productAttribute.name.toLowerCase() ===
+            `${productName?.toLowerCase()} size`
         );
         this._attributeValues.colorData = colors;
         this._attributeValues.selectedColor = colors[0]?.id;

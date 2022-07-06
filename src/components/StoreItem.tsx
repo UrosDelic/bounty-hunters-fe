@@ -1,14 +1,16 @@
 import { Box, Flex, Image, Text, Link } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
+import { ProductMedia } from '../types/index';
 
 type StoreItemProps = {
   id: string;
   name: string;
   price: number;
+  productMedia: ProductMedia[];
 };
 
-function StoreItem({ id, name, price }: StoreItemProps) {
-  const image =
+function StoreItem({ id, name, price, productMedia }: StoreItemProps) {
+  const defaultImage =
     'https://cdn.shopify.com/s/files/1/0665/2889/products/Image-1-The-Weekend-Boot-Allegra-Alice_Whittles-2000x2000_1280x.jpg?v=1632758527';
 
   return (
@@ -16,7 +18,7 @@ function StoreItem({ id, name, price }: StoreItemProps) {
       <Flex direction="column" height="100%">
         <Flex width="100%" flex={1} direction="column" justifyContent="center">
           <Image
-            src={image}
+            src={productMedia[productMedia.length - 1]?.url || defaultImage}
             alt={name}
             margin="auto"
             width="100%"

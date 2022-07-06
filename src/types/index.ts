@@ -10,3 +10,4 @@ export * from './attributeValue';
 export * from './wallet';
 export * from './notifications';
 export * from './productAttribute';
+export * from './productMedia';

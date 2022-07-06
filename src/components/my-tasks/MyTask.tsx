@@ -1,12 +1,4 @@
-import {
-  Box,
-  Badge,
-  Flex,
-  Text,
-  Heading,
-  VStack,
-  HStack,
-} from '@chakra-ui/react';
+import { Box, Badge, Text, Heading, VStack, HStack } from '@chakra-ui/react';
 import StyledCard from 'components/core/StyledCard';
 import { observer } from 'mobx-react';
 interface MyTaskProps {
@@ -43,11 +35,12 @@ const MyTask = ({
   return (
     <Box margin="1rem" w={['20rem', '25rem', '25rem', '30rem']}>
       <StyledCard>
-        <VStack spacing="24px" w="100%">
+        <VStack spacing="24px" w="100%" p="1rem">
           <Heading textAlign="center">{title}</Heading>
 
           <Badge
             px="5"
+            py="1"
             borderRadius="full"
             colorScheme={switchStatusColor(status)}
           >
