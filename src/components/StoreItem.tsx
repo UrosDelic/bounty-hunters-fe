@@ -1,6 +1,6 @@
 import { Box, Flex, Image, Text, Link } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
-import { ProductMedia } from '../types/index';
+import { ProductMedia } from 'types/productMedia';
 
 type StoreItemProps = {
   id: string;
