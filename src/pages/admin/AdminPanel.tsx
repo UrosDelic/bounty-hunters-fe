@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     Box,
     Grid,
@@ -54,6 +54,7 @@ const AdminPanel = () => {
             title: input.title,
             points: parseInt(input.points),
             description: input.description,
+            deadline: new Date(input.deadline).toISOString()
             //userId: '1d6a9841-77f0-4169-b61b-f8f043b64b90',
         });
         if (error) {
@@ -137,7 +138,9 @@ const AdminPanel = () => {
                     loading={loading}
                 >
                     {tasks.map((task: any) => (
-                        <Task details={task} />
+                        <React.Fragment key={task.id}>
+                            <Task details={task} />
+                        </React.Fragment>
                     ))}
                 </CoreTable>
             </Box>
@@ -150,6 +153,7 @@ const AdminPanel = () => {
                             {...register('title')}
                             placeholder="Write Article about XYZ"
                             size="sm"
+                            required
                         />
                         <FormLabel fontWeight="thin">Task Description</FormLabel>
                         <Textarea
@@ -158,11 +162,12 @@ const AdminPanel = () => {
                         />
                         <FormLabel fontWeight="thin">Deadline</FormLabel>
                         <Input
-                            disabled
+
                             {...register('deadline')}
                             type="date"
                             placeholder="Deadline"
                             size="sm"
+                            required
                         />
                         <FormLabel fontWeight="thin">Points</FormLabel>
                         <NumberInput size="sm">
@@ -170,6 +175,7 @@ const AdminPanel = () => {
                                 {...register('points')}
                                 type="number"
                                 placeholder="Points"
+                                required
                             />
                         </NumberInput>
 
@@ -178,10 +184,11 @@ const AdminPanel = () => {
                                 size="sm"
                                 type="submit"
                                 mt={2}
-                                colorScheme="purple"
+                                color='white'
+                                bg='purple.400'
                                 fontSize="sm"
                             >
-                                Submit
+                                Create Task
                             </Button>
                         </Flex>
                     </form>

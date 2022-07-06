@@ -47,6 +47,7 @@ const Task = (props: any) => {
 
     const cancelRef = useRef<HTMLButtonElement>(null);
     const [title, setTitle] = useState(props.details.title);
+    const [deadline, setDeadline] = useState(new Date(props.details.deadline).toISOString().substring(0, 10));
     const [description, setDescription] = useState(props.details.description);
     const [points, setPoints] = useState(props.details.points);
     const [updated, setUpdatedAt] = useState(props.details.updatedAt);
@@ -69,6 +70,7 @@ const Task = (props: any) => {
             title,
             points: parsed,
             description,
+            deadline
         });
         onCloseEdit();
         const date = new Date().toISOString();
@@ -309,10 +311,10 @@ const Task = (props: any) => {
                                     fontWeight="thin"
                                     {...register('deadline')}
                                     minW="100%"
-                                    disabled={true}
                                     type="date"
+                                    defaultValue={deadline}
                                     onChange={e => {
-                                        setPoints(e.target.value);
+                                        setDeadline(e.target.value);
                                     }}
                                 />
                             </Flex>
